@@ -15,11 +15,13 @@ namespace Tinyinfo
 			InitializeComponent();
 		}
 
+		//	collect system info and write to textBox1
 		public  void getdata()
 		{
 			var nl = Environment.NewLine;
 			while (true)
 			{
+				//	Refresh lists
 				hardwareInfo.RefreshCPUList(true);
 				hardwareInfo.RefreshMemoryList();
 				hardwareInfo.RefreshBIOSList();
@@ -79,6 +81,8 @@ namespace Tinyinfo
 			}
 		}
 		Thread thread;
+
+		//	Safely overwrites text in textBox1
 		private void WriteTextSafe(string text)
 		{
 			if (textBox1.InvokeRequired)
@@ -91,6 +95,8 @@ namespace Tinyinfo
 				textBox1.Text = text;
 			}
 		}
+
+		//	Safely appends text in textBox1
 		private void AppendTextSafe(string text)
 		{
 			if (textBox1.InvokeRequired)
@@ -104,6 +110,7 @@ namespace Tinyinfo
 			}
 		}
 
+		//	Starts thread, changes button states, update info text and increments progress bar when Start button is pressed
 		public void button1_Click(object sender, EventArgs e)
 		{
 			label1.Visible = true;
@@ -133,6 +140,7 @@ namespace Tinyinfo
 			progressBar1.Visible = false;
 		}
 
+		//	Change Button state and abort thread when Stop Button is pressed
 		private void button2_Click(object sender, EventArgs e)
 		{
 			button3.Enabled = false;
@@ -141,6 +149,7 @@ namespace Tinyinfo
 			button1.Enabled = true;
 		}
 
+		//	Start/Stop thread when Play/Pause button is pressed. not used as of v1.4
 		private void button3_Click(object sender, EventArgs e)
 		{
 			if (thread.ThreadState == System.Threading.ThreadState.Stopped) {
