@@ -16,7 +16,7 @@ namespace Tinyinfo
 		}
 
 		//	collect system info and write to textBox1
-		public  void getdata()
+		public void getdata()
 		{
 			var nl = Environment.NewLine;
 			while (true)
