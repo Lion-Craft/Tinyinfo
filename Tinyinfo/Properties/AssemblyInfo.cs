@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Tinyinfo")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("https://github.com/Lion-Craft/Tinyinfo")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Tinyinfo")]
-[assembly: AssemblyCopyright("MIT License 2023")]
+[assembly: AssemblyCopyright("Copyright (c) 2023 Leon Frommholz")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,4 +33,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.3.*")]
-[assembly: AssemblyFileVersion("1.0")]
+[assembly: AssemblyFileVersion("1.3")]
