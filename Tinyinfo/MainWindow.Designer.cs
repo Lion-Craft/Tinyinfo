@@ -54,9 +54,9 @@
 			this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label1.Location = new System.Drawing.Point(12, 9);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(216, 21);
+			this.label1.Size = new System.Drawing.Size(335, 21);
 			this.label1.TabIndex = 2;
-			this.label1.Text = "Press Start to get System Info.";
+			this.label1.Text = "Press Start to continuously update System Info.";
 			// 
 			// button2
 			// 
@@ -127,6 +127,7 @@
 			this.Name = "MainWindow";
 			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
+			this.Load += new System.EventHandler(this.startup);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
