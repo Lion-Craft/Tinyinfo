@@ -27,6 +27,7 @@ namespace Tinyinfo
 				hardwareInfo.RefreshCPUList(true);
 				hardwareInfo.RefreshMemoryList();
 				hardwareInfo.RefreshBIOSList();
+				hardwareInfo.RefreshMotherboardList();
 			
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
@@ -92,6 +93,19 @@ namespace Tinyinfo
 						//	Maximum voltage
 						AppendTextSafe("\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
 					}
+
+					//	Motherboard
+					foreach (var motherboard in hardwareInfo.MotherboardList)
+					{
+						AppendTextSafe(nl + "Motherboard: " + nl);
+						//	Manufacturer
+						AppendTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
+						//	Model
+						AppendTextSafe("\tModel: " + motherboard.Product + nl);
+						//	Serial Number
+						AppendTextSafe("\tSerial No.: " + motherboard.SerialNumber);
+					}
+
 					//	BIOS Info
 					foreach (var bios in hardwareInfo.BiosList)
 					{
