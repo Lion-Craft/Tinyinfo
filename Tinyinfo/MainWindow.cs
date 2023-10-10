@@ -318,5 +318,17 @@ namespace Tinyinfo
 				thread.Abort();
 			}
 		}
+
+		private void onTopCheckbox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (onTopCheckbox.Checked)
+			{
+				ActiveForm.TopMost = true;
+			}
+			else
+			{
+				ActiveForm.TopMost = false;
+			}
+		}
 	}
 }
