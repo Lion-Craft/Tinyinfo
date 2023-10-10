@@ -22,6 +22,7 @@ namespace Tinyinfo
 			{
 				hardwareInfo.RefreshCPUList(true);
 				hardwareInfo.RefreshMemoryList();
+				hardwareInfo.RefreshBIOSList();
 			
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
@@ -53,7 +54,7 @@ namespace Tinyinfo
 					AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
 					AppendTextSafe("\t\t" + cpu.MaxClockSpeed +"mHz Base");
 					
-					//	Memory;
+					//	Memory
 					AppendTextSafe(nl + nl + "Memory:");
 					foreach (var memory in hardwareInfo.MemoryList)
 					{
@@ -61,8 +62,20 @@ namespace Tinyinfo
 
 						AppendTextSafe(nl + "\t" + memory.BankLabel + ":" + nl+ "\t\tManufacturer: " + memory.Manufacturer + nl +"\t\t\tSize: " + memcap / 1073741824 + "GB" + nl + "\t\t\tSpeed: " + memory.Speed + "mT/s" + nl + "\t\t\tPart No.: " + memory.PartNumber + nl +"\t\t\tForm Factor: " + memory.FormFactor + nl +"\t\t\tMin. Voltage: " + memory.MinVoltage + "mV" + nl + "\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
 					}
+					//	BIOS Info
+					foreach (var bios in hardwareInfo.BiosList)
+					{
+						AppendTextSafe(nl + "BIOS: " + nl);
+						//	Manufacturer
+						AppendTextSafe("\tManufacturer: " + bios.Manufacturer + nl);
+						//	Name
+						AppendTextSafe("\tName: " + bios.Name + nl);
+						//	Version
+						AppendTextSafe("\tVersion: " + bios.Version + nl);
+						//	Release Date
+						AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
+					}
 				}
-				
 			}
 		}
 		Thread thread;
@@ -118,15 +131,6 @@ namespace Tinyinfo
 			thread.Start();
 			Thread.Sleep(500);
 			progressBar1.Visible = false;
-
-			/*
-			Debug.WriteLine(hardwareInfo.CpuList.Count.ToString());
-
-			foreach(var cpu in hardwareInfo.CpuList)
-			{
-				WriteTextSafe(textBox1.Text + " \n" + cpu.ProcessorId + "" + cpu.Manufacturer + " " + cpu.Name + "\n");
-			}
-			*/
 		}
 
 		private void button2_Click(object sender, EventArgs e)
