@@ -15,6 +15,8 @@ namespace Tinyinfo
 			InitializeComponent();
 		}
 
+		//	TODO: Put CPU info in separate thread for improved speed
+
 		//	collect system info and write to textBox1
 		public void getdata()
 		{
@@ -53,16 +55,42 @@ namespace Tinyinfo
 
 					//	Clockspeeds
 					AppendTextSafe("\tClockspeeds:" + nl);
+					//	Current Clockspeed in mHz
 					AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
+					//	Base Clockspeed in mHz
 					AppendTextSafe("\t\t" + cpu.MaxClockSpeed +"mHz Base");
 					
 					//	Memory
 					AppendTextSafe(nl + nl + "Memory:");
 					foreach (var memory in hardwareInfo.MemoryList)
 					{
-						float memcap = memory.Capacity;
+						//	Write capacity into float and convert to GB
+						float memsize = memory.Capacity;
+						memsize /= 1073741824;
 
-						AppendTextSafe(nl + "\t" + memory.BankLabel + ":" + nl+ "\t\tManufacturer: " + memory.Manufacturer + nl +"\t\t\tSize: " + memcap / 1073741824 + "GB" + nl + "\t\t\tSpeed: " + memory.Speed + "mT/s" + nl + "\t\t\tPart No.: " + memory.PartNumber + nl +"\t\t\tForm Factor: " + memory.FormFactor + nl +"\t\t\tMin. Voltage: " + memory.MinVoltage + "mV" + nl + "\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
+						//	Bank number
+						AppendTextSafe(nl + "\t" + memory.BankLabel + ":" + nl);
+
+						//	Manufacturer
+						AppendTextSafe("\t\tManufacturer: " + memory.Manufacturer + nl);
+
+						//	Size
+						AppendTextSafe("\t\t\tSize: " + memsize + "GB" + nl);
+
+						//	Speed
+						AppendTextSafe("\t\t\tSpeed: " + memory.Speed + "mT/s" + nl);
+
+						//	Part Number
+						AppendTextSafe("\t\t\tPart No.: " + memory.PartNumber + nl);
+
+						//	Form Factor
+						AppendTextSafe("\t\t\tForm Factor: " + memory.FormFactor + nl);
+
+						//	Minimum Voltage
+						AppendTextSafe("\t\t\tMin. Voltage: " + memory.MinVoltage + "mV" + nl);
+
+						//	Maximum voltage
+						AppendTextSafe("\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
 					}
 					//	BIOS Info
 					foreach (var bios in hardwareInfo.BiosList)
