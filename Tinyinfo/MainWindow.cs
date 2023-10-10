@@ -152,19 +152,15 @@ namespace Tinyinfo
 			progressBar1.Value = 50;
 			hardwareInfo.RefreshOperatingSystem();
 			button3.Enabled = true;
-			Thread.Sleep(100);
 			label1.Text = "Loading System Info...";
 			progressBar1.Value = 75;
 			thread = new Thread(new ThreadStart(getdata));
-			Thread.Sleep(150);
 			progressBar1.Value = 85;
 			thread.IsBackground = true;
 			label1.Text = "Loading System Info....";
-			Thread.Sleep(150);
 			progressBar1.Value = 100;
 			label1.Visible = false;
 			thread.Start();
-			Thread.Sleep(500);
 			progressBar1.Visible = false;
 		}
 
