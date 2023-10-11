@@ -19,8 +19,6 @@ namespace Tinyinfo
 		Thread thread;
 
 		//	Runs on form load
-		//
-		//	This solution is pretty bad but it works.
 		public void startup(object sender, EventArgs e)
 		{
 			getdata(false);
