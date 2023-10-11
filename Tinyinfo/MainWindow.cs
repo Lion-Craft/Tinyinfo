@@ -1,8 +1,15 @@
-﻿using System;
+using System;
+using System.Drawing;
 using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using System.IO;
 using Hardware.Info;
+using static System.Net.Mime.MediaTypeNames;
+using IniParser;
+using IniParser.Model;
 
 namespace Tinyinfo
 {
@@ -13,26 +20,40 @@ namespace Tinyinfo
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			//	Load Theme
+			refreshTheme();
+		}
+
+		//	Thread for updating info in background
+		Thread thread;
+
+		//	Runs on form load
+		public void startup(object sender, EventArgs e)
+		{
+			getdata(false);
 		}
 
 		//	TODO: Put CPU info in separate thread for improved speed
 
 		//	collect system info and write to textBox1
-		public void getdata()
+		public void getdata(bool loop)
 		{
 			var nl = Environment.NewLine;
-			while (true)
+			do
 			{
 				//	Refresh lists
 				hardwareInfo.RefreshCPUList(true);
 				hardwareInfo.RefreshMemoryList();
 				hardwareInfo.RefreshBIOSList();
-			
+				hardwareInfo.RefreshMotherboardList();
+				hardwareInfo.RefreshVideoControllerList();
+
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
 					//	CPU Info
 					WriteTextSafe("CPU:" + nl);
-					
+
 					//	CPU ID
 					AppendTextSafe("\tID: " + cpu.ProcessorId + nl);
 
@@ -58,8 +79,55 @@ namespace Tinyinfo
 					//	Current Clockspeed in mHz
 					AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
 					//	Base Clockspeed in mHz
-					AppendTextSafe("\t\t" + cpu.MaxClockSpeed +"mHz Base");
-					
+					AppendTextSafe("\t\t" + cpu.MaxClockSpeed + "mHz Base");
+
+					//	Graphics
+					AppendTextSafe(nl + "Video: ");
+					//	Create GPU ID
+					int id = 0;
+					foreach (var gpu in hardwareInfo.VideoControllerList)
+					{
+						//	Write capacity into float and convert to GB
+						float vmemsize = gpu.AdapterRAM;
+						vmemsize /= 1073741824;
+
+						//	GPU ID
+						AppendTextSafe(nl + "\tGPU " + id + ":" + nl);
+
+						//	Name
+						AppendTextSafe("\t\tName: " + gpu.Name + nl);
+
+						//	Manufacturer
+						AppendTextSafe("\t\tManufacturer: " + gpu.Manufacturer + nl);
+
+						//	Description
+						AppendTextSafe("\t\tDescription: " + gpu.VideoProcessor + nl);
+
+						//	Video mode
+						AppendTextSafe("\t\tVideo Mode: " + gpu.VideoModeDescription + " x " + gpu.CurrentRefreshRate + "Hz x " + gpu.CurrentBitsPerPixel + " Bit" + nl);
+
+						//	Video memory amount
+						AppendTextSafe("\t\tVRAM Amount: " + vmemsize + "GB" + nl);
+
+						//	Maximum Refresh rate
+						AppendTextSafe("\t\tMaximum Refresh Rate: " + gpu.MaxRefreshRate + "Hz" + nl);
+
+						//	Minimum Refresh rate
+						AppendTextSafe("\t\tMinimum Refresh Rate: " + gpu.MinRefreshRate + "Hz " + nl);
+
+						//	Driver
+						AppendTextSafe("\t\tDriver: " + nl);
+
+						//	Driver Version
+						AppendTextSafe("\t\t\tVersion: " + gpu.DriverVersion + nl);
+
+						//	Driver Date
+						AppendTextSafe("\t\t\tDate: " + gpu.DriverDate + nl);
+
+						//	Increment GPU ID
+						id++;
+					}
+
 					//	Memory
 					AppendTextSafe(nl + nl + "Memory:");
 					foreach (var memory in hardwareInfo.MemoryList)
@@ -92,6 +160,19 @@ namespace Tinyinfo
 						//	Maximum voltage
 						AppendTextSafe("\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
 					}
+
+					//	Motherboard
+					foreach (var motherboard in hardwareInfo.MotherboardList)
+					{
+						AppendTextSafe(nl + "Motherboard: " + nl);
+						//	Manufacturer
+						AppendTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
+						//	Model
+						AppendTextSafe("\tModel: " + motherboard.Product + nl);
+						//	Serial Number
+						AppendTextSafe("\tSerial No.: " + motherboard.SerialNumber);
+					}
+
 					//	BIOS Info
 					foreach (var bios in hardwareInfo.BiosList)
 					{
@@ -106,13 +187,41 @@ namespace Tinyinfo
 						AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
 					}
 				}
-			}
-		}
-		Thread thread;
 
-		//	Safely overwrites text in textBox1
+				ShowInfo("");
+
+			} while (loop);
+		}
+
+		// Savely Overwrite on textbox content
+		int cpt = 0;
+		private void ShowInfo(string text)
+		{
+			cpt++;
+			InfoTextBuffer = cpt.ToString() + InfoTextBuffer;
+
+            if (textBox1.InvokeRequired)
+            {
+                var d = new SafeCallDelegate(ShowInfo);
+                textBox1.Invoke(d,new object[] { InfoTextBuffer });
+            }
+            else
+            {
+                textBox1.Text = InfoTextBuffer;
+            }
+        }
+
+        // Creating String To Push it later on textbox
+        private string InfoTextBuffer = "";
 		private void WriteTextSafe(string text)
 		{
+            // NOTE (HOUDAIFA) : Faster Way
+
+            InfoTextBuffer = text;
+
+
+            return;// No Need for code bellow
+
 			if (textBox1.InvokeRequired)
 			{
 				var d = new SafeCallDelegate(WriteTextSafe);
@@ -124,10 +233,16 @@ namespace Tinyinfo
 			}
 		}
 
-		//	Safely appends text in textBox1
+		// Appand Text To Text Buffer
 		private void AppendTextSafe(string text)
 		{
-			if (textBox1.InvokeRequired)
+            // NOTE (HOUDAIFA) : Faster Way
+
+			InfoTextBuffer += text;
+
+            return;// No Need for code bellow
+
+            if (textBox1.InvokeRequired)
 			{
 				var d = new SafeCallDelegate(AppendTextSafe);
 				textBox1.Invoke(d, new object[] { text });
@@ -138,8 +253,8 @@ namespace Tinyinfo
 			}
 		}
 
-		//	Starts thread, changes button states, update info text and increments progress bar when Start button is pressed
-		public void button1_Click(object sender, EventArgs e)
+		//	Starts thread, changes button states, update info text and increments progress bar
+		public void loadInfo()
 		{
 			label1.Visible = true;
 			progressBar1.Visible = true;
@@ -154,7 +269,7 @@ namespace Tinyinfo
 			button3.Enabled = true;
 			label1.Text = "Loading System Info...";
 			progressBar1.Value = 75;
-			thread = new Thread(new ThreadStart(getdata));
+			thread = new Thread(() => getdata(true));
 			progressBar1.Value = 85;
 			thread.IsBackground = true;
 			label1.Text = "Loading System Info....";
@@ -164,13 +279,25 @@ namespace Tinyinfo
 			progressBar1.Visible = false;
 		}
 
-		//	Change Button state and abort thread when Stop Button is pressed
-		private void button2_Click(object sender, EventArgs e)
+		//	Stop update thread
+		public void stopUpdate()
 		{
 			button3.Enabled = false;
 			thread.Abort();
 			button2.Enabled = false;
 			button1.Enabled = true;
+		}
+
+		//	Load System info when Start Button is pressed
+		public void button1_Click(object sender, EventArgs e)
+		{
+			loadInfo();
+		}
+
+		//	Change Button state and abort thread when Stop Button is pressed
+		private void button2_Click(object sender, EventArgs e)
+		{
+			stopUpdate();
 		}
 
 		//	Start/Stop thread when Play/Pause button is pressed. not used as of v1.4
@@ -183,6 +310,99 @@ namespace Tinyinfo
 			{
 				thread.Abort();
 			}
+		}
+
+		private void onTopCheckbox_CheckedChanged(object sender, EventArgs e)
+		{
+			if (onTopCheckbox.Checked)
+			{
+				ActiveForm.TopMost = true;
+			}
+			else
+			{
+				ActiveForm.TopMost = false;
+			}
+		}
+
+		public void refreshTheme()
+		{
+			//	Check if file exists, if it doesnt create it with default settings
+			if (File.Exists("./tinyinfo.ini") == false)
+			{
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10");
+			}
+
+			//	Create ini parser and read ini file
+			var parser = new FileIniDataParser();
+			IniData data = parser.ReadFile("./tinyinfo.ini");
+
+			//	Read Settings
+			//	Set theme
+			if (data.GetKey("tinyinfo.theme") == "dark")
+			{
+				//	Dark theme
+				ForeColor = Color.White;
+				BackColor = Color.Black;
+				button1.ForeColor = Color.Black;
+				button2.ForeColor = Color.Black;
+				button3.ForeColor = Color.Black;
+				onTopCheckbox.ForeColor = Color.Black;
+				onTopCheckbox.BackColor = Color.Gray;
+				panel1.BackColor = Color.FromName("ButtonFace");
+				panel1.ForeColor = Color.White;
+				textBox1.BackColor = Color.Black;
+				textBox1.ForeColor = Color.White;
+			}
+			else
+			{
+				//	Light theme
+				ForeColor = Color.Black;
+				BackColor = Color.White;
+				button1.ForeColor = Color.Black;
+				button2.ForeColor = Color.Black;
+				button3.ForeColor = Color.Black;
+				onTopCheckbox.ForeColor = Color.Black;
+				onTopCheckbox.BackColor = Color.White;
+				panel1.BackColor = Color.White;
+				panel1.ForeColor = Color.Black;
+				textBox1.BackColor = Color.White;
+				textBox1.ForeColor = Color.Black;
+			}
+
+			//	Set font size
+			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
+
+			textBox1.Font = font;
+		}
+
+		//	Opens Settings Window
+		private void settings_Click(object sender, EventArgs e)
+		{
+			//	Create Settings Window
+			var settings = new SettingsWindow();
+			settings.ShowDialog();
+			//	Reload Theme
+			refreshTheme();
+		}
+
+		//	Create ShellAbout
+		[DllImport("shell32.dll")]
+		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
+
+		//	Opens ShellAbout Dialog to display version info
+		private void about_Click(object sender, EventArgs e)
+		{
+			//	Write version to string
+			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			
+			//	Create ShellAbout dialog
+			ShellAbout(IntPtr.Zero, "Tinyinfo " + version, "Tinyinfo v." + version, Icon.Handle);
+		}
+
+		//	Opens GitHub repo in browser
+		private void github_Click(object sender, EventArgs e)
+		{
+			Process.Start("https://github.com/Lion-Craft/Tinyinfo");
 		}
 	}
 }

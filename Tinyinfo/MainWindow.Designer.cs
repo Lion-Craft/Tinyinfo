@@ -1,4 +1,4 @@
-﻿namespace Tinyinfo
+namespace Tinyinfo
 {
 	partial class MainWindow
 	{
@@ -28,12 +28,21 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.button1 = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
 			this.progressBar1 = new System.Windows.Forms.ProgressBar();
 			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
+			this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
+			this.settings = new System.Windows.Forms.MenuItem();
+			this.menuItem2 = new System.Windows.Forms.MenuItem();
+			this.about = new System.Windows.Forms.MenuItem();
+			this.github = new System.Windows.Forms.MenuItem();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -54,9 +63,9 @@
 			this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label1.Location = new System.Drawing.Point(12, 9);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(216, 21);
+			this.label1.Size = new System.Drawing.Size(335, 21);
 			this.label1.TabIndex = 2;
-			this.label1.Text = "Press Start to get System Info.";
+			this.label1.Text = "Press Start to continuously update System Info.";
 			// 
 			// button2
 			// 
@@ -88,21 +97,22 @@
 			// progressBar1
 			// 
 			this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			| System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.Location = new System.Drawing.Point(16, 262);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(624, 10);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 5;
+            this.progressBar1.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.AcceptsReturn = true;
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.progressBar1.Location = new System.Drawing.Point(16, 262);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(624, 10);
-			this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-			this.progressBar1.TabIndex = 5;
-			this.progressBar1.Visible = false;
-			// 
-			// textBox1
-			// 
-			this.textBox1.AcceptsReturn = true;
-			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox1.BackColor = System.Drawing.SystemColors.Window;
 			this.textBox1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.textBox1.Location = new System.Drawing.Point(16, 33);
 			this.textBox1.Multiline = true;
@@ -113,23 +123,82 @@
 			this.textBox1.TabIndex = 6;
 			this.textBox1.WordWrap = false;
 			// 
+			// onTopCheckbox
+			// 
+			this.onTopCheckbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.onTopCheckbox.AutoSize = true;
+			this.onTopCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.onTopCheckbox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.onTopCheckbox.Location = new System.Drawing.Point(6, 8);
+			this.onTopCheckbox.Name = "onTopCheckbox";
+			this.onTopCheckbox.Size = new System.Drawing.Size(134, 26);
+			this.onTopCheckbox.TabIndex = 7;
+			this.onTopCheckbox.Text = "Always on Top";
+			this.onTopCheckbox.UseVisualStyleBackColor = true;
+			this.onTopCheckbox.CheckedChanged += new System.EventHandler(this.onTopCheckbox_CheckedChanged);
+			// 
+			// mainMenu
+			// 
+			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.settings,
+            this.menuItem2});
+			// 
+			// settings
+			// 
+			this.settings.Index = 0;
+			this.settings.Text = "Settings";
+			this.settings.Click += new System.EventHandler(this.settings_Click);
+			// 
+			// menuItem2
+			// 
+			this.menuItem2.Index = 1;
+			this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.about,
+            this.github});
+			this.menuItem2.Text = "Help";
+			// 
+			// about
+			// 
+			this.about.Index = 0;
+			this.about.Text = "About";
+			this.about.Click += new System.EventHandler(this.about_Click);
+			// 
+			// github
+			// 
+			this.github.Index = 1;
+			this.github.Text = "Github";
+			this.github.Click += new System.EventHandler(this.github_Click);
+			// 
+			// panel1
+			// 
+			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.panel1.Controls.Add(this.onTopCheckbox);
+			this.panel1.Location = new System.Drawing.Point(380, 278);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(140, 40);
+			this.panel1.TabIndex = 8;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.ClientSize = new System.Drawing.Size(653, 330);
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.progressBar1);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.button1);
-			this.MaximizeBox = false;
+			this.Menu = this.mainMenu;
 			this.Name = "MainWindow";
 			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
+			this.Load += new System.EventHandler(this.startup);
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
-
 		}
 
 		#endregion
@@ -139,7 +208,14 @@
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.ProgressBar progressBar1;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.CheckBox onTopCheckbox;
+		private System.Windows.Forms.MainMenu mainMenu;
+		private System.Windows.Forms.MenuItem settings;
+		private System.Windows.Forms.MenuItem menuItem2;
+		private System.Windows.Forms.MenuItem about;
+		private System.Windows.Forms.MenuItem github;
+		public System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.Panel panel1;
 	}
 }
 
