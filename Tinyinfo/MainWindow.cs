@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Drawing;
 using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using System.IO;
 using Hardware.Info;
+using IniParser;
+using IniParser.Model;
 
 namespace Tinyinfo
 {
@@ -13,6 +19,9 @@ namespace Tinyinfo
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			//	Load Theme
+			refreshTheme();
 		}
 
 		//	Thread for updating info in background
@@ -278,6 +287,87 @@ namespace Tinyinfo
 			{
 				ActiveForm.TopMost = false;
 			}
+		}
+
+		public void refreshTheme()
+		{
+			//	Check if file exists, if it doesnt create it with default settings
+			if (File.Exists("./tinyinfo.ini") == false)
+			{
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10");
+			}
+
+			//	Create ini parser and read ini file
+			var parser = new FileIniDataParser();
+			IniData data = parser.ReadFile("./tinyinfo.ini");
+
+			//	Read Settings
+			//	Set theme
+			if (data.GetKey("tinyinfo.theme") == "dark")
+			{
+				//	Dark theme
+				ForeColor = Color.White;
+				BackColor = Color.Black;
+				button1.ForeColor = Color.Black;
+				button2.ForeColor = Color.Black;
+				button3.ForeColor = Color.Black;
+				onTopCheckbox.ForeColor = Color.Black;
+				onTopCheckbox.BackColor = Color.Gray;
+				panel1.BackColor = Color.FromName("ButtonFace");
+				panel1.ForeColor = Color.White;
+				textBox1.BackColor = Color.Black;
+				textBox1.ForeColor = Color.White;
+			}
+			else
+			{
+				//	Light theme
+				ForeColor = Color.Black;
+				BackColor = Color.White;
+				button1.ForeColor = Color.Black;
+				button2.ForeColor = Color.Black;
+				button3.ForeColor = Color.Black;
+				onTopCheckbox.ForeColor = Color.Black;
+				onTopCheckbox.BackColor = Color.White;
+				panel1.BackColor = Color.White;
+				panel1.ForeColor = Color.Black;
+				textBox1.BackColor = Color.White;
+				textBox1.ForeColor = Color.Black;
+			}
+
+			//	Set font size
+			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
+
+			textBox1.Font = font;
+		}
+
+		//	Opens Settings Window
+		private void settings_Click(object sender, EventArgs e)
+		{
+			//	Create Settings Window
+			var settings = new SettingsWindow();
+			settings.ShowDialog();
+			//	Reload Theme
+			refreshTheme();
+		}
+
+		//	Create ShellAbout
+		[DllImport("shell32.dll")]
+		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
+
+		//	Opens ShellAbout Dialog to display version info
+		private void about_Click(object sender, EventArgs e)
+		{
+			//	Write version to string
+			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			
+			//	Create ShellAbout dialog
+			ShellAbout(IntPtr.Zero, "Tinyinfo " + version, "Tinyinfo v." + version, Icon.Handle);
+		}
+
+		//	Opens GitHub repo in browser
+		private void github_Click(object sender, EventArgs e)
+		{
+			Process.Start("https://github.com/Lion-Craft/Tinyinfo");
 		}
 	}
 }
