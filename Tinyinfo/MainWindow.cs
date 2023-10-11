@@ -34,7 +34,7 @@ namespace Tinyinfo
 			do
 			{
 				//	Refresh lists
-				hardwareInfo.RefreshCPUList(false);
+				hardwareInfo.RefreshCPUList(true);
 				hardwareInfo.RefreshMemoryList();
 				hardwareInfo.RefreshBIOSList();
 				hardwareInfo.RefreshMotherboardList();
