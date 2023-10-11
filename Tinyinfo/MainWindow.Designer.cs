@@ -139,7 +139,6 @@
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.button1);
-			this.MaximizeBox = false;
 			this.Name = "MainWindow";
 			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
