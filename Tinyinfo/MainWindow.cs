@@ -282,6 +282,7 @@ namespace Tinyinfo
 			}
 		}
 
+		//	Opens Settings Window
 		private void settings_Click(object sender, EventArgs e)
 		{
 
@@ -290,6 +291,8 @@ namespace Tinyinfo
 		//	Create ShellAbout
 		[DllImport("shell32.dll")]
 		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
+
+		//	Opens ShellAbout Dialog to display version info
 		private void about_Click(object sender, EventArgs e)
 		{
 			//	Write version to string
@@ -299,6 +302,7 @@ namespace Tinyinfo
 			ShellAbout(IntPtr.Zero, "Tinyinfo " + version, "Tinyinfo v." + version, Icon.Handle);
 		}
 
+		//	Opens GitHub repo in browser
 		private void github_Click(object sender, EventArgs e)
 		{
 			Process.Start("https://github.com/Lion-Craft/Tinyinfo");
