@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.button1 = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.button2 = new System.Windows.Forms.Button();
@@ -35,6 +36,11 @@
 			this.progressBar1 = new System.Windows.Forms.ProgressBar();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
+			this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
+			this.settings = new System.Windows.Forms.MenuItem();
+			this.menuItem2 = new System.Windows.Forms.MenuItem();
+			this.about = new System.Windows.Forms.MenuItem();
+			this.github = new System.Windows.Forms.MenuItem();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -128,6 +134,38 @@
 			this.onTopCheckbox.UseVisualStyleBackColor = true;
 			this.onTopCheckbox.CheckedChanged += new System.EventHandler(this.onTopCheckbox_CheckedChanged);
 			// 
+			// mainMenu
+			// 
+			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.settings,
+            this.menuItem2});
+			// 
+			// settings
+			// 
+			this.settings.Index = 0;
+			this.settings.Text = "Settings";
+			this.settings.Click += new System.EventHandler(this.settings_Click);
+			// 
+			// menuItem2
+			// 
+			this.menuItem2.Index = 1;
+			this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.about,
+            this.github});
+			this.menuItem2.Text = "Help";
+			// 
+			// about
+			// 
+			this.about.Index = 0;
+			this.about.Text = "About";
+			this.about.Click += new System.EventHandler(this.about_Click);
+			// 
+			// github
+			// 
+			this.github.Index = 1;
+			this.github.Text = "Github";
+			this.github.Click += new System.EventHandler(this.github_Click);
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -139,6 +177,7 @@
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.button1);
+			this.Menu = this.mainMenu;
 			this.Name = "MainWindow";
 			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
@@ -157,6 +196,11 @@
 		private System.Windows.Forms.ProgressBar progressBar1;
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.CheckBox onTopCheckbox;
+		private System.Windows.Forms.MainMenu mainMenu;
+		private System.Windows.Forms.MenuItem settings;
+		private System.Windows.Forms.MenuItem menuItem2;
+		private System.Windows.Forms.MenuItem about;
+		private System.Windows.Forms.MenuItem github;
 	}
 }
 

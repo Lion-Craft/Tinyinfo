@@ -279,5 +279,20 @@ namespace Tinyinfo
 				ActiveForm.TopMost = false;
 			}
 		}
+
+		private void settings_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void about_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void github_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
