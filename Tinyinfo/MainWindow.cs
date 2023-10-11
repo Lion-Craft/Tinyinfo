@@ -105,7 +105,7 @@ namespace Tinyinfo
 				AppendTextSafe("\t\t\tVersion: " + gpu.DriverVersion + nl);
 
 				//	Driver Date
-				AppendTextSafe("\t\t\tDate: " + gpu.DriverDate + nl);
+				AppendTextSafe("\t\t\tDate: " + gpu.DriverDate);
 
 				//	Increment GPU ID
 				id++;
