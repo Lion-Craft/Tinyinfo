@@ -169,6 +169,7 @@
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+			this.BackColor = System.Drawing.SystemColors.Window;
 			this.ClientSize = new System.Drawing.Size(653, 330);
 			this.Controls.Add(this.onTopCheckbox);
 			this.Controls.Add(this.textBox1);
