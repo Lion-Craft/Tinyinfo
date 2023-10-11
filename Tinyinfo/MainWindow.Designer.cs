@@ -34,6 +34,7 @@
 			this.button3 = new System.Windows.Forms.Button();
 			this.progressBar1 = new System.Windows.Forms.ProgressBar();
 			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -54,9 +55,9 @@
 			this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label1.Location = new System.Drawing.Point(12, 9);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(216, 21);
+			this.label1.Size = new System.Drawing.Size(335, 21);
 			this.label1.TabIndex = 2;
-			this.label1.Text = "Press Start to get System Info.";
+			this.label1.Text = "Press Start to continuously update System Info.";
 			// 
 			// button2
 			// 
@@ -113,20 +114,35 @@
 			this.textBox1.TabIndex = 6;
 			this.textBox1.WordWrap = false;
 			// 
+			// onTopCheckbox
+			// 
+			this.onTopCheckbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.onTopCheckbox.AutoSize = true;
+			this.onTopCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.System;
+			this.onTopCheckbox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.onTopCheckbox.Location = new System.Drawing.Point(386, 286);
+			this.onTopCheckbox.Name = "onTopCheckbox";
+			this.onTopCheckbox.Size = new System.Drawing.Size(134, 26);
+			this.onTopCheckbox.TabIndex = 7;
+			this.onTopCheckbox.Text = "Always on Top";
+			this.onTopCheckbox.UseVisualStyleBackColor = true;
+			this.onTopCheckbox.CheckedChanged += new System.EventHandler(this.onTopCheckbox_CheckedChanged);
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
 			this.ClientSize = new System.Drawing.Size(653, 330);
+			this.Controls.Add(this.onTopCheckbox);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.progressBar1);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.button1);
-			this.MaximizeBox = false;
 			this.Name = "MainWindow";
 			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
+			this.Load += new System.EventHandler(this.startup);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -140,6 +156,7 @@
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.ProgressBar progressBar1;
 		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.CheckBox onTopCheckbox;
 	}
 }
 
