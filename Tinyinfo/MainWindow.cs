@@ -30,19 +30,19 @@ namespace Tinyinfo
 		public void getdata(bool loop)
 		{
 			var nl = Environment.NewLine;
-			while (loop)
+			do
 			{
 				//	Refresh lists
 				hardwareInfo.RefreshCPUList(true);
 				hardwareInfo.RefreshMemoryList();
 				hardwareInfo.RefreshBIOSList();
 				hardwareInfo.RefreshMotherboardList();
-			
+
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
 					//	CPU Info
 					WriteTextSafe("CPU:" + nl);
-					
+
 					//	CPU ID
 					AppendTextSafe("\tID: " + cpu.ProcessorId + nl);
 
@@ -68,7 +68,7 @@ namespace Tinyinfo
 					//	Current Clockspeed in mHz
 					AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
 					//	Base Clockspeed in mHz
-					AppendTextSafe("\t\t" + cpu.MaxClockSpeed +"mHz Base");
+					AppendTextSafe("\t\t" + cpu.MaxClockSpeed + "mHz Base");
 
 					//	Graphics
 					AppendTextSafe(nl + "Video: ");
@@ -176,7 +176,7 @@ namespace Tinyinfo
 						AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
 					}
 				}
-			}
+			} while (loop);
 		}
 		
 
