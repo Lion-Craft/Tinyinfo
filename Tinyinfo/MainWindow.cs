@@ -216,7 +216,54 @@ namespace Tinyinfo
 					AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
 					//	Base Clockspeed in mHz
 					AppendTextSafe("\t\t" + cpu.MaxClockSpeed +"mHz Base");
-					
+
+					//	Graphics
+					AppendTextSafe(nl + "Video: ");
+					//	Create GPU ID
+					int id = 0;
+					foreach (var gpu in hardwareInfo.VideoControllerList)
+					{
+						//	Write capacity into float and convert to GB
+						float vmemsize = gpu.AdapterRAM;
+						vmemsize /= 1073741824;
+
+						//	GPU ID
+						AppendTextSafe(nl + "\tGPU " + id + ":" + nl);
+
+						//	Name
+						AppendTextSafe("\t\tName: " + gpu.Name + nl);
+
+						//	Manufacturer
+						AppendTextSafe("\t\tManufacturer: " + gpu.Manufacturer + nl);
+
+						//	Description
+						AppendTextSafe("\t\tDescription: " + gpu.VideoProcessor + nl);
+
+						//	Video mode
+						AppendTextSafe("\t\tVideo Mode: " + gpu.VideoModeDescription + " x " + gpu.CurrentRefreshRate + "Hz x " + gpu.CurrentBitsPerPixel + " Bit" + nl);
+
+						//	Video memory amount
+						AppendTextSafe("\t\tVRAM Amount: " + vmemsize + "GB" + nl);
+
+						//	Maximum Refresh rate
+						AppendTextSafe("\t\tMaximum Refresh Rate: " + gpu.MaxRefreshRate + "Hz" + nl);
+
+						//	Minimum Refresh rate
+						AppendTextSafe("\t\tMinimum Refresh Rate: " + gpu.MinRefreshRate + "Hz " + nl);
+
+						//	Driver
+						AppendTextSafe("\t\tDriver: " + nl);
+
+						//	Driver Version
+						AppendTextSafe("\t\t\tVersion: " + gpu.DriverVersion + nl);
+
+						//	Driver Date
+						AppendTextSafe("\t\t\tDate: " + gpu.DriverDate + nl);
+
+						//	Increment GPU ID
+						id++;
+					}
+
 					//	Memory
 					AppendTextSafe(nl + nl + "Memory:");
 					foreach (var memory in hardwareInfo.MemoryList)
