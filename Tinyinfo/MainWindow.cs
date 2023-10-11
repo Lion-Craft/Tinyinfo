@@ -29,6 +29,7 @@ namespace Tinyinfo
 			hardwareInfo.RefreshMemoryList();
 			hardwareInfo.RefreshBIOSList();
 			hardwareInfo.RefreshMotherboardList();
+			hardwareInfo.RefreshVideoControllerList();
 
 			foreach (var cpu in hardwareInfo.CpuList)
 			{
@@ -61,65 +62,84 @@ namespace Tinyinfo
 				AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
 				//	Base Clockspeed in mHz
 				AppendTextSafe("\t\t" + cpu.MaxClockSpeed + "mHz Base");
+			}
 
-				//	Memory
-				AppendTextSafe(nl + nl + "Memory:");
-				foreach (var memory in hardwareInfo.MemoryList)
-				{
-					//	Write capacity into float and convert to GB
-					float memsize = memory.Capacity;
-					memsize /= 1073741824;
+			//	Graphics
+			AppendTextSafe(nl + "Video: ");
+			//	Create GPU ID
+			int id = 0;
+			foreach (var gpu in hardwareInfo.VideoControllerList)
+			{
+				//	GPU ID
+				AppendTextSafe(nl + "\tGPU " + id + ":" + nl);
 
-					//	Bank number
-					AppendTextSafe(nl + "\t" + memory.BankLabel + ":" + nl);
+				//	Name
+				AppendTextSafe("\t\tName: " + gpu.Name + nl);
 
-					//	Manufacturer
-					AppendTextSafe("\t\tManufacturer: " + memory.Manufacturer + nl);
+				//	Manufacturer
+				AppendTextSafe("\t\tManufacturer: " + gpu.Manufacturer + nl);
+				
+				//	Increment GPU ID
+				id++;
+			}
 
-					//	Size
-					AppendTextSafe("\t\t\tSize: " + memsize + "GB" + nl);
+			//	Memory
+			AppendTextSafe(nl + "Memory:");
+			foreach (var memory in hardwareInfo.MemoryList)
+			{
+				//	Write capacity into float and convert to GB
+				float memsize = memory.Capacity;
+				memsize /= 1073741824;
 
-					//	Speed
-					AppendTextSafe("\t\t\tSpeed: " + memory.Speed + "mT/s" + nl);
+				//	Bank number
+				AppendTextSafe(nl + "\t" + memory.BankLabel + ":" + nl);
 
-					//	Part Number
-					AppendTextSafe("\t\t\tPart No.: " + memory.PartNumber + nl);
+				//	Manufacturer
+				AppendTextSafe("\t\tManufacturer: " + memory.Manufacturer + nl);
 
-					//	Form Factor
-					AppendTextSafe("\t\t\tForm Factor: " + memory.FormFactor + nl);
+				//	Size
+				AppendTextSafe("\t\t\tSize: " + memsize + "GB" + nl);
 
-					//	Minimum Voltage
-					AppendTextSafe("\t\t\tMin. Voltage: " + memory.MinVoltage + "mV" + nl);
+				//	Speed
+				AppendTextSafe("\t\t\tSpeed: " + memory.Speed + "mT/s" + nl);
 
-					//	Maximum voltage
-					AppendTextSafe("\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
-				}
+				//	Part Number
+				AppendTextSafe("\t\t\tPart No.: " + memory.PartNumber + nl);
 
-				//	Motherboard
-				foreach (var motherboard in hardwareInfo.MotherboardList)
-				{
-					AppendTextSafe(nl + "Motherboard: " + nl);
-					//	Manufacturer
-					AppendTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
-					//	Model
-					AppendTextSafe("\tModel: " + motherboard.Product + nl);
-					//	Serial Number
-					AppendTextSafe("\tSerial No.: " + motherboard.SerialNumber);
-				}
+				//	Form Factor
+				AppendTextSafe("\t\t\tForm Factor: " + memory.FormFactor + nl);
 
-				//	BIOS Info
-				foreach (var bios in hardwareInfo.BiosList)
-				{
-					AppendTextSafe(nl + "BIOS: " + nl);
-					//	Manufacturer
-					AppendTextSafe("\tManufacturer: " + bios.Manufacturer + nl);
-					//	Name
-					AppendTextSafe("\tName: " + bios.Name + nl);
-					//	Version
-					AppendTextSafe("\tVersion: " + bios.Version + nl);
-					//	Release Date
-					AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
-				}
+				//	Minimum Voltage
+				AppendTextSafe("\t\t\tMin. Voltage: " + memory.MinVoltage + "mV" + nl);
+
+				//	Maximum voltage
+				AppendTextSafe("\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
+			}
+
+			//	Motherboard
+			foreach (var motherboard in hardwareInfo.MotherboardList)
+			{
+				AppendTextSafe(nl + "Motherboard: " + nl);
+				//	Manufacturer
+				AppendTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
+				//	Model
+				AppendTextSafe("\tModel: " + motherboard.Product + nl);
+				//	Serial Number
+				AppendTextSafe("\tSerial No.: " + motherboard.SerialNumber);
+			}
+
+			//	BIOS Info
+			foreach (var bios in hardwareInfo.BiosList)
+			{
+				AppendTextSafe(nl + "BIOS: " + nl);
+				//	Manufacturer
+				AppendTextSafe("\tManufacturer: " + bios.Manufacturer + nl);
+				//	Name
+				AppendTextSafe("\tName: " + bios.Name + nl);
+				//	Version
+				AppendTextSafe("\tVersion: " + bios.Version + nl);
+				//	Release Date
+				AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
 			}
 		}
 
