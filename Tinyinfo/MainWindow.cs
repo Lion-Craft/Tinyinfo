@@ -292,7 +292,7 @@ namespace Tinyinfo
 
 		private void github_Click(object sender, EventArgs e)
 		{
-
+			Process.Start("https://github.com/Lion-Craft/Tinyinfo");
 		}
 	}
 }
