@@ -218,7 +218,7 @@ namespace Tinyinfo
 			} while (loop);
 		}
 
-		// Savely Overwrite on textbox content
+		// Safely Overwrite on textbox content
 		int cpt = 0;
 		private void ShowInfo(string text)
 		{
