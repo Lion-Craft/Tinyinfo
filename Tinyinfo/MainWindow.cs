@@ -29,6 +29,7 @@ namespace Tinyinfo
 			hardwareInfo.RefreshMemoryList();
 			hardwareInfo.RefreshBIOSList();
 			hardwareInfo.RefreshMotherboardList();
+			hardwareInfo.RefreshVideoControllerList();
 
 			foreach (var cpu in hardwareInfo.CpuList)
 			{
@@ -61,65 +62,112 @@ namespace Tinyinfo
 				AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
 				//	Base Clockspeed in mHz
 				AppendTextSafe("\t\t" + cpu.MaxClockSpeed + "mHz Base");
+			}
 
-				//	Memory
-				AppendTextSafe(nl + nl + "Memory:");
-				foreach (var memory in hardwareInfo.MemoryList)
-				{
-					//	Write capacity into float and convert to GB
-					float memsize = memory.Capacity;
-					memsize /= 1073741824;
+			//	Graphics
+			AppendTextSafe(nl + "Video: ");
+			//	Create GPU ID
+			int id = 0;
+			foreach (var gpu in hardwareInfo.VideoControllerList)
+			{
+				//	Write capacity into float and convert to GB
+				float vmemsize = gpu.AdapterRAM;
+				vmemsize /= 1073741824;
 
-					//	Bank number
-					AppendTextSafe(nl + "\t" + memory.BankLabel + ":" + nl);
+				//	GPU ID
+				AppendTextSafe(nl + "\tGPU " + id + ":" + nl);
 
-					//	Manufacturer
-					AppendTextSafe("\t\tManufacturer: " + memory.Manufacturer + nl);
+				//	Name
+				AppendTextSafe("\t\tName: " + gpu.Name + nl);
 
-					//	Size
-					AppendTextSafe("\t\t\tSize: " + memsize + "GB" + nl);
+				//	Manufacturer
+				AppendTextSafe("\t\tManufacturer: " + gpu.Manufacturer + nl);
 
-					//	Speed
-					AppendTextSafe("\t\t\tSpeed: " + memory.Speed + "mT/s" + nl);
+				//	Description
+				AppendTextSafe("\t\tDescription: " + gpu.VideoProcessor + nl);
 
-					//	Part Number
-					AppendTextSafe("\t\t\tPart No.: " + memory.PartNumber + nl);
+				//	Video mode
+				AppendTextSafe("\t\tVideo Mode: " + gpu.VideoModeDescription + " x " + gpu.CurrentRefreshRate + "Hz x " + gpu.CurrentBitsPerPixel + " Bit" + nl);
 
-					//	Form Factor
-					AppendTextSafe("\t\t\tForm Factor: " + memory.FormFactor + nl);
+				//	Video memory amount
+				AppendTextSafe("\t\tVRAM Amount: " + vmemsize + "GB" + nl);
 
-					//	Minimum Voltage
-					AppendTextSafe("\t\t\tMin. Voltage: " + memory.MinVoltage + "mV" + nl);
+				//	Maximum Refresh rate
+				AppendTextSafe("\t\tMaximum Refresh Rate: " + gpu.MaxRefreshRate + "Hz" + nl);
 
-					//	Maximum voltage
-					AppendTextSafe("\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
-				}
+				//	Minimum Refresh rate
+				AppendTextSafe("\t\tMinimum Refresh Rate: " + gpu.MinRefreshRate + "Hz "+ nl);
 
-				//	Motherboard
-				foreach (var motherboard in hardwareInfo.MotherboardList)
-				{
-					AppendTextSafe(nl + "Motherboard: " + nl);
-					//	Manufacturer
-					AppendTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
-					//	Model
-					AppendTextSafe("\tModel: " + motherboard.Product + nl);
-					//	Serial Number
-					AppendTextSafe("\tSerial No.: " + motherboard.SerialNumber);
-				}
+				//	Driver
+				AppendTextSafe("\t\tDriver: " + nl);
 
-				//	BIOS Info
-				foreach (var bios in hardwareInfo.BiosList)
-				{
-					AppendTextSafe(nl + "BIOS: " + nl);
-					//	Manufacturer
-					AppendTextSafe("\tManufacturer: " + bios.Manufacturer + nl);
-					//	Name
-					AppendTextSafe("\tName: " + bios.Name + nl);
-					//	Version
-					AppendTextSafe("\tVersion: " + bios.Version + nl);
-					//	Release Date
-					AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
-				}
+				//	Driver Version
+				AppendTextSafe("\t\t\tVersion: " + gpu.DriverVersion + nl);
+
+				//	Driver Date
+				AppendTextSafe("\t\t\tDate: " + gpu.DriverDate);
+
+				//	Increment GPU ID
+				id++;
+			}
+
+			//	Memory
+			AppendTextSafe(nl + "Memory:");
+			foreach (var memory in hardwareInfo.MemoryList)
+			{
+				//	Write capacity into float and convert to GB
+				float memsize = memory.Capacity;
+				memsize /= 1073741824;
+
+				//	Bank number
+				AppendTextSafe(nl + "\t" + memory.BankLabel + ":" + nl);
+
+				//	Manufacturer
+				AppendTextSafe("\t\tManufacturer: " + memory.Manufacturer + nl);
+
+				//	Size
+				AppendTextSafe("\t\t\tSize: " + memsize + "GB" + nl);
+
+				//	Speed
+				AppendTextSafe("\t\t\tSpeed: " + memory.Speed + "mT/s" + nl);
+
+				//	Part Number
+				AppendTextSafe("\t\t\tPart No.: " + memory.PartNumber + nl);
+
+				//	Form Factor
+				AppendTextSafe("\t\t\tForm Factor: " + memory.FormFactor + nl);
+
+				//	Minimum Voltage
+				AppendTextSafe("\t\t\tMin. Voltage: " + memory.MinVoltage + "mV" + nl);
+
+				//	Maximum voltage
+				AppendTextSafe("\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
+			}
+
+			//	Motherboard
+			foreach (var motherboard in hardwareInfo.MotherboardList)
+			{
+				AppendTextSafe(nl + "Motherboard: " + nl);
+				//	Manufacturer
+				AppendTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
+				//	Model
+				AppendTextSafe("\tModel: " + motherboard.Product + nl);
+				//	Serial Number
+				AppendTextSafe("\tSerial No.: " + motherboard.SerialNumber);
+			}
+
+			//	BIOS Info
+			foreach (var bios in hardwareInfo.BiosList)
+			{
+				AppendTextSafe(nl + "BIOS: " + nl);
+				//	Manufacturer
+				AppendTextSafe("\tManufacturer: " + bios.Manufacturer + nl);
+				//	Name
+				AppendTextSafe("\tName: " + bios.Name + nl);
+				//	Version
+				AppendTextSafe("\tVersion: " + bios.Version + nl);
+				//	Release Date
+				AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
 			}
 		}
 
@@ -168,7 +216,54 @@ namespace Tinyinfo
 					AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
 					//	Base Clockspeed in mHz
 					AppendTextSafe("\t\t" + cpu.MaxClockSpeed +"mHz Base");
-					
+
+					//	Graphics
+					AppendTextSafe(nl + "Video: ");
+					//	Create GPU ID
+					int id = 0;
+					foreach (var gpu in hardwareInfo.VideoControllerList)
+					{
+						//	Write capacity into float and convert to GB
+						float vmemsize = gpu.AdapterRAM;
+						vmemsize /= 1073741824;
+
+						//	GPU ID
+						AppendTextSafe(nl + "\tGPU " + id + ":" + nl);
+
+						//	Name
+						AppendTextSafe("\t\tName: " + gpu.Name + nl);
+
+						//	Manufacturer
+						AppendTextSafe("\t\tManufacturer: " + gpu.Manufacturer + nl);
+
+						//	Description
+						AppendTextSafe("\t\tDescription: " + gpu.VideoProcessor + nl);
+
+						//	Video mode
+						AppendTextSafe("\t\tVideo Mode: " + gpu.VideoModeDescription + " x " + gpu.CurrentRefreshRate + "Hz x " + gpu.CurrentBitsPerPixel + " Bit" + nl);
+
+						//	Video memory amount
+						AppendTextSafe("\t\tVRAM Amount: " + vmemsize + "GB" + nl);
+
+						//	Maximum Refresh rate
+						AppendTextSafe("\t\tMaximum Refresh Rate: " + gpu.MaxRefreshRate + "Hz" + nl);
+
+						//	Minimum Refresh rate
+						AppendTextSafe("\t\tMinimum Refresh Rate: " + gpu.MinRefreshRate + "Hz " + nl);
+
+						//	Driver
+						AppendTextSafe("\t\tDriver: " + nl);
+
+						//	Driver Version
+						AppendTextSafe("\t\t\tVersion: " + gpu.DriverVersion + nl);
+
+						//	Driver Date
+						AppendTextSafe("\t\t\tDate: " + gpu.DriverDate + nl);
+
+						//	Increment GPU ID
+						id++;
+					}
+
 					//	Memory
 					AppendTextSafe(nl + nl + "Memory:");
 					foreach (var memory in hardwareInfo.MemoryList)
