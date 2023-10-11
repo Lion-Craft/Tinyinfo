@@ -285,7 +285,9 @@ namespace Tinyinfo
 		//	Opens Settings Window
 		private void settings_Click(object sender, EventArgs e)
 		{
-
+			//	Create Settings Window
+			var settings = new SettingsWindow();
+			settings.ShowDialog();
 		}
 
 		//	Create ShellAbout
