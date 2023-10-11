@@ -19,7 +19,26 @@ namespace Tinyinfo
 				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10");
 			}
 
-			// var parser = new FileIniDataParser();
+			//	Create ini parser and read ini file
+			var parser = new FileIniDataParser();
+			IniData data = parser.ReadFile("./tinyinfo.ini");
+
+			//	load saved theme setting
+			if (data.GetKey("tinyinfo.theme") == "light")
+			{
+				//	light theme
+				radioButton1.Checked = true;
+				radioButton2.Checked = false;
+			}
+			else
+			{
+				//	dark theme
+				radioButton1.Checked = false;
+				radioButton2.Checked = true;
+			}
+
+			//	load font size setting
+			numericUpDown1.Value = Convert.ToInt32(data.GetKey("tinyinfo.font"));
 		}
 
 		private void button1_Click(object sender, EventArgs e)
