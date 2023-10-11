@@ -37,6 +37,7 @@ namespace Tinyinfo
 				hardwareInfo.RefreshMemoryList();
 				hardwareInfo.RefreshBIOSList();
 				hardwareInfo.RefreshMotherboardList();
+				hardwareInfo.RefreshVideoControllerList();
 
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
