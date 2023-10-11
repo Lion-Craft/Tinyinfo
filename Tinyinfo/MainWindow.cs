@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using Hardware.Info;
@@ -285,9 +287,16 @@ namespace Tinyinfo
 
 		}
 
+		//	Create ShellAbout
+		[DllImport("shell32.dll")]
+		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
 		private void about_Click(object sender, EventArgs e)
 		{
-
+			//	Write version to string
+			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			
+			//	Create ShellAbout dialog
+			ShellAbout(IntPtr.Zero, "Tinyinfo " + version, "Tinyinfo v." + version, Icon.Handle);
 		}
 
 		private void github_Click(object sender, EventArgs e)
