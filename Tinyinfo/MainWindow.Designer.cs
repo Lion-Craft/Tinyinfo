@@ -1,4 +1,4 @@
-﻿namespace Tinyinfo
+namespace Tinyinfo
 {
 	partial class MainWindow
 	{
@@ -97,19 +97,19 @@
 			// progressBar1
 			// 
 			this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.progressBar1.Location = new System.Drawing.Point(16, 262);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(624, 10);
-			this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-			this.progressBar1.TabIndex = 5;
-			this.progressBar1.Visible = false;
-			// 
-			// textBox1
-			// 
-			this.textBox1.AcceptsReturn = true;
-			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.progressBar1.Location = new System.Drawing.Point(16, 262);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(624, 10);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 5;
+            this.progressBar1.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.AcceptsReturn = true;
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBox1.BackColor = System.Drawing.SystemColors.Window;
@@ -199,7 +199,6 @@
 			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
-
 		}
 
 		#endregion

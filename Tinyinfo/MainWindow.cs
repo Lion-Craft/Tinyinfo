@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Diagnostics;
 using System.Reflection;
@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 using Hardware.Info;
+using static System.Net.Mime.MediaTypeNames;
 using IniParser;
 using IniParser.Model;
 
@@ -186,13 +187,41 @@ namespace Tinyinfo
 						AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
 					}
 				}
+
+				ShowInfo("");
+
 			} while (loop);
 		}
-		
 
-		//	Safely overwrites text in textBox1
+		// Savely Overwrite on textbox content
+		int cpt = 0;
+		private void ShowInfo(string text)
+		{
+			cpt++;
+			InfoTextBuffer = cpt.ToString() + InfoTextBuffer;
+
+            if (textBox1.InvokeRequired)
+            {
+                var d = new SafeCallDelegate(ShowInfo);
+                textBox1.Invoke(d,new object[] { InfoTextBuffer });
+            }
+            else
+            {
+                textBox1.Text = InfoTextBuffer;
+            }
+        }
+
+        // Creating String To Push it later on textbox
+        private string InfoTextBuffer = "";
 		private void WriteTextSafe(string text)
 		{
+            // NOTE (HOUDAIFA) : Faster Way
+
+            InfoTextBuffer = text;
+
+
+            return;// No Need for code bellow
+
 			if (textBox1.InvokeRequired)
 			{
 				var d = new SafeCallDelegate(WriteTextSafe);
@@ -204,10 +233,16 @@ namespace Tinyinfo
 			}
 		}
 
-		//	Safely appends text in textBox1
+		// Appand Text To Text Buffer
 		private void AppendTextSafe(string text)
 		{
-			if (textBox1.InvokeRequired)
+            // NOTE (HOUDAIFA) : Faster Way
+
+			InfoTextBuffer += text;
+
+            return;// No Need for code bellow
+
+            if (textBox1.InvokeRequired)
 			{
 				var d = new SafeCallDelegate(AppendTextSafe);
 				textBox1.Invoke(d, new object[] { text });
