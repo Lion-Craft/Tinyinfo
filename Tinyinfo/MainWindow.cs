@@ -219,12 +219,8 @@ namespace Tinyinfo
 		}
 
 		// Safely Overwrite on textbox content
-		int cpt = 0;
 		private void ShowInfo(string text)
 		{
-			cpt++;
-			InfoTextBuffer = cpt.ToString() + InfoTextBuffer;
-
             if (textBox1.InvokeRequired)
             {
                 var d = new SafeCallDelegate(ShowInfo);
