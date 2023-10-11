@@ -48,6 +48,7 @@ namespace Tinyinfo
 				hardwareInfo.RefreshBIOSList();
 				hardwareInfo.RefreshMotherboardList();
 				hardwareInfo.RefreshVideoControllerList();
+				hardwareInfo.RefreshBatteryList();
 
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
@@ -184,7 +185,31 @@ namespace Tinyinfo
 						//	Version
 						AppendTextSafe("\tVersion: " + bios.Version + nl);
 						//	Release Date
-						AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
+						AppendTextSafe("\tRelease Date: " + bios.ReleaseDate);
+					}
+
+					//	Battery Info
+					foreach (var battery in hardwareInfo.BatteryList)
+					{
+						AppendTextSafe(nl + "Battery: " + nl);
+						//	Status
+						AppendTextSafe("\tStatus: " + battery.BatteryStatus + nl);
+						//	Status Description
+						AppendTextSafe("\tStatus Description: " + battery.BatteryStatusDescription + nl);
+						//	Time remaining
+						AppendTextSafe("\tTime remaining: " + battery.EstimatedChargeRemaining + nl);
+						//	Expected Life
+						AppendTextSafe("\tExpected Life: " + battery.ExpectedLife + nl);
+						//	Time to Charge
+						AppendTextSafe("\tTime until fully charged: " + battery.TimeToFullCharge + nl);
+						//	Time on Battery
+						AppendTextSafe("\tTime on Battery: " + battery.TimeOnBattery + nl);
+						//	Capacities
+						AppendTextSafe("\tCapacities: " + nl);
+						//	Design Capacity
+						AppendTextSafe("\t\tDesign Capacity: " + battery.DesignCapacity + nl);
+						//	Current Capaity
+						AppendTextSafe("\t\tFull Charge Capacity: " + battery.FullChargeCapacity + nl);
 					}
 				}
 
