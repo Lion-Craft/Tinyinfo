@@ -36,6 +36,9 @@
     <Reference Include="Hardware.Info, Version=100.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Hardware.Info.100.0.0\lib\netstandard2.0\Hardware.Info.dll</HintPath>
     </Reference>
+    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
+      <HintPath>..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel1">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\Shared\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
