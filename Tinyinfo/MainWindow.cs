@@ -19,177 +19,30 @@ namespace Tinyinfo
 		Thread thread;
 
 		//	Runs on form load
-		//
-		//	This solution is pretty bad but it works.
 		public void startup(object sender, EventArgs e)
 		{
-			var nl = Environment.NewLine;
-			//	Refresh lists
-			hardwareInfo.RefreshCPUList(true);
-			hardwareInfo.RefreshMemoryList();
-			hardwareInfo.RefreshBIOSList();
-			hardwareInfo.RefreshMotherboardList();
-			hardwareInfo.RefreshVideoControllerList();
-
-			foreach (var cpu in hardwareInfo.CpuList)
-			{
-				//	CPU Info
-				WriteTextSafe("CPU:" + nl);
-
-				//	CPU ID
-				AppendTextSafe("\tID: " + cpu.ProcessorId + nl);
-
-				//	Manufacturer and Model
-				AppendTextSafe("\tManufacturer: " + cpu.Manufacturer + nl);
-				AppendTextSafe("\tModel: " + cpu.Name.Replace("  ", "") + nl);
-
-				// Description
-				AppendTextSafe("\tDescription: " + cpu.Description + nl);
-
-				//	Socket
-				AppendTextSafe("\tSocket: " + cpu.SocketDesignation + nl);
-
-				//	Cores and Threads
-				AppendTextSafe("\tCore Amount: " + cpu.NumberOfCores + " Physical, " + cpu.NumberOfLogicalProcessors + " Logical" + nl);
-
-				//	VM Firmware
-				AppendTextSafe("\tVirtualization Firmware Enabled: " + cpu.VirtualizationFirmwareEnabled + nl);
-
-
-				//	Clockspeeds
-				AppendTextSafe("\tClockspeeds:" + nl);
-				//	Current Clockspeed in mHz
-				AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
-				//	Base Clockspeed in mHz
-				AppendTextSafe("\t\t" + cpu.MaxClockSpeed + "mHz Base");
-			}
-
-			//	Graphics
-			AppendTextSafe(nl + "Video: ");
-			//	Create GPU ID
-			int id = 0;
-			foreach (var gpu in hardwareInfo.VideoControllerList)
-			{
-				//	Write capacity into float and convert to GB
-				float vmemsize = gpu.AdapterRAM;
-				vmemsize /= 1073741824;
-
-				//	GPU ID
-				AppendTextSafe(nl + "\tGPU " + id + ":" + nl);
-
-				//	Name
-				AppendTextSafe("\t\tName: " + gpu.Name + nl);
-
-				//	Manufacturer
-				AppendTextSafe("\t\tManufacturer: " + gpu.Manufacturer + nl);
-
-				//	Description
-				AppendTextSafe("\t\tDescription: " + gpu.VideoProcessor + nl);
-
-				//	Video mode
-				AppendTextSafe("\t\tVideo Mode: " + gpu.VideoModeDescription + " x " + gpu.CurrentRefreshRate + "Hz x " + gpu.CurrentBitsPerPixel + " Bit" + nl);
-
-				//	Video memory amount
-				AppendTextSafe("\t\tVRAM Amount: " + vmemsize + "GB" + nl);
-
-				//	Maximum Refresh rate
-				AppendTextSafe("\t\tMaximum Refresh Rate: " + gpu.MaxRefreshRate + "Hz" + nl);
-
-				//	Minimum Refresh rate
-				AppendTextSafe("\t\tMinimum Refresh Rate: " + gpu.MinRefreshRate + "Hz "+ nl);
-
-				//	Driver
-				AppendTextSafe("\t\tDriver: " + nl);
-
-				//	Driver Version
-				AppendTextSafe("\t\t\tVersion: " + gpu.DriverVersion + nl);
-
-				//	Driver Date
-				AppendTextSafe("\t\t\tDate: " + gpu.DriverDate);
-
-				//	Increment GPU ID
-				id++;
-			}
-
-			//	Memory
-			AppendTextSafe(nl + "Memory:");
-			foreach (var memory in hardwareInfo.MemoryList)
-			{
-				//	Write capacity into float and convert to GB
-				float memsize = memory.Capacity;
-				memsize /= 1073741824;
-
-				//	Bank number
-				AppendTextSafe(nl + "\t" + memory.BankLabel + ":" + nl);
-
-				//	Manufacturer
-				AppendTextSafe("\t\tManufacturer: " + memory.Manufacturer + nl);
-
-				//	Size
-				AppendTextSafe("\t\t\tSize: " + memsize + "GB" + nl);
-
-				//	Speed
-				AppendTextSafe("\t\t\tSpeed: " + memory.Speed + "mT/s" + nl);
-
-				//	Part Number
-				AppendTextSafe("\t\t\tPart No.: " + memory.PartNumber + nl);
-
-				//	Form Factor
-				AppendTextSafe("\t\t\tForm Factor: " + memory.FormFactor + nl);
-
-				//	Minimum Voltage
-				AppendTextSafe("\t\t\tMin. Voltage: " + memory.MinVoltage + "mV" + nl);
-
-				//	Maximum voltage
-				AppendTextSafe("\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
-			}
-
-			//	Motherboard
-			foreach (var motherboard in hardwareInfo.MotherboardList)
-			{
-				AppendTextSafe(nl + "Motherboard: " + nl);
-				//	Manufacturer
-				AppendTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
-				//	Model
-				AppendTextSafe("\tModel: " + motherboard.Product + nl);
-				//	Serial Number
-				AppendTextSafe("\tSerial No.: " + motherboard.SerialNumber);
-			}
-
-			//	BIOS Info
-			foreach (var bios in hardwareInfo.BiosList)
-			{
-				AppendTextSafe(nl + "BIOS: " + nl);
-				//	Manufacturer
-				AppendTextSafe("\tManufacturer: " + bios.Manufacturer + nl);
-				//	Name
-				AppendTextSafe("\tName: " + bios.Name + nl);
-				//	Version
-				AppendTextSafe("\tVersion: " + bios.Version + nl);
-				//	Release Date
-				AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
-			}
+			getdata(false);
 		}
 
 		//	TODO: Put CPU info in separate thread for improved speed
 
 		//	collect system info and write to textBox1
-		public void getdata()
+		public void getdata(bool loop)
 		{
 			var nl = Environment.NewLine;
-			while (true)
+			do
 			{
 				//	Refresh lists
 				hardwareInfo.RefreshCPUList(true);
 				hardwareInfo.RefreshMemoryList();
 				hardwareInfo.RefreshBIOSList();
 				hardwareInfo.RefreshMotherboardList();
-			
+
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
 					//	CPU Info
 					WriteTextSafe("CPU:" + nl);
-					
+
 					//	CPU ID
 					AppendTextSafe("\tID: " + cpu.ProcessorId + nl);
 
@@ -215,7 +68,7 @@ namespace Tinyinfo
 					//	Current Clockspeed in mHz
 					AppendTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
 					//	Base Clockspeed in mHz
-					AppendTextSafe("\t\t" + cpu.MaxClockSpeed +"mHz Base");
+					AppendTextSafe("\t\t" + cpu.MaxClockSpeed + "mHz Base");
 
 					//	Graphics
 					AppendTextSafe(nl + "Video: ");
@@ -323,7 +176,7 @@ namespace Tinyinfo
 						AppendTextSafe("\tRelease Date: " + bios.ReleaseDate + nl);
 					}
 				}
-			}
+			} while (loop);
 		}
 		
 
@@ -371,7 +224,7 @@ namespace Tinyinfo
 			button3.Enabled = true;
 			label1.Text = "Loading System Info...";
 			progressBar1.Value = 75;
-			thread = new Thread(new ThreadStart(getdata));
+			thread = new Thread(() => getdata(true));
 			progressBar1.Value = 85;
 			thread.IsBackground = true;
 			label1.Text = "Loading System Info....";
