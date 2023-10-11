@@ -41,6 +41,8 @@
 			this.menuItem2 = new System.Windows.Forms.MenuItem();
 			this.about = new System.Windows.Forms.MenuItem();
 			this.github = new System.Windows.Forms.MenuItem();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// button1
@@ -127,7 +129,7 @@
 			this.onTopCheckbox.AutoSize = true;
 			this.onTopCheckbox.FlatStyle = System.Windows.Forms.FlatStyle.System;
 			this.onTopCheckbox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.onTopCheckbox.Location = new System.Drawing.Point(386, 286);
+			this.onTopCheckbox.Location = new System.Drawing.Point(6, 8);
 			this.onTopCheckbox.Name = "onTopCheckbox";
 			this.onTopCheckbox.Size = new System.Drawing.Size(134, 26);
 			this.onTopCheckbox.TabIndex = 7;
@@ -167,12 +169,21 @@
 			this.github.Text = "Github";
 			this.github.Click += new System.EventHandler(this.github_Click);
 			// 
+			// panel1
+			// 
+			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.panel1.Controls.Add(this.onTopCheckbox);
+			this.panel1.Location = new System.Drawing.Point(380, 278);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(140, 40);
+			this.panel1.TabIndex = 8;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-			this.BackColor = System.Drawing.SystemColors.Window;
+			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.ClientSize = new System.Drawing.Size(653, 330);
-			this.Controls.Add(this.onTopCheckbox);
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.progressBar1);
 			this.Controls.Add(this.button3);
@@ -184,6 +195,8 @@
 			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
 			this.Load += new System.EventHandler(this.startup);
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -196,13 +209,14 @@
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 		private System.Windows.Forms.ProgressBar progressBar1;
-		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.CheckBox onTopCheckbox;
 		private System.Windows.Forms.MainMenu mainMenu;
 		private System.Windows.Forms.MenuItem settings;
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem about;
 		private System.Windows.Forms.MenuItem github;
+		public System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.Panel panel1;
 	}
 }
 
