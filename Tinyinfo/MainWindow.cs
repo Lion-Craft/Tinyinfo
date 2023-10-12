@@ -425,5 +425,10 @@ namespace Tinyinfo
 		{
 			Process.Start("https://github.com/Lion-Craft/Tinyinfo");
 		}
+
+		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			stopUpdate();
+		}
 	}
 }
