@@ -196,8 +196,8 @@ namespace Tinyinfo
 						AppendTextSafe("\tStatus: " + battery.BatteryStatus + nl);
 						//	Status Description
 						AppendTextSafe("\tStatus Description: " + battery.BatteryStatusDescription + nl);
-						//	Time remaining
-						AppendTextSafe("\tTime remaining: " + battery.EstimatedChargeRemaining + nl);
+						//	Battery Percentage
+						AppendTextSafe("\tBattery Percentage: " + battery.EstimatedChargeRemaining + "%" + nl);
 						//	Expected Life
 						AppendTextSafe("\tExpected Life: " + battery.ExpectedLife + nl);
 						//	Time to Charge
