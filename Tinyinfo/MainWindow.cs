@@ -194,9 +194,9 @@ namespace Tinyinfo
 					}
 
 					//	Battery Info
+					AppendTextSafe(nl + "Battery: " + nl);
 					foreach (var battery in hardwareInfo.BatteryList)
 					{
-						AppendTextSafe(nl + "Battery: " + nl);
 						//	Status
 						AppendTextSafe("\tStatus: " + battery.BatteryStatus + nl);
 						//	Status Description
