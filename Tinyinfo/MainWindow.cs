@@ -127,14 +127,14 @@ namespace Tinyinfo
 						AppendTextSafe("\t\t\tVersion: " + gpu.DriverVersion + nl);
 
 						//	Driver Date
-						AppendTextSafe("\t\t\tDate: " + gpu.DriverDate + nl);
+						AppendTextSafe("\t\t\tDate: " + gpu.DriverDate);
 
 						//	Increment GPU ID
 						id++;
 					}
 
 					//	Memory
-					AppendTextSafe(nl + nl + "Memory:");
+					AppendTextSafe(nl + "Memory:");
 					foreach (var memory in hardwareInfo.MemoryList)
 					{
 						//	Write capacity into float and convert to GB
