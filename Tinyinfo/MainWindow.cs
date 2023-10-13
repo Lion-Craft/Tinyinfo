@@ -55,11 +55,10 @@ namespace Tinyinfo
 				hardwareInfo.RefreshBatteryList();
 				hardwareInfo.RefreshDriveList();
 
+				//	CPU Info
+				WriteTextSafe("CPU:" + nl);
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
-					//	CPU Info
-					WriteTextSafe("CPU:" + nl);
-
 					//	CPU ID
 					AppendTextSafe("\tID: " + cpu.ProcessorId + nl);
 
@@ -168,9 +167,9 @@ namespace Tinyinfo
 					}
 
 					//	Motherboard
+					AppendTextSafe(nl + "Motherboard: " + nl);
 					foreach (var motherboard in hardwareInfo.MotherboardList)
 					{
-						AppendTextSafe(nl + "Motherboard: " + nl);
 						//	Manufacturer
 						AppendTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
 						//	Model
@@ -180,9 +179,9 @@ namespace Tinyinfo
 					}
 
 					//	BIOS Info
+					AppendTextSafe(nl + "BIOS: " + nl);
 					foreach (var bios in hardwareInfo.BiosList)
 					{
-						AppendTextSafe(nl + "BIOS: " + nl);
 						//	Manufacturer
 						AppendTextSafe("\tManufacturer: " + bios.Manufacturer + nl);
 						//	Name
