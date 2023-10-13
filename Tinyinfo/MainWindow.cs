@@ -241,8 +241,8 @@ namespace Tinyinfo
 						AppendTextSafe("\t\tFirmware Revision: " + drive.FirmwareRevision + nl);
 						//	Serial Number
 						AppendTextSafe("\t\tSerial No.: " + drive.SerialNumber + nl);
-						//	Partitions
-						AppendTextSafe("\t\tPartitions: " + drive.Partitions);
+						//	Partition Count
+						AppendTextSafe("\t\tPartition Count: " + drive.Partitions);
 					}
 				}
 
