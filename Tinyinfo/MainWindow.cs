@@ -266,7 +266,7 @@ namespace Tinyinfo
 						//	Bytes sent per Second
 						AppendTextSafe("\t\tBytes sent per Second: " + netadapt.BytesSentPersec + nl);
 						//	Bytes recieved per Second
-						AppendTextSafe("\t\tBytes recieved per Second: " + netadapt.BytesReceivedPersec + );
+						AppendTextSafe("\t\tBytes recieved per Second: " + netadapt.BytesReceivedPersec);
 
 						netadaptid++;
 					}
