@@ -24,27 +24,27 @@ namespace Tinyinfo
 			if (data.GetKey("tinyinfo.theme") == "light")
 			{
 				//	light theme
-				radioButton1.Checked = true;
-				radioButton2.Checked = false;
+				lightThemeRadioButton.Checked = true;
+				darkThemeRadioButton.Checked = false;
 				this.BackColor = Color.White;
 				this.ForeColor = Color.Black;
-				button1.ForeColor = Color.Black;
-				button2.ForeColor = Color.Black;
+				applyButton.ForeColor = Color.Black;
+				cancelButton.ForeColor = Color.Black;
 				
 			}
 			else
 			{
 				//	dark theme
-				radioButton1.Checked = false;
-				radioButton2.Checked = true;
+				lightThemeRadioButton.Checked = false;
+				darkThemeRadioButton.Checked = true;
 				ActiveForm.BackColor = Color.Black;
 				ActiveForm.ForeColor = Color.White;
-				button1.ForeColor = Color.Black;
-				button2.ForeColor = Color.Black;
+				applyButton.ForeColor = Color.Black;
+				cancelButton.ForeColor = Color.Black;
 			}
 
 			//	load font size setting
-			numericUpDown1.Value = Convert.ToInt32(data.GetKey("tinyinfo.font"));
+			fontSizeUpDown.Value = Convert.ToInt32(data.GetKey("tinyinfo.font"));
 		}
 
 		public void refreshTheme()
@@ -66,27 +66,27 @@ namespace Tinyinfo
 				//	Dark theme
 				ForeColor = Color.White;
 				BackColor = Color.Black;
-				button1.ForeColor = Color.Black;
-				button2.ForeColor = Color.Black;
+				applyButton.ForeColor = Color.Black;
+				cancelButton.ForeColor = Color.Black;
 			}
 			else
 			{
 				//	Light theme
 				ForeColor = Color.Black;
 				BackColor = Color.White;
-				button1.ForeColor = Color.Black;
-				button2.ForeColor = Color.Black;
+				applyButton.ForeColor = Color.Black;
+				cancelButton.ForeColor = Color.Black;
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void applyButton_Click(object sender, EventArgs e)
 		{
 			//	Create ini parser and read ini file
 			var parser = new FileIniDataParser();
 			IniData data = parser.ReadFile("./tinyinfo.ini");
 
 			//	write theme mode into ini
-			if (radioButton1.Checked)
+			if (lightThemeRadioButton.Checked)
 			{
 				//	light mode
 				data["tinyinfo"]["theme"] = "light";
@@ -100,7 +100,7 @@ namespace Tinyinfo
 			}
 
 			//	write font size into ini file
-			data["tinyinfo"]["font"] = numericUpDown1.Value.ToString();
+			data["tinyinfo"]["font"] = fontSizeUpDown.Value.ToString();
 			parser.WriteFile("./tinyinfo.ini", data);
 
 			//	reload theme

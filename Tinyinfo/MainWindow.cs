@@ -227,14 +227,14 @@ namespace Tinyinfo
 		// Safely Overwrite on textbox content
 		private void ShowInfo(string text)
 		{
-            if (textBox1.InvokeRequired)
+            if (outputBox.InvokeRequired)
             {
                 var d = new SafeCallDelegate(ShowInfo);
-                textBox1.Invoke(d,new object[] { InfoTextBuffer });
+                outputBox.Invoke(d,new object[] { InfoTextBuffer });
             }
             else
             {
-                textBox1.Text = InfoTextBuffer;
+                outputBox.Text = InfoTextBuffer;
             }
         }
 
@@ -263,26 +263,26 @@ namespace Tinyinfo
 		//	Starts thread, changes button states, update info text and increments progress bar
 		public void loadInfo()
 		{
-			label1.Visible = true;
-			progressBar1.Visible = true;
-			button1.Enabled = false;
-			label1.Text = "Loading System Info.";
-			progressBar1.Value = 25;
+			infoLabel.Visible = true;
+			progressBar.Visible = true;
+			startButton.Enabled = false;
+			infoLabel.Text = "Loading System Info.";
+			progressBar.Value = 25;
 			hardwareInfo.RefreshCPUList();
-			button2.Enabled = true;
-			label1.Text = "Loading System Info..";
-			progressBar1.Value = 50;
+			stopButton.Enabled = true;
+			infoLabel.Text = "Loading System Info..";
+			progressBar.Value = 50;
 			hardwareInfo.RefreshOperatingSystem();
-			button3.Enabled = true;
-			label1.Text = "Loading System Info...";
-			progressBar1.Value = 75;
-			progressBar1.Value = 85;
+			pauseButton.Enabled = true;
+			infoLabel.Text = "Loading System Info...";
+			progressBar.Value = 75;
+			progressBar.Value = 85;
 			thread.IsBackground = true;
-			label1.Text = "Loading System Info....";
-			progressBar1.Value = 100;
-			label1.Visible = false;
+			infoLabel.Text = "Loading System Info....";
+			progressBar.Value = 100;
+			infoLabel.Visible = false;
 			thread.Start();
-			progressBar1.Visible = false;
+			progressBar.Visible = false;
 		}
 
 		//	Stop update thread
@@ -290,27 +290,27 @@ namespace Tinyinfo
 		{
 			if (thread.IsAlive)
 			{
-				button3.Enabled = false;
+				pauseButton.Enabled = false;
 				thread.Abort();
-				button2.Enabled = false;
-				button1.Enabled = true;
+				stopButton.Enabled = false;
+				startButton.Enabled = true;
 			}
 		}
 
 		//	Load System info when Start Button is pressed
-		public void button1_Click(object sender, EventArgs e)
+		public void startButton_Click(object sender, EventArgs e)
 		{
 			loadInfo();
 		}
 
 		//	Change Button state and abort thread when Stop Button is pressed
-		private void button2_Click(object sender, EventArgs e)
+		private void stopButton_Click(object sender, EventArgs e)
 		{
 			stopUpdate();
 		}
 
 		//	Start/Stop thread when Play/Pause button is pressed. not used as of v1.4
-		private void button3_Click(object sender, EventArgs e)
+		private void pauseButton_Click(object sender, EventArgs e)
 		{
 			if (thread.ThreadState == System.Threading.ThreadState.Stopped) {
 				thread.Start();
@@ -352,40 +352,40 @@ namespace Tinyinfo
 				//	Dark theme
 				ForeColor = Color.White;
 				BackColor = Color.Black;
-				button1.ForeColor = Color.Black;
-				button2.ForeColor = Color.Black;
-				button3.ForeColor = Color.Black;
+				startButton.ForeColor = Color.Black;
+				stopButton.ForeColor = Color.Black;
+				pauseButton.ForeColor = Color.Black;
 				onTopCheckbox.ForeColor = Color.Black;
 				onTopCheckbox.BackColor = Color.Gray;
-				panel1.BackColor = Color.FromName("ButtonFace");
-				panel1.ForeColor = Color.White;
-				textBox1.BackColor = Color.Black;
-				textBox1.ForeColor = Color.White;
+				onTopBoxPanel.BackColor = Color.FromName("ButtonFace");
+				onTopBoxPanel.ForeColor = Color.White;
+				outputBox.BackColor = Color.Black;
+				outputBox.ForeColor = Color.White;
 			}
 			else
 			{
 				//	Light theme
 				ForeColor = Color.Black;
 				BackColor = Color.White;
-				button1.ForeColor = Color.Black;
-				button2.ForeColor = Color.Black;
-				button3.ForeColor = Color.Black;
+				startButton.ForeColor = Color.Black;
+				stopButton.ForeColor = Color.Black;
+				pauseButton.ForeColor = Color.Black;
 				onTopCheckbox.ForeColor = Color.Black;
 				onTopCheckbox.BackColor = Color.White;
-				panel1.BackColor = Color.White;
-				panel1.ForeColor = Color.Black;
-				textBox1.BackColor = Color.White;
-				textBox1.ForeColor = Color.Black;
+				onTopBoxPanel.BackColor = Color.White;
+				onTopBoxPanel.ForeColor = Color.Black;
+				outputBox.BackColor = Color.White;
+				outputBox.ForeColor = Color.Black;
 			}
 
 			//	Set font size
 			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
 
-			textBox1.Font = font;
+			outputBox.Font = font;
 		}
 
 		//	Opens Settings Window
-		private void settings_Click(object sender, EventArgs e)
+		private void settingsItem_Click(object sender, EventArgs e)
 		{
 			//	Create Settings Window
 			var settings = new SettingsWindow();
@@ -399,7 +399,7 @@ namespace Tinyinfo
 		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
 
 		//	Opens ShellAbout Dialog to display version info
-		private void about_Click(object sender, EventArgs e)
+		private void aboutItem_Click(object sender, EventArgs e)
 		{
 			//	Write version to string
 			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -409,7 +409,7 @@ namespace Tinyinfo
 		}
 
 		//	Opens GitHub repo in browser
-		private void github_Click(object sender, EventArgs e)
+		private void githubItem_Click(object sender, EventArgs e)
 		{
 			Process.Start("https://github.com/Lion-Craft/Tinyinfo");
 		}
