@@ -22,7 +22,7 @@ namespace Tinyinfo
 			InitializeComponent();
 
 			//	Load Theme
-			refreshTheme();
+			refreshTheme();			
 		}
 
 		//	Thread for updating info in background
@@ -31,6 +31,10 @@ namespace Tinyinfo
 		//	Runs on form load
 		public void startup(object sender, EventArgs e)
 		{
+			//	Create Thread on start
+			thread = new Thread(() => getdata(true));
+
+			//	Get info on load
 			getdata(false);
 		}
 
@@ -272,7 +276,6 @@ namespace Tinyinfo
 			button3.Enabled = true;
 			label1.Text = "Loading System Info...";
 			progressBar1.Value = 75;
-			thread = new Thread(() => getdata(true));
 			progressBar1.Value = 85;
 			thread.IsBackground = true;
 			label1.Text = "Loading System Info....";
@@ -285,10 +288,13 @@ namespace Tinyinfo
 		//	Stop update thread
 		public void stopUpdate()
 		{
-			button3.Enabled = false;
-			thread.Abort();
-			button2.Enabled = false;
-			button1.Enabled = true;
+			if (thread.IsAlive)
+			{
+				button3.Enabled = false;
+				thread.Abort();
+				button2.Enabled = false;
+				button1.Enabled = true;
+			}
 		}
 
 		//	Load System info when Start Button is pressed
