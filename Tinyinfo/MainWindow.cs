@@ -54,6 +54,7 @@ namespace Tinyinfo
 				hardwareInfo.RefreshVideoControllerList();
 				hardwareInfo.RefreshBatteryList();
 				hardwareInfo.RefreshDriveList();
+				hardwareInfo.RefreshNetworkAdapterList();
 
 				//	CPU Info
 				WriteTextSafe("CPU:" + nl);
@@ -242,6 +243,32 @@ namespace Tinyinfo
 						AppendTextSafe("\t\tSerial No.: " + drive.SerialNumber + nl);
 						//	Partition Count
 						AppendTextSafe("\t\tPartition Count: " + drive.Partitions);
+					}
+
+					//	Network Adapter Info
+					AppendTextSafe(nl + "Network Adapter: ");
+					//	Create Network Adapter ID
+					int netadaptid = 0;
+					foreach (var netadapt in hardwareInfo.NetworkAdapterList)
+					{
+						//	NIC ID
+						AppendTextSafe(nl + "\tNIC " +  netadaptid + ":" + nl);
+						//	Name
+						AppendTextSafe("\t\tName: " + netadapt.Name + nl);
+						//	Product Name
+						AppendTextSafe("\t\tProduct Name: " + netadapt.ProductName + nl);
+						//	Adapter Type
+						AppendTextSafe("\t\tType: " + netadapt.NetConnectionID + nl);
+						//	Manufacturer
+						AppendTextSafe("\t\tManufacturer: " + netadapt.Manufacturer + nl);
+						//	MAC Adress
+						AppendTextSafe("\t\tMAC Adress: " + netadapt.MACAddress + nl);
+						//	Bytes sent per Second
+						AppendTextSafe("\t\tBytes sent per Second: " + netadapt.BytesSentPersec + nl);
+						//	Bytes recieved per Second
+						AppendTextSafe("\t\tBytes recieved per Second: " + netadapt.BytesReceivedPersec);
+
+						netadaptid++;
 					}
 				}
 
