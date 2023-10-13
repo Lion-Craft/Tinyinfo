@@ -79,7 +79,7 @@ namespace Tinyinfo
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void applyButton_Click(object sender, EventArgs e)
 		{
 			//	Create ini parser and read ini file
 			var parser = new FileIniDataParser();
