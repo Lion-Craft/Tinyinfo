@@ -241,17 +241,7 @@ namespace Tinyinfo
             InfoTextBuffer = text;
 
 
-            return;// No Need for code bellow
-
-			if (textBox1.InvokeRequired)
-			{
-				var d = new SafeCallDelegate(WriteTextSafe);
-				textBox1.Invoke(d, new object[] { text });
-			}
-			else
-			{
-				textBox1.Text = text;
-			}
+            return;
 		}
 
 		// Appand Text To Text Buffer
@@ -261,17 +251,7 @@ namespace Tinyinfo
 
 			InfoTextBuffer += text;
 
-            return;// No Need for code bellow
-
-            if (textBox1.InvokeRequired)
-			{
-				var d = new SafeCallDelegate(AppendTextSafe);
-				textBox1.Invoke(d, new object[] { text });
-			}
-			else
-			{
-				textBox1.AppendText(text);
-			}
+            return;
 		}
 
 		//	Starts thread, changes button states, update info text and increments progress bar
