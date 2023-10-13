@@ -22,9 +22,7 @@ namespace Tinyinfo
 			InitializeComponent();
 
 			//	Load Theme
-			refreshTheme();
-			
-			
+			refreshTheme();			
 		}
 
 		//	Thread for updating info in background
