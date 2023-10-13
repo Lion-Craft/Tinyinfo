@@ -42,6 +42,7 @@ namespace Tinyinfo
 			this.aboutItem = new System.Windows.Forms.MenuItem();
 			this.githubItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel = new System.Windows.Forms.Panel();
+			this.refreshItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -141,6 +142,7 @@ namespace Tinyinfo
 			// 
 			this.menuBar.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.settingsItem,
+            this.refreshItem,
             this.helpDropdown});
 			// 
 			// settingsItem
@@ -151,7 +153,7 @@ namespace Tinyinfo
 			// 
 			// helpDropdown
 			// 
-			this.helpDropdown.Index = 1;
+			this.helpDropdown.Index = 2;
 			this.helpDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.aboutItem,
             this.githubItem});
@@ -178,6 +180,12 @@ namespace Tinyinfo
 			this.onTopBoxPanel.Name = "onTopBoxPanel";
 			this.onTopBoxPanel.Size = new System.Drawing.Size(140, 40);
 			this.onTopBoxPanel.TabIndex = 8;
+			// 
+			// refreshItem
+			// 
+			this.refreshItem.Index = 1;
+			this.refreshItem.Text = "Refresh";
+			this.refreshItem.Click += new System.EventHandler(this.refreshItem_Click);
 			// 
 			// MainWindow
 			// 
@@ -219,6 +227,7 @@ namespace Tinyinfo
 		private System.Windows.Forms.MenuItem githubItem;
 		public System.Windows.Forms.TextBox outputBox;
 		private System.Windows.Forms.Panel onTopBoxPanel;
+		private System.Windows.Forms.MenuItem refreshItem;
 	}
 }
 

@@ -418,5 +418,11 @@ namespace Tinyinfo
 		{
 			stopUpdate();
 		}
+
+		private void refreshItem_Click(object sender, EventArgs e)
+		{
+			//	Refresh system info
+			getdata(false);
+		}
 	}
 }
