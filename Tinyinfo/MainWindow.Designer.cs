@@ -55,7 +55,7 @@ namespace Tinyinfo
 			this.startButton.TabIndex = 0;
 			this.startButton.Text = "Start";
 			this.startButton.UseVisualStyleBackColor = true;
-			this.startButton.Click += new System.EventHandler(this.button1_Click);
+			this.startButton.Click += new System.EventHandler(this.startButton_Click);
 			// 
 			// infoLabel
 			// 
@@ -78,7 +78,7 @@ namespace Tinyinfo
 			this.stopButton.TabIndex = 3;
 			this.stopButton.Text = "Stop";
 			this.stopButton.UseVisualStyleBackColor = true;
-			this.stopButton.Click += new System.EventHandler(this.button2_Click);
+			this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
 			// 
 			// pauseButton
 			// 
@@ -92,7 +92,7 @@ namespace Tinyinfo
 			this.pauseButton.Text = "Pause/Play";
 			this.pauseButton.UseVisualStyleBackColor = true;
 			this.pauseButton.Visible = false;
-			this.pauseButton.Click += new System.EventHandler(this.button3_Click);
+			this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
 			// 
 			// progressBar
 			// 
@@ -147,7 +147,7 @@ namespace Tinyinfo
 			// 
 			this.settingsItem.Index = 0;
 			this.settingsItem.Text = "Settings";
-			this.settingsItem.Click += new System.EventHandler(this.settings_Click);
+			this.settingsItem.Click += new System.EventHandler(this.settingsItem_Click);
 			// 
 			// helpDropdown
 			// 
@@ -161,13 +161,13 @@ namespace Tinyinfo
 			// 
 			this.aboutItem.Index = 0;
 			this.aboutItem.Text = "About";
-			this.aboutItem.Click += new System.EventHandler(this.about_Click);
+			this.aboutItem.Click += new System.EventHandler(this.aboutItem_Click);
 			// 
 			// githubItem
 			// 
 			this.githubItem.Index = 1;
 			this.githubItem.Text = "Github";
-			this.githubItem.Click += new System.EventHandler(this.github_Click);
+			this.githubItem.Click += new System.EventHandler(this.githubItem_Click);
 			// 
 			// onTopBoxPanel
 			// 

@@ -298,19 +298,19 @@ namespace Tinyinfo
 		}
 
 		//	Load System info when Start Button is pressed
-		public void button1_Click(object sender, EventArgs e)
+		public void startButton_Click(object sender, EventArgs e)
 		{
 			loadInfo();
 		}
 
 		//	Change Button state and abort thread when Stop Button is pressed
-		private void button2_Click(object sender, EventArgs e)
+		private void stopButton_Click(object sender, EventArgs e)
 		{
 			stopUpdate();
 		}
 
 		//	Start/Stop thread when Play/Pause button is pressed. not used as of v1.4
-		private void button3_Click(object sender, EventArgs e)
+		private void pauseButton_Click(object sender, EventArgs e)
 		{
 			if (thread.ThreadState == System.Threading.ThreadState.Stopped) {
 				thread.Start();
@@ -385,7 +385,7 @@ namespace Tinyinfo
 		}
 
 		//	Opens Settings Window
-		private void settings_Click(object sender, EventArgs e)
+		private void settingsItem_Click(object sender, EventArgs e)
 		{
 			//	Create Settings Window
 			var settings = new SettingsWindow();
@@ -399,7 +399,7 @@ namespace Tinyinfo
 		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
 
 		//	Opens ShellAbout Dialog to display version info
-		private void about_Click(object sender, EventArgs e)
+		private void aboutItem_Click(object sender, EventArgs e)
 		{
 			//	Write version to string
 			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -409,7 +409,7 @@ namespace Tinyinfo
 		}
 
 		//	Opens GitHub repo in browser
-		private void github_Click(object sender, EventArgs e)
+		private void githubItem_Click(object sender, EventArgs e)
 		{
 			Process.Start("https://github.com/Lion-Craft/Tinyinfo");
 		}
