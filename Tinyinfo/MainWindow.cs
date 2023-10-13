@@ -53,6 +53,7 @@ namespace Tinyinfo
 				hardwareInfo.RefreshMotherboardList();
 				hardwareInfo.RefreshVideoControllerList();
 				hardwareInfo.RefreshBatteryList();
+				hardwareInfo.RefreshDriveList();
 
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
@@ -216,6 +217,32 @@ namespace Tinyinfo
 						AppendTextSafe("\t\tDesign Capacity: " + battery.DesignCapacity + nl);
 						//	Current Capaity
 						AppendTextSafe("\t\tFull Charge Capacity: " + battery.FullChargeCapacity + nl);
+					}
+
+					//	Drive Info
+					AppendTextSafe("Drives: " + nl);
+					foreach(var drive in hardwareInfo.DriveList)
+					{
+						//	Write capacity into float and convert to GB
+						float disksize = drive.Size;
+						disksize /= 1073741824;
+
+						//	Index
+						AppendTextSafe("\tDrive " + drive.Index + ":" + nl);
+						//	Name
+						AppendTextSafe("\t\tName: " + drive.Name + nl);
+						//	Size
+						AppendTextSafe("\t\tSize: " + disksize + "GB" + nl);
+						//	Manufacturer
+						AppendTextSafe("\t\tManufacturer: " + drive.Manufacturer + nl);
+						//	Model
+						AppendTextSafe("\t\tModel: " + drive.Model + nl);
+						//	Firmware
+						AppendTextSafe("\t\tFirmware Revision: " + drive.FirmwareRevision + nl);
+						//	Serial Number
+						AppendTextSafe("\t\tSerial No.: " + drive.SerialNumber + nl);
+						//	Partitions
+						AppendTextSafe("\t\tPartitions: " + drive.Partitions);
 					}
 				}
 
