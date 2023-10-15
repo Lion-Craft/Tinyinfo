@@ -29,6 +29,7 @@ namespace Tinyinfo
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
 			this.startButton = new System.Windows.Forms.Button();
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
@@ -38,11 +39,11 @@ namespace Tinyinfo
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
 			this.menuBar = new System.Windows.Forms.MainMenu(this.components);
 			this.settingsItem = new System.Windows.Forms.MenuItem();
+			this.refreshItem = new System.Windows.Forms.MenuItem();
 			this.helpDropdown = new System.Windows.Forms.MenuItem();
 			this.aboutItem = new System.Windows.Forms.MenuItem();
 			this.githubItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel = new System.Windows.Forms.Panel();
-			this.refreshItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -151,6 +152,12 @@ namespace Tinyinfo
 			this.settingsItem.Text = "Settings";
 			this.settingsItem.Click += new System.EventHandler(this.settingsItem_Click);
 			// 
+			// refreshItem
+			// 
+			this.refreshItem.Index = 1;
+			this.refreshItem.Text = "Refresh";
+			this.refreshItem.Click += new System.EventHandler(this.refreshItem_Click);
+			// 
 			// helpDropdown
 			// 
 			this.helpDropdown.Index = 2;
@@ -181,12 +188,6 @@ namespace Tinyinfo
 			this.onTopBoxPanel.Size = new System.Drawing.Size(140, 40);
 			this.onTopBoxPanel.TabIndex = 8;
 			// 
-			// refreshItem
-			// 
-			this.refreshItem.Index = 1;
-			this.refreshItem.Text = "Refresh";
-			this.refreshItem.Click += new System.EventHandler(this.refreshItem_Click);
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -199,9 +200,9 @@ namespace Tinyinfo
 			this.Controls.Add(this.stopButton);
 			this.Controls.Add(this.infoLabel);
 			this.Controls.Add(this.startButton);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Menu = this.menuBar;
 			this.Name = "MainWindow";
-			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
 			this.Load += new System.EventHandler(this.startup);
