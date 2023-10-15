@@ -60,46 +60,48 @@ namespace Tinyinfo
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
 					//	CPU ID
-					WriteTextSafe("\tID: " + cpu.ProcessorId + nl);
+					WriteTextSafe("ID: " + cpu.ProcessorId + nl);
 					treeItem = "cpu.id";
 					ShowInfo("");
 
 					//	Manufacturer
-					WriteTextSafe("\tManufacturer: " + cpu.Manufacturer + nl);
+					WriteTextSafe("Manufacturer: " + cpu.Manufacturer + nl);
 					treeItem = "cpu.manufacturer";
 					ShowInfo("");
 
 					//	Model
-					WriteTextSafe("\tModel: " + cpu.Name.Replace("  ", "") + nl);
+					WriteTextSafe("Model: " + cpu.Name.Replace("  ", "") + nl);
 					treeItem = "cpu.model";
 					ShowInfo("");
 
 					// Description
-					WriteTextSafe("\tDescription: " + cpu.Description + nl);
+					WriteTextSafe("Description: " + cpu.Description + nl);
 					treeItem = "cpu.description";
 					ShowInfo("");
 
 					//	Socket
-					WriteTextSafe("\tSocket: " + cpu.SocketDesignation + nl);
+					WriteTextSafe("Socket: " + cpu.SocketDesignation + nl);
 					treeItem = "cpu.socket";
 					ShowInfo("");
 
 					//	Cores and Threads
-					WriteTextSafe("\tCore Amount: " + cpu.NumberOfCores + " Physical, " + cpu.NumberOfLogicalProcessors + " Logical" + nl);
+					WriteTextSafe("Core Amount: " + cpu.NumberOfCores + " Physical, " + cpu.NumberOfLogicalProcessors + " Logical" + nl);
 					treeItem = "cpu.cores";
 					ShowInfo("");
 
 					//	VM Firmware
-					WriteTextSafe("\tVirtualization Firmware Enabled: " + cpu.VirtualizationFirmwareEnabled + nl);
+					WriteTextSafe("Virtualization Firmware Enabled: " + cpu.VirtualizationFirmwareEnabled + nl);
 					treeItem = "cpu.vmx";
 					ShowInfo("");
 
-					//	Clockspeeds
-					WriteTextSafe("\tClockspeeds:" + nl);
 					//	Current Clockspeed in mHz
-					WriteTextSafe("\t\t" + cpu.CurrentClockSpeed + "mHz Current" + nl);
+					WriteTextSafe("Current Clockspeed:" + cpu.CurrentClockSpeed + "mHz" + nl);
+					treeItem = "cpu.speed.current";
+					ShowInfo("");
 					//	Base Clockspeed in mHz
-					WriteTextSafe("\t\t" + cpu.MaxClockSpeed + "mHz Base");
+					WriteTextSafe("Base Clockspeed:" + cpu.MaxClockSpeed + "mHz");
+					treeItem = "cpu.speed.base";
+					ShowInfo("");
 
 					//	Graphics
 					WriteTextSafe(nl + "Video: ");
@@ -113,7 +115,8 @@ namespace Tinyinfo
 
 						//	GPU ID
 						WriteTextSafe(nl + "\tGPU " + id + ":" + nl);
-
+						treeItem = "gpu.id";
+						ShowInfo("");
 						//	Name
 						WriteTextSafe("\t\tName: " + gpu.Name + nl);
 
@@ -314,6 +317,10 @@ namespace Tinyinfo
 			}
 
 		}
+
+		//	Change Child Node's Text 
+		//	This currently is rediciolously slow.
+		//	TODO: Make faster
 		private void ChangeChildNodeText(string node, string text)
 		{
 			// Find the cpu node
@@ -343,27 +350,42 @@ namespace Tinyinfo
 					cpuManuNode.Text = text;
 					break;
 				case "cpu.description":
-					// Find the manufacturer child node under "cpu" and change its text
+					// Find the description child node under "cpu" and change its text
 					TreeNode cpuDescriptionNode = cpuNode.Nodes["CpuDescNode"];
 					cpuDescriptionNode.Text = text;
 					break;
 				case "cpu.socket":
-					// Find the manufacturer child node under "cpu" and change its text
+					// Find the description child node under "cpu" and change its text
 					TreeNode cpuSocketNode = cpuNode.Nodes["CpuSocketNode"];
 					cpuSocketNode.Text = text;
 					break;
 				case "cpu.vmx":
-					// Find the manufacturer child node under "cpu" and change its text
+					// Find the VMX child node under "cpu" and change its text
 					TreeNode cpuVmxNode = cpuNode.Nodes["CpuVmxNode"];
 					cpuVmxNode.Text = text;
 					break;
-
+				case "cpu.speed.base":
+					// Find the base clock child node under "cpu" and change its text
+					TreeNode cpuBaseNode = cpuNode.Nodes["CpuBaseNode"];
+					cpuBaseNode.Text = text;
+					break;
+				case "cpu.speed.current":
+					// Find the current clock child node under "cpu" and change its text
+					TreeNode cpuCurrentNode = cpuNode.Nodes["CpuClockNode"];
+					cpuCurrentNode.Text = text;
+					break;
+				case "gpu.id":
+					TreeNode gpuIdNode = gpuNode.Nodes["GpuIdNode"];
+					gpuIdNode.Text = text;
+					break;
+				case "gpu.name":
 					// Find the "name" child node under "gpu" and change its text
-					TreeNode gpuNameNode = gpuNode.Nodes["name"];
+					TreeNode gpuNameNode = gpuNode.Nodes["GpuNameNode"];
 					gpuNameNode.Text = text;
-
+					break;
+				case "gpu.manufacturer":
 					// Find the "manufacturer" child node under "gpu" and change its text
-					TreeNode gpuManufacturerNode = gpuNode.Nodes["manufacturer"];
+					TreeNode gpuManufacturerNode = gpuNode.Nodes["GpuManuNode"];
 					gpuManufacturerNode.Text = text;
 					break;
 			}
