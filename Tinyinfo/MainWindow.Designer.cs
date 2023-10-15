@@ -29,6 +29,7 @@ namespace Tinyinfo
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
 			this.startButton = new System.Windows.Forms.Button();
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
@@ -214,9 +215,9 @@ namespace Tinyinfo
 			this.Controls.Add(this.stopButton);
 			this.Controls.Add(this.infoLabel);
 			this.Controls.Add(this.startButton);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Menu = this.menuBar;
 			this.Name = "MainWindow";
-			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
 			this.Load += new System.EventHandler(this.startup);
