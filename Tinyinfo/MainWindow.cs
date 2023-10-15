@@ -95,11 +95,11 @@ namespace Tinyinfo
 					ShowInfo("");
 
 					//	Current Clockspeed in mHz
-					WriteTextSafe("Current Clockspeed:" + cpu.CurrentClockSpeed + "mHz");
+					WriteTextSafe("Current Clockspeed: " + cpu.CurrentClockSpeed + "mHz");
 					treeItem = "cpu.speed.current";
 					ShowInfo("");
 					//	Base Clockspeed in mHz
-					WriteTextSafe("Base Clockspeed:" + cpu.MaxClockSpeed + "mHz");
+					WriteTextSafe("Base Clockspeed: " + cpu.MaxClockSpeed + "mHz");
 					treeItem = "cpu.speed.base";
 					ShowInfo("");
 
@@ -297,15 +297,15 @@ namespace Tinyinfo
 		// Safely Overwrite on textbox content
 		private void ShowInfo(string text)
 		{
-            if (outputBox.InvokeRequired)
-            {
-                var d = new SafeCallDelegate(ShowInfo);
-                outputBox.Invoke(d,new object[] { InfoTextBuffer });
-            }
-            else
-            {
-                outputBox.Text = InfoTextBuffer;
-            }
+			if (outputBox.InvokeRequired)
+			{
+				var d = new SafeCallDelegate(ShowInfo);
+				outputBox.Invoke(d,new object[] { InfoTextBuffer });
+			}
+			else
+			{
+				outputBox.Text = InfoTextBuffer;
+			}
 			if (outputTree.InvokeRequired)
 			{
 				var d = new SafeCallDelegate(ShowInfo);
@@ -394,26 +394,26 @@ namespace Tinyinfo
 		//	Create treeItem string to select node
 		private string treeItem = "";
 
-        // Creating String To Push it later on textbox
-        private string InfoTextBuffer = "";
+		// Creating String To Push it later on textbox
+		private string InfoTextBuffer = "";
 		private void WriteTextSafe(string text)
 		{
-            // NOTE (HOUDAIFA) : Faster Way
+			// NOTE (HOUDAIFA) : Faster Way
 
-            InfoTextBuffer = text;
+			InfoTextBuffer = text;
 
 
-            return;
+			return;
 		}
 
 		// Appand Text To Text Buffer
 		private void AppendTextSafe(string text)
 		{
-            // NOTE (HOUDAIFA) : Faster Way
+			// NOTE (HOUDAIFA) : Faster Way
 
 			InfoTextBuffer += text;
 
-            return;
+			return;
 		}
 
 		//	Starts thread, changes button states, update info text and increments progress bar
@@ -551,27 +551,27 @@ namespace Tinyinfo
 		}
 
 		// Export system info to text file
-        private void exportItem_Click(object sender, EventArgs e)
-        {
-            // Create a SaveFileDialog to choose the destination file
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text Files|*.txt";
+		private void exportItem_Click(object sender, EventArgs e)
+		{
+			// Create a SaveFileDialog to choose the destination file
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
+			saveFileDialog.Filter = "Text Files|*.txt";
 
-            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+			if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
 
-            var filePath = saveFileDialog.FileName;
+			var filePath = saveFileDialog.FileName;
 
-            // Open a StreamWriter to write to the selected file
-            using (var writer = new StreamWriter(filePath))
-            {
-                var outputBoxValue = outputBox.Text;
-                writer.WriteLine(outputBoxValue);
+			// Open a StreamWriter to write to the selected file
+			using (var writer = new StreamWriter(filePath))
+			{
+				var outputBoxValue = outputBox.Text;
+				writer.WriteLine(outputBoxValue);
 
-            }
-        }
+			}
+		}
 
-        //	Create ShellAbout
-        [DllImport("shell32.dll")]
+		//	Create ShellAbout
+		[DllImport("shell32.dll")]
 		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
 
 		//	Opens ShellAbout Dialog to display version info
