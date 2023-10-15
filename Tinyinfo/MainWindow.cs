@@ -497,5 +497,13 @@ namespace Tinyinfo
 			//	Refresh system info
 			getdata(false);
 		}
+
+		private void exitItem_Click(object sender, EventArgs e)
+		{
+			//	Stop Updating
+			stopUpdate();
+			//	Exit Tinyinfo
+			System.Windows.Forms.Application.Exit();
+		}
 	}
 }

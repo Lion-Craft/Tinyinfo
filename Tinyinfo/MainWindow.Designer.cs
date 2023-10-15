@@ -37,15 +37,17 @@ namespace Tinyinfo
 			this.outputBox = new System.Windows.Forms.TextBox();
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
 			this.menuBar = new System.Windows.Forms.MainMenu(this.components);
+			this.fileDropdown = new System.Windows.Forms.MenuItem();
+			this.exportItem = new System.Windows.Forms.MenuItem();
 			this.settingsItem = new System.Windows.Forms.MenuItem();
+			this.menuItem2 = new System.Windows.Forms.MenuItem();
+			this.exitItem = new System.Windows.Forms.MenuItem();
+			this.refreshItem = new System.Windows.Forms.MenuItem();
 			this.helpDropdown = new System.Windows.Forms.MenuItem();
 			this.aboutItem = new System.Windows.Forms.MenuItem();
 			this.githubItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel = new System.Windows.Forms.Panel();
-			this.refreshItem = new System.Windows.Forms.MenuItem();
-            this.fileDropdown = new System.Windows.Forms.MenuItem();
-            this.exportItem = new System.Windows.Forms.MenuItem();
-            this.onTopBoxPanel.SuspendLayout();
+			this.onTopBoxPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -147,11 +149,44 @@ namespace Tinyinfo
             this.refreshItem,
             this.helpDropdown});
 			// 
+			// fileDropdown
+			// 
+			this.fileDropdown.Index = 0;
+			this.fileDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.exportItem,
+            this.settingsItem,
+            this.menuItem2,
+            this.exitItem});
+			this.fileDropdown.Text = "File";
+			// 
+			// exportItem
+			// 
+			this.exportItem.Index = 0;
+			this.exportItem.Text = "Export";
+			this.exportItem.Click += new System.EventHandler(this.exportItem_Click);
+			// 
 			// settingsItem
 			// 
 			this.settingsItem.Index = 1;
 			this.settingsItem.Text = "Settings";
 			this.settingsItem.Click += new System.EventHandler(this.settingsItem_Click);
+			// 
+			// menuItem2
+			// 
+			this.menuItem2.Index = 2;
+			this.menuItem2.Text = "-";
+			// 
+			// exitItem
+			// 
+			this.exitItem.Index = 3;
+			this.exitItem.Text = "Exit";
+			this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
+			// 
+			// refreshItem
+			// 
+			this.refreshItem.Index = 1;
+			this.refreshItem.Text = "Refresh";
+			this.refreshItem.Click += new System.EventHandler(this.refreshItem_Click);
 			// 
 			// helpDropdown
 			// 
@@ -183,12 +218,6 @@ namespace Tinyinfo
 			this.onTopBoxPanel.Size = new System.Drawing.Size(140, 40);
 			this.onTopBoxPanel.TabIndex = 8;
 			// 
-			// refreshItem
-			// 
-			this.refreshItem.Index = 1;
-			this.refreshItem.Text = "Refresh";
-			this.refreshItem.Click += new System.EventHandler(this.refreshItem_Click);
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -211,21 +240,6 @@ namespace Tinyinfo
 			this.onTopBoxPanel.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
-            // 
-            // fileDropdown
-            // 
-            this.fileDropdown.Index = 0;
-            this.fileDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.exportItem,
-            this.settingsItem
-            });
-            this.fileDropdown.Text = "File";
-            // 
-            // exportItem
-            // 
-            this.exportItem.Index = 0;
-            this.exportItem.Text = "Export";
-            this.exportItem.Click += new System.EventHandler(this.exportItem_Click);
 
         }
 
@@ -247,6 +261,8 @@ namespace Tinyinfo
 		private System.Windows.Forms.MenuItem refreshItem;
         private System.Windows.Forms.MenuItem fileDropdown;
         private System.Windows.Forms.MenuItem exportItem;
-    }
+		private System.Windows.Forms.MenuItem menuItem2;
+		private System.Windows.Forms.MenuItem exitItem;
+	}
 }
 
