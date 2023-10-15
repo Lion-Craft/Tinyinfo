@@ -447,8 +447,28 @@ namespace Tinyinfo
 			refreshTheme();
 		}
 
-		//	Create ShellAbout
-		[DllImport("shell32.dll")]
+		// Export system info to text file
+        private void exportItem_Click(object sender, EventArgs e)
+        {
+            // Create a SaveFileDialog to choose the destination file
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files|*.txt";
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            var filePath = saveFileDialog.FileName;
+
+            // Open a StreamWriter to write to the selected file
+            using (var writer = new StreamWriter(filePath))
+            {
+                var outputBoxValue = outputBox.Text;
+                writer.WriteLine(outputBoxValue);
+
+            }
+        }
+
+        //	Create ShellAbout
+        [DllImport("shell32.dll")]
 		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
 
 		//	Opens ShellAbout Dialog to display version info
