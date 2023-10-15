@@ -32,7 +32,6 @@ namespace Tinyinfo
 			this.startButton = new System.Windows.Forms.Button();
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
-			this.pauseButton = new System.Windows.Forms.Button();
 			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.outputBox = new System.Windows.Forms.TextBox();
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
@@ -84,20 +83,6 @@ namespace Tinyinfo
 			this.stopButton.Text = "Stop";
 			this.stopButton.UseVisualStyleBackColor = true;
 			this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-			// 
-			// pauseButton
-			// 
-			this.pauseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.pauseButton.Enabled = false;
-			this.pauseButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.pauseButton.Location = new System.Drawing.Point(137, 278);
-			this.pauseButton.Name = "pauseButton";
-			this.pauseButton.Size = new System.Drawing.Size(115, 40);
-			this.pauseButton.TabIndex = 4;
-			this.pauseButton.Text = "Pause/Play";
-			this.pauseButton.UseVisualStyleBackColor = true;
-			this.pauseButton.Visible = false;
-			this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
 			// 
 			// progressBar
 			// 
@@ -226,7 +211,6 @@ namespace Tinyinfo
 			this.Controls.Add(this.onTopBoxPanel);
 			this.Controls.Add(this.outputBox);
 			this.Controls.Add(this.progressBar);
-			this.Controls.Add(this.pauseButton);
 			this.Controls.Add(this.stopButton);
 			this.Controls.Add(this.infoLabel);
 			this.Controls.Add(this.startButton);
@@ -248,7 +232,6 @@ namespace Tinyinfo
 		private System.Windows.Forms.Button startButton;
 		private System.Windows.Forms.Label infoLabel;
 		private System.Windows.Forms.Button stopButton;
-		private System.Windows.Forms.Button pauseButton;
 		private System.Windows.Forms.ProgressBar progressBar;
 		private System.Windows.Forms.CheckBox onTopCheckbox;
 		private System.Windows.Forms.MainMenu menuBar;

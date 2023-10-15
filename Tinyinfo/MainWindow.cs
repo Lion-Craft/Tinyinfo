@@ -326,7 +326,6 @@ namespace Tinyinfo
 			infoLabel.Text = "Loading System Info..";
 			progressBar.Value = 50;
 			hardwareInfo.RefreshOperatingSystem();
-			pauseButton.Enabled = true;
 			infoLabel.Text = "Loading System Info...";
 			progressBar.Value = 75;
 			progressBar.Value = 85;
@@ -343,7 +342,6 @@ namespace Tinyinfo
 		{
 			if (thread.IsAlive)
 			{
-				pauseButton.Enabled = false;
 				thread.Abort();
 				stopButton.Enabled = false;
 				startButton.Enabled = true;
@@ -360,18 +358,6 @@ namespace Tinyinfo
 		private void stopButton_Click(object sender, EventArgs e)
 		{
 			stopUpdate();
-		}
-
-		//	Start/Stop thread when Play/Pause button is pressed. not used as of v1.4
-		private void pauseButton_Click(object sender, EventArgs e)
-		{
-			if (thread.ThreadState == System.Threading.ThreadState.Stopped) {
-				thread.Start();
-			}
-			else
-			{
-				thread.Abort();
-			}
 		}
 
 		private void onTopCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -407,7 +393,6 @@ namespace Tinyinfo
 				BackColor = Color.Black;
 				startButton.ForeColor = Color.Black;
 				stopButton.ForeColor = Color.Black;
-				pauseButton.ForeColor = Color.Black;
 				onTopCheckbox.ForeColor = Color.Black;
 				onTopCheckbox.BackColor = Color.Gray;
 				onTopBoxPanel.BackColor = Color.FromName("ButtonFace");
@@ -422,7 +407,6 @@ namespace Tinyinfo
 				BackColor = Color.White;
 				startButton.ForeColor = Color.Black;
 				stopButton.ForeColor = Color.Black;
-				pauseButton.ForeColor = Color.Black;
 				onTopCheckbox.ForeColor = Color.Black;
 				onTopCheckbox.BackColor = Color.White;
 				onTopBoxPanel.BackColor = Color.White;
