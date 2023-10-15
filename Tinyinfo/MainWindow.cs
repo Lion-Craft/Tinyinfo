@@ -22,7 +22,7 @@ namespace Tinyinfo
 			InitializeComponent();
 
 			//	Load Theme
-			refreshTheme();
+			refreshTheme();			
 		}
 
 		//	Thread for updating info in background
@@ -31,6 +31,10 @@ namespace Tinyinfo
 		//	Runs on form load
 		public void startup(object sender, EventArgs e)
 		{
+			//	Create Thread on start
+			thread = new Thread(() => getdata(true));
+
+			//	Get info on load
 			getdata(false);
 		}
 
@@ -49,12 +53,13 @@ namespace Tinyinfo
 				hardwareInfo.RefreshMotherboardList();
 				hardwareInfo.RefreshVideoControllerList();
 				hardwareInfo.RefreshBatteryList();
+				hardwareInfo.RefreshDriveList();
+				hardwareInfo.RefreshNetworkAdapterList();
 
+				//	CPU Info
+				WriteTextSafe("CPU:" + nl);
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
-					//	CPU Info
-					WriteTextSafe("CPU:" + nl);
-
 					//	CPU ID
 					AppendTextSafe("\tID: " + cpu.ProcessorId + nl);
 
@@ -123,14 +128,14 @@ namespace Tinyinfo
 						AppendTextSafe("\t\t\tVersion: " + gpu.DriverVersion + nl);
 
 						//	Driver Date
-						AppendTextSafe("\t\t\tDate: " + gpu.DriverDate + nl);
+						AppendTextSafe("\t\t\tDate: " + gpu.DriverDate);
 
 						//	Increment GPU ID
 						id++;
 					}
 
 					//	Memory
-					AppendTextSafe(nl + nl + "Memory:");
+					AppendTextSafe(nl + "Memory:");
 					foreach (var memory in hardwareInfo.MemoryList)
 					{
 						//	Write capacity into float and convert to GB
@@ -163,9 +168,9 @@ namespace Tinyinfo
 					}
 
 					//	Motherboard
+					AppendTextSafe(nl + "Motherboard: " + nl);
 					foreach (var motherboard in hardwareInfo.MotherboardList)
 					{
-						AppendTextSafe(nl + "Motherboard: " + nl);
 						//	Manufacturer
 						AppendTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
 						//	Model
@@ -175,9 +180,9 @@ namespace Tinyinfo
 					}
 
 					//	BIOS Info
+					AppendTextSafe(nl + "BIOS: " + nl);
 					foreach (var bios in hardwareInfo.BiosList)
 					{
-						AppendTextSafe(nl + "BIOS: " + nl);
 						//	Manufacturer
 						AppendTextSafe("\tManufacturer: " + bios.Manufacturer + nl);
 						//	Name
@@ -189,15 +194,17 @@ namespace Tinyinfo
 					}
 
 					//	Battery Info
+					AppendTextSafe(nl + "Battery: " + nl);
 					foreach (var battery in hardwareInfo.BatteryList)
 					{
-						AppendTextSafe(nl + "Battery: " + nl);
 						//	Status
 						AppendTextSafe("\tStatus: " + battery.BatteryStatus + nl);
 						//	Status Description
 						AppendTextSafe("\tStatus Description: " + battery.BatteryStatusDescription + nl);
+						//	Battery Percentage
+						AppendTextSafe("\tBattery Percentage: " + battery.EstimatedChargeRemaining + "%" + nl);
 						//	Time remaining
-						AppendTextSafe("\tTime remaining: " + battery.EstimatedChargeRemaining + nl);
+						AppendTextSafe("\tTime remaining: " + battery.EstimatedRunTime + " Minutes"+ nl);
 						//	Expected Life
 						AppendTextSafe("\tExpected Life: " + battery.ExpectedLife + nl);
 						//	Time to Charge
@@ -211,6 +218,58 @@ namespace Tinyinfo
 						//	Current Capaity
 						AppendTextSafe("\t\tFull Charge Capacity: " + battery.FullChargeCapacity + nl);
 					}
+
+					//	Drive Info
+					AppendTextSafe("Drives: " + nl);
+					foreach(var drive in hardwareInfo.DriveList)
+					{
+						//	Write capacity into float and convert to GB
+						float disksize = drive.Size;
+						disksize /= 1073741824;
+
+						//	Index
+						AppendTextSafe("\tDrive " + drive.Index + ":" + nl);
+						//	Name
+						AppendTextSafe("\t\tName: " + drive.Name + nl);
+						//	Size
+						AppendTextSafe("\t\tSize: " + disksize + "GB" + nl);
+						//	Manufacturer
+						AppendTextSafe("\t\tManufacturer: " + drive.Manufacturer + nl);
+						//	Model
+						AppendTextSafe("\t\tModel: " + drive.Model + nl);
+						//	Firmware
+						AppendTextSafe("\t\tFirmware Revision: " + drive.FirmwareRevision + nl);
+						//	Serial Number
+						AppendTextSafe("\t\tSerial No.: " + drive.SerialNumber + nl);
+						//	Partition Count
+						AppendTextSafe("\t\tPartition Count: " + drive.Partitions);
+					}
+
+					//	Network Adapter Info
+					AppendTextSafe(nl + "Network Adapter: ");
+					//	Create Network Adapter ID
+					int netadaptid = 0;
+					foreach (var netadapt in hardwareInfo.NetworkAdapterList)
+					{
+						//	NIC ID
+						AppendTextSafe(nl + "\tNIC " +  netadaptid + ":" + nl);
+						//	Name
+						AppendTextSafe("\t\tName: " + netadapt.Name + nl);
+						//	Product Name
+						AppendTextSafe("\t\tProduct Name: " + netadapt.ProductName + nl);
+						//	Adapter Type
+						AppendTextSafe("\t\tType: " + netadapt.NetConnectionID + nl);
+						//	Manufacturer
+						AppendTextSafe("\t\tManufacturer: " + netadapt.Manufacturer + nl);
+						//	MAC Adress
+						AppendTextSafe("\t\tMAC Adress: " + netadapt.MACAddress + nl);
+						//	Bytes sent per Second
+						AppendTextSafe("\t\tBytes sent per Second: " + netadapt.BytesSentPersec + nl);
+						//	Bytes recieved per Second
+						AppendTextSafe("\t\tBytes recieved per Second: " + netadapt.BytesReceivedPersec);
+
+						netadaptid++;
+					}
 				}
 
 				ShowInfo("");
@@ -221,14 +280,14 @@ namespace Tinyinfo
 		// Safely Overwrite on textbox content
 		private void ShowInfo(string text)
 		{
-            if (textBox1.InvokeRequired)
+            if (outputBox.InvokeRequired)
             {
                 var d = new SafeCallDelegate(ShowInfo);
-                textBox1.Invoke(d,new object[] { InfoTextBuffer });
+                outputBox.Invoke(d,new object[] { InfoTextBuffer });
             }
             else
             {
-                textBox1.Text = InfoTextBuffer;
+                outputBox.Text = InfoTextBuffer;
             }
         }
 
@@ -257,52 +316,54 @@ namespace Tinyinfo
 		//	Starts thread, changes button states, update info text and increments progress bar
 		public void loadInfo()
 		{
-			label1.Visible = true;
-			progressBar1.Visible = true;
-			button1.Enabled = false;
-			label1.Text = "Loading System Info.";
-			progressBar1.Value = 25;
+			infoLabel.Visible = true;
+			progressBar.Visible = true;
+			startButton.Enabled = false;
+			infoLabel.Text = "Loading System Info.";
+			progressBar.Value = 25;
 			hardwareInfo.RefreshCPUList();
-			button2.Enabled = true;
-			label1.Text = "Loading System Info..";
-			progressBar1.Value = 50;
+			stopButton.Enabled = true;
+			infoLabel.Text = "Loading System Info..";
+			progressBar.Value = 50;
 			hardwareInfo.RefreshOperatingSystem();
-			button3.Enabled = true;
-			label1.Text = "Loading System Info...";
-			progressBar1.Value = 75;
-			thread = new Thread(() => getdata(true));
-			progressBar1.Value = 85;
+			pauseButton.Enabled = true;
+			infoLabel.Text = "Loading System Info...";
+			progressBar.Value = 75;
+			progressBar.Value = 85;
 			thread.IsBackground = true;
-			label1.Text = "Loading System Info....";
-			progressBar1.Value = 100;
-			label1.Visible = false;
+			infoLabel.Text = "Loading System Info....";
+			progressBar.Value = 100;
+			infoLabel.Visible = false;
 			thread.Start();
-			progressBar1.Visible = false;
+			progressBar.Visible = false;
 		}
 
 		//	Stop update thread
 		public void stopUpdate()
 		{
-			button3.Enabled = false;
-			thread.Abort();
-			button2.Enabled = false;
-			button1.Enabled = true;
+			if (thread.IsAlive)
+			{
+				pauseButton.Enabled = false;
+				thread.Abort();
+				stopButton.Enabled = false;
+				startButton.Enabled = true;
+			}
 		}
 
 		//	Load System info when Start Button is pressed
-		public void button1_Click(object sender, EventArgs e)
+		public void startButton_Click(object sender, EventArgs e)
 		{
 			loadInfo();
 		}
 
 		//	Change Button state and abort thread when Stop Button is pressed
-		private void button2_Click(object sender, EventArgs e)
+		private void stopButton_Click(object sender, EventArgs e)
 		{
 			stopUpdate();
 		}
 
 		//	Start/Stop thread when Play/Pause button is pressed. not used as of v1.4
-		private void button3_Click(object sender, EventArgs e)
+		private void pauseButton_Click(object sender, EventArgs e)
 		{
 			if (thread.ThreadState == System.Threading.ThreadState.Stopped) {
 				thread.Start();
@@ -344,40 +405,40 @@ namespace Tinyinfo
 				//	Dark theme
 				ForeColor = Color.White;
 				BackColor = Color.Black;
-				button1.ForeColor = Color.Black;
-				button2.ForeColor = Color.Black;
-				button3.ForeColor = Color.Black;
+				startButton.ForeColor = Color.Black;
+				stopButton.ForeColor = Color.Black;
+				pauseButton.ForeColor = Color.Black;
 				onTopCheckbox.ForeColor = Color.Black;
 				onTopCheckbox.BackColor = Color.Gray;
-				panel1.BackColor = Color.FromName("ButtonFace");
-				panel1.ForeColor = Color.White;
-				textBox1.BackColor = Color.Black;
-				textBox1.ForeColor = Color.White;
+				onTopBoxPanel.BackColor = Color.FromName("ButtonFace");
+				onTopBoxPanel.ForeColor = Color.White;
+				outputBox.BackColor = Color.Black;
+				outputBox.ForeColor = Color.White;
 			}
 			else
 			{
 				//	Light theme
 				ForeColor = Color.Black;
 				BackColor = Color.White;
-				button1.ForeColor = Color.Black;
-				button2.ForeColor = Color.Black;
-				button3.ForeColor = Color.Black;
+				startButton.ForeColor = Color.Black;
+				stopButton.ForeColor = Color.Black;
+				pauseButton.ForeColor = Color.Black;
 				onTopCheckbox.ForeColor = Color.Black;
 				onTopCheckbox.BackColor = Color.White;
-				panel1.BackColor = Color.White;
-				panel1.ForeColor = Color.Black;
-				textBox1.BackColor = Color.White;
-				textBox1.ForeColor = Color.Black;
+				onTopBoxPanel.BackColor = Color.White;
+				onTopBoxPanel.ForeColor = Color.Black;
+				outputBox.BackColor = Color.White;
+				outputBox.ForeColor = Color.Black;
 			}
 
 			//	Set font size
 			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
 
-			textBox1.Font = font;
+			outputBox.Font = font;
 		}
 
 		//	Opens Settings Window
-		private void settings_Click(object sender, EventArgs e)
+		private void settingsItem_Click(object sender, EventArgs e)
 		{
 			//	Create Settings Window
 			var settings = new SettingsWindow();
@@ -386,12 +447,32 @@ namespace Tinyinfo
 			refreshTheme();
 		}
 
-		//	Create ShellAbout
-		[DllImport("shell32.dll")]
+		// Export system info to text file
+        private void exportItem_Click(object sender, EventArgs e)
+        {
+            // Create a SaveFileDialog to choose the destination file
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files|*.txt";
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            var filePath = saveFileDialog.FileName;
+
+            // Open a StreamWriter to write to the selected file
+            using (var writer = new StreamWriter(filePath))
+            {
+                var outputBoxValue = outputBox.Text;
+                writer.WriteLine(outputBoxValue);
+
+            }
+        }
+
+        //	Create ShellAbout
+        [DllImport("shell32.dll")]
 		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
 
 		//	Opens ShellAbout Dialog to display version info
-		private void about_Click(object sender, EventArgs e)
+		private void aboutItem_Click(object sender, EventArgs e)
 		{
 			//	Write version to string
 			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -401,7 +482,7 @@ namespace Tinyinfo
 		}
 
 		//	Opens GitHub repo in browser
-		private void github_Click(object sender, EventArgs e)
+		private void githubItem_Click(object sender, EventArgs e)
 		{
 			Process.Start("https://github.com/Lion-Craft/Tinyinfo");
 		}
@@ -409,6 +490,20 @@ namespace Tinyinfo
 		private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			stopUpdate();
+		}
+
+		private void refreshItem_Click(object sender, EventArgs e)
+		{
+			//	Refresh system info
+			getdata(false);
+		}
+
+		private void exitItem_Click(object sender, EventArgs e)
+		{
+			//	Stop Updating
+			stopUpdate();
+			//	Exit Tinyinfo
+			System.Windows.Forms.Application.Exit();
 		}
 	}
 }

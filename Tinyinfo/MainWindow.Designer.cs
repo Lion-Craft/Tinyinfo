@@ -29,99 +29,104 @@ namespace Tinyinfo
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.button1 = new System.Windows.Forms.Button();
-			this.label1 = new System.Windows.Forms.Label();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button3 = new System.Windows.Forms.Button();
-			this.progressBar1 = new System.Windows.Forms.ProgressBar();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.startButton = new System.Windows.Forms.Button();
+			this.infoLabel = new System.Windows.Forms.Label();
+			this.stopButton = new System.Windows.Forms.Button();
+			this.pauseButton = new System.Windows.Forms.Button();
+			this.progressBar = new System.Windows.Forms.ProgressBar();
+			this.outputBox = new System.Windows.Forms.TextBox();
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
-			this.mainMenu = new System.Windows.Forms.MainMenu(this.components);
-			this.settings = new System.Windows.Forms.MenuItem();
+			this.menuBar = new System.Windows.Forms.MainMenu(this.components);
+			this.fileDropdown = new System.Windows.Forms.MenuItem();
+			this.exportItem = new System.Windows.Forms.MenuItem();
+			this.settingsItem = new System.Windows.Forms.MenuItem();
 			this.menuItem2 = new System.Windows.Forms.MenuItem();
-			this.about = new System.Windows.Forms.MenuItem();
-			this.github = new System.Windows.Forms.MenuItem();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.panel1.SuspendLayout();
+			this.exitItem = new System.Windows.Forms.MenuItem();
+			this.refreshItem = new System.Windows.Forms.MenuItem();
+			this.helpDropdown = new System.Windows.Forms.MenuItem();
+			this.aboutItem = new System.Windows.Forms.MenuItem();
+			this.githubItem = new System.Windows.Forms.MenuItem();
+			this.onTopBoxPanel = new System.Windows.Forms.Panel();
+			this.onTopBoxPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// button1
+			// startButton
 			// 
-			this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button1.Location = new System.Drawing.Point(16, 278);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(115, 40);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "Start";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.startButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.startButton.Location = new System.Drawing.Point(16, 278);
+			this.startButton.Name = "startButton";
+			this.startButton.Size = new System.Drawing.Size(115, 40);
+			this.startButton.TabIndex = 0;
+			this.startButton.Text = "Start";
+			this.startButton.UseVisualStyleBackColor = true;
+			this.startButton.Click += new System.EventHandler(this.startButton_Click);
 			// 
-			// label1
+			// infoLabel
 			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label1.Location = new System.Drawing.Point(12, 9);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(335, 21);
-			this.label1.TabIndex = 2;
-			this.label1.Text = "Press Start to continuously update System Info.";
+			this.infoLabel.AutoSize = true;
+			this.infoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.infoLabel.Location = new System.Drawing.Point(12, 9);
+			this.infoLabel.Name = "infoLabel";
+			this.infoLabel.Size = new System.Drawing.Size(335, 21);
+			this.infoLabel.TabIndex = 2;
+			this.infoLabel.Text = "Press Start to continuously update System Info.";
 			// 
-			// button2
+			// stopButton
 			// 
-			this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.button2.Enabled = false;
-			this.button2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button2.Location = new System.Drawing.Point(526, 278);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(115, 40);
-			this.button2.TabIndex = 3;
-			this.button2.Text = "Stop";
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.button2_Click);
+			this.stopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.stopButton.Enabled = false;
+			this.stopButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.stopButton.Location = new System.Drawing.Point(526, 278);
+			this.stopButton.Name = "stopButton";
+			this.stopButton.Size = new System.Drawing.Size(115, 40);
+			this.stopButton.TabIndex = 3;
+			this.stopButton.Text = "Stop";
+			this.stopButton.UseVisualStyleBackColor = true;
+			this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
 			// 
-			// button3
+			// pauseButton
 			// 
-			this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.button3.Enabled = false;
-			this.button3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.button3.Location = new System.Drawing.Point(137, 278);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(115, 40);
-			this.button3.TabIndex = 4;
-			this.button3.Text = "Pause/Play";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Visible = false;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
+			this.pauseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.pauseButton.Enabled = false;
+			this.pauseButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.pauseButton.Location = new System.Drawing.Point(137, 278);
+			this.pauseButton.Name = "pauseButton";
+			this.pauseButton.Size = new System.Drawing.Size(115, 40);
+			this.pauseButton.TabIndex = 4;
+			this.pauseButton.Text = "Pause/Play";
+			this.pauseButton.UseVisualStyleBackColor = true;
+			this.pauseButton.Visible = false;
+			this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
 			// 
-			// progressBar1
+			// progressBar
 			// 
-			this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.progressBar1.Location = new System.Drawing.Point(16, 262);
-			this.progressBar1.Name = "progressBar1";
-			this.progressBar1.Size = new System.Drawing.Size(624, 10);
-			this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-			this.progressBar1.TabIndex = 5;
-			this.progressBar1.Visible = false;
+			this.progressBar.Location = new System.Drawing.Point(16, 262);
+			this.progressBar.Name = "progressBar";
+			this.progressBar.Size = new System.Drawing.Size(624, 10);
+			this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+			this.progressBar.TabIndex = 5;
+			this.progressBar.Visible = false;
 			// 
-			// textBox1
+			// outputBox
 			// 
-			this.textBox1.AcceptsReturn = true;
-			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.outputBox.AcceptsReturn = true;
+			this.outputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox1.BackColor = System.Drawing.SystemColors.Window;
-			this.textBox1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.textBox1.Location = new System.Drawing.Point(16, 33);
-			this.textBox1.Multiline = true;
-			this.textBox1.Name = "textBox1";
-			this.textBox1.ReadOnly = true;
-			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.textBox1.Size = new System.Drawing.Size(625, 223);
-			this.textBox1.TabIndex = 6;
-			this.textBox1.WordWrap = false;
+			this.outputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.outputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.outputBox.Location = new System.Drawing.Point(16, 33);
+			this.outputBox.Multiline = true;
+			this.outputBox.Name = "outputBox";
+			this.outputBox.ReadOnly = true;
+			this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.outputBox.Size = new System.Drawing.Size(625, 223);
+			this.outputBox.TabIndex = 6;
+			this.outputBox.WordWrap = false;
 			// 
 			// onTopCheckbox
 			// 
@@ -137,87 +142,127 @@ namespace Tinyinfo
 			this.onTopCheckbox.UseVisualStyleBackColor = true;
 			this.onTopCheckbox.CheckedChanged += new System.EventHandler(this.onTopCheckbox_CheckedChanged);
 			// 
-			// mainMenu
+			// menuBar
 			// 
-			this.mainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.settings,
-            this.menuItem2});
+			this.menuBar.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.fileDropdown,
+            this.refreshItem,
+            this.helpDropdown});
 			// 
-			// settings
+			// fileDropdown
 			// 
-			this.settings.Index = 0;
-			this.settings.Text = "Settings";
-			this.settings.Click += new System.EventHandler(this.settings_Click);
+			this.fileDropdown.Index = 0;
+			this.fileDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.exportItem,
+            this.settingsItem,
+            this.menuItem2,
+            this.exitItem});
+			this.fileDropdown.Text = "File";
+			// 
+			// exportItem
+			// 
+			this.exportItem.Index = 0;
+			this.exportItem.Text = "Export";
+			this.exportItem.Click += new System.EventHandler(this.exportItem_Click);
+			// 
+			// settingsItem
+			// 
+			this.settingsItem.Index = 1;
+			this.settingsItem.Text = "Settings";
+			this.settingsItem.Click += new System.EventHandler(this.settingsItem_Click);
 			// 
 			// menuItem2
 			// 
-			this.menuItem2.Index = 1;
-			this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.about,
-            this.github});
-			this.menuItem2.Text = "Help";
+			this.menuItem2.Index = 2;
+			this.menuItem2.Text = "-";
 			// 
-			// about
+			// exitItem
 			// 
-			this.about.Index = 0;
-			this.about.Text = "About";
-			this.about.Click += new System.EventHandler(this.about_Click);
+			this.exitItem.Index = 3;
+			this.exitItem.Text = "Exit";
+			this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
 			// 
-			// github
+			// refreshItem
 			// 
-			this.github.Index = 1;
-			this.github.Text = "Github";
-			this.github.Click += new System.EventHandler(this.github_Click);
+			this.refreshItem.Index = 1;
+			this.refreshItem.Text = "Refresh";
+			this.refreshItem.Click += new System.EventHandler(this.refreshItem_Click);
 			// 
-			// panel1
+			// helpDropdown
 			// 
-			this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.panel1.Controls.Add(this.onTopCheckbox);
-			this.panel1.Location = new System.Drawing.Point(380, 278);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(140, 40);
-			this.panel1.TabIndex = 8;
+			this.helpDropdown.Index = 2;
+			this.helpDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.aboutItem,
+            this.githubItem});
+			this.helpDropdown.Text = "Help";
+			// 
+			// aboutItem
+			// 
+			this.aboutItem.Index = 0;
+			this.aboutItem.Text = "About";
+			this.aboutItem.Click += new System.EventHandler(this.aboutItem_Click);
+			// 
+			// githubItem
+			// 
+			this.githubItem.Index = 1;
+			this.githubItem.Text = "Github";
+			this.githubItem.Click += new System.EventHandler(this.githubItem_Click);
+			// 
+			// onTopBoxPanel
+			// 
+			this.onTopBoxPanel.AllowDrop = true;
+			this.onTopBoxPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.onTopBoxPanel.Controls.Add(this.onTopCheckbox);
+			this.onTopBoxPanel.Location = new System.Drawing.Point(380, 278);
+			this.onTopBoxPanel.Name = "onTopBoxPanel";
+			this.onTopBoxPanel.Size = new System.Drawing.Size(140, 40);
+			this.onTopBoxPanel.TabIndex = 8;
 			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.ClientSize = new System.Drawing.Size(653, 330);
-			this.Controls.Add(this.panel1);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.progressBar1);
-			this.Controls.Add(this.button3);
-			this.Controls.Add(this.button2);
-			this.Controls.Add(this.label1);
-			this.Controls.Add(this.button1);
-			this.Menu = this.mainMenu;
+			this.Controls.Add(this.onTopBoxPanel);
+			this.Controls.Add(this.outputBox);
+			this.Controls.Add(this.progressBar);
+			this.Controls.Add(this.pauseButton);
+			this.Controls.Add(this.stopButton);
+			this.Controls.Add(this.infoLabel);
+			this.Controls.Add(this.startButton);
+			this.Menu = this.menuBar;
 			this.Name = "MainWindow";
 			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
 			this.Load += new System.EventHandler(this.startup);
-			this.panel1.ResumeLayout(false);
-			this.panel1.PerformLayout();
+			this.onTopBoxPanel.ResumeLayout(false);
+			this.onTopBoxPanel.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-		}
+        }
 
 		#endregion
 
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Button button2;
-		private System.Windows.Forms.Button button3;
-		private System.Windows.Forms.ProgressBar progressBar1;
+		private System.Windows.Forms.Button startButton;
+		private System.Windows.Forms.Label infoLabel;
+		private System.Windows.Forms.Button stopButton;
+		private System.Windows.Forms.Button pauseButton;
+		private System.Windows.Forms.ProgressBar progressBar;
 		private System.Windows.Forms.CheckBox onTopCheckbox;
-		private System.Windows.Forms.MainMenu mainMenu;
-		private System.Windows.Forms.MenuItem settings;
+		private System.Windows.Forms.MainMenu menuBar;
+		private System.Windows.Forms.MenuItem settingsItem;
+		private System.Windows.Forms.MenuItem helpDropdown;
+		private System.Windows.Forms.MenuItem aboutItem;
+		private System.Windows.Forms.MenuItem githubItem;
+		public System.Windows.Forms.TextBox outputBox;
+		private System.Windows.Forms.Panel onTopBoxPanel;
+		private System.Windows.Forms.MenuItem refreshItem;
+        private System.Windows.Forms.MenuItem fileDropdown;
+        private System.Windows.Forms.MenuItem exportItem;
 		private System.Windows.Forms.MenuItem menuItem2;
-		private System.Windows.Forms.MenuItem about;
-		private System.Windows.Forms.MenuItem github;
-		public System.Windows.Forms.TextBox textBox1;
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.MenuItem exitItem;
 	}
 }
 
