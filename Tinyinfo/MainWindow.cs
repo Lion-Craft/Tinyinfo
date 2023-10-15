@@ -60,42 +60,42 @@ namespace Tinyinfo
 				foreach (var cpu in hardwareInfo.CpuList)
 				{
 					//	CPU ID
-					WriteTextSafe("ID: " + cpu.ProcessorId + nl);
+					WriteTextSafe("ID: " + cpu.ProcessorId);
 					treeItem = "cpu.id";
 					ShowInfo("");
 
 					//	Manufacturer
-					WriteTextSafe("Manufacturer: " + cpu.Manufacturer + nl);
+					WriteTextSafe("Manufacturer: " + cpu.Manufacturer);
 					treeItem = "cpu.manufacturer";
 					ShowInfo("");
 
 					//	Model
-					WriteTextSafe("Model: " + cpu.Name.Replace("  ", "") + nl);
+					WriteTextSafe("Model: " + cpu.Name.Replace("  ", ""));
 					treeItem = "cpu.model";
 					ShowInfo("");
 
 					// Description
-					WriteTextSafe("Description: " + cpu.Description + nl);
+					WriteTextSafe("Description: " + cpu.Description);
 					treeItem = "cpu.description";
 					ShowInfo("");
 
 					//	Socket
-					WriteTextSafe("Socket: " + cpu.SocketDesignation + nl);
+					WriteTextSafe("Socket: " + cpu.SocketDesignation);
 					treeItem = "cpu.socket";
 					ShowInfo("");
 
 					//	Cores and Threads
-					WriteTextSafe("Core Amount: " + cpu.NumberOfCores + " Physical, " + cpu.NumberOfLogicalProcessors + " Logical" + nl);
+					WriteTextSafe("Core Amount: " + cpu.NumberOfCores + " Physical, " + cpu.NumberOfLogicalProcessors + " Logical");
 					treeItem = "cpu.cores";
 					ShowInfo("");
 
 					//	VM Firmware
-					WriteTextSafe("Virtualization Firmware Enabled: " + cpu.VirtualizationFirmwareEnabled + nl);
+					WriteTextSafe("Virtualization Firmware Enabled: " + cpu.VirtualizationFirmwareEnabled);
 					treeItem = "cpu.vmx";
 					ShowInfo("");
 
 					//	Current Clockspeed in mHz
-					WriteTextSafe("Current Clockspeed:" + cpu.CurrentClockSpeed + "mHz" + nl);
+					WriteTextSafe("Current Clockspeed:" + cpu.CurrentClockSpeed + "mHz");
 					treeItem = "cpu.speed.current";
 					ShowInfo("");
 					//	Base Clockspeed in mHz
@@ -114,35 +114,35 @@ namespace Tinyinfo
 						vmemsize /= 1073741824;
 
 						//	GPU ID
-						WriteTextSafe(nl + "\tGPU " + id + ":" + nl);
+						WriteTextSafe(nl + "\tGPU " + id + ":");
 						treeItem = "gpu.id";
 						ShowInfo("");
 						//	Name
-						WriteTextSafe("\t\tName: " + gpu.Name + nl);
+						WriteTextSafe("\t\tName: " + gpu.Name);
 
 						//	Manufacturer
-						WriteTextSafe("\t\tManufacturer: " + gpu.Manufacturer + nl);
+						WriteTextSafe("\t\tManufacturer: " + gpu.Manufacturer);
 
 						//	Description
-						WriteTextSafe("\t\tDescription: " + gpu.VideoProcessor + nl);
+						WriteTextSafe("\t\tDescription: " + gpu.VideoProcessor);
 
 						//	Video mode
-						WriteTextSafe("\t\tVideo Mode: " + gpu.VideoModeDescription + " x " + gpu.CurrentRefreshRate + "Hz x " + gpu.CurrentBitsPerPixel + " Bit" + nl);
+						WriteTextSafe("\t\tVideo Mode: " + gpu.VideoModeDescription + " x " + gpu.CurrentRefreshRate + "Hz x " + gpu.CurrentBitsPerPixel + " Bit");
 
 						//	Video memory amount
-						WriteTextSafe("\t\tVRAM Amount: " + vmemsize + "GB" + nl);
+						WriteTextSafe("\t\tVRAM Amount: " + vmemsize + "GB");
 
 						//	Maximum Refresh rate
-						WriteTextSafe("\t\tMaximum Refresh Rate: " + gpu.MaxRefreshRate + "Hz" + nl);
+						WriteTextSafe("\t\tMaximum Refresh Rate: " + gpu.MaxRefreshRate + "Hz");
 
 						//	Minimum Refresh rate
-						WriteTextSafe("\t\tMinimum Refresh Rate: " + gpu.MinRefreshRate + "Hz " + nl);
+						WriteTextSafe("\t\tMinimum Refresh Rate: " + gpu.MinRefreshRate + "Hz ");
 
 						//	Driver
-						WriteTextSafe("\t\tDriver: " + nl);
+						WriteTextSafe("\t\tDriver: ");
 
 						//	Driver Version
-						WriteTextSafe("\t\t\tVersion: " + gpu.DriverVersion + nl);
+						WriteTextSafe("\t\t\tVersion: " + gpu.DriverVersion);
 
 						//	Driver Date
 						WriteTextSafe("\t\t\tDate: " + gpu.DriverDate);
@@ -160,84 +160,84 @@ namespace Tinyinfo
 						memsize /= 1073741824;
 
 						//	Bank number
-						WriteTextSafe(nl + "\t" + memory.BankLabel + ":" + nl);
+						WriteTextSafe(nl + "\t" + memory.BankLabel + ":");
 
 						//	Manufacturer
-						WriteTextSafe("\t\tManufacturer: " + memory.Manufacturer + nl);
+						WriteTextSafe("\t\tManufacturer: " + memory.Manufacturer);
 
 						//	Size
-						WriteTextSafe("\t\t\tSize: " + memsize + "GB" + nl);
+						WriteTextSafe("\t\t\tSize: " + memsize + "GB");
 
 						//	Speed
-						WriteTextSafe("\t\t\tSpeed: " + memory.Speed + "mT/s" + nl);
+						WriteTextSafe("\t\t\tSpeed: " + memory.Speed + "mT/s");
 
 						//	Part Number
-						WriteTextSafe("\t\t\tPart No.: " + memory.PartNumber + nl);
+						WriteTextSafe("\t\t\tPart No.: " + memory.PartNumber);
 
 						//	Form Factor
-						WriteTextSafe("\t\t\tForm Factor: " + memory.FormFactor + nl);
+						WriteTextSafe("\t\t\tForm Factor: " + memory.FormFactor);
 
 						//	Minimum Voltage
-						WriteTextSafe("\t\t\tMin. Voltage: " + memory.MinVoltage + "mV" + nl);
+						WriteTextSafe("\t\t\tMin. Voltage: " + memory.MinVoltage + "mV");
 
 						//	Maximum voltage
 						WriteTextSafe("\t\t\tMax. Voltage: " + memory.MaxVoltage + "mV");
 					}
 
 					//	Motherboard
-					WriteTextSafe(nl + "Motherboard: " + nl);
+					WriteTextSafe(nl + "Motherboard: ");
 					foreach (var motherboard in hardwareInfo.MotherboardList)
 					{
 						//	Manufacturer
-						WriteTextSafe("\tManufacturer: " + motherboard.Manufacturer + nl);
+						WriteTextSafe("\tManufacturer: " + motherboard.Manufacturer);
 						//	Model
-						WriteTextSafe("\tModel: " + motherboard.Product + nl);
+						WriteTextSafe("\tModel: " + motherboard.Product);
 						//	Serial Number
 						WriteTextSafe("\tSerial No.: " + motherboard.SerialNumber);
 					}
 
 					//	BIOS Info
-					WriteTextSafe(nl + "BIOS: " + nl);
+					WriteTextSafe(nl + "BIOS: ");
 					foreach (var bios in hardwareInfo.BiosList)
 					{
 						//	Manufacturer
-						WriteTextSafe("\tManufacturer: " + bios.Manufacturer + nl);
+						WriteTextSafe("\tManufacturer: " + bios.Manufacturer);
 						//	Name
-						WriteTextSafe("\tName: " + bios.Name + nl);
+						WriteTextSafe("\tName: " + bios.Name);
 						//	Version
-						WriteTextSafe("\tVersion: " + bios.Version + nl);
+						WriteTextSafe("\tVersion: " + bios.Version);
 						//	Release Date
 						WriteTextSafe("\tRelease Date: " + bios.ReleaseDate);
 					}
 
 					//	Battery Info
-					WriteTextSafe(nl + "Battery: " + nl);
+					WriteTextSafe(nl + "Battery: ");
 					foreach (var battery in hardwareInfo.BatteryList)
 					{
 						//	Status
-						WriteTextSafe("\tStatus: " + battery.BatteryStatus + nl);
+						WriteTextSafe("\tStatus: " + battery.BatteryStatus);
 						//	Status Description
-						WriteTextSafe("\tStatus Description: " + battery.BatteryStatusDescription + nl);
+						WriteTextSafe("\tStatus Description: " + battery.BatteryStatusDescription);
 						//	Battery Percentage
-						WriteTextSafe("\tBattery Percentage: " + battery.EstimatedChargeRemaining + "%" + nl);
+						WriteTextSafe("\tBattery Percentage: " + battery.EstimatedChargeRemaining + "%");
 						//	Time remaining
 						WriteTextSafe("\tTime remaining: " + battery.EstimatedRunTime + " Minutes"+ nl);
 						//	Expected Life
-						WriteTextSafe("\tExpected Life: " + battery.ExpectedLife + nl);
+						WriteTextSafe("\tExpected Life: " + battery.ExpectedLife);
 						//	Time to Charge
-						WriteTextSafe("\tTime until fully charged: " + battery.TimeToFullCharge + nl);
+						WriteTextSafe("\tTime until fully charged: " + battery.TimeToFullCharge);
 						//	Time on Battery
-						WriteTextSafe("\tTime on Battery: " + battery.TimeOnBattery + nl);
+						WriteTextSafe("\tTime on Battery: " + battery.TimeOnBattery);
 						//	Capacities
-						WriteTextSafe("\tCapacities: " + nl);
+						WriteTextSafe("\tCapacities: ");
 						//	Design Capacity
-						WriteTextSafe("\t\tDesign Capacity: " + battery.DesignCapacity + nl);
+						WriteTextSafe("\t\tDesign Capacity: " + battery.DesignCapacity);
 						//	Current Capaity
-						WriteTextSafe("\t\tFull Charge Capacity: " + battery.FullChargeCapacity + nl);
+						WriteTextSafe("\t\tFull Charge Capacity: " + battery.FullChargeCapacity);
 					}
 
 					//	Drive Info
-					WriteTextSafe("Drives: " + nl);
+					WriteTextSafe("Drives: ");
 					foreach(var drive in hardwareInfo.DriveList)
 					{
 						//	Write capacity into float and convert to GB
@@ -245,19 +245,19 @@ namespace Tinyinfo
 						disksize /= 1073741824;
 
 						//	Index
-						WriteTextSafe("\tDrive " + drive.Index + ":" + nl);
+						WriteTextSafe("\tDrive " + drive.Index + ":");
 						//	Name
-						WriteTextSafe("\t\tName: " + drive.Name + nl);
+						WriteTextSafe("\t\tName: " + drive.Name);
 						//	Size
-						WriteTextSafe("\t\tSize: " + disksize + "GB" + nl);
+						WriteTextSafe("\t\tSize: " + disksize + "GB");
 						//	Manufacturer
-						WriteTextSafe("\t\tManufacturer: " + drive.Manufacturer + nl);
+						WriteTextSafe("\t\tManufacturer: " + drive.Manufacturer);
 						//	Model
-						WriteTextSafe("\t\tModel: " + drive.Model + nl);
+						WriteTextSafe("\t\tModel: " + drive.Model);
 						//	Firmware
-						WriteTextSafe("\t\tFirmware Revision: " + drive.FirmwareRevision + nl);
+						WriteTextSafe("\t\tFirmware Revision: " + drive.FirmwareRevision);
 						//	Serial Number
-						WriteTextSafe("\t\tSerial No.: " + drive.SerialNumber + nl);
+						WriteTextSafe("\t\tSerial No.: " + drive.SerialNumber);
 						//	Partition Count
 						WriteTextSafe("\t\tPartition Count: " + drive.Partitions);
 					}
@@ -269,19 +269,19 @@ namespace Tinyinfo
 					foreach (var netadapt in hardwareInfo.NetworkAdapterList)
 					{
 						//	NIC ID
-						WriteTextSafe(nl + "\tNIC " +  netadaptid + ":" + nl);
+						WriteTextSafe(nl + "\tNIC " +  netadaptid + ":");
 						//	Name
-						WriteTextSafe("\t\tName: " + netadapt.Name + nl);
+						WriteTextSafe("\t\tName: " + netadapt.Name);
 						//	Product Name
-						WriteTextSafe("\t\tProduct Name: " + netadapt.ProductName + nl);
+						WriteTextSafe("\t\tProduct Name: " + netadapt.ProductName);
 						//	Adapter Type
-						WriteTextSafe("\t\tType: " + netadapt.NetConnectionID + nl);
+						WriteTextSafe("\t\tType: " + netadapt.NetConnectionID);
 						//	Manufacturer
-						WriteTextSafe("\t\tManufacturer: " + netadapt.Manufacturer + nl);
+						WriteTextSafe("\t\tManufacturer: " + netadapt.Manufacturer);
 						//	MAC Adress
-						WriteTextSafe("\t\tMAC Adress: " + netadapt.MACAddress + nl);
+						WriteTextSafe("\t\tMAC Adress: " + netadapt.MACAddress);
 						//	Bytes sent per Second
-						WriteTextSafe("\t\tBytes sent per Second: " + netadapt.BytesSentPersec + nl);
+						WriteTextSafe("\t\tBytes sent per Second: " + netadapt.BytesSentPersec);
 						//	Bytes recieved per Second
 						WriteTextSafe("\t\tBytes recieved per Second: " + netadapt.BytesReceivedPersec);
 
