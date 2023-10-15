@@ -326,7 +326,6 @@ namespace Tinyinfo
 			infoLabel.Text = "Loading System Info..";
 			progressBar.Value = 50;
 			hardwareInfo.RefreshOperatingSystem();
-			pauseButton.Enabled = true;
 			infoLabel.Text = "Loading System Info...";
 			progressBar.Value = 75;
 			progressBar.Value = 85;
@@ -343,7 +342,6 @@ namespace Tinyinfo
 		{
 			if (thread.IsAlive)
 			{
-				pauseButton.Enabled = false;
 				thread.Abort();
 				stopButton.Enabled = false;
 				startButton.Enabled = true;
@@ -360,18 +358,6 @@ namespace Tinyinfo
 		private void stopButton_Click(object sender, EventArgs e)
 		{
 			stopUpdate();
-		}
-
-		//	Start/Stop thread when Play/Pause button is pressed. not used as of v1.4
-		private void pauseButton_Click(object sender, EventArgs e)
-		{
-			if (thread.ThreadState == System.Threading.ThreadState.Stopped) {
-				thread.Start();
-			}
-			else
-			{
-				thread.Abort();
-			}
 		}
 
 		private void onTopCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -407,7 +393,6 @@ namespace Tinyinfo
 				BackColor = Color.Black;
 				startButton.ForeColor = Color.Black;
 				stopButton.ForeColor = Color.Black;
-				pauseButton.ForeColor = Color.Black;
 				onTopCheckbox.ForeColor = Color.Black;
 				onTopCheckbox.BackColor = Color.Gray;
 				onTopBoxPanel.BackColor = Color.FromName("ButtonFace");
@@ -422,7 +407,6 @@ namespace Tinyinfo
 				BackColor = Color.White;
 				startButton.ForeColor = Color.Black;
 				stopButton.ForeColor = Color.Black;
-				pauseButton.ForeColor = Color.Black;
 				onTopCheckbox.ForeColor = Color.Black;
 				onTopCheckbox.BackColor = Color.White;
 				onTopBoxPanel.BackColor = Color.White;
@@ -447,8 +431,28 @@ namespace Tinyinfo
 			refreshTheme();
 		}
 
-		//	Create ShellAbout
-		[DllImport("shell32.dll")]
+		// Export system info to text file
+        private void exportItem_Click(object sender, EventArgs e)
+        {
+            // Create a SaveFileDialog to choose the destination file
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text Files|*.txt";
+
+            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+
+            var filePath = saveFileDialog.FileName;
+
+            // Open a StreamWriter to write to the selected file
+            using (var writer = new StreamWriter(filePath))
+            {
+                var outputBoxValue = outputBox.Text;
+                writer.WriteLine(outputBoxValue);
+
+            }
+        }
+
+        //	Create ShellAbout
+        [DllImport("shell32.dll")]
 		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
 
 		//	Opens ShellAbout Dialog to display version info
@@ -476,6 +480,14 @@ namespace Tinyinfo
 		{
 			//	Refresh system info
 			getdata(false);
+		}
+
+		private void exitItem_Click(object sender, EventArgs e)
+		{
+			//	Stop Updating
+			stopUpdate();
+			//	Exit Tinyinfo
+			System.Windows.Forms.Application.Exit();
 		}
 	}
 }

@@ -33,12 +33,15 @@ namespace Tinyinfo
 			this.startButton = new System.Windows.Forms.Button();
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
-			this.pauseButton = new System.Windows.Forms.Button();
 			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.outputBox = new System.Windows.Forms.TextBox();
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
 			this.menuBar = new System.Windows.Forms.MainMenu(this.components);
+			this.fileDropdown = new System.Windows.Forms.MenuItem();
+			this.exportItem = new System.Windows.Forms.MenuItem();
 			this.settingsItem = new System.Windows.Forms.MenuItem();
+			this.menuItem2 = new System.Windows.Forms.MenuItem();
+			this.exitItem = new System.Windows.Forms.MenuItem();
 			this.refreshItem = new System.Windows.Forms.MenuItem();
 			this.helpDropdown = new System.Windows.Forms.MenuItem();
 			this.aboutItem = new System.Windows.Forms.MenuItem();
@@ -81,20 +84,6 @@ namespace Tinyinfo
 			this.stopButton.Text = "Stop";
 			this.stopButton.UseVisualStyleBackColor = true;
 			this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-			// 
-			// pauseButton
-			// 
-			this.pauseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.pauseButton.Enabled = false;
-			this.pauseButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.pauseButton.Location = new System.Drawing.Point(137, 278);
-			this.pauseButton.Name = "pauseButton";
-			this.pauseButton.Size = new System.Drawing.Size(115, 40);
-			this.pauseButton.TabIndex = 4;
-			this.pauseButton.Text = "Pause/Play";
-			this.pauseButton.UseVisualStyleBackColor = true;
-			this.pauseButton.Visible = false;
-			this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
 			// 
 			// progressBar
 			// 
@@ -142,15 +131,42 @@ namespace Tinyinfo
 			// menuBar
 			// 
 			this.menuBar.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.settingsItem,
+            this.fileDropdown,
             this.refreshItem,
             this.helpDropdown});
 			// 
+			// fileDropdown
+			// 
+			this.fileDropdown.Index = 0;
+			this.fileDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.exportItem,
+            this.settingsItem,
+            this.menuItem2,
+            this.exitItem});
+			this.fileDropdown.Text = "File";
+			// 
+			// exportItem
+			// 
+			this.exportItem.Index = 0;
+			this.exportItem.Text = "Export";
+			this.exportItem.Click += new System.EventHandler(this.exportItem_Click);
+			// 
 			// settingsItem
 			// 
-			this.settingsItem.Index = 0;
+			this.settingsItem.Index = 1;
 			this.settingsItem.Text = "Settings";
 			this.settingsItem.Click += new System.EventHandler(this.settingsItem_Click);
+			// 
+			// menuItem2
+			// 
+			this.menuItem2.Index = 2;
+			this.menuItem2.Text = "-";
+			// 
+			// exitItem
+			// 
+			this.exitItem.Index = 3;
+			this.exitItem.Text = "Exit";
+			this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
 			// 
 			// refreshItem
 			// 
@@ -196,7 +212,6 @@ namespace Tinyinfo
 			this.Controls.Add(this.onTopBoxPanel);
 			this.Controls.Add(this.outputBox);
 			this.Controls.Add(this.progressBar);
-			this.Controls.Add(this.pauseButton);
 			this.Controls.Add(this.stopButton);
 			this.Controls.Add(this.infoLabel);
 			this.Controls.Add(this.startButton);
@@ -211,14 +226,13 @@ namespace Tinyinfo
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
-		}
+        }
 
 		#endregion
 
 		private System.Windows.Forms.Button startButton;
 		private System.Windows.Forms.Label infoLabel;
 		private System.Windows.Forms.Button stopButton;
-		private System.Windows.Forms.Button pauseButton;
 		private System.Windows.Forms.ProgressBar progressBar;
 		private System.Windows.Forms.CheckBox onTopCheckbox;
 		private System.Windows.Forms.MainMenu menuBar;
@@ -229,6 +243,10 @@ namespace Tinyinfo
 		public System.Windows.Forms.TextBox outputBox;
 		private System.Windows.Forms.Panel onTopBoxPanel;
 		private System.Windows.Forms.MenuItem refreshItem;
+        private System.Windows.Forms.MenuItem fileDropdown;
+        private System.Windows.Forms.MenuItem exportItem;
+		private System.Windows.Forms.MenuItem menuItem2;
+		private System.Windows.Forms.MenuItem exitItem;
 	}
 }
 
