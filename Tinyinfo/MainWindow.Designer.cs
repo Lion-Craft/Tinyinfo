@@ -29,6 +29,41 @@ namespace Tinyinfo
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("ID:");
+			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Manufacturer:");
+			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Model:");
+			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Description:");
+			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Socket:");
+			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Core Amount:");
+			System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Virtualization: ");
+			System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Clockspeeds");
+			System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("CPU", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8});
+			System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node4");
+			System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Video", new System.Windows.Forms.TreeNode[] {
+            treeNode10});
+			System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node3");
+			System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("RAM", new System.Windows.Forms.TreeNode[] {
+            treeNode12});
+			System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Node7");
+			System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Motherboard", new System.Windows.Forms.TreeNode[] {
+            treeNode14});
+			System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Node9");
+			System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("BIOS", new System.Windows.Forms.TreeNode[] {
+            treeNode16});
+			System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Node11");
+			System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Battery", new System.Windows.Forms.TreeNode[] {
+            treeNode18});
+			System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Node13");
+			System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Drives", new System.Windows.Forms.TreeNode[] {
+            treeNode20});
 			this.startButton = new System.Windows.Forms.Button();
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
@@ -47,6 +82,7 @@ namespace Tinyinfo
 			this.aboutItem = new System.Windows.Forms.MenuItem();
 			this.githubItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel = new System.Windows.Forms.Panel();
+			this.outputTree = new System.Windows.Forms.TreeView();
 			this.onTopBoxPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -54,7 +90,7 @@ namespace Tinyinfo
 			// 
 			this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.startButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.startButton.Location = new System.Drawing.Point(16, 278);
+			this.startButton.Location = new System.Drawing.Point(16, 319);
 			this.startButton.Name = "startButton";
 			this.startButton.Size = new System.Drawing.Size(115, 40);
 			this.startButton.TabIndex = 0;
@@ -77,7 +113,7 @@ namespace Tinyinfo
 			this.stopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.stopButton.Enabled = false;
 			this.stopButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.stopButton.Location = new System.Drawing.Point(526, 278);
+			this.stopButton.Location = new System.Drawing.Point(554, 319);
 			this.stopButton.Name = "stopButton";
 			this.stopButton.Size = new System.Drawing.Size(115, 40);
 			this.stopButton.TabIndex = 3;
@@ -90,7 +126,7 @@ namespace Tinyinfo
 			this.pauseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.pauseButton.Enabled = false;
 			this.pauseButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.pauseButton.Location = new System.Drawing.Point(137, 278);
+			this.pauseButton.Location = new System.Drawing.Point(137, 319);
 			this.pauseButton.Name = "pauseButton";
 			this.pauseButton.Size = new System.Drawing.Size(115, 40);
 			this.pauseButton.TabIndex = 4;
@@ -104,9 +140,9 @@ namespace Tinyinfo
 			this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.progressBar.Location = new System.Drawing.Point(16, 262);
+			this.progressBar.Location = new System.Drawing.Point(16, 294);
 			this.progressBar.Name = "progressBar";
-			this.progressBar.Size = new System.Drawing.Size(624, 10);
+			this.progressBar.Size = new System.Drawing.Size(652, 19);
 			this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
 			this.progressBar.TabIndex = 5;
 			this.progressBar.Visible = false;
@@ -119,13 +155,14 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.outputBox.BackColor = System.Drawing.SystemColors.Window;
 			this.outputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.outputBox.Location = new System.Drawing.Point(16, 33);
+			this.outputBox.Location = new System.Drawing.Point(388, 96);
 			this.outputBox.Multiline = true;
 			this.outputBox.Name = "outputBox";
 			this.outputBox.ReadOnly = true;
 			this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.outputBox.Size = new System.Drawing.Size(625, 223);
+			this.outputBox.Size = new System.Drawing.Size(264, 147);
 			this.outputBox.TabIndex = 6;
+			this.outputBox.Visible = false;
 			this.outputBox.WordWrap = false;
 			// 
 			// onTopCheckbox
@@ -213,18 +250,81 @@ namespace Tinyinfo
 			this.onTopBoxPanel.AllowDrop = true;
 			this.onTopBoxPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.onTopBoxPanel.Controls.Add(this.onTopCheckbox);
-			this.onTopBoxPanel.Location = new System.Drawing.Point(380, 278);
+			this.onTopBoxPanel.Location = new System.Drawing.Point(408, 319);
 			this.onTopBoxPanel.Name = "onTopBoxPanel";
 			this.onTopBoxPanel.Size = new System.Drawing.Size(140, 40);
 			this.onTopBoxPanel.TabIndex = 8;
+			// 
+			// outputTree
+			// 
+			this.outputTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.outputTree.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.outputTree.HotTracking = true;
+			this.outputTree.Location = new System.Drawing.Point(16, 33);
+			this.outputTree.Name = "outputTree";
+			treeNode1.Name = "CpuIdNode";
+			treeNode1.Text = "ID:";
+			treeNode2.Name = "CpuManuNode";
+			treeNode2.Text = "Manufacturer:";
+			treeNode3.Name = "CpuModelNode";
+			treeNode3.Text = "Model:";
+			treeNode4.Name = "CpuDescNode";
+			treeNode4.Text = "Description:";
+			treeNode5.Name = "CpuSocketNode";
+			treeNode5.Text = "Socket:";
+			treeNode6.Name = "CpuCoresNode";
+			treeNode6.Text = "Core Amount:";
+			treeNode7.Name = "CpuVmxNode";
+			treeNode7.Text = "Virtualization: ";
+			treeNode8.Name = "CpuClocksNode";
+			treeNode8.Text = "Clockspeeds";
+			treeNode9.Name = "CpuNode";
+			treeNode9.Text = "CPU";
+			treeNode10.Name = "Node4";
+			treeNode10.Text = "Node4";
+			treeNode11.Name = "VideoNode";
+			treeNode11.Text = "Video";
+			treeNode12.Name = "Node3";
+			treeNode12.Text = "Node3";
+			treeNode13.Name = "MemoryNode";
+			treeNode13.Text = "RAM";
+			treeNode14.Name = "Node7";
+			treeNode14.Text = "Node7";
+			treeNode15.Name = "MotherboardNode";
+			treeNode15.Text = "Motherboard";
+			treeNode16.Name = "Node9";
+			treeNode16.Text = "Node9";
+			treeNode17.Name = "BiosNode";
+			treeNode17.Text = "BIOS";
+			treeNode18.Name = "Node11";
+			treeNode18.Text = "Node11";
+			treeNode19.Name = "BatteryNode";
+			treeNode19.Text = "Battery";
+			treeNode20.Name = "Node13";
+			treeNode20.Text = "Node13";
+			treeNode21.Name = "DriveNode";
+			treeNode21.Text = "Drives";
+			this.outputTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode9,
+            treeNode11,
+            treeNode13,
+            treeNode15,
+            treeNode17,
+            treeNode19,
+            treeNode21});
+			this.outputTree.Size = new System.Drawing.Size(651, 255);
+			this.outputTree.TabIndex = 9;
 			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.ClientSize = new System.Drawing.Size(653, 330);
-			this.Controls.Add(this.onTopBoxPanel);
+			this.ClientSize = new System.Drawing.Size(681, 371);
 			this.Controls.Add(this.outputBox);
+			this.Controls.Add(this.outputTree);
+			this.Controls.Add(this.onTopBoxPanel);
 			this.Controls.Add(this.progressBar);
 			this.Controls.Add(this.pauseButton);
 			this.Controls.Add(this.stopButton);
@@ -263,6 +363,7 @@ namespace Tinyinfo
         private System.Windows.Forms.MenuItem exportItem;
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem exitItem;
+		private System.Windows.Forms.TreeView outputTree;
 	}
 }
 
