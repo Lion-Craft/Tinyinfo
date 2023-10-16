@@ -454,15 +454,17 @@ namespace Tinyinfo
         //	Create ShellAbout
         [DllImport("shell32.dll")]
 		static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
-
+		
+		//	Write versions to strings
+		string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+		string majorVersion = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString();
+		string servicePack = Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
+		string revision = Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString();
 		//	Opens ShellAbout Dialog to display version info
 		private void aboutItem_Click(object sender, EventArgs e)
 		{
-			//	Write version to string
-			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			
 			//	Create ShellAbout dialog
-			ShellAbout(IntPtr.Zero, "Tinyinfo " + version, "Tinyinfo v." + version, Icon.Handle);
+			ShellAbout(IntPtr.Zero, "About Tinyinfo" + "#Tinyinfo V" + majorVersion + " Service Pack " + servicePack, "Detailed version info:\nTinyinfo v." + version, Icon.Handle);
 		}
 
 		//	Opens GitHub repo in browser
