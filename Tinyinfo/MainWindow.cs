@@ -10,12 +10,16 @@ using Hardware.Info;
 using static System.Net.Mime.MediaTypeNames;
 using IniParser;
 using IniParser.Model;
+using Newtonsoft.Json;
 
 namespace Tinyinfo
 {
 	public partial class MainWindow : Form
 	{
-		static readonly IHardwareInfo hardwareInfo = new HardwareInfo();
+		bool exportToJson = false;
+
+        static readonly IHardwareInfo hardwareInfo = new HardwareInfo();
+		
 		private delegate void SafeCallDelegate(string text);
 		public MainWindow()
 		{
@@ -431,24 +435,118 @@ namespace Tinyinfo
 			refreshTheme();
 		}
 
-		// Export system info to text file
+        /// <summary>
+		/// Export system info to text file as plain text
+		/// </summary>
         private void exportItem_Click(object sender, EventArgs e)
         {
-            // Create a SaveFileDialog to choose the destination file
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text Files|*.txt";
+			ExportToTextFile(0);
+        }
 
-            if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
+        /// <summary>
+        /// Export system info to text file as JSON
+        /// </summary>
+        private void btnExportAsJSON_Click(object sender, EventArgs e)
+        {
+            ExportToTextFile(1);
+        }
 
-            var filePath = saveFileDialog.FileName;
-
-            // Open a StreamWriter to write to the selected file
-            using (var writer = new StreamWriter(filePath))
+        private void ExportToTextFile(int mode)
+		{
+            if (outputBox == null)
             {
-                var outputBoxValue = outputBox.Text;
-                writer.WriteLine(outputBoxValue);
+                // Handle the case where outputBox is not set.
+                return;
+            }
+
+            try
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "Text Files (*.txt)|*.txt";
+
+                    if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                    {
+                        return;
+                    }
+
+                    string filePath = saveFileDialog.FileName;
+					switch (mode)
+					{
+						case 0:
+                            using (StreamWriter writer = new StreamWriter(filePath))
+                            {
+                                string outputText = outputBox.Text;
+
+                                writer.Write(outputText);
+                            }
+                            break;
+
+						case 1:
+                            string json = GetHardwareInfoAsJSON();
+
+                            using (StreamWriter writer = new StreamWriter(filePath))
+                            {
+                                writer.Write(json);
+                            }
+                            break;
+							
+						default:
+							break;
+					}
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+	
+		private string GetHardwareInfoAsJSON()
+		{
+			string finalJson = string.Empty;
+
+            try
+			{
+                string cpuListJson = JsonConvert.SerializeObject(hardwareInfo.CpuList);
+
+                string videoControllerListJson = JsonConvert.SerializeObject(hardwareInfo.VideoControllerList);
+
+                string memoryListJson = JsonConvert.SerializeObject(hardwareInfo.MemoryList);
+
+                string motherboardListJson = JsonConvert.SerializeObject(hardwareInfo.MotherboardList);
+
+                string biosListJson = JsonConvert.SerializeObject(hardwareInfo.BiosList);
+
+                string batteryListJson = JsonConvert.SerializeObject(hardwareInfo.BatteryList);
+
+                string driveListJson = JsonConvert.SerializeObject(hardwareInfo.DriveList);
+
+				// I commented this one because for some reason it was the only one giving me a weird exception. I don't know.
+                //string networkAdapterListJson = JsonConvert.SerializeObject(hardwareInfo.NetworkAdapterList);
+
+                var combinedJson = new
+                {
+                    CpuList = cpuListJson,
+                    VideoControllerList = videoControllerListJson,
+                    MemoryList = memoryListJson,
+                    MotherboardList = motherboardListJson,
+                    BiosList = biosListJson,
+                    BatteryList = batteryListJson,
+                    DriveList = driveListJson,
+                    //NetworkAdapterList = networkAdapterListJson
+                };
+
+                finalJson = JsonConvert.SerializeObject(combinedJson);
 
             }
+            catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+
+			return finalJson;
         }
 
         //	Create ShellAbout
@@ -491,5 +589,7 @@ namespace Tinyinfo
 			//	Exit Tinyinfo
 			System.Windows.Forms.Application.Exit();
 		}
-	}
+
+       
+    }
 }
