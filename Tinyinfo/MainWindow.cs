@@ -25,8 +25,12 @@ namespace Tinyinfo
 		{
 			InitializeComponent();
 
+			
 			LoadTheme();
 		}
+
+		//	Create Splash
+		Form splash = new Splash();
 
 		//	Thread for updating info in background
 
@@ -35,11 +39,17 @@ namespace Tinyinfo
 		/// </summary>
 		public void Startup(object sender, EventArgs e)
 		{
+			//	Show Splash
+			splash.Show();
+
 			//	Create Thread on start
 			thread = new Thread(() => Getdata(true));
 
 			//	Get info on load
 			Getdata(false);
+
+			//	Close Splash
+			splash.Close();
 		}
 
 		/// <summary>
