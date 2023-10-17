@@ -43,6 +43,18 @@ namespace Tinyinfo
 		}
 
 		/// <summary>
+		/// Refreshes minimum amount of hardware info data needed
+		/// </summary>
+		private void RefreshMinimumHardwareInfo()
+		{
+			hardwareInfo.RefreshCPUList(true);
+
+			hardwareInfo.RefreshBatteryList();
+
+			hardwareInfo.RefreshNetworkAdapterList();
+		}
+
+		/// <summary>
 		/// Refreshes all the hardware info data
 		/// </summary>
 		private void RefreshAllHardwareInfo()
@@ -69,8 +81,43 @@ namespace Tinyinfo
 		/// </summary>
 		public void Getdata(bool loop)
 		{
-			do
+			if (loop)
 			{
+				do
+				{
+					//	Refresh minimum amount of info needed
+					RefreshMinimumHardwareInfo();
+
+					//	CPU Info
+					LoadCPUData();
+
+					//	Graphics
+					LoadVideoControllerData();
+
+					//	Memory
+					LoadMemoryData();
+
+					//	Motherboard
+					LoadMotherBoardData();
+
+					//	BIOS Info
+					LoadBIOSData();
+
+					//	Battery Info
+					LoadBatteryData();
+
+					//	Drive Info
+					LoadDrivesData();
+
+					//	Network Adapter Info
+					LoadNetworkAdaptersData();
+
+					ShowInfo("");
+				} while (loop);
+			}
+			else
+			{
+				//	Refresh all hardware info
 				RefreshAllHardwareInfo();
 
 				//	CPU Info
@@ -98,7 +145,7 @@ namespace Tinyinfo
 				LoadNetworkAdaptersData();
 
 				ShowInfo("");
-			} while (loop);
+			}
 		}
 
 		/// <summary>
