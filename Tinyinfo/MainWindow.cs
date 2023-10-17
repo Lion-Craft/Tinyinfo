@@ -643,6 +643,9 @@ namespace Tinyinfo
 							//	Sets default file name
 							saveFileDialog.FileName = "export.txt";
 
+							//	Set SaveFileDialog title
+							saveFileDialog.Title = "Tinyinfo - Text Export";
+
 							if (saveFileDialog.ShowDialog() != DialogResult.OK)
 							{
 								return;
@@ -664,6 +667,9 @@ namespace Tinyinfo
 							saveFileDialog.Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*";
 							//	Sets default file name
 							saveFileDialog.FileName = "export.json";
+
+							//	Set SaveFileDialog title
+							saveFileDialog.Title = "Tinyinfo - JSON Export";
 
 							if (saveFileDialog.ShowDialog() != DialogResult.OK)
 							{
