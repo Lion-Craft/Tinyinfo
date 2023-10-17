@@ -228,7 +228,7 @@ namespace Tinyinfo
             this.Name = "MainWindow";
             this.Text = "Tinyinfo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
-            this.Load += new System.EventHandler(this.Startup);
+            this.Load += new System.EventHandler(this.startup);
             this.onTopBoxPanel.ResumeLayout(false);
             this.onTopBoxPanel.PerformLayout();
             this.ResumeLayout(false);
