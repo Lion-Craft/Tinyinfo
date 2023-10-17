@@ -132,7 +132,7 @@ namespace Tinyinfo
 
                 string currentClockspeedInfo = $"\t\t{cpu.CurrentClockSpeed}mHz Current{nl}";
 
-                string baseClockspeedInfo = $"\t\t{cpu.MaxClockSpeed}mHz Base";
+                string baseClockspeedInfo = $"\t\t{cpu.MaxClockSpeed}mHz Base{nl}";
 
                 string result = idInfo + manufacturerInfo + modelInfo + descriptionInfo + socketInfo +
                     coresThreadsInfo + vmFirmwareInfo + clockspeedsInfo + currentClockspeedInfo + baseClockspeedInfo;
@@ -150,7 +150,7 @@ namespace Tinyinfo
 
             string nl = Environment.NewLine;
 
-            AppendTextSafe(nl + "Video: ");
+            AppendTextSafe("Video: " + nl);
 
             foreach (var gpu in hardwareInfo.VideoControllerList)
             {
@@ -176,7 +176,7 @@ namespace Tinyinfo
 
                 string driverVersionInfo = $"\t\t\tVersion: {gpu.DriverVersion}{nl}";
 
-                string driverDateInfo = $"\t\t\tDate: {gpu.DriverDate}";
+                string driverDateInfo = $"\t\t\tDate: {gpu.DriverDate}{nl}";
 
                 string result = gpuIdInfo + nameInfo + manufacturerInfo + descriptionInfo + videoModeInfo + vramAmountInfo +
                     maxRefreshRateInfo + minRefreshRateInfo + driverInfo + driverVersionInfo + driverDateInfo;
@@ -194,7 +194,7 @@ namespace Tinyinfo
         {
             string nl = Environment.NewLine;
 
-            AppendTextSafe(nl + "Motherboard: " + nl);
+            AppendTextSafe("Motherboard: " + nl);
 
             foreach (var motherboard in hardwareInfo.MotherboardList)
             {
@@ -202,7 +202,7 @@ namespace Tinyinfo
 
                 string modelInfo = $"\tModel: {motherboard.Product}{nl}";
 
-                string serialNumberInfo = $"\tSerial No.: {motherboard.SerialNumber}";
+                string serialNumberInfo = $"\tSerial No.: {motherboard.SerialNumber}{nl}";
 
                 string result = manufacturerInfo + modelInfo + serialNumberInfo;
 
@@ -217,7 +217,7 @@ namespace Tinyinfo
         {
             string nl = Environment.NewLine;
 
-            AppendTextSafe(nl + "BIOS: " + nl);
+            AppendTextSafe("BIOS: " + nl);
 
             foreach (var bios in hardwareInfo.BiosList)
             {
@@ -227,7 +227,7 @@ namespace Tinyinfo
 
                 string versionInfo = $"\tVersion: {bios.Version}{nl}";
 
-                string releaseDateInfo = $"\tRelease Date: {bios.ReleaseDate}";
+                string releaseDateInfo = $"\tRelease Date: {bios.ReleaseDate}{nl}";
 
                 string result = manufacturerInfo + nameInfo + versionInfo + releaseDateInfo;
 
@@ -242,7 +242,7 @@ namespace Tinyinfo
         {
             string nl = Environment.NewLine;
 
-            AppendTextSafe(nl + "Battery: ");
+            AppendTextSafe("Battery: " + nl);
 
             foreach (var battery in hardwareInfo.BatteryList)
             {
@@ -281,7 +281,7 @@ namespace Tinyinfo
         {
             string nl = Environment.NewLine;
 
-            AppendTextSafe(nl + "Drives: " + nl);
+            AppendTextSafe("Drives: " + nl);
 
             foreach (var drive in hardwareInfo.DriveList)
             {
@@ -301,7 +301,7 @@ namespace Tinyinfo
 
                 string serialNumberInfo = $"\t\tSerial No.: {drive.SerialNumber}{nl}";
 
-                string partitionsInfo = $"\t\tPartition Count: {drive.Partitions}";
+                string partitionsInfo = $"\t\tPartition Count: {drive.Partitions}{nl}";
 
                 string result = driveInfo + nameInfo + sizeInfo + manufacturerInfo + modelInfo + firmwareInfo + serialNumberInfo + partitionsInfo;
 
@@ -318,7 +318,7 @@ namespace Tinyinfo
 
             string nl = Environment.NewLine;
 
-            AppendTextSafe(nl + "Network Adapter: " + nl);
+            AppendTextSafe("Network Adapter: " + nl);
 
             foreach (var netAdapt in hardwareInfo.NetworkAdapterList)
             {
@@ -336,7 +336,7 @@ namespace Tinyinfo
 
                 string bytesSentInfo = $"\t\tBytes sent per Second: {netAdapt.BytesSentPersec}{nl}";
 
-                string bytesReceivedInfo = $"\t\tBytes received per Second: {netAdapt.BytesReceivedPersec}";
+                string bytesReceivedInfo = $"\t\tBytes received per Second: {netAdapt.BytesReceivedPersec}{nl}";
 
                 string result = netAdaptInfo + nameInfo + productNameInfo + typeInfo + manufacturerInfo + macAddressInfo + bytesSentInfo + bytesReceivedInfo;
 
@@ -353,7 +353,7 @@ namespace Tinyinfo
         {
             string nl = Environment.NewLine;
 
-            AppendTextSafe(nl + "Memory:" + nl);
+            AppendTextSafe("Memory:" + nl);
 
             foreach (var memory in hardwareInfo.MemoryList)
             {
@@ -373,11 +373,11 @@ namespace Tinyinfo
 
                 string minVoltageInfo = $"\t\t\tMin. Voltage: {memory.MinVoltage}mV{nl}";
 
-                string maxVoltageInfo = $"\t\t\tMax. Voltage: {memory.MaxVoltage}mV";
+                string maxVoltageInfo = $"\t\t\tMax. Voltage: {memory.MaxVoltage}mV{nl}";
 
                 string result = bankInfo + manufacturerInfo + sizeInfo + speedInfo + partNumberInfo + formFactorInfo + minVoltageInfo + maxVoltageInfo;
 
-                AppendTextSafe(result + nl);
+                AppendTextSafe(result);
             }
         }
 
