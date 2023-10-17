@@ -29,23 +29,26 @@ namespace Tinyinfo
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
 			this.startButton = new System.Windows.Forms.Button();
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
-			this.pauseButton = new System.Windows.Forms.Button();
 			this.progressBar = new System.Windows.Forms.ProgressBar();
 			this.outputBox = new System.Windows.Forms.TextBox();
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
 			this.menuBar = new System.Windows.Forms.MainMenu(this.components);
+			this.fileDropdown = new System.Windows.Forms.MenuItem();
+			this.exportItem = new System.Windows.Forms.MenuItem();
+			this.btnExportAsJSON = new System.Windows.Forms.MenuItem();
 			this.settingsItem = new System.Windows.Forms.MenuItem();
+			this.menuItem2 = new System.Windows.Forms.MenuItem();
+			this.exitItem = new System.Windows.Forms.MenuItem();
+			this.refreshItem = new System.Windows.Forms.MenuItem();
 			this.helpDropdown = new System.Windows.Forms.MenuItem();
 			this.aboutItem = new System.Windows.Forms.MenuItem();
 			this.githubItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel = new System.Windows.Forms.Panel();
-			this.refreshItem = new System.Windows.Forms.MenuItem();
-            this.fileDropdown = new System.Windows.Forms.MenuItem();
-            this.exportItem = new System.Windows.Forms.MenuItem();
-            this.onTopBoxPanel.SuspendLayout();
+			this.onTopBoxPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -82,20 +85,6 @@ namespace Tinyinfo
 			this.stopButton.Text = "Stop";
 			this.stopButton.UseVisualStyleBackColor = true;
 			this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-			// 
-			// pauseButton
-			// 
-			this.pauseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.pauseButton.Enabled = false;
-			this.pauseButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.pauseButton.Location = new System.Drawing.Point(137, 278);
-			this.pauseButton.Name = "pauseButton";
-			this.pauseButton.Size = new System.Drawing.Size(115, 40);
-			this.pauseButton.TabIndex = 4;
-			this.pauseButton.Text = "Pause/Play";
-			this.pauseButton.UseVisualStyleBackColor = true;
-			this.pauseButton.Visible = false;
-			this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
 			// 
 			// progressBar
 			// 
@@ -147,11 +136,57 @@ namespace Tinyinfo
             this.refreshItem,
             this.helpDropdown});
 			// 
+			// fileDropdown
+			// 
+			this.fileDropdown.Index = 0;
+			this.fileDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.exportItem,
+            this.btnExportAsJSON,
+            this.settingsItem,
+            this.menuItem2,
+            this.exitItem});
+			this.fileDropdown.Text = "File";
+			// 
+			// exportItem
+			// 
+			this.exportItem.Index = 0;
+			this.exportItem.Shortcut = System.Windows.Forms.Shortcut.CtrlT;
+			this.exportItem.Text = "Export as plain text";
+			this.exportItem.Click += new System.EventHandler(this.exportItem_Click);
+			// 
+			// btnExportAsJSON
+			// 
+			this.btnExportAsJSON.Index = 1;
+			this.btnExportAsJSON.RadioCheck = true;
+			this.btnExportAsJSON.Shortcut = System.Windows.Forms.Shortcut.CtrlE;
+			this.btnExportAsJSON.Text = "Export as JSON";
+			this.btnExportAsJSON.Click += new System.EventHandler(this.btnExportAsJSON_Click);
+			// 
 			// settingsItem
 			// 
-			this.settingsItem.Index = 1;
+			this.settingsItem.Index = 2;
+			this.settingsItem.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
 			this.settingsItem.Text = "Settings";
 			this.settingsItem.Click += new System.EventHandler(this.settingsItem_Click);
+			// 
+			// menuItem2
+			// 
+			this.menuItem2.Index = 3;
+			this.menuItem2.Text = "-";
+			// 
+			// exitItem
+			// 
+			this.exitItem.Index = 4;
+			this.exitItem.Shortcut = System.Windows.Forms.Shortcut.AltF4;
+			this.exitItem.Text = "Exit";
+			this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
+			// 
+			// refreshItem
+			// 
+			this.refreshItem.Index = 1;
+			this.refreshItem.Shortcut = System.Windows.Forms.Shortcut.F5;
+			this.refreshItem.Text = "Refresh";
+			this.refreshItem.Click += new System.EventHandler(this.refreshItem_Click);
 			// 
 			// helpDropdown
 			// 
@@ -164,12 +199,14 @@ namespace Tinyinfo
 			// aboutItem
 			// 
 			this.aboutItem.Index = 0;
+			this.aboutItem.Shortcut = System.Windows.Forms.Shortcut.F1;
 			this.aboutItem.Text = "About";
 			this.aboutItem.Click += new System.EventHandler(this.aboutItem_Click);
 			// 
 			// githubItem
 			// 
 			this.githubItem.Index = 1;
+			this.githubItem.Shortcut = System.Windows.Forms.Shortcut.ShiftF1;
 			this.githubItem.Text = "Github";
 			this.githubItem.Click += new System.EventHandler(this.githubItem_Click);
 			// 
@@ -183,12 +220,6 @@ namespace Tinyinfo
 			this.onTopBoxPanel.Size = new System.Drawing.Size(140, 40);
 			this.onTopBoxPanel.TabIndex = 8;
 			// 
-			// refreshItem
-			// 
-			this.refreshItem.Index = 1;
-			this.refreshItem.Text = "Refresh";
-			this.refreshItem.Click += new System.EventHandler(this.refreshItem_Click);
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -197,35 +228,19 @@ namespace Tinyinfo
 			this.Controls.Add(this.onTopBoxPanel);
 			this.Controls.Add(this.outputBox);
 			this.Controls.Add(this.progressBar);
-			this.Controls.Add(this.pauseButton);
 			this.Controls.Add(this.stopButton);
 			this.Controls.Add(this.infoLabel);
 			this.Controls.Add(this.startButton);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Menu = this.menuBar;
 			this.Name = "MainWindow";
-			this.ShowIcon = false;
 			this.Text = "Tinyinfo";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
-			this.Load += new System.EventHandler(this.startup);
+			this.Load += new System.EventHandler(this.Startup);
 			this.onTopBoxPanel.ResumeLayout(false);
 			this.onTopBoxPanel.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
-            // 
-            // fileDropdown
-            // 
-            this.fileDropdown.Index = 0;
-            this.fileDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.exportItem,
-            this.settingsItem
-            });
-            this.fileDropdown.Text = "File";
-            // 
-            // exportItem
-            // 
-            this.exportItem.Index = 0;
-            this.exportItem.Text = "Export";
-            this.exportItem.Click += new System.EventHandler(this.exportItem_Click);
 
         }
 
@@ -234,7 +249,6 @@ namespace Tinyinfo
 		private System.Windows.Forms.Button startButton;
 		private System.Windows.Forms.Label infoLabel;
 		private System.Windows.Forms.Button stopButton;
-		private System.Windows.Forms.Button pauseButton;
 		private System.Windows.Forms.ProgressBar progressBar;
 		private System.Windows.Forms.CheckBox onTopCheckbox;
 		private System.Windows.Forms.MainMenu menuBar;
@@ -247,6 +261,9 @@ namespace Tinyinfo
 		private System.Windows.Forms.MenuItem refreshItem;
         private System.Windows.Forms.MenuItem fileDropdown;
         private System.Windows.Forms.MenuItem exportItem;
+		private System.Windows.Forms.MenuItem menuItem2;
+		private System.Windows.Forms.MenuItem exitItem;
+        private System.Windows.Forms.MenuItem btnExportAsJSON;
     }
 }
 
