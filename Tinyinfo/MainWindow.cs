@@ -634,17 +634,23 @@ namespace Tinyinfo
 			{
 				using (SaveFileDialog saveFileDialog = new SaveFileDialog())
 				{
-					saveFileDialog.Filter = "Text Files (*.txt)|*.txt";
-
-					if (saveFileDialog.ShowDialog() != DialogResult.OK)
-					{
-						return;
-					}
-
-					string filePath = saveFileDialog.FileName;
+					string filePath = "";
 					switch (mode)
 					{
 						case 0:
+							//	Defines allowed file types
+							saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+							//	Sets default file name
+							saveFileDialog.FileName = "export.txt";
+
+							if (saveFileDialog.ShowDialog() != DialogResult.OK)
+							{
+								return;
+							}
+
+							//	Sets file path to users directory of choice
+							filePath = saveFileDialog.FileName;
+
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
 								string outputText = outputBox.Text;
@@ -654,7 +660,19 @@ namespace Tinyinfo
 							break;
 
 						case 1:
+							//	Defines allowed file types
+							saveFileDialog.Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*";
+							//	Sets default file name
+							saveFileDialog.FileName = "export.json";
+
+							if (saveFileDialog.ShowDialog() != DialogResult.OK)
+							{
+								return;
+							}
 							string json = GetHardwareInfoAsJSON();
+
+							//	Sets file path to users directory of choice
+							filePath = saveFileDialog.FileName;
 
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
