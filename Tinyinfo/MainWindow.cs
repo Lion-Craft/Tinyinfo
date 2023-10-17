@@ -236,14 +236,17 @@ namespace Tinyinfo
         }
 
         /// <summary>
-        /// Loads the battery data and appends it
+        /// Loads the battery data and appends it. Appends "Not Present" when no battery is found.
         /// </summary>
         private void LoadBatteryData()
         {
             string nl = Environment.NewLine;
 
             AppendTextSafe("Battery: " + nl);
-
+            if (hardwareInfo.BatteryList.Count == 0)
+            {
+                AppendTextSafe("\tNot Present" + nl);
+            }
             foreach (var battery in hardwareInfo.BatteryList)
             {
                 string statusInfo = $"\tStatus: {battery.BatteryStatus}{nl}";
@@ -271,6 +274,7 @@ namespace Tinyinfo
                     fullChargeCapacityInfo;
 
                 AppendTextSafe(result);
+                
             }
         }
 
