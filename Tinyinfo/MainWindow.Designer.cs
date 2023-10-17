@@ -39,6 +39,7 @@ namespace Tinyinfo
 			this.menuBar = new System.Windows.Forms.MainMenu(this.components);
 			this.fileDropdown = new System.Windows.Forms.MenuItem();
 			this.exportItem = new System.Windows.Forms.MenuItem();
+			this.btnExportAsJSON = new System.Windows.Forms.MenuItem();
 			this.settingsItem = new System.Windows.Forms.MenuItem();
 			this.menuItem2 = new System.Windows.Forms.MenuItem();
 			this.exitItem = new System.Windows.Forms.MenuItem();
@@ -140,6 +141,7 @@ namespace Tinyinfo
 			this.fileDropdown.Index = 0;
 			this.fileDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.exportItem,
+            this.btnExportAsJSON,
             this.settingsItem,
             this.menuItem2,
             this.exitItem});
@@ -148,29 +150,41 @@ namespace Tinyinfo
 			// exportItem
 			// 
 			this.exportItem.Index = 0;
-			this.exportItem.Text = "Export";
+			this.exportItem.Shortcut = System.Windows.Forms.Shortcut.CtrlT;
+			this.exportItem.Text = "Export as plain text";
 			this.exportItem.Click += new System.EventHandler(this.exportItem_Click);
+			// 
+			// btnExportAsJSON
+			// 
+			this.btnExportAsJSON.Index = 1;
+			this.btnExportAsJSON.RadioCheck = true;
+			this.btnExportAsJSON.Shortcut = System.Windows.Forms.Shortcut.CtrlE;
+			this.btnExportAsJSON.Text = "Export as JSON";
+			this.btnExportAsJSON.Click += new System.EventHandler(this.btnExportAsJSON_Click);
 			// 
 			// settingsItem
 			// 
-			this.settingsItem.Index = 1;
+			this.settingsItem.Index = 2;
+			this.settingsItem.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
 			this.settingsItem.Text = "Settings";
 			this.settingsItem.Click += new System.EventHandler(this.settingsItem_Click);
 			// 
 			// menuItem2
 			// 
-			this.menuItem2.Index = 2;
+			this.menuItem2.Index = 3;
 			this.menuItem2.Text = "-";
 			// 
 			// exitItem
 			// 
-			this.exitItem.Index = 3;
+			this.exitItem.Index = 4;
+			this.exitItem.Shortcut = System.Windows.Forms.Shortcut.AltF4;
 			this.exitItem.Text = "Exit";
 			this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
 			// 
 			// refreshItem
 			// 
 			this.refreshItem.Index = 1;
+			this.refreshItem.Shortcut = System.Windows.Forms.Shortcut.F5;
 			this.refreshItem.Text = "Refresh";
 			this.refreshItem.Click += new System.EventHandler(this.refreshItem_Click);
 			// 
@@ -185,12 +199,14 @@ namespace Tinyinfo
 			// aboutItem
 			// 
 			this.aboutItem.Index = 0;
+			this.aboutItem.Shortcut = System.Windows.Forms.Shortcut.F1;
 			this.aboutItem.Text = "About";
 			this.aboutItem.Click += new System.EventHandler(this.aboutItem_Click);
 			// 
 			// githubItem
 			// 
 			this.githubItem.Index = 1;
+			this.githubItem.Shortcut = System.Windows.Forms.Shortcut.ShiftF1;
 			this.githubItem.Text = "Github";
 			this.githubItem.Click += new System.EventHandler(this.githubItem_Click);
 			// 
@@ -220,7 +236,7 @@ namespace Tinyinfo
 			this.Name = "MainWindow";
 			this.Text = "Tinyinfo";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
-			this.Load += new System.EventHandler(this.startup);
+			this.Load += new System.EventHandler(this.Startup);
 			this.onTopBoxPanel.ResumeLayout(false);
 			this.onTopBoxPanel.PerformLayout();
 			this.ResumeLayout(false);
@@ -247,6 +263,7 @@ namespace Tinyinfo
         private System.Windows.Forms.MenuItem exportItem;
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem exitItem;
-	}
+        private System.Windows.Forms.MenuItem btnExportAsJSON;
+    }
 }
 
