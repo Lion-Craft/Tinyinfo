@@ -30,6 +30,43 @@ namespace Tinyinfo
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
+			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("ID:");
+			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Manufacturer:");
+			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Model:");
+			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Description:");
+			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Socket:");
+			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Core Amount:");
+			System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Virtualization: ");
+			System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Current Clockspeed:");
+			System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Base Clockspeed:");
+			System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("CPU", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9});
+			System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("GPU ID:");
+			System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Video", new System.Windows.Forms.TreeNode[] {
+            treeNode11});
+			System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node3");
+			System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("RAM", new System.Windows.Forms.TreeNode[] {
+            treeNode13});
+			System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Node7");
+			System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Motherboard", new System.Windows.Forms.TreeNode[] {
+            treeNode15});
+			System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Node9");
+			System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("BIOS", new System.Windows.Forms.TreeNode[] {
+            treeNode17});
+			System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Node11");
+			System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Battery", new System.Windows.Forms.TreeNode[] {
+            treeNode19});
+			System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Node13");
+			System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Drives", new System.Windows.Forms.TreeNode[] {
+            treeNode21});
 			this.startButton = new System.Windows.Forms.Button();
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
@@ -48,6 +85,7 @@ namespace Tinyinfo
 			this.aboutItem = new System.Windows.Forms.MenuItem();
 			this.githubItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel = new System.Windows.Forms.Panel();
+			this.outputTree = new System.Windows.Forms.TreeView();
 			this.onTopBoxPanel.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -55,7 +93,7 @@ namespace Tinyinfo
 			// 
 			this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.startButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.startButton.Location = new System.Drawing.Point(16, 278);
+			this.startButton.Location = new System.Drawing.Point(16, 319);
 			this.startButton.Name = "startButton";
 			this.startButton.Size = new System.Drawing.Size(115, 40);
 			this.startButton.TabIndex = 0;
@@ -78,7 +116,7 @@ namespace Tinyinfo
 			this.stopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.stopButton.Enabled = false;
 			this.stopButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.stopButton.Location = new System.Drawing.Point(526, 278);
+			this.stopButton.Location = new System.Drawing.Point(554, 319);
 			this.stopButton.Name = "stopButton";
 			this.stopButton.Size = new System.Drawing.Size(115, 40);
 			this.stopButton.TabIndex = 3;
@@ -91,9 +129,9 @@ namespace Tinyinfo
 			this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.progressBar.Location = new System.Drawing.Point(16, 262);
+			this.progressBar.Location = new System.Drawing.Point(16, 294);
 			this.progressBar.Name = "progressBar";
-			this.progressBar.Size = new System.Drawing.Size(624, 10);
+			this.progressBar.Size = new System.Drawing.Size(652, 19);
 			this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
 			this.progressBar.TabIndex = 5;
 			this.progressBar.Visible = false;
@@ -106,13 +144,14 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.outputBox.BackColor = System.Drawing.SystemColors.Window;
 			this.outputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.outputBox.Location = new System.Drawing.Point(16, 33);
+			this.outputBox.Location = new System.Drawing.Point(388, 96);
 			this.outputBox.Multiline = true;
 			this.outputBox.Name = "outputBox";
 			this.outputBox.ReadOnly = true;
 			this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.outputBox.Size = new System.Drawing.Size(625, 223);
+			this.outputBox.Size = new System.Drawing.Size(264, 147);
 			this.outputBox.TabIndex = 6;
+			this.outputBox.Visible = false;
 			this.outputBox.WordWrap = false;
 			// 
 			// onTopCheckbox
@@ -215,18 +254,83 @@ namespace Tinyinfo
 			this.onTopBoxPanel.AllowDrop = true;
 			this.onTopBoxPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.onTopBoxPanel.Controls.Add(this.onTopCheckbox);
-			this.onTopBoxPanel.Location = new System.Drawing.Point(380, 278);
+			this.onTopBoxPanel.Location = new System.Drawing.Point(408, 319);
 			this.onTopBoxPanel.Name = "onTopBoxPanel";
 			this.onTopBoxPanel.Size = new System.Drawing.Size(140, 40);
 			this.onTopBoxPanel.TabIndex = 8;
+			// 
+			// outputTree
+			// 
+			this.outputTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.outputTree.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.outputTree.HotTracking = true;
+			this.outputTree.Location = new System.Drawing.Point(16, 33);
+			this.outputTree.Name = "outputTree";
+			treeNode1.Name = "CpuIdNode";
+			treeNode1.Text = "ID:";
+			treeNode2.Name = "CpuManuNode";
+			treeNode2.Text = "Manufacturer:";
+			treeNode3.Name = "CpuModelNode";
+			treeNode3.Text = "Model:";
+			treeNode4.Name = "CpuDescNode";
+			treeNode4.Text = "Description:";
+			treeNode5.Name = "CpuSocketNode";
+			treeNode5.Text = "Socket:";
+			treeNode6.Name = "CpuCoresNode";
+			treeNode6.Text = "Core Amount:";
+			treeNode7.Name = "CpuVmxNode";
+			treeNode7.Text = "Virtualization: ";
+			treeNode8.Name = "CpuClockNode";
+			treeNode8.Text = "Current Clockspeed:";
+			treeNode9.Name = "CpuBaseNode";
+			treeNode9.Text = "Base Clockspeed:";
+			treeNode10.Name = "CpuNode";
+			treeNode10.Text = "CPU";
+			treeNode11.Name = "GpuIdNode";
+			treeNode11.Text = "GPU ID:";
+			treeNode12.Name = "VideoNode";
+			treeNode12.Text = "Video";
+			treeNode13.Name = "Node3";
+			treeNode13.Text = "Node3";
+			treeNode14.Name = "MemoryNode";
+			treeNode14.Text = "RAM";
+			treeNode15.Name = "Node7";
+			treeNode15.Text = "Node7";
+			treeNode16.Name = "MotherboardNode";
+			treeNode16.Text = "Motherboard";
+			treeNode17.Name = "Node9";
+			treeNode17.Text = "Node9";
+			treeNode18.Name = "BiosNode";
+			treeNode18.Text = "BIOS";
+			treeNode19.Name = "Node11";
+			treeNode19.Text = "Node11";
+			treeNode20.Name = "BatteryNode";
+			treeNode20.Text = "Battery";
+			treeNode21.Name = "Node13";
+			treeNode21.Text = "Node13";
+			treeNode22.Name = "DriveNode";
+			treeNode22.Text = "Drives";
+			this.outputTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode10,
+            treeNode12,
+            treeNode14,
+            treeNode16,
+            treeNode18,
+            treeNode20,
+            treeNode22});
+			this.outputTree.Size = new System.Drawing.Size(651, 255);
+			this.outputTree.TabIndex = 9;
 			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.ClientSize = new System.Drawing.Size(653, 330);
-			this.Controls.Add(this.onTopBoxPanel);
+			this.ClientSize = new System.Drawing.Size(681, 371);
 			this.Controls.Add(this.outputBox);
+			this.Controls.Add(this.outputTree);
+			this.Controls.Add(this.onTopBoxPanel);
 			this.Controls.Add(this.progressBar);
 			this.Controls.Add(this.stopButton);
 			this.Controls.Add(this.infoLabel);
@@ -264,6 +368,7 @@ namespace Tinyinfo
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem exitItem;
         private System.Windows.Forms.MenuItem btnExportAsJSON;
-    }
+		private System.Windows.Forms.TreeView outputTree;
+	}
 }
 
