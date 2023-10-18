@@ -13,6 +13,9 @@ Tinyinfo currently gives you information about the following components:
 - BIOS
 - Battery
 - Network adapters
+## What is the installation procedure for Tinyinfo?
+It's as simple as downloading the latest version, unzipping the archive and run Tinyinfo.exe.
+It is fully portable and does not require being run as Administrator.
 ## What does Tinyinfo need to run?
 Tinyinfo is relatively easy to run. It requires the following:
 - Microsoft Windows (64 Bit recommended)
