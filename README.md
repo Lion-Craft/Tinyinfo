@@ -16,6 +16,9 @@ Tinyinfo currently gives you information about the following components:
 ## What is the installation procedure for Tinyinfo?
 It's as simple as downloading the latest version, unzipping the archive and run Tinyinfo.exe.
 It is fully portable and does not require being run as Administrator.
+## Help I'm getting a Windows Defender SmartScreen warning when trying to run the Program
+Windows by default marks all downloaded executables with "not enough reputation" as dangerous. 
+You can either click on "More info" and then "Run anyway" in the SmartScreen warning or right click the ZIP before extracting, select "Properties", check the "Unblock" checkbox and then press "Ok".
 ## What does Tinyinfo need to run?
 Tinyinfo is relatively easy to run. It requires the following:
 - Microsoft Windows (64 Bit recommended)
