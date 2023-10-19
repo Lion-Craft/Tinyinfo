@@ -30,43 +30,6 @@ namespace Tinyinfo
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("ID:");
-			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Manufacturer:");
-			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Model:");
-			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Description:");
-			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Socket:");
-			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Core Amount:");
-			System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Virtualization: ");
-			System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Current Clockspeed:");
-			System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Base Clockspeed:");
-			System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("CPU", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9});
-			System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("GPU ID:");
-			System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Video", new System.Windows.Forms.TreeNode[] {
-            treeNode11});
-			System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node3");
-			System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("RAM", new System.Windows.Forms.TreeNode[] {
-            treeNode13});
-			System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Node7");
-			System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Motherboard", new System.Windows.Forms.TreeNode[] {
-            treeNode15});
-			System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Node9");
-			System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("BIOS", new System.Windows.Forms.TreeNode[] {
-            treeNode17});
-			System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Node11");
-			System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Battery", new System.Windows.Forms.TreeNode[] {
-            treeNode19});
-			System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Node13");
-			System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Drives", new System.Windows.Forms.TreeNode[] {
-            treeNode21});
 			this.startButton = new System.Windows.Forms.Button();
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
@@ -85,8 +48,15 @@ namespace Tinyinfo
 			this.aboutItem = new System.Windows.Forms.MenuItem();
 			this.githubItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel = new System.Windows.Forms.Panel();
-			this.outputTree = new System.Windows.Forms.TreeView();
+			this.outputTabs = new System.Windows.Forms.TabControl();
+			this.cpuTab = new System.Windows.Forms.TabPage();
+			this.ramTab = new System.Windows.Forms.TabPage();
+			this.gpuTab = new System.Windows.Forms.TabPage();
+			this.cpuModelLabel = new System.Windows.Forms.Label();
+			this.cpuManuLabel = new System.Windows.Forms.Label();
 			this.onTopBoxPanel.SuspendLayout();
+			this.outputTabs.SuspendLayout();
+			this.cpuTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -259,69 +229,75 @@ namespace Tinyinfo
 			this.onTopBoxPanel.Size = new System.Drawing.Size(140, 40);
 			this.onTopBoxPanel.TabIndex = 8;
 			// 
-			// outputTree
+			// outputTabs
 			// 
-			this.outputTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.outputTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.outputTree.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.outputTree.HotTracking = true;
-			this.outputTree.Location = new System.Drawing.Point(16, 33);
-			this.outputTree.Name = "outputTree";
-			treeNode1.Name = "CpuIdNode";
-			treeNode1.Text = "ID:";
-			treeNode2.Name = "CpuManuNode";
-			treeNode2.Text = "Manufacturer:";
-			treeNode3.Name = "CpuModelNode";
-			treeNode3.Text = "Model:";
-			treeNode4.Name = "CpuDescNode";
-			treeNode4.Text = "Description:";
-			treeNode5.Name = "CpuSocketNode";
-			treeNode5.Text = "Socket:";
-			treeNode6.Name = "CpuCoresNode";
-			treeNode6.Text = "Core Amount:";
-			treeNode7.Name = "CpuVmxNode";
-			treeNode7.Text = "Virtualization: ";
-			treeNode8.Name = "CpuClockNode";
-			treeNode8.Text = "Current Clockspeed:";
-			treeNode9.Name = "CpuBaseNode";
-			treeNode9.Text = "Base Clockspeed:";
-			treeNode10.Name = "CpuNode";
-			treeNode10.Text = "CPU";
-			treeNode11.Name = "GpuIdNode";
-			treeNode11.Text = "GPU ID:";
-			treeNode12.Name = "VideoNode";
-			treeNode12.Text = "Video";
-			treeNode13.Name = "Node3";
-			treeNode13.Text = "Node3";
-			treeNode14.Name = "MemoryNode";
-			treeNode14.Text = "RAM";
-			treeNode15.Name = "Node7";
-			treeNode15.Text = "Node7";
-			treeNode16.Name = "MotherboardNode";
-			treeNode16.Text = "Motherboard";
-			treeNode17.Name = "Node9";
-			treeNode17.Text = "Node9";
-			treeNode18.Name = "BiosNode";
-			treeNode18.Text = "BIOS";
-			treeNode19.Name = "Node11";
-			treeNode19.Text = "Node11";
-			treeNode20.Name = "BatteryNode";
-			treeNode20.Text = "Battery";
-			treeNode21.Name = "Node13";
-			treeNode21.Text = "Node13";
-			treeNode22.Name = "DriveNode";
-			treeNode22.Text = "Drives";
-			this.outputTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode12,
-            treeNode14,
-            treeNode16,
-            treeNode18,
-            treeNode20,
-            treeNode22});
-			this.outputTree.Size = new System.Drawing.Size(651, 255);
-			this.outputTree.TabIndex = 9;
+			this.outputTabs.Controls.Add(this.cpuTab);
+			this.outputTabs.Controls.Add(this.ramTab);
+			this.outputTabs.Controls.Add(this.gpuTab);
+			this.outputTabs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.outputTabs.Location = new System.Drawing.Point(16, 33);
+			this.outputTabs.Name = "outputTabs";
+			this.outputTabs.SelectedIndex = 0;
+			this.outputTabs.Size = new System.Drawing.Size(652, 255);
+			this.outputTabs.TabIndex = 10;
+			// 
+			// cpuTab
+			// 
+			this.cpuTab.AutoScroll = true;
+			this.cpuTab.Controls.Add(this.cpuManuLabel);
+			this.cpuTab.Controls.Add(this.cpuModelLabel);
+			this.cpuTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cpuTab.Location = new System.Drawing.Point(4, 26);
+			this.cpuTab.Name = "cpuTab";
+			this.cpuTab.Padding = new System.Windows.Forms.Padding(3);
+			this.cpuTab.Size = new System.Drawing.Size(644, 225);
+			this.cpuTab.TabIndex = 0;
+			this.cpuTab.Text = "CPU";
+			this.cpuTab.ToolTipText = "Displays Information about the Computer\'s CPU";
+			this.cpuTab.UseVisualStyleBackColor = true;
+			// 
+			// ramTab
+			// 
+			this.ramTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ramTab.Location = new System.Drawing.Point(4, 22);
+			this.ramTab.Name = "ramTab";
+			this.ramTab.Padding = new System.Windows.Forms.Padding(3);
+			this.ramTab.Size = new System.Drawing.Size(644, 229);
+			this.ramTab.TabIndex = 1;
+			this.ramTab.Text = "RAM";
+			this.ramTab.ToolTipText = "Displays information about the Computer\'s Memory";
+			this.ramTab.UseVisualStyleBackColor = true;
+			// 
+			// gpuTab
+			// 
+			this.gpuTab.Location = new System.Drawing.Point(4, 22);
+			this.gpuTab.Name = "gpuTab";
+			this.gpuTab.Size = new System.Drawing.Size(644, 229);
+			this.gpuTab.TabIndex = 2;
+			this.gpuTab.Text = "GPU";
+			this.gpuTab.ToolTipText = "Displays information about the Computer\'s GPUs";
+			this.gpuTab.UseVisualStyleBackColor = true;
+			// 
+			// cpuModelLabel
+			// 
+			this.cpuModelLabel.AutoSize = true;
+			this.cpuModelLabel.Location = new System.Drawing.Point(6, 3);
+			this.cpuModelLabel.Name = "cpuModelLabel";
+			this.cpuModelLabel.Size = new System.Drawing.Size(74, 17);
+			this.cpuModelLabel.TabIndex = 0;
+			this.cpuModelLabel.Text = "CPU Model";
+			// 
+			// cpuManuLabel
+			// 
+			this.cpuManuLabel.AutoSize = true;
+			this.cpuManuLabel.Location = new System.Drawing.Point(6, 37);
+			this.cpuManuLabel.Name = "cpuManuLabel";
+			this.cpuManuLabel.Size = new System.Drawing.Size(114, 17);
+			this.cpuManuLabel.TabIndex = 1;
+			this.cpuManuLabel.Text = "CPU Manufacturer";
 			// 
 			// MainWindow
 			// 
@@ -329,7 +305,7 @@ namespace Tinyinfo
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.ClientSize = new System.Drawing.Size(681, 371);
 			this.Controls.Add(this.outputBox);
-			this.Controls.Add(this.outputTree);
+			this.Controls.Add(this.outputTabs);
 			this.Controls.Add(this.onTopBoxPanel);
 			this.Controls.Add(this.progressBar);
 			this.Controls.Add(this.stopButton);
@@ -343,6 +319,9 @@ namespace Tinyinfo
 			this.Load += new System.EventHandler(this.Startup);
 			this.onTopBoxPanel.ResumeLayout(false);
 			this.onTopBoxPanel.PerformLayout();
+			this.outputTabs.ResumeLayout(false);
+			this.cpuTab.ResumeLayout(false);
+			this.cpuTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -368,7 +347,12 @@ namespace Tinyinfo
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem exitItem;
         private System.Windows.Forms.MenuItem btnExportAsJSON;
-		private System.Windows.Forms.TreeView outputTree;
+		private System.Windows.Forms.TabControl outputTabs;
+		private System.Windows.Forms.TabPage cpuTab;
+		private System.Windows.Forms.TabPage ramTab;
+		private System.Windows.Forms.TabPage gpuTab;
+		private System.Windows.Forms.Label cpuModelLabel;
+		private System.Windows.Forms.Label cpuManuLabel;
 	}
 }
 

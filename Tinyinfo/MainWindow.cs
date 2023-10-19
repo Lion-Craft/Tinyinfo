@@ -596,6 +596,7 @@ namespace Tinyinfo
 			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
 
 			outputBox.Font = font;
+			outputTabs.Font = font;
 		}
 
 		/// <summary>
