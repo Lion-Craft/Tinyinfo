@@ -16,7 +16,11 @@ namespace Tinyinfo
 {
 	public partial class MainWindow : Form
 	{
+		//	Create Threads
 		private Thread thread;
+		private Thread cpuThread;
+		private Thread batteryThread;
+		private Thread netThread;
 
 		private static readonly IHardwareInfo hardwareInfo = new HardwareInfo();
 
@@ -43,8 +47,11 @@ namespace Tinyinfo
 			//	Show Splash
 			splash.Show();
 
-			//	Create Thread on start
+			//	Create Threads on start
 			thread = new Thread(() => Getdata(true));
+			cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
+			batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
+			netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
 
 			//	Get info on load
 			Getdata(false);
@@ -58,20 +65,47 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshMinimumHardwareInfo()
 		{
-			//	Create Thread for CPU info
-			Thread cpuThread = new Thread(() => { hardwareInfo.RefreshCPUList(); });
-			cpuThread.IsBackground = true;
-			cpuThread.Start();
+			//	Check if Thread is alive
+			if (cpuThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				cpuThread.Join();
+			}
+			else
+			{
+				//	Start Thread for CPU info
+				cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
+				cpuThread.IsBackground = true;
+				cpuThread.Start();
+			}
 
-			//	Create Thread for Battery info
-			Thread batteryThread = new Thread(() => { hardwareInfo.RefreshBatteryList(); });
-			batteryThread.IsBackground = true;
-			batteryThread.Start();
+			//	Check if Thread is alive
+			if (batteryThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				batteryThread.Join();
+			}
+			else
+			{
+				//	Start Thread for Battery info
+				batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
+				batteryThread.IsBackground = true;
+				batteryThread.Start();
+			}
 
-			//	Create Thread for Network info
-			Thread netThread = new Thread(() => { hardwareInfo.RefreshNetworkAdapterList(); });
-			netThread.IsBackground = true;
-			netThread.Start();
+			//	Check if Thread is alive
+			if (netThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				netThread.Join();
+			}
+			else
+			{
+				//	Start Thread for Network info
+				netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
+				netThread.IsBackground = false;
+				netThread.Start();
+			}
 		}
 
 		/// <summary>
@@ -534,6 +568,7 @@ namespace Tinyinfo
 			startButton.Enabled = false;
 			infoLabel.Text = "Loading System Info.";
 			progressBar.Value = 25;
+			thread = new Thread(() => Getdata(true));
 			stopButton.Enabled = true;
 			progressBar.Value = 50;
 			infoLabel.Text = "Loading System Info...";
