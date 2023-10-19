@@ -58,11 +58,17 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshMinimumHardwareInfo()
 		{
-			hardwareInfo.RefreshCPUList(true);
+			Thread cpuThread = new Thread(() => { hardwareInfo.RefreshCPUList(); });
+			cpuThread.IsBackground = true;
+			cpuThread.Start();
 
-			hardwareInfo.RefreshBatteryList();
+			Thread batteryThread = new Thread(() => { hardwareInfo.RefreshBatteryList(); });
+			batteryThread.IsBackground = true;
+			batteryThread.Start();
 
-			hardwareInfo.RefreshNetworkAdapterList();
+			Thread netThread = new Thread(() => { hardwareInfo.RefreshNetworkAdapterList(); });
+			netThread.IsBackground = true;
+			netThread.Start();
 		}
 
 		/// <summary>
