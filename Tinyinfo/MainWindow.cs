@@ -2,7 +2,7 @@ using Hardware.Info;
 using IniParser;
 using IniParser.Model;
 using Newtonsoft.Json;
-using NvAPIWrapper;
+using NvAPIWrapper.GPU;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -227,6 +227,7 @@ namespace Tinyinfo
 		{
 			int id = 0;
 
+			string[] manufacturer = {"3dfx", "ati"};
 			string nl = Environment.NewLine;
 			//	Example usage
 			/*
@@ -248,6 +249,7 @@ namespace Tinyinfo
 				string nameInfo = $"\t\tName: {gpu.Name}{nl}";
 
 				string manufacturerInfo = $"\t\tManufacturer: {gpu.Manufacturer}{nl}";
+				manufacturer[id] = gpu.Manufacturer;
 
 				string descriptionInfo = $"\t\tDescription: {gpu.VideoProcessor}{nl}";
 
@@ -272,6 +274,49 @@ namespace Tinyinfo
 
 				id++;
 				ShowInfo("");
+			}
+
+			//	Check what manufacturer the gpu is, if nvidia show nvapi info
+			if (manufacturer[0].ToLower() == "nvidia" || manufacturer[1].ToLower() == "nvidia")
+			{
+				int nvid = 0;
+				foreach (var nvgpu in PhysicalGPU.GetPhysicalGPUs())
+				{
+					string gpuid = $"GPU {nvid}:{nl}";
+
+					string gpu = $"\tGraphics Card: {nvgpu.FullName}{nl}";
+					string chip = $"\tChip: {nvgpu.ArchitectInformation.ShortName}{nl}";
+					string cores = $"\tCores: {nvgpu.ArchitectInformation.NumberOfCores}{nl}";
+					string rops = $"\tROPs: {nvgpu.ArchitectInformation.NumberOfROPs}{nl}";
+					string shaders = $"\tShader Pipelines: {nvgpu.ArchitectInformation.NumberOfShaderPipelines}{nl}";
+					string graphicsBase = $"\tGraphics Base Clock: {nvgpu.BaseClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
+					string graphicsBoost = $"\tGraphics Boost Clock: {nvgpu.BoostClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
+					string memoryBase = $"\tMemory Base Clock: {nvgpu.BaseClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
+					string memoryBoost = $"\tMemory Boost Clock: {nvgpu.BoostClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
+					//string tpcs = $"\tTPCs: {nvgpu.ArchitectInformation.TotalNumberOfTPCs}{nl}";	//	Kinda buggy
+					string memoryBus = $"\tMemory Bus: {nvgpu.MemoryInformation.FrameBufferBandwidth} Bit{nl}";
+					string memorySize = $"\tPhysicalMemory Size: {nvgpu.MemoryInformation.PhysicalFrameBufferSizeInkB / 1000}MB{nl}";
+					string memoryType = $"\tMemory Type: {nvgpu.MemoryInformation.RAMType}{nl}";
+					string memoryManufacturer = $"\tMemory Manufacturer: {nvgpu.MemoryInformation.RAMMaker}{nl}";
+					string memoryEcc = $"\tECC Supported: {nvgpu.ECCMemoryInformation.IsSupported}{nl}";
+					string memoryEccOn = $"\t\tEnabled: {nvgpu.ECCMemoryInformation.IsEnabled}{nl}";
+					string bios = $"\tBIOS Version: {nvgpu.Bios.VersionString}{nl}";
+					string bus = $"\tBUS Type: {nvgpu.BusInformation.BusType}{nl}";
+					string pcie = $"\t\tPCIe Lanes: {nvgpu.BusInformation.CurrentPCIeLanes}{nl}";
+					string agp = $"\t\tAGP: {nvgpu.BusInformation.AGPInformation}{nl}";
+					string fan = $"\tFan Speed: {nvgpu.CoolerInformation}{nl}";
+					string currentGraphicsClock = $"\tGraphics Clockspeed: {nvgpu.CurrentClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
+					string currentMemoryClock = $"\tMemory Clockspeed: {nvgpu.CurrentClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
+					string currentVideoClock = $"\tVideo Decode Clockspeed (If available): {nvgpu.CurrentClockFrequencies.VideoDecodingClock.Frequency / 1000}MHz{nl}";
+					
+
+					nvapiOutputBox.Text += gpuid + gpu + chip + cores + rops + shaders + graphicsBase + graphicsBoost + memoryBase + memoryBoost+ memoryBus + memorySize + memoryType + memoryManufacturer + memoryEcc + memoryEccOn + bios + bus + pcie + agp + fan + currentGraphicsClock + currentMemoryClock + currentVideoClock;
+					nvid++;
+				}
+			}
+			else
+			{
+				nvapiOutputBox.Text = "Non NVIDIA Graphics detected. Unable to Display NvAPI information.";
 			}
 		}
 
