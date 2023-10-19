@@ -35,12 +35,15 @@
 			this.themeLabel = new System.Windows.Forms.Label();
 			this.applyButton = new System.Windows.Forms.Button();
 			this.cancelButton = new System.Windows.Forms.Button();
+			this.refreshRateUpDown = new System.Windows.Forms.NumericUpDown();
+			this.refreshRateLabel = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.fontSizeUpDown)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.refreshRateUpDown)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// fontSizeUpDown
 			// 
-			this.fontSizeUpDown.Cursor = System.Windows.Forms.Cursors.No;
+			this.fontSizeUpDown.Cursor = System.Windows.Forms.Cursors.Default;
 			this.fontSizeUpDown.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.fontSizeUpDown.Location = new System.Drawing.Point(68, 12);
 			this.fontSizeUpDown.Maximum = new decimal(new int[] {
@@ -130,6 +133,42 @@
 			this.cancelButton.Text = "Cancel";
 			this.cancelButton.UseVisualStyleBackColor = true;
 			// 
+			// refreshRateUpDown
+			// 
+			this.refreshRateUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.refreshRateUpDown.Cursor = System.Windows.Forms.Cursors.Default;
+			this.refreshRateUpDown.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.refreshRateUpDown.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+			this.refreshRateUpDown.Location = new System.Drawing.Point(246, 14);
+			this.refreshRateUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+			this.refreshRateUpDown.Name = "refreshRateUpDown";
+			this.refreshRateUpDown.Size = new System.Drawing.Size(43, 22);
+			this.refreshRateUpDown.TabIndex = 7;
+			this.refreshRateUpDown.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+			// 
+			// refreshRateLabel
+			// 
+			this.refreshRateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.refreshRateLabel.AutoSize = true;
+			this.refreshRateLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.refreshRateLabel.Location = new System.Drawing.Point(144, 16);
+			this.refreshRateLabel.Name = "refreshRateLabel";
+			this.refreshRateLabel.Size = new System.Drawing.Size(96, 13);
+			this.refreshRateLabel.TabIndex = 8;
+			this.refreshRateLabel.Text = "Max Refresh Rate";
+			// 
 			// SettingsWindow
 			// 
 			this.AcceptButton = this.applyButton;
@@ -138,6 +177,8 @@
 			this.BackColor = System.Drawing.Color.White;
 			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(301, 178);
+			this.Controls.Add(this.refreshRateLabel);
+			this.Controls.Add(this.refreshRateUpDown);
 			this.Controls.Add(this.cancelButton);
 			this.Controls.Add(this.applyButton);
 			this.Controls.Add(this.themeLabel);
@@ -145,13 +186,14 @@
 			this.Controls.Add(this.lightThemeRadioButton);
 			this.Controls.Add(this.fontSizeLabel);
 			this.Controls.Add(this.fontSizeUpDown);
-			this.MinimumSize = new System.Drawing.Size(250, 200);
+			this.MinimumSize = new System.Drawing.Size(285, 200);
 			this.Name = "SettingsWindow";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Tinyinfo Settings";
 			((System.ComponentModel.ISupportInitialize)(this.fontSizeUpDown)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.refreshRateUpDown)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -166,5 +208,7 @@
 		private System.Windows.Forms.Label themeLabel;
 		private System.Windows.Forms.Button applyButton;
 		private System.Windows.Forms.Button cancelButton;
+		private System.Windows.Forms.NumericUpDown refreshRateUpDown;
+		private System.Windows.Forms.Label refreshRateLabel;
 	}
 }

@@ -16,7 +16,11 @@ namespace Tinyinfo
 {
 	public partial class MainWindow : Form
 	{
+		//	Create Threads
 		private Thread thread;
+		private Thread cpuThread;
+		private Thread batteryThread;
+		private Thread netThread;
 
 		private static readonly IHardwareInfo hardwareInfo = new HardwareInfo();
 
@@ -26,7 +30,7 @@ namespace Tinyinfo
 		{
 			InitializeComponent();
 
-			
+			//	Load saved Theme settings
 			LoadTheme();
 		}
 
@@ -43,8 +47,11 @@ namespace Tinyinfo
 			//	Show Splash
 			splash.Show();
 
-			//	Create Thread on start
+			//	Create Threads on start
 			thread = new Thread(() => Getdata(true));
+			cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
+			batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
+			netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
 
 			//	Get info on load
 			Getdata(false);
@@ -58,11 +65,47 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshMinimumHardwareInfo()
 		{
-			hardwareInfo.RefreshCPUList(true);
+			//	Check if Thread is alive
+			if (cpuThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				cpuThread.Join();
+			}
+			else
+			{
+				//	Start Thread for CPU info
+				cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
+				cpuThread.IsBackground = true;
+				cpuThread.Start();
+			}
 
-			hardwareInfo.RefreshBatteryList();
+			//	Check if Thread is alive
+			if (batteryThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				batteryThread.Join();
+			}
+			else
+			{
+				//	Start Thread for Battery info
+				batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
+				batteryThread.IsBackground = true;
+				batteryThread.Start();
+			}
 
-			hardwareInfo.RefreshNetworkAdapterList();
+			//	Check if Thread is alive
+			if (netThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				netThread.Join();
+			}
+			else
+			{
+				//	Start Thread for Network info
+				netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
+				netThread.IsBackground = false;
+				netThread.Start();
+			}
 		}
 
 		/// <summary>
@@ -70,22 +113,12 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshAllHardwareInfo()
 		{
-			hardwareInfo.RefreshCPUList(true);
-
-			hardwareInfo.RefreshMemoryList();
-
-			hardwareInfo.RefreshBIOSList();
-
-			hardwareInfo.RefreshMotherboardList();
-
-			hardwareInfo.RefreshVideoControllerList();
-
-			hardwareInfo.RefreshBatteryList();
-
-			hardwareInfo.RefreshDriveList();
-
-			hardwareInfo.RefreshNetworkAdapterList();
+			//	Update info
+			hardwareInfo.RefreshAll();
 		}
+
+		//	Set maximum theoretical Refresh rate in ms
+		private int maxRefresh = 500;
 
 		/// <summary>
 		/// Collect system info and write to textBox1
@@ -102,28 +135,14 @@ namespace Tinyinfo
 					//	CPU Info
 					LoadCPUData();
 
-					//	Graphics
-					LoadVideoControllerData();
-
-					//	Memory
-					LoadMemoryData();
-
-					//	Motherboard
-					LoadMotherBoardData();
-
-					//	BIOS Info
-					LoadBIOSData();
-
 					//	Battery Info
 					LoadBatteryData();
-
-					//	Drive Info
-					LoadDrivesData();
 
 					//	Network Adapter Info
 					LoadNetworkAdaptersData();
 
-					ShowInfo("");
+					//	TODO: Make better (This is just bad if were honest)
+					Thread.Sleep(maxRefresh);
 				} while (loop);
 			}
 			else
@@ -196,6 +215,8 @@ namespace Tinyinfo
 					coresThreadsInfo + vmFirmwareInfo + clockspeedsInfo + currentClockspeedInfo + baseClockspeedInfo;
 
 				AppendTextSafe(result);
+
+				ShowInfo("");
 			}
 		}
 
@@ -216,7 +237,7 @@ namespace Tinyinfo
 			}
 			*/
 
-			AppendTextSafe("Video: " + nl);
+			WriteTextSafe("Video: " + nl, "gpuOutputBox");
 
 			foreach (var gpu in hardwareInfo.VideoControllerList)
 			{
@@ -247,9 +268,10 @@ namespace Tinyinfo
 				string result = gpuIdInfo + nameInfo + manufacturerInfo + descriptionInfo + videoModeInfo + vramAmountInfo +
 					maxRefreshRateInfo + minRefreshRateInfo + driverInfo + driverVersionInfo + driverDateInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "gpuOutputBox");
 
 				id++;
+				ShowInfo("");
 			}
 		}
 
@@ -260,7 +282,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Motherboard: " + nl);
+			WriteTextSafe("Motherboard: " + nl, "boardOutputBox");
 
 			foreach (var motherboard in hardwareInfo.MotherboardList)
 			{
@@ -272,7 +294,8 @@ namespace Tinyinfo
 
 				string result = manufacturerInfo + modelInfo + serialNumberInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "boardOutputBox");
+				ShowInfo("");
 			}
 		}
 
@@ -283,7 +306,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("BIOS: " + nl);
+			WriteTextSafe("BIOS: " + nl, "biosOutputBox");
 
 			foreach (var bios in hardwareInfo.BiosList)
 			{
@@ -297,7 +320,8 @@ namespace Tinyinfo
 
 				string result = manufacturerInfo + nameInfo + versionInfo + releaseDateInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "biosOutputBox");
+				ShowInfo("");
 			}
 		}
 
@@ -308,7 +332,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Battery: " + nl);
+			WriteTextSafe("Battery: " + nl, "battOutputBox");
 			if (hardwareInfo.BatteryList.Count == 0)
 			{
 				AppendTextSafe("\tNot Present" + nl);
@@ -339,8 +363,9 @@ namespace Tinyinfo
 					expectedLifeInfo + timeToChargeInfo + timeOnBatteryInfo + capacitiesInfo + designCapacityInfo +
 					fullChargeCapacityInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "battOutputBox");
 				
+				ShowInfo("");
 			}
 		}
 
@@ -351,7 +376,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Drives: " + nl);
+			WriteTextSafe("Drives: " + nl, "diskOutputBox");
 
 			foreach (var drive in hardwareInfo.DriveList)
 			{
@@ -375,7 +400,9 @@ namespace Tinyinfo
 
 				string result = driveInfo + nameInfo + sizeInfo + manufacturerInfo + modelInfo + firmwareInfo + serialNumberInfo + partitionsInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "diskOutputBox");
+				
+				ShowInfo("");
 			}
 		}
 
@@ -388,7 +415,7 @@ namespace Tinyinfo
 
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Network Adapter: " + nl);
+			WriteTextSafe("Network Adapter: " + nl, "netOutputBox");
 
 			foreach (var netAdapt in hardwareInfo.NetworkAdapterList)
 			{
@@ -410,9 +437,11 @@ namespace Tinyinfo
 
 				string result = netAdaptInfo + nameInfo + productNameInfo + typeInfo + manufacturerInfo + macAddressInfo + bytesSentInfo + bytesReceivedInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "netOutputBox");
 
 				netAdaptId++;
+
+				ShowInfo("");
 			}
 		}
 
@@ -423,7 +452,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Memory:" + nl);
+			WriteTextSafe("Memory:" + nl, "ramOutputBox");
 
 			foreach (var memory in hardwareInfo.MemoryList)
 			{
@@ -447,7 +476,9 @@ namespace Tinyinfo
 
 				string result = bankInfo + manufacturerInfo + sizeInfo + speedInfo + partNumberInfo + formFactorInfo + minVoltageInfo + maxVoltageInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "ramOutputBox");
+				
+				ShowInfo("");
 			}
 		}
 
@@ -457,35 +488,74 @@ namespace Tinyinfo
 		/// <param name="text"></param>
 		private void ShowInfo(string text)
 		{
-			if (outputBox.InvokeRequired)
+			//	TODO: Think of better names
+			
+			//	Create textbox variable to invoke
+			TextBox textBox = cpuOutputBox;
+
+			//	change textbox variable to correct textbox
+			switch (outputBox)
+			{
+				default:
+					break;
+				case "cpuOutputBox":
+					textBox = cpuOutputBox;
+					break;
+				case "ramOutputBox":
+					textBox = ramOutputBox;
+					break;
+				case "gpuOutputBox":
+					textBox = gpuOutputBox;
+					break;
+				case "boardOutputBox":
+					textBox = boardOutputBox;
+					break;
+				case "biosOutputBox":
+					textBox = biosOutputBox;
+					break;
+				case "battOutputBox":
+					textBox = battOutputBox;
+					break;
+				case "diskOutputBox":
+					textBox = diskOutputBox;
+					break;
+				case "netOutputBox":
+					textBox = netOutputBox;
+					break;
+			}
+			if (textBox.InvokeRequired)
 			{
 				var d = new SafeCallDelegate(ShowInfo);
-				outputBox.Invoke(d, new object[] { InfoTextBuffer });
+				textBox.Invoke(d, new object[] { InfoTextBuffer });
 			}
 			else
 			{
-				outputBox.Text = InfoTextBuffer;
+				textBox.Text = InfoTextBuffer;
 			}
 		}
 
 		// Creating String To Push it later on textbox
 		private string InfoTextBuffer = "";
 
-		private void WriteTextSafe(string text)
+		private string outputBox = "";
+
+		private void WriteTextSafe(string text, string output = "cpuTextBox")
 		{
 			// NOTE (HOUDAIFA) : Faster Way
 
 			InfoTextBuffer = text;
+			outputBox = output;
 		}
 
 		/// <summary>
 		/// Appand Text To Text Buffer
 		/// </summary>
-		private void AppendTextSafe(string text)
+		private void AppendTextSafe(string text, string output = "cpuTextBox")
 		{
 			// NOTE (HOUDAIFA) : Faster Way
 
 			InfoTextBuffer += text;
+			outputBox = output;
 		}
 
 		/// <summary>
@@ -498,11 +568,9 @@ namespace Tinyinfo
 			startButton.Enabled = false;
 			infoLabel.Text = "Loading System Info.";
 			progressBar.Value = 25;
-			hardwareInfo.RefreshCPUList();
+			thread = new Thread(() => Getdata(true));
 			stopButton.Enabled = true;
-			infoLabel.Text = "Loading System Info..";
 			progressBar.Value = 50;
-			hardwareInfo.RefreshOperatingSystem();
 			infoLabel.Text = "Loading System Info...";
 			progressBar.Value = 75;
 			progressBar.Value = 85;
@@ -563,7 +631,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (!File.Exists("./tinyinfo.ini"))
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10\nrefresh=500");
 			}
 
 			//	Create ini parser and read ini file
@@ -583,8 +651,22 @@ namespace Tinyinfo
 				onTopCheckbox.BackColor = Color.Gray;
 				onTopBoxPanel.BackColor = Color.FromName("ButtonFace");
 				onTopBoxPanel.ForeColor = Color.White;
-				outputBox.BackColor = Color.Black;
-				outputBox.ForeColor = Color.White;
+				cpuOutputBox.BackColor = Color.Black;
+				cpuOutputBox.ForeColor = Color.White;
+				ramOutputBox.BackColor = Color.Black;
+				ramOutputBox.ForeColor = Color.White; 
+				gpuOutputBox.BackColor = Color.Black;
+				gpuOutputBox.ForeColor = Color.White; 
+				boardOutputBox.BackColor = Color.Black;
+				boardOutputBox.ForeColor = Color.White; 
+				biosOutputBox.BackColor = Color.Black;
+				biosOutputBox.ForeColor = Color.White; 
+				battOutputBox.BackColor = Color.Black;
+				battOutputBox.ForeColor = Color.White; 
+				diskOutputBox.BackColor = Color.Black;
+				diskOutputBox.ForeColor = Color.White; 
+				netOutputBox.BackColor = Color.Black;
+				netOutputBox.ForeColor = Color.White;
 			}
 			else
 			{
@@ -597,14 +679,33 @@ namespace Tinyinfo
 				onTopCheckbox.BackColor = Color.White;
 				onTopBoxPanel.BackColor = Color.White;
 				onTopBoxPanel.ForeColor = Color.Black;
-				outputBox.BackColor = Color.White;
-				outputBox.ForeColor = Color.Black;
+				cpuOutputBox.BackColor = Color.White;
+				cpuOutputBox.ForeColor = Color.Black;
+				ramOutputBox.BackColor = Color.White;
+				ramOutputBox.ForeColor = Color.Black;
+				gpuOutputBox.BackColor = Color.White;
+				gpuOutputBox.ForeColor = Color.Black;
+				boardOutputBox.BackColor = Color.White;
+				boardOutputBox.ForeColor = Color.Black;
+				biosOutputBox.BackColor = Color.White;
+				biosOutputBox.ForeColor = Color.Black;
+				battOutputBox.BackColor = Color.White;
+				battOutputBox.ForeColor = Color.Black;
+				diskOutputBox.BackColor = Color.White;
+				diskOutputBox.ForeColor = Color.Black;
+				netOutputBox.BackColor = Color.White;
+				netOutputBox.ForeColor = Color.Black;
 			}
 
 			//	Set font size
 			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
 
-			outputBox.Font = font;
+			//	Set refresh rate
+			maxRefresh = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
+
+			//	Apply font sizes
+			cpuOutputBox.Font = font;
+			outputTabs.Font = font;
 		}
 
 		/// <summary>
@@ -643,7 +744,7 @@ namespace Tinyinfo
 		/// <param name="mode"></param>
 		private void ExportToTextFile(int mode)
 		{
-			if (outputBox == null)
+			if (cpuOutputBox == null)
 			{
 				// Handle the case where outputBox is not set.
 				return;
@@ -675,7 +776,7 @@ namespace Tinyinfo
 
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
-								string outputText = outputBox.Text;
+								string outputText = cpuOutputBox.Text;
 
 								writer.Write(outputText);
 							}
