@@ -26,7 +26,7 @@ namespace Tinyinfo
 		{
 			InitializeComponent();
 
-			
+			//	Load saved Theme settings
 			LoadTheme();
 		}
 
@@ -58,14 +58,17 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshMinimumHardwareInfo()
 		{
+			//	Create Thread for CPU info
 			Thread cpuThread = new Thread(() => { hardwareInfo.RefreshCPUList(); });
 			cpuThread.IsBackground = true;
 			cpuThread.Start();
 
+			//	Create Thread for Battery info
 			Thread batteryThread = new Thread(() => { hardwareInfo.RefreshBatteryList(); });
 			batteryThread.IsBackground = true;
 			batteryThread.Start();
 
+			//	Create Thread for Network info
 			Thread netThread = new Thread(() => { hardwareInfo.RefreshNetworkAdapterList(); });
 			netThread.IsBackground = true;
 			netThread.Start();
