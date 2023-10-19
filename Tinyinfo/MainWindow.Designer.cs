@@ -62,6 +62,8 @@ namespace Tinyinfo
 			this.battOutputBox = new System.Windows.Forms.TextBox();
 			this.diskTab = new System.Windows.Forms.TabPage();
 			this.diskOutputBox = new System.Windows.Forms.TextBox();
+			this.netTab = new System.Windows.Forms.TabPage();
+			this.netOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
@@ -71,6 +73,7 @@ namespace Tinyinfo
 			this.biosTab.SuspendLayout();
 			this.battTab.SuspendLayout();
 			this.diskTab.SuspendLayout();
+			this.netTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -254,6 +257,7 @@ namespace Tinyinfo
 			this.outputTabs.Controls.Add(this.biosTab);
 			this.outputTabs.Controls.Add(this.battTab);
 			this.outputTabs.Controls.Add(this.diskTab);
+			this.outputTabs.Controls.Add(this.netTab);
 			this.outputTabs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.outputTabs.Location = new System.Drawing.Point(16, 33);
 			this.outputTabs.Name = "outputTabs";
@@ -440,6 +444,33 @@ namespace Tinyinfo
 			this.diskOutputBox.TabIndex = 7;
 			this.diskOutputBox.WordWrap = false;
 			// 
+			// netTab
+			// 
+			this.netTab.Controls.Add(this.netOutputBox);
+			this.netTab.Location = new System.Drawing.Point(4, 26);
+			this.netTab.Name = "netTab";
+			this.netTab.Size = new System.Drawing.Size(644, 225);
+			this.netTab.TabIndex = 7;
+			this.netTab.Text = "Network";
+			this.netTab.UseVisualStyleBackColor = true;
+			// 
+			// netOutputBox
+			// 
+			this.netOutputBox.AcceptsReturn = true;
+			this.netOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.netOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.netOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.netOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.netOutputBox.Multiline = true;
+			this.netOutputBox.Name = "netOutputBox";
+			this.netOutputBox.ReadOnly = true;
+			this.netOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.netOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.netOutputBox.TabIndex = 7;
+			this.netOutputBox.WordWrap = false;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -474,6 +505,8 @@ namespace Tinyinfo
 			this.battTab.PerformLayout();
 			this.diskTab.ResumeLayout(false);
 			this.diskTab.PerformLayout();
+			this.netTab.ResumeLayout(false);
+			this.netTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -513,6 +546,8 @@ namespace Tinyinfo
 		public System.Windows.Forms.TextBox battOutputBox;
 		private System.Windows.Forms.TabPage diskTab;
 		public System.Windows.Forms.TextBox diskOutputBox;
+		private System.Windows.Forms.TabPage netTab;
+		public System.Windows.Forms.TextBox netOutputBox;
 	}
 }
 

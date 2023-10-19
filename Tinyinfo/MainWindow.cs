@@ -387,7 +387,7 @@ namespace Tinyinfo
 
 			string nl = Environment.NewLine;
 
-			WriteTextSafe("Network Adapter: " + nl);
+			WriteTextSafe("Network Adapter: " + nl, "netOutputBox");
 
 			foreach (var netAdapt in hardwareInfo.NetworkAdapterList)
 			{
@@ -409,7 +409,7 @@ namespace Tinyinfo
 
 				string result = netAdaptInfo + nameInfo + productNameInfo + typeInfo + manufacturerInfo + macAddressInfo + bytesSentInfo + bytesReceivedInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "netOutputBox");
 
 				netAdaptId++;
 
@@ -490,6 +490,9 @@ namespace Tinyinfo
 					break;
 				case "diskOutputBox":
 					textBox = diskOutputBox;
+					break;
+				case "netOutputBox":
+					textBox = netOutputBox;
 					break;
 			}
 			if (textBox.InvokeRequired)
