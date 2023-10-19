@@ -627,6 +627,20 @@ namespace Tinyinfo
 				onTopBoxPanel.ForeColor = Color.White;
 				cpuOutputBox.BackColor = Color.Black;
 				cpuOutputBox.ForeColor = Color.White;
+				ramOutputBox.BackColor = Color.Black;
+				ramOutputBox.ForeColor = Color.White; 
+				gpuOutputBox.BackColor = Color.Black;
+				gpuOutputBox.ForeColor = Color.White; 
+				boardOutputBox.BackColor = Color.Black;
+				boardOutputBox.ForeColor = Color.White; 
+				biosOutputBox.BackColor = Color.Black;
+				biosOutputBox.ForeColor = Color.White; 
+				battOutputBox.BackColor = Color.Black;
+				battOutputBox.ForeColor = Color.White; 
+				diskOutputBox.BackColor = Color.Black;
+				diskOutputBox.ForeColor = Color.White; 
+				netOutputBox.BackColor = Color.Black;
+				netOutputBox.ForeColor = Color.White;
 			}
 			else
 			{
@@ -641,6 +655,20 @@ namespace Tinyinfo
 				onTopBoxPanel.ForeColor = Color.Black;
 				cpuOutputBox.BackColor = Color.White;
 				cpuOutputBox.ForeColor = Color.Black;
+				ramOutputBox.BackColor = Color.White;
+				ramOutputBox.ForeColor = Color.Black;
+				gpuOutputBox.BackColor = Color.White;
+				gpuOutputBox.ForeColor = Color.Black;
+				boardOutputBox.BackColor = Color.White;
+				boardOutputBox.ForeColor = Color.Black;
+				biosOutputBox.BackColor = Color.White;
+				biosOutputBox.ForeColor = Color.Black;
+				battOutputBox.BackColor = Color.White;
+				battOutputBox.ForeColor = Color.Black;
+				diskOutputBox.BackColor = Color.White;
+				diskOutputBox.ForeColor = Color.Black;
+				netOutputBox.BackColor = Color.White;
+				netOutputBox.ForeColor = Color.Black;
 			}
 
 			//	Set font size
