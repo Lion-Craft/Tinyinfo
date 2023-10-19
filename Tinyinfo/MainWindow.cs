@@ -108,28 +108,11 @@ namespace Tinyinfo
 					//	CPU Info
 					LoadCPUData();
 
-					//	Graphics
-					LoadVideoControllerData();
-
-					//	Memory
-					LoadMemoryData();
-
-					//	Motherboard
-					LoadMotherBoardData();
-
-					//	BIOS Info
-					LoadBIOSData();
-
 					//	Battery Info
 					LoadBatteryData();
 
-					//	Drive Info
-					LoadDrivesData();
-
 					//	Network Adapter Info
 					LoadNetworkAdaptersData();
-
-					//ShowInfo("");
 				} while (loop);
 			}
 			else
