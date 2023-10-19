@@ -713,6 +713,8 @@ namespace Tinyinfo
 				diskOutputBox.ForeColor = Color.White; 
 				netOutputBox.BackColor = Color.Black;
 				netOutputBox.ForeColor = Color.White;
+				nvapiOutputBox.BackColor = Color.Black;
+				nvapiOutputBox.ForeColor = Color.White;
 			}
 			else
 			{
@@ -741,6 +743,8 @@ namespace Tinyinfo
 				diskOutputBox.ForeColor = Color.Black;
 				netOutputBox.BackColor = Color.White;
 				netOutputBox.ForeColor = Color.Black;
+				nvapiOutputBox.BackColor = Color.White;
+				nvapiOutputBox.ForeColor = Color.Black;
 			}
 
 			//	Set font size
@@ -751,6 +755,14 @@ namespace Tinyinfo
 
 			//	Apply font sizes
 			cpuOutputBox.Font = font;
+			ramOutputBox.Font = font;
+			gpuOutputBox.Font = font;
+			nvapiOutputBox.Font = font;
+			diskOutputBox.Font = font;
+			biosOutputBox.Font = font;
+			battOutputBox.Font = font;
+			boardOutputBox.Font = font;
+			netOutputBox.Font = font;
 			outputTabs.Font = font;
 		}
 
