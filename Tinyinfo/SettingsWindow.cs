@@ -45,6 +45,9 @@ namespace Tinyinfo
 
 			//	load font size setting
 			fontSizeUpDown.Value = Convert.ToInt32(data.GetKey("tinyinfo.font"));
+
+			//	load refresh rate setting
+			refreshRateUpDown.Value = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
 		}
 
 		public void refreshTheme()
@@ -52,7 +55,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (File.Exists("./tinyinfo.ini") == false)
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10\nrefresh=500");
 			}
 
 			//	Create ini parser and read ini file
@@ -101,6 +104,10 @@ namespace Tinyinfo
 
 			//	write font size into ini file
 			data["tinyinfo"]["font"] = fontSizeUpDown.Value.ToString();
+			parser.WriteFile("./tinyinfo.ini", data);
+
+			//	wrire refresh rate into ini file
+			data["tinyinfo"]["refresh"] = refreshRateUpDown.Value.ToString();
 			parser.WriteFile("./tinyinfo.ini", data);
 
 			//	reload theme

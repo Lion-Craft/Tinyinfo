@@ -117,6 +117,7 @@ namespace Tinyinfo
 					//	Network Adapter Info
 					LoadNetworkAdaptersData();
 
+					//	TODO: Make better (This is just bad if were honest)
 					Thread.Sleep(maxRefresh);
 				} while (loop);
 			}
@@ -608,7 +609,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (!File.Exists("./tinyinfo.ini"))
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10\nrefresh=500");
 			}
 
 			//	Create ini parser and read ini file
@@ -677,6 +678,10 @@ namespace Tinyinfo
 			//	Set font size
 			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
 
+			//	Set refresh rate
+			maxRefresh = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
+
+			//	Apply font sizes
 			cpuOutputBox.Font = font;
 			outputTabs.Font = font;
 		}
