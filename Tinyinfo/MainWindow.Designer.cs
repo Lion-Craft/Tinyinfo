@@ -34,7 +34,7 @@ namespace Tinyinfo
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
 			this.progressBar = new System.Windows.Forms.ProgressBar();
-			this.outputBox = new System.Windows.Forms.TextBox();
+			this.cpuOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
 			this.menuBar = new System.Windows.Forms.MainMenu(this.components);
 			this.fileDropdown = new System.Windows.Forms.MenuItem();
@@ -52,11 +52,11 @@ namespace Tinyinfo
 			this.cpuTab = new System.Windows.Forms.TabPage();
 			this.ramTab = new System.Windows.Forms.TabPage();
 			this.gpuTab = new System.Windows.Forms.TabPage();
-			this.cpuModelLabel = new System.Windows.Forms.Label();
-			this.cpuManuLabel = new System.Windows.Forms.Label();
+			this.ramOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
+			this.ramTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -106,23 +106,22 @@ namespace Tinyinfo
 			this.progressBar.TabIndex = 5;
 			this.progressBar.Visible = false;
 			// 
-			// outputBox
+			// cpuOutputBox
 			// 
-			this.outputBox.AcceptsReturn = true;
-			this.outputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.cpuOutputBox.AcceptsReturn = true;
+			this.cpuOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.outputBox.BackColor = System.Drawing.SystemColors.Window;
-			this.outputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.outputBox.Location = new System.Drawing.Point(388, 96);
-			this.outputBox.Multiline = true;
-			this.outputBox.Name = "outputBox";
-			this.outputBox.ReadOnly = true;
-			this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.outputBox.Size = new System.Drawing.Size(264, 147);
-			this.outputBox.TabIndex = 6;
-			this.outputBox.Visible = false;
-			this.outputBox.WordWrap = false;
+			this.cpuOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.cpuOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cpuOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.cpuOutputBox.Multiline = true;
+			this.cpuOutputBox.Name = "cpuOutputBox";
+			this.cpuOutputBox.ReadOnly = true;
+			this.cpuOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.cpuOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.cpuOutputBox.TabIndex = 6;
+			this.cpuOutputBox.WordWrap = false;
 			// 
 			// onTopCheckbox
 			// 
@@ -247,8 +246,7 @@ namespace Tinyinfo
 			// cpuTab
 			// 
 			this.cpuTab.AutoScroll = true;
-			this.cpuTab.Controls.Add(this.cpuManuLabel);
-			this.cpuTab.Controls.Add(this.cpuModelLabel);
+			this.cpuTab.Controls.Add(this.cpuOutputBox);
 			this.cpuTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.cpuTab.Location = new System.Drawing.Point(4, 26);
 			this.cpuTab.Name = "cpuTab";
@@ -261,11 +259,12 @@ namespace Tinyinfo
 			// 
 			// ramTab
 			// 
+			this.ramTab.Controls.Add(this.ramOutputBox);
 			this.ramTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.ramTab.Location = new System.Drawing.Point(4, 22);
+			this.ramTab.Location = new System.Drawing.Point(4, 26);
 			this.ramTab.Name = "ramTab";
 			this.ramTab.Padding = new System.Windows.Forms.Padding(3);
-			this.ramTab.Size = new System.Drawing.Size(644, 229);
+			this.ramTab.Size = new System.Drawing.Size(644, 225);
 			this.ramTab.TabIndex = 1;
 			this.ramTab.Text = "RAM";
 			this.ramTab.ToolTipText = "Displays information about the Computer\'s Memory";
@@ -281,30 +280,28 @@ namespace Tinyinfo
 			this.gpuTab.ToolTipText = "Displays information about the Computer\'s GPUs";
 			this.gpuTab.UseVisualStyleBackColor = true;
 			// 
-			// cpuModelLabel
+			// ramOutputBox
 			// 
-			this.cpuModelLabel.AutoSize = true;
-			this.cpuModelLabel.Location = new System.Drawing.Point(6, 3);
-			this.cpuModelLabel.Name = "cpuModelLabel";
-			this.cpuModelLabel.Size = new System.Drawing.Size(74, 17);
-			this.cpuModelLabel.TabIndex = 0;
-			this.cpuModelLabel.Text = "CPU Model";
-			// 
-			// cpuManuLabel
-			// 
-			this.cpuManuLabel.AutoSize = true;
-			this.cpuManuLabel.Location = new System.Drawing.Point(6, 37);
-			this.cpuManuLabel.Name = "cpuManuLabel";
-			this.cpuManuLabel.Size = new System.Drawing.Size(114, 17);
-			this.cpuManuLabel.TabIndex = 1;
-			this.cpuManuLabel.Text = "CPU Manufacturer";
+			this.ramOutputBox.AcceptsReturn = true;
+			this.ramOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ramOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.ramOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ramOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.ramOutputBox.Multiline = true;
+			this.ramOutputBox.Name = "ramOutputBox";
+			this.ramOutputBox.ReadOnly = true;
+			this.ramOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.ramOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.ramOutputBox.TabIndex = 7;
+			this.ramOutputBox.WordWrap = false;
 			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.ClientSize = new System.Drawing.Size(681, 371);
-			this.Controls.Add(this.outputBox);
 			this.Controls.Add(this.outputTabs);
 			this.Controls.Add(this.onTopBoxPanel);
 			this.Controls.Add(this.progressBar);
@@ -322,6 +319,8 @@ namespace Tinyinfo
 			this.outputTabs.ResumeLayout(false);
 			this.cpuTab.ResumeLayout(false);
 			this.cpuTab.PerformLayout();
+			this.ramTab.ResumeLayout(false);
+			this.ramTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -339,7 +338,7 @@ namespace Tinyinfo
 		private System.Windows.Forms.MenuItem helpDropdown;
 		private System.Windows.Forms.MenuItem aboutItem;
 		private System.Windows.Forms.MenuItem githubItem;
-		public System.Windows.Forms.TextBox outputBox;
+		public System.Windows.Forms.TextBox cpuOutputBox;
 		private System.Windows.Forms.Panel onTopBoxPanel;
 		private System.Windows.Forms.MenuItem refreshItem;
         private System.Windows.Forms.MenuItem fileDropdown;
@@ -351,8 +350,7 @@ namespace Tinyinfo
 		private System.Windows.Forms.TabPage cpuTab;
 		private System.Windows.Forms.TabPage ramTab;
 		private System.Windows.Forms.TabPage gpuTab;
-		private System.Windows.Forms.Label cpuModelLabel;
-		private System.Windows.Forms.Label cpuManuLabel;
+		public System.Windows.Forms.TextBox ramOutputBox;
 	}
 }
 

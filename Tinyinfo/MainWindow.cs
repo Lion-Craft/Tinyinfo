@@ -122,7 +122,7 @@ namespace Tinyinfo
 					//	Network Adapter Info
 					LoadNetworkAdaptersData();
 
-					ShowInfo("");
+					//ShowInfo("");
 				} while (loop);
 			}
 			else
@@ -195,6 +195,8 @@ namespace Tinyinfo
 					coresThreadsInfo + vmFirmwareInfo + clockspeedsInfo + currentClockspeedInfo + baseClockspeedInfo;
 
 				AppendTextSafe(result);
+
+				ShowInfo("");
 			}
 		}
 
@@ -241,6 +243,7 @@ namespace Tinyinfo
 				AppendTextSafe(result);
 
 				id++;
+				ShowInfo("");
 			}
 		}
 
@@ -264,6 +267,7 @@ namespace Tinyinfo
 				string result = manufacturerInfo + modelInfo + serialNumberInfo;
 
 				AppendTextSafe(result);
+				ShowInfo("");
 			}
 		}
 
@@ -289,6 +293,7 @@ namespace Tinyinfo
 				string result = manufacturerInfo + nameInfo + versionInfo + releaseDateInfo;
 
 				AppendTextSafe(result);
+				ShowInfo("");
 			}
 		}
 
@@ -332,6 +337,7 @@ namespace Tinyinfo
 
 				AppendTextSafe(result);
 				
+				ShowInfo("");
 			}
 		}
 
@@ -367,6 +373,8 @@ namespace Tinyinfo
 				string result = driveInfo + nameInfo + sizeInfo + manufacturerInfo + modelInfo + firmwareInfo + serialNumberInfo + partitionsInfo;
 
 				AppendTextSafe(result);
+				
+				ShowInfo("");
 			}
 		}
 
@@ -404,6 +412,8 @@ namespace Tinyinfo
 				AppendTextSafe(result);
 
 				netAdaptId++;
+
+				ShowInfo("");
 			}
 		}
 
@@ -414,7 +424,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Memory:" + nl);
+			AppendTextSafe("Memory:" + nl, "ramOutputBox");
 
 			foreach (var memory in hardwareInfo.MemoryList)
 			{
@@ -438,7 +448,9 @@ namespace Tinyinfo
 
 				string result = bankInfo + manufacturerInfo + sizeInfo + speedInfo + partNumberInfo + formFactorInfo + minVoltageInfo + maxVoltageInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "ramOutputBox");
+				
+				ShowInfo("");
 			}
 		}
 
@@ -448,35 +460,56 @@ namespace Tinyinfo
 		/// <param name="text"></param>
 		private void ShowInfo(string text)
 		{
-			if (outputBox.InvokeRequired)
+			//	TODO: Think of better names
+			
+			//	Create textbox variable to invoke
+			TextBox textBox = cpuOutputBox;
+
+			//	change textbox variable to correct textbox
+			switch (outputBox)
+			{
+				default:
+					break;
+				case "cpuOutputBox":
+					textBox = cpuOutputBox;
+					break;
+				case "ramOutputBox":
+					textBox = ramOutputBox;
+					break;
+			}
+			if (textBox.InvokeRequired)
 			{
 				var d = new SafeCallDelegate(ShowInfo);
-				outputBox.Invoke(d, new object[] { InfoTextBuffer });
+				textBox.Invoke(d, new object[] { InfoTextBuffer });
 			}
 			else
 			{
-				outputBox.Text = InfoTextBuffer;
+				textBox.Text = InfoTextBuffer;
 			}
 		}
 
 		// Creating String To Push it later on textbox
 		private string InfoTextBuffer = "";
 
-		private void WriteTextSafe(string text)
+		private string outputBox = "";
+
+		private void WriteTextSafe(string text, string output = "cpuTextBox")
 		{
 			// NOTE (HOUDAIFA) : Faster Way
 
 			InfoTextBuffer = text;
+			outputBox = output;
 		}
 
 		/// <summary>
 		/// Appand Text To Text Buffer
 		/// </summary>
-		private void AppendTextSafe(string text)
+		private void AppendTextSafe(string text, string output = "cpuTextBox")
 		{
 			// NOTE (HOUDAIFA) : Faster Way
 
 			InfoTextBuffer += text;
+			outputBox = output;
 		}
 
 		/// <summary>
@@ -574,8 +607,8 @@ namespace Tinyinfo
 				onTopCheckbox.BackColor = Color.Gray;
 				onTopBoxPanel.BackColor = Color.FromName("ButtonFace");
 				onTopBoxPanel.ForeColor = Color.White;
-				outputBox.BackColor = Color.Black;
-				outputBox.ForeColor = Color.White;
+				cpuOutputBox.BackColor = Color.Black;
+				cpuOutputBox.ForeColor = Color.White;
 			}
 			else
 			{
@@ -588,14 +621,14 @@ namespace Tinyinfo
 				onTopCheckbox.BackColor = Color.White;
 				onTopBoxPanel.BackColor = Color.White;
 				onTopBoxPanel.ForeColor = Color.Black;
-				outputBox.BackColor = Color.White;
-				outputBox.ForeColor = Color.Black;
+				cpuOutputBox.BackColor = Color.White;
+				cpuOutputBox.ForeColor = Color.Black;
 			}
 
 			//	Set font size
 			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
 
-			outputBox.Font = font;
+			cpuOutputBox.Font = font;
 			outputTabs.Font = font;
 		}
 
@@ -635,7 +668,7 @@ namespace Tinyinfo
 		/// <param name="mode"></param>
 		private void ExportToTextFile(int mode)
 		{
-			if (outputBox == null)
+			if (cpuOutputBox == null)
 			{
 				// Handle the case where outputBox is not set.
 				return;
@@ -667,7 +700,7 @@ namespace Tinyinfo
 
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
-								string outputText = outputBox.Text;
+								string outputText = cpuOutputBox.Text;
 
 								writer.Write(outputText);
 							}
