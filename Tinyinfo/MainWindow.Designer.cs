@@ -54,11 +54,14 @@ namespace Tinyinfo
 			this.gpuTab = new System.Windows.Forms.TabPage();
 			this.ramOutputBox = new System.Windows.Forms.TextBox();
 			this.gpuOutputBox = new System.Windows.Forms.TextBox();
+			this.boardTab = new System.Windows.Forms.TabPage();
+			this.boardOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
 			this.ramTab.SuspendLayout();
 			this.gpuTab.SuspendLayout();
+			this.boardTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -238,6 +241,7 @@ namespace Tinyinfo
 			this.outputTabs.Controls.Add(this.cpuTab);
 			this.outputTabs.Controls.Add(this.ramTab);
 			this.outputTabs.Controls.Add(this.gpuTab);
+			this.outputTabs.Controls.Add(this.boardTab);
 			this.outputTabs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.outputTabs.Location = new System.Drawing.Point(16, 33);
 			this.outputTabs.Name = "outputTabs";
@@ -247,7 +251,6 @@ namespace Tinyinfo
 			// 
 			// cpuTab
 			// 
-			this.cpuTab.AutoScroll = true;
 			this.cpuTab.Controls.Add(this.cpuOutputBox);
 			this.cpuTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.cpuTab.Location = new System.Drawing.Point(4, 26);
@@ -317,6 +320,33 @@ namespace Tinyinfo
 			this.gpuOutputBox.TabIndex = 8;
 			this.gpuOutputBox.WordWrap = false;
 			// 
+			// boardTab
+			// 
+			this.boardTab.Controls.Add(this.boardOutputBox);
+			this.boardTab.Location = new System.Drawing.Point(4, 26);
+			this.boardTab.Name = "boardTab";
+			this.boardTab.Size = new System.Drawing.Size(644, 225);
+			this.boardTab.TabIndex = 3;
+			this.boardTab.Text = "Motherboard";
+			this.boardTab.UseVisualStyleBackColor = true;
+			// 
+			// boardOutputBox
+			// 
+			this.boardOutputBox.AcceptsReturn = true;
+			this.boardOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.boardOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.boardOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.boardOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.boardOutputBox.Multiline = true;
+			this.boardOutputBox.Name = "boardOutputBox";
+			this.boardOutputBox.ReadOnly = true;
+			this.boardOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.boardOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.boardOutputBox.TabIndex = 7;
+			this.boardOutputBox.WordWrap = false;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -343,6 +373,8 @@ namespace Tinyinfo
 			this.ramTab.PerformLayout();
 			this.gpuTab.ResumeLayout(false);
 			this.gpuTab.PerformLayout();
+			this.boardTab.ResumeLayout(false);
+			this.boardTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -374,6 +406,8 @@ namespace Tinyinfo
 		private System.Windows.Forms.TabPage gpuTab;
 		public System.Windows.Forms.TextBox ramOutputBox;
 		public System.Windows.Forms.TextBox gpuOutputBox;
+		private System.Windows.Forms.TabPage boardTab;
+		public System.Windows.Forms.TextBox boardOutputBox;
 	}
 }
 

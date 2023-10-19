@@ -254,7 +254,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			WriteTextSafe("Motherboard: " + nl);
+			WriteTextSafe("Motherboard: " + nl, "boardOutputBox");
 
 			foreach (var motherboard in hardwareInfo.MotherboardList)
 			{
@@ -266,7 +266,7 @@ namespace Tinyinfo
 
 				string result = manufacturerInfo + modelInfo + serialNumberInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "boardOutputBox");
 				ShowInfo("");
 			}
 		}
@@ -478,6 +478,9 @@ namespace Tinyinfo
 					break;
 				case "gpuOutputBox":
 					textBox = gpuOutputBox;
+					break;
+				case "boardOutputBox":
+					textBox = boardOutputBox;
 					break;
 			}
 			if (textBox.InvokeRequired)
