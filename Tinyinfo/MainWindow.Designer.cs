@@ -53,7 +53,11 @@ namespace Tinyinfo
 			this.ramTab = new System.Windows.Forms.TabPage();
 			this.ramOutputBox = new System.Windows.Forms.TextBox();
 			this.gpuTab = new System.Windows.Forms.TabPage();
+			this.gpuTabs = new System.Windows.Forms.TabControl();
+			this.driverTab = new System.Windows.Forms.TabPage();
 			this.gpuOutputBox = new System.Windows.Forms.TextBox();
+			this.apiTab = new System.Windows.Forms.TabPage();
+			this.nvapiOutputBox = new System.Windows.Forms.TextBox();
 			this.boardTab = new System.Windows.Forms.TabPage();
 			this.boardOutputBox = new System.Windows.Forms.TextBox();
 			this.biosTab = new System.Windows.Forms.TabPage();
@@ -64,23 +68,19 @@ namespace Tinyinfo
 			this.diskOutputBox = new System.Windows.Forms.TextBox();
 			this.netTab = new System.Windows.Forms.TabPage();
 			this.netOutputBox = new System.Windows.Forms.TextBox();
-			this.gpuTabs = new System.Windows.Forms.TabControl();
-			this.driverTab = new System.Windows.Forms.TabPage();
-			this.apiTab = new System.Windows.Forms.TabPage();
-			this.nvapiOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
 			this.ramTab.SuspendLayout();
 			this.gpuTab.SuspendLayout();
+			this.gpuTabs.SuspendLayout();
+			this.driverTab.SuspendLayout();
+			this.apiTab.SuspendLayout();
 			this.boardTab.SuspendLayout();
 			this.biosTab.SuspendLayout();
 			this.battTab.SuspendLayout();
 			this.diskTab.SuspendLayout();
 			this.netTab.SuspendLayout();
-			this.gpuTabs.SuspendLayout();
-			this.driverTab.SuspendLayout();
-			this.apiTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -326,6 +326,30 @@ namespace Tinyinfo
 			this.gpuTab.ToolTipText = "Displays information about the Computer\'s GPUs";
 			this.gpuTab.UseVisualStyleBackColor = true;
 			// 
+			// gpuTabs
+			// 
+			this.gpuTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gpuTabs.Controls.Add(this.driverTab);
+			this.gpuTabs.Controls.Add(this.apiTab);
+			this.gpuTabs.Location = new System.Drawing.Point(0, 0);
+			this.gpuTabs.Name = "gpuTabs";
+			this.gpuTabs.SelectedIndex = 0;
+			this.gpuTabs.Size = new System.Drawing.Size(641, 225);
+			this.gpuTabs.TabIndex = 0;
+			// 
+			// driverTab
+			// 
+			this.driverTab.Controls.Add(this.gpuOutputBox);
+			this.driverTab.Location = new System.Drawing.Point(4, 26);
+			this.driverTab.Name = "driverTab";
+			this.driverTab.Padding = new System.Windows.Forms.Padding(3);
+			this.driverTab.Size = new System.Drawing.Size(633, 195);
+			this.driverTab.TabIndex = 0;
+			this.driverTab.Text = "Driver Info";
+			this.driverTab.UseVisualStyleBackColor = true;
+			// 
 			// gpuOutputBox
 			// 
 			this.gpuOutputBox.AcceptsReturn = true;
@@ -342,6 +366,34 @@ namespace Tinyinfo
 			this.gpuOutputBox.Size = new System.Drawing.Size(633, 195);
 			this.gpuOutputBox.TabIndex = 8;
 			this.gpuOutputBox.WordWrap = false;
+			// 
+			// apiTab
+			// 
+			this.apiTab.Controls.Add(this.nvapiOutputBox);
+			this.apiTab.Location = new System.Drawing.Point(4, 22);
+			this.apiTab.Name = "apiTab";
+			this.apiTab.Padding = new System.Windows.Forms.Padding(3);
+			this.apiTab.Size = new System.Drawing.Size(633, 199);
+			this.apiTab.TabIndex = 1;
+			this.apiTab.Text = "NvAPI";
+			this.apiTab.UseVisualStyleBackColor = true;
+			// 
+			// nvapiOutputBox
+			// 
+			this.nvapiOutputBox.AcceptsReturn = true;
+			this.nvapiOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.nvapiOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.nvapiOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.nvapiOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.nvapiOutputBox.Multiline = true;
+			this.nvapiOutputBox.Name = "nvapiOutputBox";
+			this.nvapiOutputBox.ReadOnly = true;
+			this.nvapiOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.nvapiOutputBox.Size = new System.Drawing.Size(633, 199);
+			this.nvapiOutputBox.TabIndex = 9;
+			this.nvapiOutputBox.WordWrap = false;
 			// 
 			// boardTab
 			// 
@@ -478,58 +530,6 @@ namespace Tinyinfo
 			this.netOutputBox.TabIndex = 7;
 			this.netOutputBox.WordWrap = false;
 			// 
-			// gpuTabs
-			// 
-			this.gpuTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.gpuTabs.Controls.Add(this.driverTab);
-			this.gpuTabs.Controls.Add(this.apiTab);
-			this.gpuTabs.Location = new System.Drawing.Point(0, 0);
-			this.gpuTabs.Name = "gpuTabs";
-			this.gpuTabs.SelectedIndex = 0;
-			this.gpuTabs.Size = new System.Drawing.Size(641, 225);
-			this.gpuTabs.TabIndex = 0;
-			// 
-			// driverTab
-			// 
-			this.driverTab.Controls.Add(this.gpuOutputBox);
-			this.driverTab.Location = new System.Drawing.Point(4, 26);
-			this.driverTab.Name = "driverTab";
-			this.driverTab.Padding = new System.Windows.Forms.Padding(3);
-			this.driverTab.Size = new System.Drawing.Size(633, 195);
-			this.driverTab.TabIndex = 0;
-			this.driverTab.Text = "Driver Info";
-			this.driverTab.UseVisualStyleBackColor = true;
-			// 
-			// apiTab
-			// 
-			this.apiTab.Controls.Add(this.nvapiOutputBox);
-			this.apiTab.Location = new System.Drawing.Point(4, 26);
-			this.apiTab.Name = "apiTab";
-			this.apiTab.Padding = new System.Windows.Forms.Padding(3);
-			this.apiTab.Size = new System.Drawing.Size(633, 195);
-			this.apiTab.TabIndex = 1;
-			this.apiTab.Text = "NvAPI";
-			this.apiTab.UseVisualStyleBackColor = true;
-			// 
-			// nvapiOutputBox
-			// 
-			this.nvapiOutputBox.AcceptsReturn = true;
-			this.nvapiOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.nvapiOutputBox.BackColor = System.Drawing.SystemColors.Window;
-			this.nvapiOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.nvapiOutputBox.Location = new System.Drawing.Point(0, 0);
-			this.nvapiOutputBox.Multiline = true;
-			this.nvapiOutputBox.Name = "nvapiOutputBox";
-			this.nvapiOutputBox.ReadOnly = true;
-			this.nvapiOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.nvapiOutputBox.Size = new System.Drawing.Size(633, 195);
-			this.nvapiOutputBox.TabIndex = 9;
-			this.nvapiOutputBox.WordWrap = false;
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -555,6 +555,11 @@ namespace Tinyinfo
 			this.ramTab.ResumeLayout(false);
 			this.ramTab.PerformLayout();
 			this.gpuTab.ResumeLayout(false);
+			this.gpuTabs.ResumeLayout(false);
+			this.driverTab.ResumeLayout(false);
+			this.driverTab.PerformLayout();
+			this.apiTab.ResumeLayout(false);
+			this.apiTab.PerformLayout();
 			this.boardTab.ResumeLayout(false);
 			this.boardTab.PerformLayout();
 			this.biosTab.ResumeLayout(false);
@@ -565,11 +570,6 @@ namespace Tinyinfo
 			this.diskTab.PerformLayout();
 			this.netTab.ResumeLayout(false);
 			this.netTab.PerformLayout();
-			this.gpuTabs.ResumeLayout(false);
-			this.driverTab.ResumeLayout(false);
-			this.driverTab.PerformLayout();
-			this.apiTab.ResumeLayout(false);
-			this.apiTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

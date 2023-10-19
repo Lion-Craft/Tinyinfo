@@ -279,6 +279,7 @@ namespace Tinyinfo
 			//	Check what manufacturer the gpu is, if nvidia show nvapi info
 			if (manufacturer[0].ToLower() == "nvidia" || manufacturer[1].ToLower() == "nvidia")
 			{
+				nvapiOutputBox.Text = "";
 				int nvid = 0;
 				foreach (var nvgpu in PhysicalGPU.GetPhysicalGPUs())
 				{
