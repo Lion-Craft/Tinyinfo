@@ -60,6 +60,8 @@ namespace Tinyinfo
 			this.biosOutputBox = new System.Windows.Forms.TextBox();
 			this.battTab = new System.Windows.Forms.TabPage();
 			this.battOutputBox = new System.Windows.Forms.TextBox();
+			this.diskTab = new System.Windows.Forms.TabPage();
+			this.diskOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
@@ -68,6 +70,7 @@ namespace Tinyinfo
 			this.boardTab.SuspendLayout();
 			this.biosTab.SuspendLayout();
 			this.battTab.SuspendLayout();
+			this.diskTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -250,6 +253,7 @@ namespace Tinyinfo
 			this.outputTabs.Controls.Add(this.boardTab);
 			this.outputTabs.Controls.Add(this.biosTab);
 			this.outputTabs.Controls.Add(this.battTab);
+			this.outputTabs.Controls.Add(this.diskTab);
 			this.outputTabs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.outputTabs.Location = new System.Drawing.Point(16, 33);
 			this.outputTabs.Name = "outputTabs";
@@ -409,6 +413,33 @@ namespace Tinyinfo
 			this.battOutputBox.TabIndex = 7;
 			this.battOutputBox.WordWrap = false;
 			// 
+			// diskTab
+			// 
+			this.diskTab.Controls.Add(this.diskOutputBox);
+			this.diskTab.Location = new System.Drawing.Point(4, 26);
+			this.diskTab.Name = "diskTab";
+			this.diskTab.Size = new System.Drawing.Size(644, 225);
+			this.diskTab.TabIndex = 6;
+			this.diskTab.Text = "Disk";
+			this.diskTab.UseVisualStyleBackColor = true;
+			// 
+			// diskOutputBox
+			// 
+			this.diskOutputBox.AcceptsReturn = true;
+			this.diskOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.diskOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.diskOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.diskOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.diskOutputBox.Multiline = true;
+			this.diskOutputBox.Name = "diskOutputBox";
+			this.diskOutputBox.ReadOnly = true;
+			this.diskOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.diskOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.diskOutputBox.TabIndex = 7;
+			this.diskOutputBox.WordWrap = false;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -441,6 +472,8 @@ namespace Tinyinfo
 			this.biosTab.PerformLayout();
 			this.battTab.ResumeLayout(false);
 			this.battTab.PerformLayout();
+			this.diskTab.ResumeLayout(false);
+			this.diskTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -478,6 +511,8 @@ namespace Tinyinfo
 		public System.Windows.Forms.TextBox biosOutputBox;
 		private System.Windows.Forms.TabPage battTab;
 		public System.Windows.Forms.TextBox battOutputBox;
+		private System.Windows.Forms.TabPage diskTab;
+		public System.Windows.Forms.TextBox diskOutputBox;
 	}
 }
 

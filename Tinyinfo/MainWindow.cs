@@ -348,7 +348,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			WriteTextSafe("Drives: " + nl);
+			WriteTextSafe("Drives: " + nl, "diskOutputBox");
 
 			foreach (var drive in hardwareInfo.DriveList)
 			{
@@ -372,7 +372,7 @@ namespace Tinyinfo
 
 				string result = driveInfo + nameInfo + sizeInfo + manufacturerInfo + modelInfo + firmwareInfo + serialNumberInfo + partitionsInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "diskOutputBox");
 				
 				ShowInfo("");
 			}
@@ -487,6 +487,9 @@ namespace Tinyinfo
 					break;
 				case "battOutputBox":
 					textBox = battOutputBox;
+					break;
+				case "diskOutputBox":
+					textBox = diskOutputBox;
 					break;
 			}
 			if (textBox.InvokeRequired)
