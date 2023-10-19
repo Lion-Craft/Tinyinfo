@@ -304,7 +304,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			WriteTextSafe("Battery: " + nl);
+			WriteTextSafe("Battery: " + nl, "battOutputBox");
 			if (hardwareInfo.BatteryList.Count == 0)
 			{
 				AppendTextSafe("\tNot Present" + nl);
@@ -335,7 +335,7 @@ namespace Tinyinfo
 					expectedLifeInfo + timeToChargeInfo + timeOnBatteryInfo + capacitiesInfo + designCapacityInfo +
 					fullChargeCapacityInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "battOutputBox");
 				
 				ShowInfo("");
 			}
@@ -484,6 +484,9 @@ namespace Tinyinfo
 					break;
 				case "biosOutputBox":
 					textBox = biosOutputBox;
+					break;
+				case "battOutputBox":
+					textBox = battOutputBox;
 					break;
 			}
 			if (textBox.InvokeRequired)

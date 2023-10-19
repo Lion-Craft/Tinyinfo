@@ -58,6 +58,8 @@ namespace Tinyinfo
 			this.boardOutputBox = new System.Windows.Forms.TextBox();
 			this.biosTab = new System.Windows.Forms.TabPage();
 			this.biosOutputBox = new System.Windows.Forms.TextBox();
+			this.battTab = new System.Windows.Forms.TabPage();
+			this.battOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
@@ -65,6 +67,7 @@ namespace Tinyinfo
 			this.gpuTab.SuspendLayout();
 			this.boardTab.SuspendLayout();
 			this.biosTab.SuspendLayout();
+			this.battTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -246,6 +249,7 @@ namespace Tinyinfo
 			this.outputTabs.Controls.Add(this.gpuTab);
 			this.outputTabs.Controls.Add(this.boardTab);
 			this.outputTabs.Controls.Add(this.biosTab);
+			this.outputTabs.Controls.Add(this.battTab);
 			this.outputTabs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.outputTabs.Location = new System.Drawing.Point(16, 33);
 			this.outputTabs.Name = "outputTabs";
@@ -378,6 +382,33 @@ namespace Tinyinfo
 			this.biosOutputBox.TabIndex = 7;
 			this.biosOutputBox.WordWrap = false;
 			// 
+			// battTab
+			// 
+			this.battTab.Controls.Add(this.battOutputBox);
+			this.battTab.Location = new System.Drawing.Point(4, 26);
+			this.battTab.Name = "battTab";
+			this.battTab.Size = new System.Drawing.Size(644, 225);
+			this.battTab.TabIndex = 5;
+			this.battTab.Text = "Battery";
+			this.battTab.UseVisualStyleBackColor = true;
+			// 
+			// battOutputBox
+			// 
+			this.battOutputBox.AcceptsReturn = true;
+			this.battOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.battOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.battOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.battOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.battOutputBox.Multiline = true;
+			this.battOutputBox.Name = "battOutputBox";
+			this.battOutputBox.ReadOnly = true;
+			this.battOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.battOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.battOutputBox.TabIndex = 7;
+			this.battOutputBox.WordWrap = false;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -408,6 +439,8 @@ namespace Tinyinfo
 			this.boardTab.PerformLayout();
 			this.biosTab.ResumeLayout(false);
 			this.biosTab.PerformLayout();
+			this.battTab.ResumeLayout(false);
+			this.battTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -443,6 +476,8 @@ namespace Tinyinfo
 		public System.Windows.Forms.TextBox boardOutputBox;
 		private System.Windows.Forms.TabPage biosTab;
 		public System.Windows.Forms.TextBox biosOutputBox;
+		private System.Windows.Forms.TabPage battTab;
+		public System.Windows.Forms.TextBox battOutputBox;
 	}
 }
 
