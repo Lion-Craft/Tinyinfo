@@ -278,7 +278,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			WriteTextSafe("BIOS: " + nl);
+			WriteTextSafe("BIOS: " + nl, "biosOutputBox");
 
 			foreach (var bios in hardwareInfo.BiosList)
 			{
@@ -292,7 +292,7 @@ namespace Tinyinfo
 
 				string result = manufacturerInfo + nameInfo + versionInfo + releaseDateInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "biosOutputBox");
 				ShowInfo("");
 			}
 		}
@@ -481,6 +481,9 @@ namespace Tinyinfo
 					break;
 				case "boardOutputBox":
 					textBox = boardOutputBox;
+					break;
+				case "biosOutputBox":
+					textBox = biosOutputBox;
 					break;
 			}
 			if (textBox.InvokeRequired)

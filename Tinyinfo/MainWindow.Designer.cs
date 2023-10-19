@@ -56,12 +56,15 @@ namespace Tinyinfo
 			this.gpuOutputBox = new System.Windows.Forms.TextBox();
 			this.boardTab = new System.Windows.Forms.TabPage();
 			this.boardOutputBox = new System.Windows.Forms.TextBox();
+			this.biosTab = new System.Windows.Forms.TabPage();
+			this.biosOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
 			this.ramTab.SuspendLayout();
 			this.gpuTab.SuspendLayout();
 			this.boardTab.SuspendLayout();
+			this.biosTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -242,6 +245,7 @@ namespace Tinyinfo
 			this.outputTabs.Controls.Add(this.ramTab);
 			this.outputTabs.Controls.Add(this.gpuTab);
 			this.outputTabs.Controls.Add(this.boardTab);
+			this.outputTabs.Controls.Add(this.biosTab);
 			this.outputTabs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.outputTabs.Location = new System.Drawing.Point(16, 33);
 			this.outputTabs.Name = "outputTabs";
@@ -347,6 +351,33 @@ namespace Tinyinfo
 			this.boardOutputBox.TabIndex = 7;
 			this.boardOutputBox.WordWrap = false;
 			// 
+			// biosTab
+			// 
+			this.biosTab.Controls.Add(this.biosOutputBox);
+			this.biosTab.Location = new System.Drawing.Point(4, 26);
+			this.biosTab.Name = "biosTab";
+			this.biosTab.Size = new System.Drawing.Size(644, 225);
+			this.biosTab.TabIndex = 4;
+			this.biosTab.Text = "BIOS";
+			this.biosTab.UseVisualStyleBackColor = true;
+			// 
+			// biosOutputBox
+			// 
+			this.biosOutputBox.AcceptsReturn = true;
+			this.biosOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.biosOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.biosOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.biosOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.biosOutputBox.Multiline = true;
+			this.biosOutputBox.Name = "biosOutputBox";
+			this.biosOutputBox.ReadOnly = true;
+			this.biosOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.biosOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.biosOutputBox.TabIndex = 7;
+			this.biosOutputBox.WordWrap = false;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -375,6 +406,8 @@ namespace Tinyinfo
 			this.gpuTab.PerformLayout();
 			this.boardTab.ResumeLayout(false);
 			this.boardTab.PerformLayout();
+			this.biosTab.ResumeLayout(false);
+			this.biosTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -408,6 +441,8 @@ namespace Tinyinfo
 		public System.Windows.Forms.TextBox gpuOutputBox;
 		private System.Windows.Forms.TabPage boardTab;
 		public System.Windows.Forms.TextBox boardOutputBox;
+		private System.Windows.Forms.TabPage biosTab;
+		public System.Windows.Forms.TextBox biosOutputBox;
 	}
 }
 
