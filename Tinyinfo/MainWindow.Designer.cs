@@ -30,48 +30,11 @@ namespace Tinyinfo
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("ID:");
-			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Manufacturer:");
-			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Model:");
-			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Description:");
-			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Socket:");
-			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Core Amount:");
-			System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Virtualization: ");
-			System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Current Clockspeed:");
-			System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Base Clockspeed:");
-			System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("CPU", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9});
-			System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("GPU ID:");
-			System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Video", new System.Windows.Forms.TreeNode[] {
-            treeNode11});
-			System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node3");
-			System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("RAM", new System.Windows.Forms.TreeNode[] {
-            treeNode13});
-			System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Node7");
-			System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Motherboard", new System.Windows.Forms.TreeNode[] {
-            treeNode15});
-			System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Node9");
-			System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("BIOS", new System.Windows.Forms.TreeNode[] {
-            treeNode17});
-			System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Node11");
-			System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Battery", new System.Windows.Forms.TreeNode[] {
-            treeNode19});
-			System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Node13");
-			System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Drives", new System.Windows.Forms.TreeNode[] {
-            treeNode21});
 			this.startButton = new System.Windows.Forms.Button();
 			this.infoLabel = new System.Windows.Forms.Label();
 			this.stopButton = new System.Windows.Forms.Button();
 			this.progressBar = new System.Windows.Forms.ProgressBar();
-			this.outputBox = new System.Windows.Forms.TextBox();
+			this.cpuOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
 			this.menuBar = new System.Windows.Forms.MainMenu(this.components);
 			this.fileDropdown = new System.Windows.Forms.MenuItem();
@@ -85,8 +48,32 @@ namespace Tinyinfo
 			this.aboutItem = new System.Windows.Forms.MenuItem();
 			this.githubItem = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel = new System.Windows.Forms.Panel();
-			this.outputTree = new System.Windows.Forms.TreeView();
+			this.outputTabs = new System.Windows.Forms.TabControl();
+			this.cpuTab = new System.Windows.Forms.TabPage();
+			this.ramTab = new System.Windows.Forms.TabPage();
+			this.gpuTab = new System.Windows.Forms.TabPage();
+			this.ramOutputBox = new System.Windows.Forms.TextBox();
+			this.gpuOutputBox = new System.Windows.Forms.TextBox();
+			this.boardTab = new System.Windows.Forms.TabPage();
+			this.boardOutputBox = new System.Windows.Forms.TextBox();
+			this.biosTab = new System.Windows.Forms.TabPage();
+			this.biosOutputBox = new System.Windows.Forms.TextBox();
+			this.battTab = new System.Windows.Forms.TabPage();
+			this.battOutputBox = new System.Windows.Forms.TextBox();
+			this.diskTab = new System.Windows.Forms.TabPage();
+			this.diskOutputBox = new System.Windows.Forms.TextBox();
+			this.netTab = new System.Windows.Forms.TabPage();
+			this.netOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
+			this.outputTabs.SuspendLayout();
+			this.cpuTab.SuspendLayout();
+			this.ramTab.SuspendLayout();
+			this.gpuTab.SuspendLayout();
+			this.boardTab.SuspendLayout();
+			this.biosTab.SuspendLayout();
+			this.battTab.SuspendLayout();
+			this.diskTab.SuspendLayout();
+			this.netTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -136,23 +123,22 @@ namespace Tinyinfo
 			this.progressBar.TabIndex = 5;
 			this.progressBar.Visible = false;
 			// 
-			// outputBox
+			// cpuOutputBox
 			// 
-			this.outputBox.AcceptsReturn = true;
-			this.outputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.cpuOutputBox.AcceptsReturn = true;
+			this.cpuOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.outputBox.BackColor = System.Drawing.SystemColors.Window;
-			this.outputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.outputBox.Location = new System.Drawing.Point(388, 96);
-			this.outputBox.Multiline = true;
-			this.outputBox.Name = "outputBox";
-			this.outputBox.ReadOnly = true;
-			this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.outputBox.Size = new System.Drawing.Size(264, 147);
-			this.outputBox.TabIndex = 6;
-			this.outputBox.Visible = false;
-			this.outputBox.WordWrap = false;
+			this.cpuOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.cpuOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cpuOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.cpuOutputBox.Multiline = true;
+			this.cpuOutputBox.Name = "cpuOutputBox";
+			this.cpuOutputBox.ReadOnly = true;
+			this.cpuOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.cpuOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.cpuOutputBox.TabIndex = 6;
+			this.cpuOutputBox.WordWrap = false;
 			// 
 			// onTopCheckbox
 			// 
@@ -259,77 +245,238 @@ namespace Tinyinfo
 			this.onTopBoxPanel.Size = new System.Drawing.Size(140, 40);
 			this.onTopBoxPanel.TabIndex = 8;
 			// 
-			// outputTree
+			// outputTabs
 			// 
-			this.outputTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.outputTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.outputTree.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.outputTree.HotTracking = true;
-			this.outputTree.Location = new System.Drawing.Point(16, 33);
-			this.outputTree.Name = "outputTree";
-			treeNode1.Name = "CpuIdNode";
-			treeNode1.Text = "ID:";
-			treeNode2.Name = "CpuManuNode";
-			treeNode2.Text = "Manufacturer:";
-			treeNode3.Name = "CpuModelNode";
-			treeNode3.Text = "Model:";
-			treeNode4.Name = "CpuDescNode";
-			treeNode4.Text = "Description:";
-			treeNode5.Name = "CpuSocketNode";
-			treeNode5.Text = "Socket:";
-			treeNode6.Name = "CpuCoresNode";
-			treeNode6.Text = "Core Amount:";
-			treeNode7.Name = "CpuVmxNode";
-			treeNode7.Text = "Virtualization: ";
-			treeNode8.Name = "CpuClockNode";
-			treeNode8.Text = "Current Clockspeed:";
-			treeNode9.Name = "CpuBaseNode";
-			treeNode9.Text = "Base Clockspeed:";
-			treeNode10.Name = "CpuNode";
-			treeNode10.Text = "CPU";
-			treeNode11.Name = "GpuIdNode";
-			treeNode11.Text = "GPU ID:";
-			treeNode12.Name = "VideoNode";
-			treeNode12.Text = "Video";
-			treeNode13.Name = "Node3";
-			treeNode13.Text = "Node3";
-			treeNode14.Name = "MemoryNode";
-			treeNode14.Text = "RAM";
-			treeNode15.Name = "Node7";
-			treeNode15.Text = "Node7";
-			treeNode16.Name = "MotherboardNode";
-			treeNode16.Text = "Motherboard";
-			treeNode17.Name = "Node9";
-			treeNode17.Text = "Node9";
-			treeNode18.Name = "BiosNode";
-			treeNode18.Text = "BIOS";
-			treeNode19.Name = "Node11";
-			treeNode19.Text = "Node11";
-			treeNode20.Name = "BatteryNode";
-			treeNode20.Text = "Battery";
-			treeNode21.Name = "Node13";
-			treeNode21.Text = "Node13";
-			treeNode22.Name = "DriveNode";
-			treeNode22.Text = "Drives";
-			this.outputTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode10,
-            treeNode12,
-            treeNode14,
-            treeNode16,
-            treeNode18,
-            treeNode20,
-            treeNode22});
-			this.outputTree.Size = new System.Drawing.Size(651, 255);
-			this.outputTree.TabIndex = 9;
+			this.outputTabs.Controls.Add(this.cpuTab);
+			this.outputTabs.Controls.Add(this.ramTab);
+			this.outputTabs.Controls.Add(this.gpuTab);
+			this.outputTabs.Controls.Add(this.boardTab);
+			this.outputTabs.Controls.Add(this.biosTab);
+			this.outputTabs.Controls.Add(this.battTab);
+			this.outputTabs.Controls.Add(this.diskTab);
+			this.outputTabs.Controls.Add(this.netTab);
+			this.outputTabs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.outputTabs.Location = new System.Drawing.Point(16, 33);
+			this.outputTabs.Name = "outputTabs";
+			this.outputTabs.SelectedIndex = 0;
+			this.outputTabs.Size = new System.Drawing.Size(652, 255);
+			this.outputTabs.TabIndex = 10;
+			// 
+			// cpuTab
+			// 
+			this.cpuTab.Controls.Add(this.cpuOutputBox);
+			this.cpuTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.cpuTab.Location = new System.Drawing.Point(4, 26);
+			this.cpuTab.Name = "cpuTab";
+			this.cpuTab.Padding = new System.Windows.Forms.Padding(3);
+			this.cpuTab.Size = new System.Drawing.Size(644, 225);
+			this.cpuTab.TabIndex = 0;
+			this.cpuTab.Text = "CPU";
+			this.cpuTab.ToolTipText = "Displays Information about the Computer\'s CPU";
+			this.cpuTab.UseVisualStyleBackColor = true;
+			// 
+			// ramTab
+			// 
+			this.ramTab.Controls.Add(this.ramOutputBox);
+			this.ramTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ramTab.Location = new System.Drawing.Point(4, 26);
+			this.ramTab.Name = "ramTab";
+			this.ramTab.Padding = new System.Windows.Forms.Padding(3);
+			this.ramTab.Size = new System.Drawing.Size(644, 225);
+			this.ramTab.TabIndex = 1;
+			this.ramTab.Text = "RAM";
+			this.ramTab.ToolTipText = "Displays information about the Computer\'s Memory";
+			this.ramTab.UseVisualStyleBackColor = true;
+			// 
+			// gpuTab
+			// 
+			this.gpuTab.Controls.Add(this.gpuOutputBox);
+			this.gpuTab.Location = new System.Drawing.Point(4, 26);
+			this.gpuTab.Name = "gpuTab";
+			this.gpuTab.Size = new System.Drawing.Size(644, 225);
+			this.gpuTab.TabIndex = 2;
+			this.gpuTab.Text = "GPU";
+			this.gpuTab.ToolTipText = "Displays information about the Computer\'s GPUs";
+			this.gpuTab.UseVisualStyleBackColor = true;
+			// 
+			// ramOutputBox
+			// 
+			this.ramOutputBox.AcceptsReturn = true;
+			this.ramOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ramOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.ramOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.ramOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.ramOutputBox.Multiline = true;
+			this.ramOutputBox.Name = "ramOutputBox";
+			this.ramOutputBox.ReadOnly = true;
+			this.ramOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.ramOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.ramOutputBox.TabIndex = 7;
+			this.ramOutputBox.WordWrap = false;
+			// 
+			// gpuOutputBox
+			// 
+			this.gpuOutputBox.AcceptsReturn = true;
+			this.gpuOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gpuOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.gpuOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gpuOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.gpuOutputBox.Multiline = true;
+			this.gpuOutputBox.Name = "gpuOutputBox";
+			this.gpuOutputBox.ReadOnly = true;
+			this.gpuOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.gpuOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.gpuOutputBox.TabIndex = 8;
+			this.gpuOutputBox.WordWrap = false;
+			// 
+			// boardTab
+			// 
+			this.boardTab.Controls.Add(this.boardOutputBox);
+			this.boardTab.Location = new System.Drawing.Point(4, 26);
+			this.boardTab.Name = "boardTab";
+			this.boardTab.Size = new System.Drawing.Size(644, 225);
+			this.boardTab.TabIndex = 3;
+			this.boardTab.Text = "Motherboard";
+			this.boardTab.UseVisualStyleBackColor = true;
+			// 
+			// boardOutputBox
+			// 
+			this.boardOutputBox.AcceptsReturn = true;
+			this.boardOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.boardOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.boardOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.boardOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.boardOutputBox.Multiline = true;
+			this.boardOutputBox.Name = "boardOutputBox";
+			this.boardOutputBox.ReadOnly = true;
+			this.boardOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.boardOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.boardOutputBox.TabIndex = 7;
+			this.boardOutputBox.WordWrap = false;
+			// 
+			// biosTab
+			// 
+			this.biosTab.Controls.Add(this.biosOutputBox);
+			this.biosTab.Location = new System.Drawing.Point(4, 26);
+			this.biosTab.Name = "biosTab";
+			this.biosTab.Size = new System.Drawing.Size(644, 225);
+			this.biosTab.TabIndex = 4;
+			this.biosTab.Text = "BIOS";
+			this.biosTab.UseVisualStyleBackColor = true;
+			// 
+			// biosOutputBox
+			// 
+			this.biosOutputBox.AcceptsReturn = true;
+			this.biosOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.biosOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.biosOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.biosOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.biosOutputBox.Multiline = true;
+			this.biosOutputBox.Name = "biosOutputBox";
+			this.biosOutputBox.ReadOnly = true;
+			this.biosOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.biosOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.biosOutputBox.TabIndex = 7;
+			this.biosOutputBox.WordWrap = false;
+			// 
+			// battTab
+			// 
+			this.battTab.Controls.Add(this.battOutputBox);
+			this.battTab.Location = new System.Drawing.Point(4, 26);
+			this.battTab.Name = "battTab";
+			this.battTab.Size = new System.Drawing.Size(644, 225);
+			this.battTab.TabIndex = 5;
+			this.battTab.Text = "Battery";
+			this.battTab.UseVisualStyleBackColor = true;
+			// 
+			// battOutputBox
+			// 
+			this.battOutputBox.AcceptsReturn = true;
+			this.battOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.battOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.battOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.battOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.battOutputBox.Multiline = true;
+			this.battOutputBox.Name = "battOutputBox";
+			this.battOutputBox.ReadOnly = true;
+			this.battOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.battOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.battOutputBox.TabIndex = 7;
+			this.battOutputBox.WordWrap = false;
+			// 
+			// diskTab
+			// 
+			this.diskTab.Controls.Add(this.diskOutputBox);
+			this.diskTab.Location = new System.Drawing.Point(4, 26);
+			this.diskTab.Name = "diskTab";
+			this.diskTab.Size = new System.Drawing.Size(644, 225);
+			this.diskTab.TabIndex = 6;
+			this.diskTab.Text = "Disk";
+			this.diskTab.UseVisualStyleBackColor = true;
+			// 
+			// diskOutputBox
+			// 
+			this.diskOutputBox.AcceptsReturn = true;
+			this.diskOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.diskOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.diskOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.diskOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.diskOutputBox.Multiline = true;
+			this.diskOutputBox.Name = "diskOutputBox";
+			this.diskOutputBox.ReadOnly = true;
+			this.diskOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.diskOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.diskOutputBox.TabIndex = 7;
+			this.diskOutputBox.WordWrap = false;
+			// 
+			// netTab
+			// 
+			this.netTab.Controls.Add(this.netOutputBox);
+			this.netTab.Location = new System.Drawing.Point(4, 26);
+			this.netTab.Name = "netTab";
+			this.netTab.Size = new System.Drawing.Size(644, 225);
+			this.netTab.TabIndex = 7;
+			this.netTab.Text = "Network";
+			this.netTab.UseVisualStyleBackColor = true;
+			// 
+			// netOutputBox
+			// 
+			this.netOutputBox.AcceptsReturn = true;
+			this.netOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.netOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.netOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.netOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.netOutputBox.Multiline = true;
+			this.netOutputBox.Name = "netOutputBox";
+			this.netOutputBox.ReadOnly = true;
+			this.netOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.netOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.netOutputBox.TabIndex = 7;
+			this.netOutputBox.WordWrap = false;
 			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
 			this.BackColor = System.Drawing.SystemColors.ControlLightLight;
 			this.ClientSize = new System.Drawing.Size(681, 371);
-			this.Controls.Add(this.outputBox);
-			this.Controls.Add(this.outputTree);
+			this.Controls.Add(this.outputTabs);
 			this.Controls.Add(this.onTopBoxPanel);
 			this.Controls.Add(this.progressBar);
 			this.Controls.Add(this.stopButton);
@@ -343,6 +490,23 @@ namespace Tinyinfo
 			this.Load += new System.EventHandler(this.Startup);
 			this.onTopBoxPanel.ResumeLayout(false);
 			this.onTopBoxPanel.PerformLayout();
+			this.outputTabs.ResumeLayout(false);
+			this.cpuTab.ResumeLayout(false);
+			this.cpuTab.PerformLayout();
+			this.ramTab.ResumeLayout(false);
+			this.ramTab.PerformLayout();
+			this.gpuTab.ResumeLayout(false);
+			this.gpuTab.PerformLayout();
+			this.boardTab.ResumeLayout(false);
+			this.boardTab.PerformLayout();
+			this.biosTab.ResumeLayout(false);
+			this.biosTab.PerformLayout();
+			this.battTab.ResumeLayout(false);
+			this.battTab.PerformLayout();
+			this.diskTab.ResumeLayout(false);
+			this.diskTab.PerformLayout();
+			this.netTab.ResumeLayout(false);
+			this.netTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -360,7 +524,7 @@ namespace Tinyinfo
 		private System.Windows.Forms.MenuItem helpDropdown;
 		private System.Windows.Forms.MenuItem aboutItem;
 		private System.Windows.Forms.MenuItem githubItem;
-		public System.Windows.Forms.TextBox outputBox;
+		public System.Windows.Forms.TextBox cpuOutputBox;
 		private System.Windows.Forms.Panel onTopBoxPanel;
 		private System.Windows.Forms.MenuItem refreshItem;
         private System.Windows.Forms.MenuItem fileDropdown;
@@ -368,7 +532,22 @@ namespace Tinyinfo
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem exitItem;
         private System.Windows.Forms.MenuItem btnExportAsJSON;
-		private System.Windows.Forms.TreeView outputTree;
+		private System.Windows.Forms.TabControl outputTabs;
+		private System.Windows.Forms.TabPage cpuTab;
+		private System.Windows.Forms.TabPage ramTab;
+		private System.Windows.Forms.TabPage gpuTab;
+		public System.Windows.Forms.TextBox ramOutputBox;
+		public System.Windows.Forms.TextBox gpuOutputBox;
+		private System.Windows.Forms.TabPage boardTab;
+		public System.Windows.Forms.TextBox boardOutputBox;
+		private System.Windows.Forms.TabPage biosTab;
+		public System.Windows.Forms.TextBox biosOutputBox;
+		private System.Windows.Forms.TabPage battTab;
+		public System.Windows.Forms.TextBox battOutputBox;
+		private System.Windows.Forms.TabPage diskTab;
+		public System.Windows.Forms.TextBox diskOutputBox;
+		private System.Windows.Forms.TabPage netTab;
+		public System.Windows.Forms.TextBox netOutputBox;
 	}
 }
 
