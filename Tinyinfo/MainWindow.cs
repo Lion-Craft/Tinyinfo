@@ -2,6 +2,7 @@ using Hardware.Info;
 using IniParser;
 using IniParser.Model;
 using Newtonsoft.Json;
+using NvAPIWrapper;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -206,6 +207,14 @@ namespace Tinyinfo
 			int id = 0;
 
 			string nl = Environment.NewLine;
+			//	Example usage
+			/*
+			foreach (var gpu in NvAPIWrapper.GPU.PhysicalGPU.GetPhysicalGPUs())
+			{
+				//	Displays Message Box with gpu chip name
+				MessageBox.Show(gpu.ArchitectInformation.ShortName);
+			}
+			*/
 
 			AppendTextSafe("Video: " + nl);
 
