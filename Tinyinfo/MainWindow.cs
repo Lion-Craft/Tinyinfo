@@ -209,7 +209,7 @@ namespace Tinyinfo
 
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Video: " + nl);
+			WriteTextSafe("Video: " + nl);
 
 			foreach (var gpu in hardwareInfo.VideoControllerList)
 			{
@@ -254,7 +254,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Motherboard: " + nl);
+			WriteTextSafe("Motherboard: " + nl);
 
 			foreach (var motherboard in hardwareInfo.MotherboardList)
 			{
@@ -278,7 +278,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("BIOS: " + nl);
+			WriteTextSafe("BIOS: " + nl);
 
 			foreach (var bios in hardwareInfo.BiosList)
 			{
@@ -304,7 +304,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Battery: " + nl);
+			WriteTextSafe("Battery: " + nl);
 			if (hardwareInfo.BatteryList.Count == 0)
 			{
 				AppendTextSafe("\tNot Present" + nl);
@@ -348,7 +348,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Drives: " + nl);
+			WriteTextSafe("Drives: " + nl);
 
 			foreach (var drive in hardwareInfo.DriveList)
 			{
@@ -387,7 +387,7 @@ namespace Tinyinfo
 
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Network Adapter: " + nl);
+			WriteTextSafe("Network Adapter: " + nl);
 
 			foreach (var netAdapt in hardwareInfo.NetworkAdapterList)
 			{
@@ -424,7 +424,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Memory:" + nl, "ramOutputBox");
+			WriteTextSafe("Memory:" + nl, "ramOutputBox");
 
 			foreach (var memory in hardwareInfo.MemoryList)
 			{
