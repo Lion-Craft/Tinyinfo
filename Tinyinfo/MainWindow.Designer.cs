@@ -137,6 +137,7 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.cpuOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.cpuOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.cpuOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.cpuOutputBox.Location = new System.Drawing.Point(0, 0);
 			this.cpuOutputBox.Multiline = true;
@@ -305,6 +306,7 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.ramOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.ramOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.ramOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.ramOutputBox.Location = new System.Drawing.Point(0, 0);
 			this.ramOutputBox.Multiline = true;
@@ -357,6 +359,7 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.gpuOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.gpuOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.gpuOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.gpuOutputBox.Location = new System.Drawing.Point(0, 0);
 			this.gpuOutputBox.Multiline = true;
@@ -370,10 +373,10 @@ namespace Tinyinfo
 			// apiTab
 			// 
 			this.apiTab.Controls.Add(this.nvapiOutputBox);
-			this.apiTab.Location = new System.Drawing.Point(4, 22);
+			this.apiTab.Location = new System.Drawing.Point(4, 26);
 			this.apiTab.Name = "apiTab";
 			this.apiTab.Padding = new System.Windows.Forms.Padding(3);
-			this.apiTab.Size = new System.Drawing.Size(633, 199);
+			this.apiTab.Size = new System.Drawing.Size(633, 195);
 			this.apiTab.TabIndex = 1;
 			this.apiTab.Text = "NvAPI";
 			this.apiTab.UseVisualStyleBackColor = true;
@@ -385,13 +388,14 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.nvapiOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.nvapiOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.nvapiOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.nvapiOutputBox.Location = new System.Drawing.Point(0, 0);
 			this.nvapiOutputBox.Multiline = true;
 			this.nvapiOutputBox.Name = "nvapiOutputBox";
 			this.nvapiOutputBox.ReadOnly = true;
 			this.nvapiOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.nvapiOutputBox.Size = new System.Drawing.Size(633, 199);
+			this.nvapiOutputBox.Size = new System.Drawing.Size(633, 195);
 			this.nvapiOutputBox.TabIndex = 9;
 			this.nvapiOutputBox.WordWrap = false;
 			// 
@@ -412,6 +416,7 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.boardOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.boardOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.boardOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.boardOutputBox.Location = new System.Drawing.Point(0, 0);
 			this.boardOutputBox.Multiline = true;
@@ -439,6 +444,7 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.biosOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.biosOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.biosOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.biosOutputBox.Location = new System.Drawing.Point(0, 0);
 			this.biosOutputBox.Multiline = true;
@@ -466,6 +472,7 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.battOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.battOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.battOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.battOutputBox.Location = new System.Drawing.Point(0, 0);
 			this.battOutputBox.Multiline = true;
@@ -493,6 +500,7 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.diskOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.diskOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.diskOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.diskOutputBox.Location = new System.Drawing.Point(0, 0);
 			this.diskOutputBox.Multiline = true;
@@ -520,6 +528,7 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.netOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.netOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.netOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.netOutputBox.Location = new System.Drawing.Point(0, 0);
 			this.netOutputBox.Multiline = true;
