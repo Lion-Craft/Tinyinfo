@@ -16,7 +16,11 @@ namespace Tinyinfo
 {
 	public partial class MainWindow : Form
 	{
+		//	Create Threads
 		private Thread thread;
+		private Thread cpuThread;
+		private Thread batteryThread;
+		private Thread netThread;
 
 		private static readonly IHardwareInfo hardwareInfo = new HardwareInfo();
 
@@ -26,7 +30,7 @@ namespace Tinyinfo
 		{
 			InitializeComponent();
 
-			
+			//	Load saved Theme settings
 			LoadTheme();
 		}
 
@@ -43,8 +47,11 @@ namespace Tinyinfo
 			//	Show Splash
 			splash.Show();
 
-			//	Create Thread on start
+			//	Create Threads on start
 			thread = new Thread(() => Getdata(true));
+			cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
+			batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
+			netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
 
 			//	Get info on load
 			Getdata(false);
@@ -58,11 +65,47 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshMinimumHardwareInfo()
 		{
-			hardwareInfo.RefreshCPUList(true);
+			//	Check if Thread is alive
+			if (cpuThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				cpuThread.Join();
+			}
+			else
+			{
+				//	Start Thread for CPU info
+				cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
+				cpuThread.IsBackground = true;
+				cpuThread.Start();
+			}
 
-			hardwareInfo.RefreshBatteryList();
+			//	Check if Thread is alive
+			if (batteryThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				batteryThread.Join();
+			}
+			else
+			{
+				//	Start Thread for Battery info
+				batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
+				batteryThread.IsBackground = true;
+				batteryThread.Start();
+			}
 
-			hardwareInfo.RefreshNetworkAdapterList();
+			//	Check if Thread is alive
+			if (netThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				netThread.Join();
+			}
+			else
+			{
+				//	Start Thread for Network info
+				netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
+				netThread.IsBackground = false;
+				netThread.Start();
+			}
 		}
 
 		/// <summary>
@@ -70,22 +113,12 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshAllHardwareInfo()
 		{
-			hardwareInfo.RefreshCPUList(true);
-
-			hardwareInfo.RefreshMemoryList();
-
-			hardwareInfo.RefreshBIOSList();
-
-			hardwareInfo.RefreshMotherboardList();
-
-			hardwareInfo.RefreshVideoControllerList();
-
-			hardwareInfo.RefreshBatteryList();
-
-			hardwareInfo.RefreshDriveList();
-
-			hardwareInfo.RefreshNetworkAdapterList();
+			//	Update info
+			hardwareInfo.RefreshAll();
 		}
+
+		//	Set maximum theoretical Refresh rate in ms
+		private int maxRefresh = 500;
 
 		/// <summary>
 		/// Collect system info and write to textBox1
@@ -102,28 +135,14 @@ namespace Tinyinfo
 					//	CPU Info
 					LoadCPUData();
 
-					//	Graphics
-					LoadVideoControllerData();
-
-					//	Memory
-					LoadMemoryData();
-
-					//	Motherboard
-					LoadMotherBoardData();
-
-					//	BIOS Info
-					LoadBIOSData();
-
 					//	Battery Info
 					LoadBatteryData();
-
-					//	Drive Info
-					LoadDrivesData();
 
 					//	Network Adapter Info
 					LoadNetworkAdaptersData();
 
-					//ShowInfo("");
+					//	TODO: Make better (This is just bad if were honest)
+					Thread.Sleep(maxRefresh);
 				} while (loop);
 			}
 			else
@@ -549,11 +568,9 @@ namespace Tinyinfo
 			startButton.Enabled = false;
 			infoLabel.Text = "Loading System Info.";
 			progressBar.Value = 25;
-			hardwareInfo.RefreshCPUList();
+			thread = new Thread(() => Getdata(true));
 			stopButton.Enabled = true;
-			infoLabel.Text = "Loading System Info..";
 			progressBar.Value = 50;
-			hardwareInfo.RefreshOperatingSystem();
 			infoLabel.Text = "Loading System Info...";
 			progressBar.Value = 75;
 			progressBar.Value = 85;
@@ -614,7 +631,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (!File.Exists("./tinyinfo.ini"))
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10\nrefresh=500");
 			}
 
 			//	Create ini parser and read ini file
@@ -683,6 +700,10 @@ namespace Tinyinfo
 			//	Set font size
 			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
 
+			//	Set refresh rate
+			maxRefresh = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
+
+			//	Apply font sizes
 			cpuOutputBox.Font = font;
 			outputTabs.Font = font;
 		}
