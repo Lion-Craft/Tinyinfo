@@ -79,21 +79,8 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshAllHardwareInfo()
 		{
-			hardwareInfo.RefreshCPUList(true);
-
-			hardwareInfo.RefreshMemoryList();
-
-			hardwareInfo.RefreshBIOSList();
-
-			hardwareInfo.RefreshMotherboardList();
-
-			hardwareInfo.RefreshVideoControllerList();
-
-			hardwareInfo.RefreshBatteryList();
-
-			hardwareInfo.RefreshDriveList();
-
-			hardwareInfo.RefreshNetworkAdapterList();
+			//	Update info
+			hardwareInfo.RefreshAll();
 		}
 
 		//	Set maximum theoretical Refresh rate in ms
@@ -547,11 +534,8 @@ namespace Tinyinfo
 			startButton.Enabled = false;
 			infoLabel.Text = "Loading System Info.";
 			progressBar.Value = 25;
-			hardwareInfo.RefreshCPUList();
 			stopButton.Enabled = true;
-			infoLabel.Text = "Loading System Info..";
 			progressBar.Value = 50;
-			hardwareInfo.RefreshOperatingSystem();
 			infoLabel.Text = "Loading System Info...";
 			progressBar.Value = 75;
 			progressBar.Value = 85;
