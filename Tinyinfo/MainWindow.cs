@@ -379,10 +379,12 @@ namespace Tinyinfo
 			string nl = Environment.NewLine;
 
 			WriteTextSafe("Battery: " + nl, "battOutputBox");
+
 			if (hardwareInfo.BatteryList.Count == 0)
 			{
-				AppendTextSafe("\tNot Present" + nl);
+				AppendTextSafe("\tNot Present" + nl, "battOutputBox");
 			}
+
 			foreach (var battery in hardwareInfo.BatteryList)
 			{
 				string statusInfo = $"\tStatus: {battery.BatteryStatus}{nl}";
@@ -410,9 +412,8 @@ namespace Tinyinfo
 					fullChargeCapacityInfo;
 
 				AppendTextSafe(result, "battOutputBox");
-				
-				ShowInfo("");
 			}
+			ShowInfo("");
 		}
 
 		/// <summary>
