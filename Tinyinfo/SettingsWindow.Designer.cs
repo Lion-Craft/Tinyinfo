@@ -160,6 +160,7 @@
 			// 
 			// refreshRateLabel
 			// 
+			this.refreshRateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.refreshRateLabel.AutoSize = true;
 			this.refreshRateLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.refreshRateLabel.Location = new System.Drawing.Point(144, 16);
@@ -185,7 +186,7 @@
 			this.Controls.Add(this.lightThemeRadioButton);
 			this.Controls.Add(this.fontSizeLabel);
 			this.Controls.Add(this.fontSizeUpDown);
-			this.MinimumSize = new System.Drawing.Size(250, 200);
+			this.MinimumSize = new System.Drawing.Size(285, 200);
 			this.Name = "SettingsWindow";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
