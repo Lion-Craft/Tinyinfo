@@ -53,10 +53,12 @@ namespace Tinyinfo
 			this.ramTab = new System.Windows.Forms.TabPage();
 			this.gpuTab = new System.Windows.Forms.TabPage();
 			this.ramOutputBox = new System.Windows.Forms.TextBox();
+			this.gpuOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
 			this.ramTab.SuspendLayout();
+			this.gpuTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -272,9 +274,10 @@ namespace Tinyinfo
 			// 
 			// gpuTab
 			// 
-			this.gpuTab.Location = new System.Drawing.Point(4, 22);
+			this.gpuTab.Controls.Add(this.gpuOutputBox);
+			this.gpuTab.Location = new System.Drawing.Point(4, 26);
 			this.gpuTab.Name = "gpuTab";
-			this.gpuTab.Size = new System.Drawing.Size(644, 229);
+			this.gpuTab.Size = new System.Drawing.Size(644, 225);
 			this.gpuTab.TabIndex = 2;
 			this.gpuTab.Text = "GPU";
 			this.gpuTab.ToolTipText = "Displays information about the Computer\'s GPUs";
@@ -296,6 +299,23 @@ namespace Tinyinfo
 			this.ramOutputBox.Size = new System.Drawing.Size(644, 225);
 			this.ramOutputBox.TabIndex = 7;
 			this.ramOutputBox.WordWrap = false;
+			// 
+			// gpuOutputBox
+			// 
+			this.gpuOutputBox.AcceptsReturn = true;
+			this.gpuOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gpuOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.gpuOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gpuOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.gpuOutputBox.Multiline = true;
+			this.gpuOutputBox.Name = "gpuOutputBox";
+			this.gpuOutputBox.ReadOnly = true;
+			this.gpuOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.gpuOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.gpuOutputBox.TabIndex = 8;
+			this.gpuOutputBox.WordWrap = false;
 			// 
 			// MainWindow
 			// 
@@ -321,6 +341,8 @@ namespace Tinyinfo
 			this.cpuTab.PerformLayout();
 			this.ramTab.ResumeLayout(false);
 			this.ramTab.PerformLayout();
+			this.gpuTab.ResumeLayout(false);
+			this.gpuTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -351,6 +373,7 @@ namespace Tinyinfo
 		private System.Windows.Forms.TabPage ramTab;
 		private System.Windows.Forms.TabPage gpuTab;
 		public System.Windows.Forms.TextBox ramOutputBox;
+		public System.Windows.Forms.TextBox gpuOutputBox;
 	}
 }
 

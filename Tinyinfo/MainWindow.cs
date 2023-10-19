@@ -209,7 +209,7 @@ namespace Tinyinfo
 
 			string nl = Environment.NewLine;
 
-			WriteTextSafe("Video: " + nl);
+			WriteTextSafe("Video: " + nl, "gpuOutputBox");
 
 			foreach (var gpu in hardwareInfo.VideoControllerList)
 			{
@@ -240,7 +240,7 @@ namespace Tinyinfo
 				string result = gpuIdInfo + nameInfo + manufacturerInfo + descriptionInfo + videoModeInfo + vramAmountInfo +
 					maxRefreshRateInfo + minRefreshRateInfo + driverInfo + driverVersionInfo + driverDateInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "gpuOutputBox");
 
 				id++;
 				ShowInfo("");
@@ -475,6 +475,9 @@ namespace Tinyinfo
 					break;
 				case "ramOutputBox":
 					textBox = ramOutputBox;
+					break;
+				case "gpuOutputBox":
+					textBox = gpuOutputBox;
 					break;
 			}
 			if (textBox.InvokeRequired)
