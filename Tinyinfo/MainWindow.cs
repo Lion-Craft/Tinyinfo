@@ -93,6 +93,9 @@ namespace Tinyinfo
 			hardwareInfo.RefreshNetworkAdapterList();
 		}
 
+		//	Set maximum theoretical Refresh rate in ms
+		private int maxRefresh = 500;
+
 		/// <summary>
 		/// Collect system info and write to textBox1
 		/// </summary>
@@ -113,6 +116,8 @@ namespace Tinyinfo
 
 					//	Network Adapter Info
 					LoadNetworkAdaptersData();
+
+					Thread.Sleep(maxRefresh);
 				} while (loop);
 			}
 			else
