@@ -321,12 +321,17 @@ namespace Tinyinfo
 							fan = $"\tFan Speed: {ex.Message}{nl}";
 						}
 					}
+					string temp = $"\tTemperatures: {nl}";
+					foreach (var sensor in nvgpu.ThermalInformation.ThermalSensors)
+					{
+						temp = temp + $"\t\t{sensor}{nl}";
+					}
 					string currentGraphicsClock = $"\tGraphics Clockspeed: {nvgpu.CurrentClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
 					string currentMemoryClock = $"\tMemory Clockspeed: {nvgpu.CurrentClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
 					string currentVideoClock = $"\tVideo Decode Clockspeed (If available): {nvgpu.CurrentClockFrequencies.VideoDecodingClock.Frequency / 1000}MHz{nl}";
 					
 
-					nvapiOutputBox.Text += gpuid + gpu + chip + cores + rops + shaders + graphicsBase + graphicsBoost + memoryBase + memoryBoost+ memoryBus + memorySize + memoryType + memoryManufacturer + memoryEcc + memoryEccOn + bios + bus + pcie + agp + fan + currentGraphicsClock + currentMemoryClock + currentVideoClock;
+					nvapiOutputBox.Text += gpuid + gpu + chip + cores + rops + shaders + graphicsBase + graphicsBoost + memoryBase + memoryBoost+ memoryBus + memorySize + memoryType + memoryManufacturer + memoryEcc + memoryEccOn + bios + bus + pcie + agp + fan + temp + currentGraphicsClock + currentMemoryClock + currentVideoClock;
 					nvid++;
 				}
 			}
