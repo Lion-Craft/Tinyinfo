@@ -305,7 +305,22 @@ namespace Tinyinfo
 					string bus = $"\tBUS Type: {nvgpu.BusInformation.BusType}{nl}";
 					string pcie = $"\t\tPCIe Lanes: {nvgpu.BusInformation.CurrentPCIeLanes}{nl}";
 					string agp = $"\t\tAGP: {nvgpu.BusInformation.AGPInformation}{nl}";
-					string fan = $"\tFan Speed: {nvgpu.CoolerInformation}{nl}";
+					string fan = "";
+					try
+					{
+						fan = $"\tFan Speed: {nvgpu.CoolerInformation}{nl}";
+					}
+					catch (Exception ex)
+					{
+						if (ex.Message.ToLower() == "nvapi_not_supported")
+						{
+							fan = $"\tFan Speed: N/A {nl}";
+						}
+						else
+						{
+							fan = $"\tFan Speed: {ex.Message}{nl}";
+						}
+					}
 					string currentGraphicsClock = $"\tGraphics Clockspeed: {nvgpu.CurrentClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
 					string currentMemoryClock = $"\tMemory Clockspeed: {nvgpu.CurrentClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
 					string currentVideoClock = $"\tVideo Decode Clockspeed (If available): {nvgpu.CurrentClockFrequencies.VideoDecodingClock.Frequency / 1000}MHz{nl}";
