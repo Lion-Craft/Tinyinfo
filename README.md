@@ -1,3 +1,4 @@
+<img src="https://github.com/Lion-Craft/Tinyinfo/blob/master/Logo/logo.png?raw=true" width="128"></img>
 # Tinyinfo
 Lightweight System Info tool for Windows written in C# using .NET Framework 4.7.2
 
