@@ -279,33 +279,61 @@ namespace Tinyinfo
 			//	Check what manufacturer the gpu is, if nvidia show nvapi info
 			if (manufacturer[0].ToLower() == "nvidia" || manufacturer[1].ToLower() == "nvidia")
 			{
+				//	Clear nvapi Textbox
 				nvapiOutputBox.Text = "";
+
+				//	Set GPU ID to 0
 				int nvid = 0;
+
+				//	Get GPU info
 				foreach (var nvgpu in PhysicalGPU.GetPhysicalGPUs())
 				{
+					//	GPU id
 					string gpuid = $"GPU {nvid}:{nl}";
-
+					//	Get GPU name
 					string gpu = $"\tGraphics Card: {nvgpu.FullName}{nl}";
+					//	Get GPU Chip name
 					string chip = $"\tChip: {nvgpu.ArchitectInformation.ShortName}{nl}";
+					//	Get amount of Cores
 					string cores = $"\tCores: {nvgpu.ArchitectInformation.NumberOfCores}{nl}";
+					//	Get amount of ROPs
 					string rops = $"\tROPs: {nvgpu.ArchitectInformation.NumberOfROPs}{nl}";
+					//	Get amount of Shader Pipelines
 					string shaders = $"\tShader Pipelines: {nvgpu.ArchitectInformation.NumberOfShaderPipelines}{nl}";
+					//	Get Graphics Base Freq
 					string graphicsBase = $"\tGraphics Base Clock: {nvgpu.BaseClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
+					//	Get Graphics Boost Freq
 					string graphicsBoost = $"\tGraphics Boost Clock: {nvgpu.BoostClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
+					//	Get Memory Base Freq
 					string memoryBase = $"\tMemory Base Clock: {nvgpu.BaseClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
+					//	Get Memory Boost Freq
 					string memoryBoost = $"\tMemory Boost Clock: {nvgpu.BoostClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
+					//	Get amount of TPCs
 					//string tpcs = $"\tTPCs: {nvgpu.ArchitectInformation.TotalNumberOfTPCs}{nl}";	//	Kinda buggy
+					//	Get Memory Bus Width
 					string memoryBus = $"\tMemory Bus: {nvgpu.MemoryInformation.FrameBufferBandwidth} Bit{nl}";
+					//	Get Memory Size
 					string memorySize = $"\tPhysicalMemory Size: {nvgpu.MemoryInformation.PhysicalFrameBufferSizeInkB / 1000}MB{nl}";
+					//	Get Memory Type (Note: Result of "14" appears to be GDDR6)
 					string memoryType = $"\tMemory Type: {nvgpu.MemoryInformation.RAMType}{nl}";
+					//	Get Memory manufacturer
 					string memoryManufacturer = $"\tMemory Manufacturer: {nvgpu.MemoryInformation.RAMMaker}{nl}";
+					//	Get ECC Memory Support state
 					string memoryEcc = $"\tECC Supported: {nvgpu.ECCMemoryInformation.IsSupported}{nl}";
+					//	Get ECC Memory state
 					string memoryEccOn = $"\t\tEnabled: {nvgpu.ECCMemoryInformation.IsEnabled}{nl}";
+					//	Get vBIOS Version
 					string bios = $"\tBIOS Version: {nvgpu.Bios.VersionString}{nl}";
+					//	Get Bus type
 					string bus = $"\tBUS Type: {nvgpu.BusInformation.BusType}{nl}";
+					//	Get amount of PCIe Lanes
 					string pcie = $"\t\tPCIe Lanes: {nvgpu.BusInformation.CurrentPCIeLanes}{nl}";
+					//	Get AGP Bus info
 					string agp = $"\t\tAGP: {nvgpu.BusInformation.AGPInformation}{nl}";
+
+					//	Create Fan string
 					string fan = "";
+					//	Try reading Fan Speed, if not available print not available message
 					try
 					{
 						fan = $"\tFan Speed: {nvgpu.CoolerInformation}{nl}";
@@ -321,17 +349,26 @@ namespace Tinyinfo
 							fan = $"\tFan Speed: {ex.Message}{nl}";
 						}
 					}
+
+					//	Get Temperatures
 					string temp = $"\tTemperatures: {nl}";
+
 					foreach (var sensor in nvgpu.ThermalInformation.ThermalSensors)
 					{
-						temp = temp + $"\t\t{sensor}{nl}";
+						temp += $"\t\t{sensor}{nl}";
 					}
-					string currentGraphicsClock = $"\tGraphics Clockspeed: {nvgpu.CurrentClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
-					string currentMemoryClock = $"\tMemory Clockspeed: {nvgpu.CurrentClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
-					string currentVideoClock = $"\tVideo Decode Clockspeed (If available): {nvgpu.CurrentClockFrequencies.VideoDecodingClock.Frequency / 1000}MHz{nl}";
-					
 
+					//	Get Grpahics Clockspeed
+					string currentGraphicsClock = $"\tGraphics Clockspeed: {nvgpu.CurrentClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
+					//	Get Memory Clockspeed
+					string currentMemoryClock = $"\tMemory Clockspeed: {nvgpu.CurrentClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
+					//	Get Video Decode Clockspeed
+					string currentVideoClock = $"\tVideo Decode Clockspeed (If available): {nvgpu.CurrentClockFrequencies.VideoDecodingClock.Frequency / 1000}MHz{nl}";
+
+					//	Output GPU info
 					nvapiOutputBox.Text += gpuid + gpu + chip + cores + rops + shaders + graphicsBase + graphicsBoost + memoryBase + memoryBoost+ memoryBus + memorySize + memoryType + memoryManufacturer + memoryEcc + memoryEccOn + bios + bus + pcie + agp + fan + temp + currentGraphicsClock + currentMemoryClock + currentVideoClock;
+					
+					//	Increment ID
 					nvid++;
 				}
 			}
