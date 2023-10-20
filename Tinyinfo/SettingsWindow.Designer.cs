@@ -37,15 +37,23 @@
 			this.cancelButton = new System.Windows.Forms.Button();
 			this.refreshRateUpDown = new System.Windows.Forms.NumericUpDown();
 			this.refreshRateLabel = new System.Windows.Forms.Label();
+			this.fontDialog = new System.Windows.Forms.FontDialog();
+			this.fontButton = new System.Windows.Forms.Button();
+			this.settingTabs = new System.Windows.Forms.TabControl();
+			this.themeTab = new System.Windows.Forms.TabPage();
+			this.generalTab = new System.Windows.Forms.TabPage();
 			((System.ComponentModel.ISupportInitialize)(this.fontSizeUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.refreshRateUpDown)).BeginInit();
+			this.settingTabs.SuspendLayout();
+			this.themeTab.SuspendLayout();
+			this.generalTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// fontSizeUpDown
 			// 
 			this.fontSizeUpDown.Cursor = System.Windows.Forms.Cursors.Default;
 			this.fontSizeUpDown.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.fontSizeUpDown.Location = new System.Drawing.Point(68, 12);
+			this.fontSizeUpDown.Location = new System.Drawing.Point(66, 101);
 			this.fontSizeUpDown.Maximum = new decimal(new int[] {
             72,
             0,
@@ -69,7 +77,7 @@
 			// 
 			this.fontSizeLabel.AutoSize = true;
 			this.fontSizeLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.fontSizeLabel.Location = new System.Drawing.Point(8, 14);
+			this.fontSizeLabel.Location = new System.Drawing.Point(6, 103);
 			this.fontSizeLabel.Name = "fontSizeLabel";
 			this.fontSizeLabel.Size = new System.Drawing.Size(54, 13);
 			this.fontSizeLabel.TabIndex = 1;
@@ -80,7 +88,7 @@
 			this.lightThemeRadioButton.AutoSize = true;
 			this.lightThemeRadioButton.Checked = true;
 			this.lightThemeRadioButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lightThemeRadioButton.Location = new System.Drawing.Point(10, 62);
+			this.lightThemeRadioButton.Location = new System.Drawing.Point(6, 23);
 			this.lightThemeRadioButton.Name = "lightThemeRadioButton";
 			this.lightThemeRadioButton.Size = new System.Drawing.Size(51, 17);
 			this.lightThemeRadioButton.TabIndex = 2;
@@ -92,7 +100,7 @@
 			// 
 			this.darkThemeRadioButton.AutoSize = true;
 			this.darkThemeRadioButton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.darkThemeRadioButton.Location = new System.Drawing.Point(10, 85);
+			this.darkThemeRadioButton.Location = new System.Drawing.Point(6, 46);
 			this.darkThemeRadioButton.Name = "darkThemeRadioButton";
 			this.darkThemeRadioButton.Size = new System.Drawing.Size(49, 17);
 			this.darkThemeRadioButton.TabIndex = 3;
@@ -103,7 +111,7 @@
 			// 
 			this.themeLabel.AutoSize = true;
 			this.themeLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.themeLabel.Location = new System.Drawing.Point(8, 46);
+			this.themeLabel.Location = new System.Drawing.Point(4, 7);
 			this.themeLabel.Name = "themeLabel";
 			this.themeLabel.Size = new System.Drawing.Size(41, 13);
 			this.themeLabel.TabIndex = 4;
@@ -113,7 +121,7 @@
 			// 
 			this.applyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.applyButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.applyButton.Location = new System.Drawing.Point(10, 135);
+			this.applyButton.Location = new System.Drawing.Point(10, 318);
 			this.applyButton.Name = "applyButton";
 			this.applyButton.Size = new System.Drawing.Size(97, 31);
 			this.applyButton.TabIndex = 5;
@@ -126,7 +134,7 @@
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.cancelButton.Location = new System.Drawing.Point(192, 135);
+			this.cancelButton.Location = new System.Drawing.Point(375, 318);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(97, 31);
 			this.cancelButton.TabIndex = 6;
@@ -135,7 +143,6 @@
 			// 
 			// refreshRateUpDown
 			// 
-			this.refreshRateUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.refreshRateUpDown.Cursor = System.Windows.Forms.Cursors.Default;
 			this.refreshRateUpDown.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.refreshRateUpDown.Increment = new decimal(new int[] {
@@ -143,7 +150,7 @@
             0,
             0,
             0});
-			this.refreshRateUpDown.Location = new System.Drawing.Point(246, 14);
+			this.refreshRateUpDown.Location = new System.Drawing.Point(105, 12);
 			this.refreshRateUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -160,14 +167,82 @@
 			// 
 			// refreshRateLabel
 			// 
-			this.refreshRateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.refreshRateLabel.AutoSize = true;
 			this.refreshRateLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.refreshRateLabel.Location = new System.Drawing.Point(144, 16);
+			this.refreshRateLabel.Location = new System.Drawing.Point(3, 14);
 			this.refreshRateLabel.Name = "refreshRateLabel";
 			this.refreshRateLabel.Size = new System.Drawing.Size(96, 13);
 			this.refreshRateLabel.TabIndex = 8;
 			this.refreshRateLabel.Text = "Max Refresh Rate";
+			// 
+			// fontDialog
+			// 
+			this.fontDialog.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.fontDialog.ShowColor = true;
+			// 
+			// fontButton
+			// 
+			this.fontButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.fontButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.fontButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.fontButton.Location = new System.Drawing.Point(349, 231);
+			this.fontButton.Name = "fontButton";
+			this.fontButton.Size = new System.Drawing.Size(97, 31);
+			this.fontButton.TabIndex = 9;
+			this.fontButton.Text = "Change Font";
+			this.fontButton.UseVisualStyleBackColor = true;
+			this.fontButton.Click += new System.EventHandler(this.fontButton_Click);
+			// 
+			// settingTabs
+			// 
+			this.settingTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.settingTabs.Controls.Add(this.themeTab);
+			this.settingTabs.Controls.Add(this.generalTab);
+			this.settingTabs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.settingTabs.HotTrack = true;
+			this.settingTabs.Location = new System.Drawing.Point(10, 12);
+			this.settingTabs.Multiline = true;
+			this.settingTabs.Name = "settingTabs";
+			this.settingTabs.SelectedIndex = 0;
+			this.settingTabs.ShowToolTips = true;
+			this.settingTabs.Size = new System.Drawing.Size(462, 300);
+			this.settingTabs.TabIndex = 10;
+			// 
+			// themeTab
+			// 
+			this.themeTab.BackColor = System.Drawing.Color.White;
+			this.themeTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.themeTab.Controls.Add(this.lightThemeRadioButton);
+			this.themeTab.Controls.Add(this.fontButton);
+			this.themeTab.Controls.Add(this.darkThemeRadioButton);
+			this.themeTab.Controls.Add(this.themeLabel);
+			this.themeTab.Controls.Add(this.fontSizeLabel);
+			this.themeTab.Controls.Add(this.fontSizeUpDown);
+			this.themeTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.themeTab.Location = new System.Drawing.Point(4, 26);
+			this.themeTab.Name = "themeTab";
+			this.themeTab.Padding = new System.Windows.Forms.Padding(3);
+			this.themeTab.Size = new System.Drawing.Size(454, 270);
+			this.themeTab.TabIndex = 0;
+			this.themeTab.Text = "Theme";
+			this.themeTab.ToolTipText = "Change Theme Settings";
+			// 
+			// generalTab
+			// 
+			this.generalTab.BackColor = System.Drawing.Color.White;
+			this.generalTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.generalTab.Controls.Add(this.refreshRateUpDown);
+			this.generalTab.Controls.Add(this.refreshRateLabel);
+			this.generalTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.generalTab.Location = new System.Drawing.Point(4, 26);
+			this.generalTab.Name = "generalTab";
+			this.generalTab.Padding = new System.Windows.Forms.Padding(3);
+			this.generalTab.Size = new System.Drawing.Size(454, 270);
+			this.generalTab.TabIndex = 1;
+			this.generalTab.Text = "General";
+			this.generalTab.ToolTipText = "Change Generic Settings";
 			// 
 			// SettingsWindow
 			// 
@@ -176,16 +251,10 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.White;
 			this.CancelButton = this.cancelButton;
-			this.ClientSize = new System.Drawing.Size(301, 178);
-			this.Controls.Add(this.refreshRateLabel);
-			this.Controls.Add(this.refreshRateUpDown);
+			this.ClientSize = new System.Drawing.Size(484, 361);
+			this.Controls.Add(this.settingTabs);
 			this.Controls.Add(this.cancelButton);
 			this.Controls.Add(this.applyButton);
-			this.Controls.Add(this.themeLabel);
-			this.Controls.Add(this.darkThemeRadioButton);
-			this.Controls.Add(this.lightThemeRadioButton);
-			this.Controls.Add(this.fontSizeLabel);
-			this.Controls.Add(this.fontSizeUpDown);
 			this.MinimumSize = new System.Drawing.Size(285, 200);
 			this.Name = "SettingsWindow";
 			this.ShowIcon = false;
@@ -194,8 +263,12 @@
 			this.Text = "Tinyinfo Settings";
 			((System.ComponentModel.ISupportInitialize)(this.fontSizeUpDown)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.refreshRateUpDown)).EndInit();
+			this.settingTabs.ResumeLayout(false);
+			this.themeTab.ResumeLayout(false);
+			this.themeTab.PerformLayout();
+			this.generalTab.ResumeLayout(false);
+			this.generalTab.PerformLayout();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
@@ -210,5 +283,10 @@
 		private System.Windows.Forms.Button cancelButton;
 		private System.Windows.Forms.NumericUpDown refreshRateUpDown;
 		private System.Windows.Forms.Label refreshRateLabel;
+		private System.Windows.Forms.FontDialog fontDialog;
+		private System.Windows.Forms.Button fontButton;
+		private System.Windows.Forms.TabControl settingTabs;
+		private System.Windows.Forms.TabPage themeTab;
+		private System.Windows.Forms.TabPage generalTab;
 	}
 }
