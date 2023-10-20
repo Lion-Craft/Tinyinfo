@@ -748,30 +748,30 @@ namespace Tinyinfo
 			{
 				//	Dark theme
 				ForeColor = Color.White;
-				BackColor = Color.Black;
+				BackColor = Color.Gray;
 				startButton.ForeColor = Color.Black;
 				stopButton.ForeColor = Color.Black;
-				onTopCheckbox.ForeColor = Color.Black;
+				onTopCheckbox.ForeColor = Color.White;
 				onTopCheckbox.BackColor = Color.Gray;
 				onTopBoxPanel.BackColor = Color.FromName("ButtonFace");
 				onTopBoxPanel.ForeColor = Color.White;
-				cpuOutputBox.BackColor = Color.Black;
+				cpuOutputBox.BackColor = Color.DimGray;
 				cpuOutputBox.ForeColor = Color.White;
-				ramOutputBox.BackColor = Color.Black;
+				ramOutputBox.BackColor = Color.DimGray;
 				ramOutputBox.ForeColor = Color.White; 
-				gpuOutputBox.BackColor = Color.Black;
+				gpuOutputBox.BackColor = Color.DimGray;
 				gpuOutputBox.ForeColor = Color.White; 
-				boardOutputBox.BackColor = Color.Black;
+				boardOutputBox.BackColor = Color.DimGray;
 				boardOutputBox.ForeColor = Color.White; 
-				biosOutputBox.BackColor = Color.Black;
+				biosOutputBox.BackColor = Color.DimGray;
 				biosOutputBox.ForeColor = Color.White; 
-				battOutputBox.BackColor = Color.Black;
+				battOutputBox.BackColor = Color.DimGray;
 				battOutputBox.ForeColor = Color.White; 
-				diskOutputBox.BackColor = Color.Black;
+				diskOutputBox.BackColor = Color.DimGray;
 				diskOutputBox.ForeColor = Color.White; 
-				netOutputBox.BackColor = Color.Black;
+				netOutputBox.BackColor = Color.DimGray;
 				netOutputBox.ForeColor = Color.White;
-				nvapiOutputBox.BackColor = Color.Black;
+				nvapiOutputBox.BackColor = Color.DimGray;
 				nvapiOutputBox.ForeColor = Color.White;
 			}
 			else

@@ -37,7 +37,7 @@ namespace Tinyinfo
 				//	dark theme
 				lightThemeRadioButton.Checked = false;
 				darkThemeRadioButton.Checked = true;
-				ActiveForm.BackColor = Color.Black;
+				ActiveForm.BackColor = Color.Gray;
 				ActiveForm.ForeColor = Color.White;
 				applyButton.ForeColor = Color.Black;
 				cancelButton.ForeColor = Color.Black;
@@ -68,7 +68,7 @@ namespace Tinyinfo
 			{
 				//	Dark theme
 				ForeColor = Color.White;
-				BackColor = Color.Black;
+				BackColor = Color.Gray;
 				applyButton.ForeColor = Color.Black;
 				cancelButton.ForeColor = Color.Black;
 			}
