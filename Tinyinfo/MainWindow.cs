@@ -65,6 +65,7 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshMinimumHardwareInfo()
 		{
+			//	TODO: Make better. This entire thing is a mess. What the hell was i thinking.
 			//	Check if Thread is alive
 			if (cpuThread.IsAlive)
 			{
