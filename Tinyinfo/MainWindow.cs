@@ -313,7 +313,7 @@ namespace Tinyinfo
 					//	Get Memory Bus Width
 					string memoryBus = $"\tMemory Bus: {nvgpu.MemoryInformation.FrameBufferBandwidth} Bit{nl}";
 					//	Get Memory Size
-					string memorySize = $"\tPhysicalMemory Size: {nvgpu.MemoryInformation.PhysicalFrameBufferSizeInkB / 1000}MB{nl}";
+					string memorySize = $"\tPhysical Memory Size: {nvgpu.MemoryInformation.PhysicalFrameBufferSizeInkB / 1000}MB{nl}";
 					//	Get Memory Type (Note: Result of "14" appears to be GDDR6)
 					string memoryType = $"\tMemory Type: {nvgpu.MemoryInformation.RAMType}{nl}";
 					//	Get Memory manufacturer
