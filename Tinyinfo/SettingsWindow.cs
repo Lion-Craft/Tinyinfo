@@ -58,6 +58,17 @@ namespace Tinyinfo
 
 			//	load refresh rate setting
 			refreshRateUpDown.Value = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
+
+			//	load font
+			var font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToSingle(data.GetKey("tinyinfo.fontsize")));
+			ActiveForm.Font = font;
+			fontButton.Font = font;
+			settingTabs.Font = font;
+			themeLabel.Font = font;
+			themeTab.Font = font;
+			fontSizeLabel.Font = font;
+			applyButton.Font = font;
+			cancelButton.Font = font;
 		}
 
 		public void refreshTheme()
@@ -65,7 +76,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (File.Exists("./tinyinfo.ini") == false)
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10\nrefresh=500");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10\nrefresh=500\nfontsize=10\nfontname=Segoe UI");
 			}
 
 			//	Create ini parser and read ini file
@@ -136,7 +147,30 @@ namespace Tinyinfo
 
 		private void fontButton_Click(object sender, EventArgs e)
 		{
-			fontDialog.ShowDialog();
+			var parser = new FileIniDataParser();
+			IniData data = parser.ReadFile("./tinyinfo.ini");
+
+			if (fontDialog.ShowDialog() != DialogResult.OK)
+			{
+				return;
+			}
+			data["tinyinfo"]["fontname"] = fontDialog.Font.Name.ToString();
+			parser.WriteFile("./tinyinfo.ini", data);
+			data["tinyinfo"]["fontsize"] = fontDialog.Font.SizeInPoints.ToString().Replace(",", ".");
+			parser.WriteFile("./tinyinfo.ini", data);
+
+			
+			//	WHY DO YOU NOT WORK
+			var font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToSingle(data.GetKey("tinyinfo.fontsize")) / 100);
+			MessageBox.Show(font.Size.ToString());
+			ActiveForm.Font = font;
+			fontButton.Font = font;
+			settingTabs.Font = font;
+			themeLabel.Font = font;
+			themeTab.Font = font;
+			fontSizeLabel.Font = font;
+			applyButton.Font = font;
+			cancelButton.Font = font;
 		}
 	}
 }
