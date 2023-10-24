@@ -61,6 +61,7 @@ namespace Tinyinfo
 
 			//	load font
 			var font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToSingle(data.GetKey("tinyinfo.fontsize")));
+			fontDialog.Font = font;
 			ActiveForm.Font = font;
 			fontButton.Font = font;
 			settingTabs.Font = font;
