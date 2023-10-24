@@ -156,12 +156,11 @@ namespace Tinyinfo
 			}
 			data["tinyinfo"]["fontname"] = fontDialog.Font.Name.ToString();
 			parser.WriteFile("./tinyinfo.ini", data);
-			data["tinyinfo"]["fontsize"] = fontDialog.Font.SizeInPoints.ToString().Replace(",", ".");
+			data["tinyinfo"]["fontsize"] = Math.Round(fontDialog.Font.SizeInPoints, 0).ToString();
 			parser.WriteFile("./tinyinfo.ini", data);
 
-			
-			//	WHY DO YOU NOT WORK
-			var font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToSingle(data.GetKey("tinyinfo.fontsize")) / 100);
+			//	Apply font changes.
+			var font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")));
 			MessageBox.Show(font.Size.ToString());
 			ActiveForm.Font = font;
 			fontButton.Font = font;

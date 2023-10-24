@@ -373,10 +373,10 @@ namespace Tinyinfo
 			// apiTab
 			// 
 			this.apiTab.Controls.Add(this.nvapiOutputBox);
-			this.apiTab.Location = new System.Drawing.Point(4, 26);
+			this.apiTab.Location = new System.Drawing.Point(4, 22);
 			this.apiTab.Name = "apiTab";
 			this.apiTab.Padding = new System.Windows.Forms.Padding(3);
-			this.apiTab.Size = new System.Drawing.Size(633, 195);
+			this.apiTab.Size = new System.Drawing.Size(633, 199);
 			this.apiTab.TabIndex = 1;
 			this.apiTab.Text = "NvAPI";
 			this.apiTab.UseVisualStyleBackColor = true;
@@ -395,7 +395,7 @@ namespace Tinyinfo
 			this.nvapiOutputBox.Name = "nvapiOutputBox";
 			this.nvapiOutputBox.ReadOnly = true;
 			this.nvapiOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.nvapiOutputBox.Size = new System.Drawing.Size(633, 195);
+			this.nvapiOutputBox.Size = new System.Drawing.Size(633, 199);
 			this.nvapiOutputBox.TabIndex = 9;
 			this.nvapiOutputBox.WordWrap = false;
 			// 
