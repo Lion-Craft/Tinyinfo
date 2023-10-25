@@ -113,7 +113,7 @@
             0,
             0,
             0});
-			this.refreshRateUpDown.Location = new System.Drawing.Point(105, 12);
+			this.refreshRateUpDown.Location = new System.Drawing.Point(127, 12);
 			this.refreshRateUpDown.Maximum = new decimal(new int[] {
             10000,
             0,
