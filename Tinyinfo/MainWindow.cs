@@ -806,8 +806,28 @@ namespace Tinyinfo
 				nvapiOutputBox.ForeColor = Color.Black;
 			}
 
-			//	Set font size
-			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
+			//	Apply font changes
+			FontStyle fontStyle;
+			string savedStyle = data.GetKey("tinyinfo.fontstyle");
+			switch (savedStyle)
+			{
+				default:
+					fontStyle = FontStyle.Regular;
+					break;
+				case "FontStyle.Bold":
+					fontStyle = FontStyle.Bold;
+					break;
+				case "FontStyle.Italic":
+					fontStyle = FontStyle.Italic;
+					break;
+				case "FontStyle.Strikeout":
+					fontStyle = FontStyle.Strikeout;
+					break;
+				case "FontStyle.Underline":
+					fontStyle = FontStyle.Underline;
+					break;
+			}
+			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);
 
 			//	Set refresh rate
 			maxRefresh = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
@@ -823,6 +843,11 @@ namespace Tinyinfo
 			boardOutputBox.Font = font;
 			netOutputBox.Font = font;
 			outputTabs.Font = font;
+			gpuTabs.Font = font;
+			startButton.Font = font;
+			stopButton.Font = font;
+			infoLabel.Font = font;
+			onTopCheckbox.Font = font;
 		}
 
 		/// <summary>
