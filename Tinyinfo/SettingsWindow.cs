@@ -64,16 +64,19 @@ namespace Tinyinfo
 				default:
 					fontStyle = FontStyle.Regular;
 					break;
-				case "FontStyle.Bold":
+				case "Bold":
 					fontStyle = FontStyle.Bold;
 					break;
-				case "FontStyle.Italic":
+				case "Bold, Italic":
+					fontStyle = FontStyle.Bold | FontStyle.Italic;
+					break;
+				case "Italic":
 					fontStyle = FontStyle.Italic;
 					break;
-				case "FontStyle.Strikeout":
+				case "Strikeout":
 					fontStyle = FontStyle.Strikeout;
 					break;
-				case "FontStyle.Underline":
+				case "Underline":
 					fontStyle= FontStyle.Underline;
 					break;
 			}
@@ -187,16 +190,19 @@ namespace Tinyinfo
 				default:
 					fontStyle = FontStyle.Regular;
 					break;
-				case "FontStyle.Bold":
+				case "Bold":
 					fontStyle = FontStyle.Bold;
 					break;
-				case "FontStyle.Italic":
+				case "Bold, Italic":
+					fontStyle = FontStyle.Bold | FontStyle.Italic;
+					break;
+				case "Italic":
 					fontStyle = FontStyle.Italic;
 					break;
-				case "FontStyle.Strikeout":
+				case "Strikeout":
 					fontStyle = FontStyle.Strikeout;
 					break;
-				case "FontStyle.Underline":
+				case "Underline":
 					fontStyle= FontStyle.Underline;
 					break;
 			}
