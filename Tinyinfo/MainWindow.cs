@@ -736,7 +736,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (!File.Exists("./tinyinfo.ini"))
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular\ntransparentsplash=false");
 			}
 
 			//	Create ini parser and read ini file
@@ -979,6 +979,8 @@ namespace Tinyinfo
 
 				string driveListJson = JsonConvert.SerializeObject(hardwareInfo.DriveList);
 
+				//string nvapiListJson = JsonConvert.SerializeObject();
+
 				// I commented this one because for some reason it was the only one giving me a weird exception. I don't know.
 				//string networkAdapterListJson = JsonConvert.SerializeObject(hardwareInfo.NetworkAdapterList);
 
@@ -991,6 +993,7 @@ namespace Tinyinfo
 					BiosList = biosListJson,
 					BatteryList = batteryListJson,
 					DriveList = driveListJson,
+					//NvapiList = nvapiListJson,
 					//NetworkAdapterList = networkAdapterListJson
 				};
 
