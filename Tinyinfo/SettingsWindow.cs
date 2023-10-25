@@ -159,10 +159,32 @@ namespace Tinyinfo
 			parser.WriteFile("./tinyinfo.ini", data);
 			data["tinyinfo"]["fontsize"] = Math.Round(fontDialog.Font.SizeInPoints, 0).ToString();
 			parser.WriteFile("./tinyinfo.ini", data);
+			data["tinyinfo"]["fontstyle"] = fontDialog.Font.Style.ToString();
+			parser.WriteFile("./tinyinfo.ini", data);
 
 			//	Apply font changes.
-			var font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")));
-			MessageBox.Show(font.Size.ToString());
+			FontStyle fontStyle;
+			string savedStyle = data.GetKey("tinyinfo.fontstyle");
+			switch (savedStyle)
+			{
+				default:
+					fontStyle = FontStyle.Regular;
+					break;
+				case "FontStyle.Bold":
+					fontStyle = FontStyle.Bold;
+					break;
+				case "FontStyle.Italic":
+					fontStyle = FontStyle.Italic;
+					break;
+				case "FontStyle.Strikeout":
+					fontStyle = FontStyle.Strikeout;
+					break;
+				case "FontStyle.Underline":
+					fontStyle= FontStyle.Underline;
+					break;
+			}
+			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);
+			//	MessageBox.Show(font.Size.ToString());
 			ActiveForm.Font = font;
 			fontButton.Font = font;
 			settingTabs.Font = font;
