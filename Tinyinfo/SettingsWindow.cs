@@ -88,6 +88,17 @@ namespace Tinyinfo
 			darkThemeRadioButton.Font = font;
 			refreshRateLabel.Font = font;
 			refreshRateUpDown.Font = font;
+			splashTransCheckBox.Font = font;
+
+			//	Load splash transparency state
+			if (data.GetKey("tinyinfo.transparentsplash").ToLower() == "true")
+			{
+				splashTransCheckBox.Checked = true;
+			}
+			else
+			{
+				splashTransCheckBox.Checked = false;
+			}
 		}
 
 		public void refreshTheme()
@@ -95,7 +106,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (File.Exists("./tinyinfo.ini") == false)
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular\ntransparentsplash=false");
 			}
 
 			//	Create ini parser and read ini file
@@ -156,12 +167,17 @@ namespace Tinyinfo
 			data["tinyinfo"]["refresh"] = refreshRateUpDown.Value.ToString();
 			parser.WriteFile("./tinyinfo.ini", data);
 
+			//	Write splash transparency setting
+			data["tinyinfo"]["transparentsplash"] = splashTransCheckBox.Checked.ToString();
+			parser.WriteFile("./tinyinfo.ini", data);
+
 			//	reload theme
 			refreshTheme();
 		}
 
 		private void fontButton_Click(object sender, EventArgs e)
 		{
+			//	Create ini parser and read ini file
 			var parser = new FileIniDataParser();
 			IniData data = parser.ReadFile("./tinyinfo.ini");
 
@@ -204,6 +220,7 @@ namespace Tinyinfo
 			cancelButton.Font = font;
 			lightThemeRadioButton.Font = font;
 			darkThemeRadioButton.Font = font;
+			splashTransCheckBox.Font = font;
 			refreshRateLabel.Font = font;
 			refreshRateUpDown.Font = font;
 			refreshRateUpDown.Location = new Point(refreshRateUpDown.Location.X + Convert.ToInt32(font.Size) * 10, refreshRateUpDown.Location.Y);
