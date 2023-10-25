@@ -65,6 +65,7 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshMinimumHardwareInfo()
 		{
+			//	TODO: Make better. This entire thing is a mess. What the hell was i thinking.
 			//	Check if Thread is alive
 			if (cpuThread.IsAlive)
 			{
@@ -735,7 +736,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (!File.Exists("./tinyinfo.ini"))
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10\nrefresh=500");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular");
 			}
 
 			//	Create ini parser and read ini file
@@ -805,8 +806,25 @@ namespace Tinyinfo
 				nvapiOutputBox.ForeColor = Color.Black;
 			}
 
-			//	Set font size
-			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
+			//	Apply font changes
+			FontStyle fontStyle;
+			string savedStyle = data.GetKey("tinyinfo.fontstyle");
+			switch (savedStyle)
+			{
+				default:
+					fontStyle = FontStyle.Regular;
+					break;
+				case "Bold":
+					fontStyle = FontStyle.Bold;
+					break;
+				case "Bold, Italic":
+					fontStyle = FontStyle.Bold | FontStyle.Italic;
+					break;
+				case "Italic":
+					fontStyle = FontStyle.Italic;
+					break;
+			}
+			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);
 
 			//	Set refresh rate
 			maxRefresh = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
@@ -822,6 +840,11 @@ namespace Tinyinfo
 			boardOutputBox.Font = font;
 			netOutputBox.Font = font;
 			outputTabs.Font = font;
+			gpuTabs.Font = font;
+			startButton.Font = font;
+			stopButton.Font = font;
+			infoLabel.Font = font;
+			onTopCheckbox.Font = font;
 		}
 
 		/// <summary>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -53,11 +53,41 @@ namespace Tinyinfo
 				cancelButton.ForeColor = Color.Black;
 			}
 
-			//	load font size setting
-			fontSizeUpDown.Value = Convert.ToInt32(data.GetKey("tinyinfo.font"));
-
 			//	load refresh rate setting
 			refreshRateUpDown.Value = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
+
+			//	load font
+			FontStyle fontStyle;
+			string savedStyle = data.GetKey("tinyinfo.fontstyle");
+			switch (savedStyle)
+			{
+				default:
+					fontStyle = FontStyle.Regular;
+					break;
+				case "Bold":
+					fontStyle = FontStyle.Bold;
+					break;
+				case "Bold, Italic":
+					fontStyle = FontStyle.Bold | FontStyle.Italic;
+					break;
+				case "Italic":
+					fontStyle = FontStyle.Italic;
+					break;
+			}
+			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);
+
+			fontDialog.Font = font;
+			ActiveForm.Font = font;
+			fontButton.Font = font;
+			settingTabs.Font = font;
+			themeLabel.Font = font;
+			themeTab.Font = font;
+			applyButton.Font = font;
+			cancelButton.Font = font;
+			lightThemeRadioButton.Font = font;
+			darkThemeRadioButton.Font = font;
+			refreshRateLabel.Font = font;
+			refreshRateUpDown.Font = font;
 		}
 
 		public void refreshTheme()
@@ -65,7 +95,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (File.Exists("./tinyinfo.ini") == false)
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10\nrefresh=500");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular");
 			}
 
 			//	Create ini parser and read ini file
@@ -122,10 +152,6 @@ namespace Tinyinfo
 				parser.WriteFile("./tinyinfo.ini", data);
 			}
 
-			//	write font size into ini file
-			data["tinyinfo"]["font"] = fontSizeUpDown.Value.ToString();
-			parser.WriteFile("./tinyinfo.ini", data);
-
 			//	wrire refresh rate into ini file
 			data["tinyinfo"]["refresh"] = refreshRateUpDown.Value.ToString();
 			parser.WriteFile("./tinyinfo.ini", data);
@@ -136,7 +162,51 @@ namespace Tinyinfo
 
 		private void fontButton_Click(object sender, EventArgs e)
 		{
-			fontDialog.ShowDialog();
+			var parser = new FileIniDataParser();
+			IniData data = parser.ReadFile("./tinyinfo.ini");
+
+			if (fontDialog.ShowDialog() != DialogResult.OK)
+			{
+				return;
+			}
+			data["tinyinfo"]["fontname"] = fontDialog.Font.Name.ToString();
+			parser.WriteFile("./tinyinfo.ini", data);
+			data["tinyinfo"]["fontsize"] = Math.Round(fontDialog.Font.SizeInPoints, 0).ToString();
+			parser.WriteFile("./tinyinfo.ini", data);
+			data["tinyinfo"]["fontstyle"] = fontDialog.Font.Style.ToString();
+			parser.WriteFile("./tinyinfo.ini", data);
+
+			//	Apply font changes.
+			FontStyle fontStyle;
+			string savedStyle = data.GetKey("tinyinfo.fontstyle");
+			switch (savedStyle)
+			{
+				default:
+					fontStyle = FontStyle.Regular;
+					break;
+				case "Bold":
+					fontStyle = FontStyle.Bold;
+					break;
+				case "Bold, Italic":
+					fontStyle = FontStyle.Bold | FontStyle.Italic;
+					break;
+				case "Italic":
+					fontStyle = FontStyle.Italic;
+					break;
+			}
+			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);
+			ActiveForm.Font = font;
+			fontButton.Font = font;
+			settingTabs.Font = font;
+			themeLabel.Font = font;
+			themeTab.Font = font;
+			applyButton.Font = font;
+			cancelButton.Font = font;
+			lightThemeRadioButton.Font = font;
+			darkThemeRadioButton.Font = font;
+			refreshRateLabel.Font = font;
+			refreshRateUpDown.Font = font;
+			refreshRateUpDown.Location = new Point(refreshRateUpDown.Location.X + Convert.ToInt32(font.Size) * 10, refreshRateUpDown.Location.Y);
 		}
 	}
 }
