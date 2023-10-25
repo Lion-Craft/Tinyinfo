@@ -87,6 +87,10 @@ namespace Tinyinfo
 			themeTab.Font = font;
 			applyButton.Font = font;
 			cancelButton.Font = font;
+			lightThemeRadioButton.Font = font;
+			darkThemeRadioButton.Font = font;
+			refreshRateLabel.Font = font;
+			refreshRateUpDown.Font = font;
 		}
 
 		public void refreshTheme()
@@ -205,6 +209,11 @@ namespace Tinyinfo
 			themeTab.Font = font;
 			applyButton.Font = font;
 			cancelButton.Font = font;
+			lightThemeRadioButton.Font = font;
+			darkThemeRadioButton.Font = font;
+			refreshRateLabel.Font = font;
+			refreshRateUpDown.Font = font;
+			refreshRateUpDown.Location = new Point(refreshRateUpDown.Location.X + Convert.ToInt32(font.Size) * 10, refreshRateUpDown.Location.Y);
 		}
 	}
 }
