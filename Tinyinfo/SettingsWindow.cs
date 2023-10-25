@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -60,7 +60,28 @@ namespace Tinyinfo
 			refreshRateUpDown.Value = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
 
 			//	load font
-			var font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToSingle(data.GetKey("tinyinfo.fontsize")));
+			FontStyle fontStyle;
+			string savedStyle = data.GetKey("tinyinfo.fontstyle");
+			switch (savedStyle)
+			{
+				default:
+					fontStyle = FontStyle.Regular;
+					break;
+				case "FontStyle.Bold":
+					fontStyle = FontStyle.Bold;
+					break;
+				case "FontStyle.Italic":
+					fontStyle = FontStyle.Italic;
+					break;
+				case "FontStyle.Strikeout":
+					fontStyle = FontStyle.Strikeout;
+					break;
+				case "FontStyle.Underline":
+					fontStyle= FontStyle.Underline;
+					break;
+			}
+			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);
+
 			fontDialog.Font = font;
 			ActiveForm.Font = font;
 			fontButton.Font = font;
