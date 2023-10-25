@@ -73,12 +73,6 @@ namespace Tinyinfo
 				case "Italic":
 					fontStyle = FontStyle.Italic;
 					break;
-				case "Strikeout":
-					fontStyle = FontStyle.Strikeout;
-					break;
-				case "Underline":
-					fontStyle= FontStyle.Underline;
-					break;
 			}
 			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);
 
@@ -198,12 +192,6 @@ namespace Tinyinfo
 					break;
 				case "Italic":
 					fontStyle = FontStyle.Italic;
-					break;
-				case "Strikeout":
-					fontStyle = FontStyle.Strikeout;
-					break;
-				case "Underline":
-					fontStyle= FontStyle.Underline;
 					break;
 			}
 			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);

@@ -142,7 +142,6 @@
 			// 
 			this.fontDialog.AllowScriptChange = false;
 			this.fontDialog.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.fontDialog.ShowColor = true;
 			this.fontDialog.ShowEffects = false;
 			// 
 			// fontButton
