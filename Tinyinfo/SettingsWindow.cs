@@ -201,7 +201,6 @@ namespace Tinyinfo
 					break;
 			}
 			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);
-			//	MessageBox.Show(font.Size.ToString());
 			ActiveForm.Font = font;
 			fontButton.Font = font;
 			settingTabs.Font = font;
