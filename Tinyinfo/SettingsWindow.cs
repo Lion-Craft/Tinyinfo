@@ -53,9 +53,6 @@ namespace Tinyinfo
 				cancelButton.ForeColor = Color.Black;
 			}
 
-			//	load font size setting
-			fontSizeUpDown.Value = Convert.ToInt32(data.GetKey("tinyinfo.font"));
-
 			//	load refresh rate setting
 			refreshRateUpDown.Value = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
 
@@ -88,7 +85,6 @@ namespace Tinyinfo
 			settingTabs.Font = font;
 			themeLabel.Font = font;
 			themeTab.Font = font;
-			fontSizeLabel.Font = font;
 			applyButton.Font = font;
 			cancelButton.Font = font;
 		}
@@ -155,10 +151,6 @@ namespace Tinyinfo
 				parser.WriteFile("./tinyinfo.ini", data);
 			}
 
-			//	write font size into ini file
-			data["tinyinfo"]["font"] = fontSizeUpDown.Value.ToString();
-			parser.WriteFile("./tinyinfo.ini", data);
-
 			//	wrire refresh rate into ini file
 			data["tinyinfo"]["refresh"] = refreshRateUpDown.Value.ToString();
 			parser.WriteFile("./tinyinfo.ini", data);
@@ -211,7 +203,6 @@ namespace Tinyinfo
 			settingTabs.Font = font;
 			themeLabel.Font = font;
 			themeTab.Font = font;
-			fontSizeLabel.Font = font;
 			applyButton.Font = font;
 			cancelButton.Font = font;
 		}

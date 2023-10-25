@@ -28,8 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.fontSizeUpDown = new System.Windows.Forms.NumericUpDown();
-			this.fontSizeLabel = new System.Windows.Forms.Label();
 			this.lightThemeRadioButton = new System.Windows.Forms.RadioButton();
 			this.darkThemeRadioButton = new System.Windows.Forms.RadioButton();
 			this.themeLabel = new System.Windows.Forms.Label();
@@ -42,46 +40,11 @@
 			this.settingTabs = new System.Windows.Forms.TabControl();
 			this.themeTab = new System.Windows.Forms.TabPage();
 			this.generalTab = new System.Windows.Forms.TabPage();
-			((System.ComponentModel.ISupportInitialize)(this.fontSizeUpDown)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.refreshRateUpDown)).BeginInit();
 			this.settingTabs.SuspendLayout();
 			this.themeTab.SuspendLayout();
 			this.generalTab.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// fontSizeUpDown
-			// 
-			this.fontSizeUpDown.Cursor = System.Windows.Forms.Cursors.Default;
-			this.fontSizeUpDown.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.fontSizeUpDown.Location = new System.Drawing.Point(66, 101);
-			this.fontSizeUpDown.Maximum = new decimal(new int[] {
-            72,
-            0,
-            0,
-            0});
-			this.fontSizeUpDown.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-			this.fontSizeUpDown.Name = "fontSizeUpDown";
-			this.fontSizeUpDown.Size = new System.Drawing.Size(43, 22);
-			this.fontSizeUpDown.TabIndex = 0;
-			this.fontSizeUpDown.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-			// 
-			// fontSizeLabel
-			// 
-			this.fontSizeLabel.AutoSize = true;
-			this.fontSizeLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.fontSizeLabel.Location = new System.Drawing.Point(6, 103);
-			this.fontSizeLabel.Name = "fontSizeLabel";
-			this.fontSizeLabel.Size = new System.Drawing.Size(54, 13);
-			this.fontSizeLabel.TabIndex = 1;
-			this.fontSizeLabel.Text = "Font Size";
 			// 
 			// lightThemeRadioButton
 			// 
@@ -220,8 +183,6 @@
 			this.themeTab.Controls.Add(this.fontButton);
 			this.themeTab.Controls.Add(this.darkThemeRadioButton);
 			this.themeTab.Controls.Add(this.themeLabel);
-			this.themeTab.Controls.Add(this.fontSizeLabel);
-			this.themeTab.Controls.Add(this.fontSizeUpDown);
 			this.themeTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.themeTab.Location = new System.Drawing.Point(4, 26);
 			this.themeTab.Name = "themeTab";
@@ -263,7 +224,6 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Tinyinfo Settings";
-			((System.ComponentModel.ISupportInitialize)(this.fontSizeUpDown)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.refreshRateUpDown)).EndInit();
 			this.settingTabs.ResumeLayout(false);
 			this.themeTab.ResumeLayout(false);
@@ -275,9 +235,6 @@
 		}
 
 		#endregion
-
-		private System.Windows.Forms.NumericUpDown fontSizeUpDown;
-		private System.Windows.Forms.Label fontSizeLabel;
 		private System.Windows.Forms.RadioButton lightThemeRadioButton;
 		private System.Windows.Forms.RadioButton darkThemeRadioButton;
 		private System.Windows.Forms.Label themeLabel;
