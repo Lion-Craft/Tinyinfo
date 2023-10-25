@@ -736,7 +736,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (!File.Exists("./tinyinfo.ini"))
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10\nrefresh=500");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular");
 			}
 
 			//	Create ini parser and read ini file
