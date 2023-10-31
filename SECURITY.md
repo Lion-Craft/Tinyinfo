@@ -11,6 +11,8 @@ Following Versions are currently officially supported. Please note that this lis
 | 2.0 prereleases   | :x: | Yes |
 | 1.x   | :x:                | Yes |
 
+For detailed information please visit https://lioncraft.ione15.com/tinyinfo/versions
+
 ## Reporting a Vulnerability
 
 Please Create a GitHub Issue if you find any Vulnerability or Bug.
