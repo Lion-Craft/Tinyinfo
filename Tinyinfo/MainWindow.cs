@@ -743,6 +743,12 @@ namespace Tinyinfo
 			var parser = new FileIniDataParser();
 			IniData data = parser.ReadFile("./tinyinfo.ini");
 
+			//	See if keys new to v3 exist, if not overwrite file with default settings
+			if (data.GetKey("tinyinfo.refresh") == null || data.GetKey("tinyinfo.fontsize") == null || data.GetKey("tinyinfo.fontname") == null || data.GetKey("tinyinfo.fontstyle") == null || data.GetKey("tinyinfo.transparentsplash") == null)
+			{
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular\ntransparentsplash=false");
+			}
+
 			//	Read Settings
 			//	Set theme
 			if (data.GetKey("tinyinfo.theme") == "dark")
