@@ -2,7 +2,7 @@ using Hardware.Info;
 using IniParser;
 using IniParser.Model;
 using Newtonsoft.Json;
-using NvAPIWrapper;
+using NvAPIWrapper.GPU;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -16,7 +16,11 @@ namespace Tinyinfo
 {
 	public partial class MainWindow : Form
 	{
+		//	Create Threads
 		private Thread thread;
+		private Thread cpuThread;
+		private Thread batteryThread;
+		private Thread netThread;
 
 		private static readonly IHardwareInfo hardwareInfo = new HardwareInfo();
 
@@ -26,7 +30,7 @@ namespace Tinyinfo
 		{
 			InitializeComponent();
 
-			
+			//	Load saved Theme settings
 			LoadTheme();
 		}
 
@@ -43,8 +47,11 @@ namespace Tinyinfo
 			//	Show Splash
 			splash.Show();
 
-			//	Create Thread on start
+			//	Create Threads on start
 			thread = new Thread(() => Getdata(true));
+			cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
+			batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
+			netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
 
 			//	Get info on load
 			Getdata(false);
@@ -58,11 +65,48 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshMinimumHardwareInfo()
 		{
-			hardwareInfo.RefreshCPUList(true);
+			//	TODO: Make better. This entire thing is a mess. What the hell was i thinking.
+			//	Check if Thread is alive
+			if (cpuThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				cpuThread.Join();
+			}
+			else
+			{
+				//	Start Thread for CPU info
+				cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
+				cpuThread.IsBackground = true;
+				cpuThread.Start();
+			}
 
-			hardwareInfo.RefreshBatteryList();
+			//	Check if Thread is alive
+			if (batteryThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				batteryThread.Join();
+			}
+			else
+			{
+				//	Start Thread for Battery info
+				batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
+				batteryThread.IsBackground = true;
+				batteryThread.Start();
+			}
 
-			hardwareInfo.RefreshNetworkAdapterList();
+			//	Check if Thread is alive
+			if (netThread.IsAlive)
+			{
+				//	Wait for Thread to finish
+				netThread.Join();
+			}
+			else
+			{
+				//	Start Thread for Network info
+				netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
+				netThread.IsBackground = false;
+				netThread.Start();
+			}
 		}
 
 		/// <summary>
@@ -70,22 +114,12 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshAllHardwareInfo()
 		{
-			hardwareInfo.RefreshCPUList(true);
-
-			hardwareInfo.RefreshMemoryList();
-
-			hardwareInfo.RefreshBIOSList();
-
-			hardwareInfo.RefreshMotherboardList();
-
-			hardwareInfo.RefreshVideoControllerList();
-
-			hardwareInfo.RefreshBatteryList();
-
-			hardwareInfo.RefreshDriveList();
-
-			hardwareInfo.RefreshNetworkAdapterList();
+			//	Update info
+			hardwareInfo.RefreshAll();
 		}
+
+		//	Set maximum theoretical Refresh rate in ms
+		private int maxRefresh = 500;
 
 		/// <summary>
 		/// Collect system info and write to textBox1
@@ -102,28 +136,14 @@ namespace Tinyinfo
 					//	CPU Info
 					LoadCPUData();
 
-					//	Graphics
-					LoadVideoControllerData();
-
-					//	Memory
-					LoadMemoryData();
-
-					//	Motherboard
-					LoadMotherBoardData();
-
-					//	BIOS Info
-					LoadBIOSData();
-
 					//	Battery Info
 					LoadBatteryData();
-
-					//	Drive Info
-					LoadDrivesData();
 
 					//	Network Adapter Info
 					LoadNetworkAdaptersData();
 
-					ShowInfo("");
+					//	TODO: Make better (This is just bad if were honest)
+					Thread.Sleep(maxRefresh);
 				} while (loop);
 			}
 			else
@@ -196,6 +216,8 @@ namespace Tinyinfo
 					coresThreadsInfo + vmFirmwareInfo + clockspeedsInfo + currentClockspeedInfo + baseClockspeedInfo;
 
 				AppendTextSafe(result);
+
+				ShowInfo("");
 			}
 		}
 
@@ -206,6 +228,7 @@ namespace Tinyinfo
 		{
 			int id = 0;
 
+			string[] manufacturer = {"3dfx", "ati"};
 			string nl = Environment.NewLine;
 			//	Example usage
 			/*
@@ -216,7 +239,7 @@ namespace Tinyinfo
 			}
 			*/
 
-			AppendTextSafe("Video: " + nl);
+			WriteTextSafe("Video: " + nl, "gpuOutputBox");
 
 			foreach (var gpu in hardwareInfo.VideoControllerList)
 			{
@@ -227,6 +250,7 @@ namespace Tinyinfo
 				string nameInfo = $"\t\tName: {gpu.Name}{nl}";
 
 				string manufacturerInfo = $"\t\tManufacturer: {gpu.Manufacturer}{nl}";
+				manufacturer[id] = gpu.Manufacturer;
 
 				string descriptionInfo = $"\t\tDescription: {gpu.VideoProcessor}{nl}";
 
@@ -247,9 +271,111 @@ namespace Tinyinfo
 				string result = gpuIdInfo + nameInfo + manufacturerInfo + descriptionInfo + videoModeInfo + vramAmountInfo +
 					maxRefreshRateInfo + minRefreshRateInfo + driverInfo + driverVersionInfo + driverDateInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "gpuOutputBox");
 
 				id++;
+				ShowInfo("");
+			}
+
+			//	Check what manufacturer the gpu is, if nvidia show nvapi info
+			if (manufacturer[0].ToLower() == "nvidia" || manufacturer[1].ToLower() == "nvidia")
+			{
+				//	Clear nvapi Textbox
+				nvapiOutputBox.Text = "";
+
+				//	Set GPU ID to 0
+				int nvid = 0;
+
+				//	Get GPU info
+				foreach (var nvgpu in PhysicalGPU.GetPhysicalGPUs())
+				{
+					//	GPU id
+					string gpuid = $"GPU {nvid}:{nl}";
+					//	Get GPU name
+					string gpu = $"\tGraphics Card: {nvgpu.FullName}{nl}";
+					//	Get GPU Chip name
+					string chip = $"\tChip: {nvgpu.ArchitectInformation.ShortName}{nl}";
+					//	Get amount of Cores
+					string cores = $"\tCores: {nvgpu.ArchitectInformation.NumberOfCores}{nl}";
+					//	Get amount of ROPs
+					string rops = $"\tROPs: {nvgpu.ArchitectInformation.NumberOfROPs}{nl}";
+					//	Get amount of Shader Pipelines
+					string shaders = $"\tShader Pipelines: {nvgpu.ArchitectInformation.NumberOfShaderPipelines}{nl}";
+					//	Get Graphics Base Freq
+					string graphicsBase = $"\tGraphics Base Clock: {nvgpu.BaseClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
+					//	Get Graphics Boost Freq
+					string graphicsBoost = $"\tGraphics Boost Clock: {nvgpu.BoostClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
+					//	Get Memory Base Freq
+					string memoryBase = $"\tMemory Base Clock: {nvgpu.BaseClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
+					//	Get Memory Boost Freq
+					string memoryBoost = $"\tMemory Boost Clock: {nvgpu.BoostClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
+					//	Get amount of TPCs
+					//string tpcs = $"\tTPCs: {nvgpu.ArchitectInformation.TotalNumberOfTPCs}{nl}";	//	Kinda buggy
+					//	Get Memory Bus Width
+					string memoryBus = $"\tMemory Bus: {nvgpu.MemoryInformation.FrameBufferBandwidth} Bit{nl}";
+					//	Get Memory Size
+					string memorySize = $"\tPhysical Memory Size: {nvgpu.MemoryInformation.PhysicalFrameBufferSizeInkB / 1000}MB{nl}";
+					//	Get Memory Type (Note: Result of "14" appears to be GDDR6)
+					string memoryType = $"\tMemory Type: {nvgpu.MemoryInformation.RAMType}{nl}";
+					//	Get Memory manufacturer
+					string memoryManufacturer = $"\tMemory Manufacturer: {nvgpu.MemoryInformation.RAMMaker}{nl}";
+					//	Get ECC Memory Support state
+					string memoryEcc = $"\tECC Supported: {nvgpu.ECCMemoryInformation.IsSupported}{nl}";
+					//	Get ECC Memory state
+					string memoryEccOn = $"\t\tEnabled: {nvgpu.ECCMemoryInformation.IsEnabled}{nl}";
+					//	Get vBIOS Version
+					string bios = $"\tBIOS Version: {nvgpu.Bios.VersionString}{nl}";
+					//	Get Bus type
+					string bus = $"\tBUS Type: {nvgpu.BusInformation.BusType}{nl}";
+					//	Get amount of PCIe Lanes
+					string pcie = $"\t\tPCIe Lanes: {nvgpu.BusInformation.CurrentPCIeLanes}{nl}";
+					//	Get AGP Bus info
+					string agp = $"\t\tAGP: {nvgpu.BusInformation.AGPInformation}{nl}";
+
+					//	Create Fan string
+					string fan = "";
+					//	Try reading Fan Speed, if not available print not available message
+					try
+					{
+						fan = $"\tFan Speed: {nvgpu.CoolerInformation}{nl}";
+					}
+					catch (Exception ex)
+					{
+						if (ex.Message.ToLower() == "nvapi_not_supported")
+						{
+							fan = $"\tFan Speed: N/A {nl}";
+						}
+						else
+						{
+							fan = $"\tFan Speed: {ex.Message}{nl}";
+						}
+					}
+
+					//	Get Temperatures
+					string temp = $"\tTemperatures: {nl}";
+
+					foreach (var sensor in nvgpu.ThermalInformation.ThermalSensors)
+					{
+						temp += $"\t\t{sensor}{nl}";
+					}
+
+					//	Get Grpahics Clockspeed
+					string currentGraphicsClock = $"\tGraphics Clockspeed: {nvgpu.CurrentClockFrequencies.GraphicsClock.Frequency / 1000}MHz{nl}";
+					//	Get Memory Clockspeed
+					string currentMemoryClock = $"\tMemory Clockspeed: {nvgpu.CurrentClockFrequencies.MemoryClock.Frequency / 1000}MHz{nl}";
+					//	Get Video Decode Clockspeed
+					string currentVideoClock = $"\tVideo Decode Clockspeed (If available): {nvgpu.CurrentClockFrequencies.VideoDecodingClock.Frequency / 1000}MHz{nl}";
+
+					//	Output GPU info
+					nvapiOutputBox.Text += gpuid + gpu + chip + cores + rops + shaders + graphicsBase + graphicsBoost + memoryBase + memoryBoost+ memoryBus + memorySize + memoryType + memoryManufacturer + memoryEcc + memoryEccOn + bios + bus + pcie + agp + fan + temp + currentGraphicsClock + currentMemoryClock + currentVideoClock;
+					
+					//	Increment ID
+					nvid++;
+				}
+			}
+			else
+			{
+				nvapiOutputBox.Text = "Non NVIDIA Graphics detected. Unable to Display NvAPI information.";
 			}
 		}
 
@@ -260,7 +386,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Motherboard: " + nl);
+			WriteTextSafe("Motherboard: " + nl, "boardOutputBox");
 
 			foreach (var motherboard in hardwareInfo.MotherboardList)
 			{
@@ -272,7 +398,8 @@ namespace Tinyinfo
 
 				string result = manufacturerInfo + modelInfo + serialNumberInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "boardOutputBox");
+				ShowInfo("");
 			}
 		}
 
@@ -283,7 +410,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("BIOS: " + nl);
+			WriteTextSafe("BIOS: " + nl, "biosOutputBox");
 
 			foreach (var bios in hardwareInfo.BiosList)
 			{
@@ -297,7 +424,8 @@ namespace Tinyinfo
 
 				string result = manufacturerInfo + nameInfo + versionInfo + releaseDateInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "biosOutputBox");
+				ShowInfo("");
 			}
 		}
 
@@ -308,11 +436,13 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Battery: " + nl);
+			WriteTextSafe("Battery: " + nl, "battOutputBox");
+
 			if (hardwareInfo.BatteryList.Count == 0)
 			{
-				AppendTextSafe("\tNot Present" + nl);
+				AppendTextSafe("\tNot Present" + nl, "battOutputBox");
 			}
+
 			foreach (var battery in hardwareInfo.BatteryList)
 			{
 				string statusInfo = $"\tStatus: {battery.BatteryStatus}{nl}";
@@ -339,9 +469,9 @@ namespace Tinyinfo
 					expectedLifeInfo + timeToChargeInfo + timeOnBatteryInfo + capacitiesInfo + designCapacityInfo +
 					fullChargeCapacityInfo;
 
-				AppendTextSafe(result);
-				
+				AppendTextSafe(result, "battOutputBox");
 			}
+			ShowInfo("");
 		}
 
 		/// <summary>
@@ -351,7 +481,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Drives: " + nl);
+			WriteTextSafe("Drives: " + nl, "diskOutputBox");
 
 			foreach (var drive in hardwareInfo.DriveList)
 			{
@@ -375,7 +505,9 @@ namespace Tinyinfo
 
 				string result = driveInfo + nameInfo + sizeInfo + manufacturerInfo + modelInfo + firmwareInfo + serialNumberInfo + partitionsInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "diskOutputBox");
+				
+				ShowInfo("");
 			}
 		}
 
@@ -388,7 +520,7 @@ namespace Tinyinfo
 
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Network Adapter: " + nl);
+			WriteTextSafe("Network Adapter: " + nl, "netOutputBox");
 
 			foreach (var netAdapt in hardwareInfo.NetworkAdapterList)
 			{
@@ -410,9 +542,11 @@ namespace Tinyinfo
 
 				string result = netAdaptInfo + nameInfo + productNameInfo + typeInfo + manufacturerInfo + macAddressInfo + bytesSentInfo + bytesReceivedInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "netOutputBox");
 
 				netAdaptId++;
+
+				ShowInfo("");
 			}
 		}
 
@@ -423,7 +557,7 @@ namespace Tinyinfo
 		{
 			string nl = Environment.NewLine;
 
-			AppendTextSafe("Memory:" + nl);
+			WriteTextSafe("Memory:" + nl, "ramOutputBox");
 
 			foreach (var memory in hardwareInfo.MemoryList)
 			{
@@ -447,7 +581,9 @@ namespace Tinyinfo
 
 				string result = bankInfo + manufacturerInfo + sizeInfo + speedInfo + partNumberInfo + formFactorInfo + minVoltageInfo + maxVoltageInfo;
 
-				AppendTextSafe(result);
+				AppendTextSafe(result, "ramOutputBox");
+				
+				ShowInfo("");
 			}
 		}
 
@@ -457,35 +593,74 @@ namespace Tinyinfo
 		/// <param name="text"></param>
 		private void ShowInfo(string text)
 		{
-			if (outputBox.InvokeRequired)
+			//	TODO: Think of better names
+			
+			//	Create textbox variable to invoke
+			TextBox textBox = cpuOutputBox;
+
+			//	change textbox variable to correct textbox
+			switch (outputBox)
+			{
+				default:
+					break;
+				case "cpuOutputBox":
+					textBox = cpuOutputBox;
+					break;
+				case "ramOutputBox":
+					textBox = ramOutputBox;
+					break;
+				case "gpuOutputBox":
+					textBox = gpuOutputBox;
+					break;
+				case "boardOutputBox":
+					textBox = boardOutputBox;
+					break;
+				case "biosOutputBox":
+					textBox = biosOutputBox;
+					break;
+				case "battOutputBox":
+					textBox = battOutputBox;
+					break;
+				case "diskOutputBox":
+					textBox = diskOutputBox;
+					break;
+				case "netOutputBox":
+					textBox = netOutputBox;
+					break;
+			}
+			if (textBox.InvokeRequired)
 			{
 				var d = new SafeCallDelegate(ShowInfo);
-				outputBox.Invoke(d, new object[] { InfoTextBuffer });
+				textBox.Invoke(d, new object[] { InfoTextBuffer });
 			}
 			else
 			{
-				outputBox.Text = InfoTextBuffer;
+				textBox.Text = InfoTextBuffer;
 			}
 		}
 
 		// Creating String To Push it later on textbox
 		private string InfoTextBuffer = "";
 
-		private void WriteTextSafe(string text)
+		private string outputBox = "";
+
+		private void WriteTextSafe(string text, string output = "cpuTextBox")
 		{
 			// NOTE (HOUDAIFA) : Faster Way
 
 			InfoTextBuffer = text;
+			outputBox = output;
 		}
 
 		/// <summary>
 		/// Appand Text To Text Buffer
 		/// </summary>
-		private void AppendTextSafe(string text)
+		private void AppendTextSafe(string text, string output = "cpuTextBox")
 		{
 			// NOTE (HOUDAIFA) : Faster Way
 
 			InfoTextBuffer += text;
+			outputBox = output;
 		}
 
 		/// <summary>
@@ -498,11 +673,9 @@ namespace Tinyinfo
 			startButton.Enabled = false;
 			infoLabel.Text = "Loading System Info.";
 			progressBar.Value = 25;
-			hardwareInfo.RefreshCPUList();
+			thread = new Thread(() => Getdata(true));
 			stopButton.Enabled = true;
-			infoLabel.Text = "Loading System Info..";
 			progressBar.Value = 50;
-			hardwareInfo.RefreshOperatingSystem();
 			infoLabel.Text = "Loading System Info...";
 			progressBar.Value = 75;
 			progressBar.Value = 85;
@@ -563,7 +736,7 @@ namespace Tinyinfo
 			//	Check if file exists, if it doesnt create it with default settings
 			if (!File.Exists("./tinyinfo.ini"))
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nfont=10");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular\ntransparentsplash=false");
 			}
 
 			//	Create ini parser and read ini file
@@ -576,15 +749,31 @@ namespace Tinyinfo
 			{
 				//	Dark theme
 				ForeColor = Color.White;
-				BackColor = Color.Black;
+				BackColor = Color.Gray;
 				startButton.ForeColor = Color.Black;
 				stopButton.ForeColor = Color.Black;
-				onTopCheckbox.ForeColor = Color.Black;
+				onTopCheckbox.ForeColor = Color.White;
 				onTopCheckbox.BackColor = Color.Gray;
 				onTopBoxPanel.BackColor = Color.FromName("ButtonFace");
 				onTopBoxPanel.ForeColor = Color.White;
-				outputBox.BackColor = Color.Black;
-				outputBox.ForeColor = Color.White;
+				cpuOutputBox.BackColor = Color.DimGray;
+				cpuOutputBox.ForeColor = Color.White;
+				ramOutputBox.BackColor = Color.DimGray;
+				ramOutputBox.ForeColor = Color.White; 
+				gpuOutputBox.BackColor = Color.DimGray;
+				gpuOutputBox.ForeColor = Color.White; 
+				boardOutputBox.BackColor = Color.DimGray;
+				boardOutputBox.ForeColor = Color.White; 
+				biosOutputBox.BackColor = Color.DimGray;
+				biosOutputBox.ForeColor = Color.White; 
+				battOutputBox.BackColor = Color.DimGray;
+				battOutputBox.ForeColor = Color.White; 
+				diskOutputBox.BackColor = Color.DimGray;
+				diskOutputBox.ForeColor = Color.White; 
+				netOutputBox.BackColor = Color.DimGray;
+				netOutputBox.ForeColor = Color.White;
+				nvapiOutputBox.BackColor = Color.DimGray;
+				nvapiOutputBox.ForeColor = Color.White;
 			}
 			else
 			{
@@ -597,14 +786,65 @@ namespace Tinyinfo
 				onTopCheckbox.BackColor = Color.White;
 				onTopBoxPanel.BackColor = Color.White;
 				onTopBoxPanel.ForeColor = Color.Black;
-				outputBox.BackColor = Color.White;
-				outputBox.ForeColor = Color.Black;
+				cpuOutputBox.BackColor = Color.White;
+				cpuOutputBox.ForeColor = Color.Black;
+				ramOutputBox.BackColor = Color.White;
+				ramOutputBox.ForeColor = Color.Black;
+				gpuOutputBox.BackColor = Color.White;
+				gpuOutputBox.ForeColor = Color.Black;
+				boardOutputBox.BackColor = Color.White;
+				boardOutputBox.ForeColor = Color.Black;
+				biosOutputBox.BackColor = Color.White;
+				biosOutputBox.ForeColor = Color.Black;
+				battOutputBox.BackColor = Color.White;
+				battOutputBox.ForeColor = Color.Black;
+				diskOutputBox.BackColor = Color.White;
+				diskOutputBox.ForeColor = Color.Black;
+				netOutputBox.BackColor = Color.White;
+				netOutputBox.ForeColor = Color.Black;
+				nvapiOutputBox.BackColor = Color.White;
+				nvapiOutputBox.ForeColor = Color.Black;
 			}
 
-			//	Set font size
-			var font = new Font("Segoe UI", Convert.ToInt32(data.GetKey("tinyinfo.font")));
+			//	Apply font changes
+			FontStyle fontStyle;
+			string savedStyle = data.GetKey("tinyinfo.fontstyle");
+			switch (savedStyle)
+			{
+				default:
+					fontStyle = FontStyle.Regular;
+					break;
+				case "Bold":
+					fontStyle = FontStyle.Bold;
+					break;
+				case "Bold, Italic":
+					fontStyle = FontStyle.Bold | FontStyle.Italic;
+					break;
+				case "Italic":
+					fontStyle = FontStyle.Italic;
+					break;
+			}
+			Font font = new Font(data.GetKey("tinyinfo.fontname"), Convert.ToInt32(data.GetKey("tinyinfo.fontsize")), fontStyle);
 
-			outputBox.Font = font;
+			//	Set refresh rate
+			maxRefresh = Convert.ToInt32(data.GetKey("tinyinfo.refresh"));
+
+			//	Apply font sizes
+			cpuOutputBox.Font = font;
+			ramOutputBox.Font = font;
+			gpuOutputBox.Font = font;
+			nvapiOutputBox.Font = font;
+			diskOutputBox.Font = font;
+			biosOutputBox.Font = font;
+			battOutputBox.Font = font;
+			boardOutputBox.Font = font;
+			netOutputBox.Font = font;
+			outputTabs.Font = font;
+			gpuTabs.Font = font;
+			startButton.Font = font;
+			stopButton.Font = font;
+			infoLabel.Font = font;
+			onTopCheckbox.Font = font;
 		}
 
 		/// <summary>
@@ -643,7 +883,7 @@ namespace Tinyinfo
 		/// <param name="mode"></param>
 		private void ExportToTextFile(int mode)
 		{
-			if (outputBox == null)
+			if (cpuOutputBox == null)
 			{
 				// Handle the case where outputBox is not set.
 				return;
@@ -675,7 +915,7 @@ namespace Tinyinfo
 
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
-								string outputText = outputBox.Text;
+								string outputText = cpuOutputBox.Text;
 
 								writer.Write(outputText);
 							}
@@ -739,6 +979,8 @@ namespace Tinyinfo
 
 				string driveListJson = JsonConvert.SerializeObject(hardwareInfo.DriveList);
 
+				//string nvapiListJson = JsonConvert.SerializeObject();
+
 				// I commented this one because for some reason it was the only one giving me a weird exception. I don't know.
 				//string networkAdapterListJson = JsonConvert.SerializeObject(hardwareInfo.NetworkAdapterList);
 
@@ -751,6 +993,7 @@ namespace Tinyinfo
 					BiosList = biosListJson,
 					BatteryList = batteryListJson,
 					DriveList = driveListJson,
+					//NvapiList = nvapiListJson,
 					//NetworkAdapterList = networkAdapterListJson
 				};
 
