@@ -254,7 +254,15 @@ namespace Tinyinfo
 
 				string descriptionInfo = $"\t\tDescription: {gpu.VideoProcessor}{nl}";
 
-				string videoModeInfo = $"\t\tVideo Mode: {gpu.VideoModeDescription} x {gpu.CurrentRefreshRate}Hz x {gpu.CurrentBitsPerPixel} Bit{nl}";
+				string videoModeInfo;
+				if (gpu.VideoModeDescription == "")
+				{
+					videoModeInfo = $"\t\tVideo Mode: No Display attached{nl}";
+				}
+				else
+				{
+					videoModeInfo = $"\t\tVideo Mode: {gpu.VideoModeDescription} x {gpu.CurrentRefreshRate}Hz x {gpu.CurrentBitsPerPixel} Bit{nl}";
+				}
 
 				string vramAmountInfo = $"\t\tVRAM Amount: {vmemSizeGB:F2}GB{nl}";
 
