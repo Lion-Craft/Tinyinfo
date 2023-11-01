@@ -315,8 +315,16 @@ namespace Tinyinfo
 					string memoryBus = $"\tMemory Bus: {nvgpu.MemoryInformation.FrameBufferBandwidth} Bit{nl}";
 					//	Get Memory Size
 					string memorySize = $"\tPhysical Memory Size: {nvgpu.MemoryInformation.PhysicalFrameBufferSizeInkB / 1000}MB{nl}";
-					//	Get Memory Type (Note: Result of "14" appears to be GDDR6)
-					string memoryType = $"\tMemory Type: {nvgpu.MemoryInformation.RAMType}{nl}";
+					//	Get Memory Type
+					string memoryType;
+					if (nvgpu.MemoryInformation.RAMType.ToString() == "14")
+					{
+						memoryType = $"\tMemory Type: GDDR6{nl}";
+					}
+					else
+					{
+						memoryType = $"\tMemory Type: {nvgpu.MemoryInformation.RAMType}{nl}";
+					}
 					//	Get Memory manufacturer
 					string memoryManufacturer = $"\tMemory Manufacturer: {nvgpu.MemoryInformation.RAMMaker}{nl}";
 					//	Get ECC Memory Support state
