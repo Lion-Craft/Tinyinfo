@@ -29,9 +29,6 @@ namespace Tinyinfo
 		public MainWindow()
 		{
 			InitializeComponent();
-
-			//	Load saved Theme settings
-			LoadTheme();
 		}
 
 		//	Create Splash
@@ -44,6 +41,9 @@ namespace Tinyinfo
 		/// </summary>
 		public void Startup(object sender, EventArgs e)
 		{
+			//	Load saved Theme settings
+			LoadTheme();
+
 			//	Show Splash
 			splash.Show();
 
@@ -750,9 +750,9 @@ namespace Tinyinfo
 		public void LoadTheme()
 		{
 			//	Check if file exists, if it doesnt create it with default settings
-			if (!File.Exists("./tinyinfo.ini"))
+			if (File.Exists("./tinyinfo.ini") == false)
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular\ntransparentsplash=false");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=Regular\ntransparentsplash=false");
 			}
 
 			//	Create ini parser and read ini file
@@ -762,7 +762,7 @@ namespace Tinyinfo
 			//	See if keys new to v3 exist, if not overwrite file with default settings
 			if (data.GetKey("tinyinfo.refresh") == null || data.GetKey("tinyinfo.fontsize") == null || data.GetKey("tinyinfo.fontname") == null || data.GetKey("tinyinfo.fontstyle") == null || data.GetKey("tinyinfo.transparentsplash") == null)
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular\ntransparentsplash=false");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=Regular\ntransparentsplash=false");
 			}
 
 			//	Read Settings
