@@ -29,9 +29,6 @@ namespace Tinyinfo
 		public MainWindow()
 		{
 			InitializeComponent();
-
-			//	Load saved Theme settings
-			LoadTheme();
 		}
 
 		//	Create Splash
@@ -44,6 +41,9 @@ namespace Tinyinfo
 		/// </summary>
 		public void Startup(object sender, EventArgs e)
 		{
+			//	Load saved Theme settings
+			LoadTheme();
+
 			//	Show Splash
 			splash.Show();
 
@@ -254,7 +254,15 @@ namespace Tinyinfo
 
 				string descriptionInfo = $"\t\tDescription: {gpu.VideoProcessor}{nl}";
 
-				string videoModeInfo = $"\t\tVideo Mode: {gpu.VideoModeDescription} x {gpu.CurrentRefreshRate}Hz x {gpu.CurrentBitsPerPixel} Bit{nl}";
+				string videoModeInfo;
+				if (gpu.VideoModeDescription == "")
+				{
+					videoModeInfo = $"\t\tVideo Mode: No Display attached{nl}";
+				}
+				else
+				{
+					videoModeInfo = $"\t\tVideo Mode: {gpu.VideoModeDescription} x {gpu.CurrentRefreshRate}Hz x {gpu.CurrentBitsPerPixel} Bit{nl}";
+				}
 
 				string vramAmountInfo = $"\t\tVRAM Amount: {vmemSizeGB:F2}GB{nl}";
 
@@ -315,8 +323,16 @@ namespace Tinyinfo
 					string memoryBus = $"\tMemory Bus: {nvgpu.MemoryInformation.FrameBufferBandwidth} Bit{nl}";
 					//	Get Memory Size
 					string memorySize = $"\tPhysical Memory Size: {nvgpu.MemoryInformation.PhysicalFrameBufferSizeInkB / 1000}MB{nl}";
-					//	Get Memory Type (Note: Result of "14" appears to be GDDR6)
-					string memoryType = $"\tMemory Type: {nvgpu.MemoryInformation.RAMType}{nl}";
+					//	Get Memory Type
+					string memoryType;
+					if (nvgpu.MemoryInformation.RAMType.ToString() == "14")
+					{
+						memoryType = $"\tMemory Type: GDDR6{nl}";
+					}
+					else
+					{
+						memoryType = $"\tMemory Type: {nvgpu.MemoryInformation.RAMType}{nl}";
+					}
 					//	Get Memory manufacturer
 					string memoryManufacturer = $"\tMemory Manufacturer: {nvgpu.MemoryInformation.RAMMaker}{nl}";
 					//	Get ECC Memory Support state
@@ -734,14 +750,20 @@ namespace Tinyinfo
 		public void LoadTheme()
 		{
 			//	Check if file exists, if it doesnt create it with default settings
-			if (!File.Exists("./tinyinfo.ini"))
+			if (File.Exists("./tinyinfo.ini") == false)
 			{
-				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=FontStyle.Regular\ntransparentsplash=false");
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=Regular\ntransparentsplash=false");
 			}
 
 			//	Create ini parser and read ini file
 			var parser = new FileIniDataParser();
 			IniData data = parser.ReadFile("./tinyinfo.ini");
+
+			//	See if keys new to v3 exist, if not overwrite file with default settings
+			if (data.GetKey("tinyinfo.refresh") == null || data.GetKey("tinyinfo.fontsize") == null || data.GetKey("tinyinfo.fontname") == null || data.GetKey("tinyinfo.fontstyle") == null || data.GetKey("tinyinfo.transparentsplash") == null)
+			{
+				File.WriteAllText("./tinyinfo.ini", "[tinyinfo]\ntheme=light\nrefresh=500\nfontsize=10\nfontname=Segoe UI\nfontstyle=Regular\ntransparentsplash=false");
+			}
 
 			//	Read Settings
 			//	Set theme
@@ -872,6 +894,9 @@ namespace Tinyinfo
 		/// </summary>
 		private void btnExportAsJSON_Click(object sender, EventArgs e)
 		{
+			//	Show Warning Message
+			MessageBox.Show("JSON Export is not fully working at this time.", "Tinyinfo - Export Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
 			ExportToTextFile(1);
 		}
 
@@ -915,7 +940,8 @@ namespace Tinyinfo
 
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
-								string outputText = cpuOutputBox.Text;
+								string nl = Environment.NewLine;
+								string outputText = cpuOutputBox.Text + ramOutputBox.Text + gpuOutputBox.Text + nvapiOutputBox.Text + boardOutputBox.Text + biosOutputBox.Text + battOutputBox.Text + diskOutputBox.Text + netOutputBox.Text;
 
 								writer.Write(outputText);
 							}
