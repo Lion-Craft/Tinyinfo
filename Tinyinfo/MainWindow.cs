@@ -896,7 +896,6 @@ namespace Tinyinfo
 		{
 			//	Show Warning Message
 			MessageBox.Show("JSON Export is not fully working at this time.", "Tinyinfo - Export Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
 			ExportToTextFile(1);
 		}
 
@@ -967,7 +966,7 @@ namespace Tinyinfo
 
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
-								writer.Write(json);
+								writer.Write(JSON.CreateJSON());
 							}
 							break;
 
@@ -988,7 +987,7 @@ namespace Tinyinfo
 		private string GetHardwareInfoAsJSON()
 		{
 			string finalJson = string.Empty;
-
+			
 			try
 			{
 				string cpuListJson = JsonConvert.SerializeObject(hardwareInfo.CpuList);
