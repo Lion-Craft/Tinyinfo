@@ -198,6 +198,16 @@ namespace Tinyinfo
 				}
 			}
 			
+			output += "\n},\n";
+
+			foreach (var board in hardwareInfo.MotherboardList)
+			{
+				output += "\"Motherboard\":\n{\n";
+				output += "\"Manufacturer\": \"" + board.Manufacturer + "\",\n";
+				output += "\"Model\": \"" + board.Product + "\",\n";
+				output += "\"Serial Number\": \"" + board.SerialNumber + "\"";
+			}
+
 			output += "\n}\n";
 
 			output += "}";
