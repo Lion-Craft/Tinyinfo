@@ -208,6 +208,17 @@ namespace Tinyinfo
 				output += "\"Serial Number\": \"" + board.SerialNumber + "\"";
 			}
 
+			output += "\n},\n";
+
+			foreach (var bios in hardwareInfo.BiosList)
+			{
+				output += "\"BIOS\":\n{\n";
+				output += "\"Manufacturer\": \"" + bios.Manufacturer + "\",\n";
+				output += "\"Name\": \"" + bios.Name + "\",\n";
+				output += "\"Version\": \"" + bios.Version + "\",\n";
+				output += "\"Release Date\": \"" + bios.ReleaseDate + "\"";
+			}
+
 			output += "\n}\n";
 
 			output += "}";
