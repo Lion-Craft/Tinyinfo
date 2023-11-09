@@ -7,6 +7,11 @@ namespace Tinyinfo
 	class JSON
 	{
 		private static readonly IHardwareInfo hardwareInfo = new HardwareInfo();
+
+		/// <summary>
+		/// Creates JSON formatted text about the hardware
+		/// </summary>
+		/// <returns>JSON text</returns>
 		public static string CreateJSON()
 		{
 			//	Is this bad?
