@@ -1,7 +1,6 @@
 using Hardware.Info;
 using IniParser;
 using IniParser.Model;
-using Newtonsoft.Json;
 using NvAPIWrapper.GPU;
 using System;
 using System.Diagnostics;
@@ -896,7 +895,6 @@ namespace Tinyinfo
 		{
 			//	Show Warning Message
 			MessageBox.Show("JSON Export is not fully working at this time.", "Tinyinfo - Export Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
 			ExportToTextFile(1);
 		}
 
@@ -960,14 +958,13 @@ namespace Tinyinfo
 							{
 								return;
 							}
-							string json = GetHardwareInfoAsJSON();
 
 							//	Sets file path to users directory of choice
 							filePath = saveFileDialog.FileName;
 
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
-								writer.Write(json);
+								writer.Write(JSON.CreateJSON());
 							}
 							break;
 
@@ -980,57 +977,6 @@ namespace Tinyinfo
 			{
 				Console.WriteLine(ex.Message);
 			}
-		}
-
-		/// <summary>
-		/// Returns the hardwareInfo object as a JSON string
-		/// </summary>
-		private string GetHardwareInfoAsJSON()
-		{
-			string finalJson = string.Empty;
-
-			try
-			{
-				string cpuListJson = JsonConvert.SerializeObject(hardwareInfo.CpuList);
-
-				string videoControllerListJson = JsonConvert.SerializeObject(hardwareInfo.VideoControllerList);
-
-				string memoryListJson = JsonConvert.SerializeObject(hardwareInfo.MemoryList);
-
-				string motherboardListJson = JsonConvert.SerializeObject(hardwareInfo.MotherboardList);
-
-				string biosListJson = JsonConvert.SerializeObject(hardwareInfo.BiosList);
-
-				string batteryListJson = JsonConvert.SerializeObject(hardwareInfo.BatteryList);
-
-				string driveListJson = JsonConvert.SerializeObject(hardwareInfo.DriveList);
-
-				//string nvapiListJson = JsonConvert.SerializeObject();
-
-				// I commented this one because for some reason it was the only one giving me a weird exception. I don't know.
-				//string networkAdapterListJson = JsonConvert.SerializeObject(hardwareInfo.NetworkAdapterList);
-
-				var combinedJson = new
-				{
-					CpuList = cpuListJson,
-					VideoControllerList = videoControllerListJson,
-					MemoryList = memoryListJson,
-					MotherboardList = motherboardListJson,
-					BiosList = biosListJson,
-					BatteryList = batteryListJson,
-					DriveList = driveListJson,
-					//NvapiList = nvapiListJson,
-					//NetworkAdapterList = networkAdapterListJson
-				};
-
-				finalJson = JsonConvert.SerializeObject(combinedJson);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-			}
-
-			return finalJson;
 		}
 
 		//	Create ShellAbout
