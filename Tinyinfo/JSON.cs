@@ -45,14 +45,16 @@ namespace Tinyinfo
 			foreach (var ram in hardwareInfo.MemoryList)
 			{
 				bankNo++;
-				
+				string endOfSection;
 				if ( bankNo > 1)
 				{
-					output += ",\n";
+					endOfSection = ",\n";
+					output += endOfSection;
 				}
 				else
 				{
-					output += "\n";
+					endOfSection = "\n";
+					output += endOfSection;
 				}
 				
 				output += "\"" + ram.BankLabel + "\":\n{\n";
@@ -64,6 +66,47 @@ namespace Tinyinfo
 				output += "\"Form Factor\": \"" + ram.FormFactor + "\",\n";
 				output += "\"Min Voltage\": \"" + ram.MinVoltage + "mV\",\n";
 				output += "\"Max Voltage\": \"" + ram.MaxVoltage + "mV\"\n";
+
+				output += "}";
+			}
+			output += "\n},\n";
+
+			//	GPU (WMI)
+			output += "\"WMI GPU\":\n{";
+			int gpuNo = 0;
+			foreach (var gpu in hardwareInfo.VideoControllerList)
+			{
+				gpuNo++;
+
+				if (gpuNo > 1)
+				{
+					output += ",\n";
+				}
+				else
+				{
+					output += "\n";
+				}
+
+				output += "\"GPU " + (gpuNo - 1) + "\": \n{\n";
+
+				output += "\"Name\": \"" + gpu.Name + "\",\n";
+				output += "\"Manufacturer\": \"" + gpu.Manufacturer + "\",\n";
+				output += "\"Description\": \"" + gpu.Description + "\",\n";
+
+				if (gpu.VideoModeDescription == "")
+				{
+					output += "\"Video Mode\": \"No Display\",\n";
+				}
+				else
+				{
+					output += $"\"Video Mode\": \"" + gpu.VideoModeDescription + " x " + gpu.CurrentRefreshRate + "Hz x " + gpu.CurrentBitsPerPixel + "Bit\",\n";
+				}
+
+				output += "\"VRAM Amount\": \"" + (gpu.AdapterRAM / 1073741824) + "GB\",\n";
+				output += "\"Max Refresh Rate\": \"" + gpu.MaxRefreshRate + "\",\n";
+				output += "\"Min Refresh Rate\": \"" + gpu.MinRefreshRate + "\",\n";
+				output += "\"Driver Version\": \"" + gpu.DriverVersion + "\",\n";
+				output += "\"Driver Date\": \"" + gpu.DriverDate + "\"\n";
 
 				output += "}";
 			}
