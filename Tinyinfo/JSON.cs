@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NvAPIWrapper.GPU;
 using Hardware.Info;
 
@@ -44,17 +40,35 @@ namespace Tinyinfo
 			}
 
 			//	RAM
-			output += "\"RAM:\":\n{\n";
+			output += "\"RAM:\":\n{";
+			int bankNo = 0;
 			foreach (var ram in hardwareInfo.MemoryList)
 			{
-				output += "\"" + ram.BankLabel + "\":\n{";
+				bankNo++;
+				
+				if ( bankNo > 1)
+				{
+					output += ",\n";
+				}
+				else
+				{
+					output += "\n";
+				}
+				
+				output += "\"" + ram.BankLabel + "\":\n{\n";
 
 				output += "\"Manufacturer\": \"" + ram.Manufacturer + "\",\n";
-				output += "\"Size\": \"" + ram.Capacity / 1073741824 + " GB\" \n";
-				
-				output += "},\n";
+				output += "\"Size\": \"" + ram.Capacity / 1073741824 + " GB\",\n";
+				output += "\"Speed\": \"" + ram.Speed + "MT/s\",\n";
+				output += "\"Part No\": \"" + ram.PartNumber + "\",\n";
+				output += "\"Form Factor\": \"" + ram.FormFactor + "\",\n";
+				output += "\"Min Voltage\": \"" + ram.MinVoltage + "mV\",\n";
+				output += "\"Max Voltage\": \"" + ram.MaxVoltage + "mV\"\n";
+
+				output += "}";
 			}
-			output += "}\n";
+
+			output += "\n}\n";
 
 			output += "}";
 			return output;
