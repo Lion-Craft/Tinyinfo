@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Tinyinfo
 {
@@ -7,6 +8,8 @@ namespace Tinyinfo
 		public Splash()
 		{
 			InitializeComponent();
+			splashPictureBox.Image = Image.FromFile("./img/splash/splash.png");
+			splashPictureBox.Refresh();
 		}
 	}
 }

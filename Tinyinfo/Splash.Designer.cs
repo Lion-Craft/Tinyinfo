@@ -40,7 +40,6 @@ namespace Tinyinfo
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.splashPictureBox.BackColor = System.Drawing.Color.Transparent;
-			this.splashPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("splashPictureBox.Image")));
 			this.splashPictureBox.Location = new System.Drawing.Point(0, 0);
 			this.splashPictureBox.Name = "splashPictureBox";
 			this.splashPictureBox.Size = new System.Drawing.Size(640, 320);
