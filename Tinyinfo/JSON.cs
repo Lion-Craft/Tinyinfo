@@ -205,9 +205,9 @@ namespace Tinyinfo
 			
 			output += "\n},\n";
 
+			output += "\"Motherboard\":\n{\n";
 			foreach (var board in hardwareInfo.MotherboardList)
 			{
-				output += "\"Motherboard\":\n{\n";
 				output += "\"Manufacturer\": \"" + board.Manufacturer + "\",\n";
 				output += "\"Model\": \"" + board.Product + "\",\n";
 				output += "\"Serial Number\": \"" + board.SerialNumber + "\"";
@@ -215,16 +215,100 @@ namespace Tinyinfo
 
 			output += "\n},\n";
 
+			output += "\"BIOS\":\n{\n";
 			foreach (var bios in hardwareInfo.BiosList)
 			{
-				output += "\"BIOS\":\n{\n";
 				output += "\"Manufacturer\": \"" + bios.Manufacturer + "\",\n";
 				output += "\"Name\": \"" + bios.Name + "\",\n";
 				output += "\"Version\": \"" + bios.Version + "\",\n";
 				output += "\"Release Date\": \"" + bios.ReleaseDate + "\"";
 			}
 
-			output += "\n}\n";
+			output += "\n},\n";
+
+			output += "\"Batteries\":\n{\n";
+			if (hardwareInfo.BatteryList.Count == 0)
+			{
+				output += "\"Battery 0\": \"Not Present\"";
+			}
+			else
+			{
+				int batt = 0;
+				foreach (var battery in hardwareInfo.BatteryList)
+				{
+					output += "\"Battery " + batt + "\":\n{\n";
+					output += "\"Status\": \"" + battery.BatteryStatus + "\",\n";
+					output += "\"Status Description\": \"" + battery.BatteryStatusDescription + "\",\n";
+					output += "\"Percentage\": \"" + battery.EstimatedChargeRemaining + "\",\n";
+					output += "\"Time Remaining\": \"" + battery.EstimatedRunTime + "\",\n";
+					output += "\"Expected Life\": \"" + battery.ExpectedLife + "\",\n";
+					output += "\"Time To Full\": \"" + battery.TimeToFullCharge + "\",\n";
+					output += "\"Time On Battery\": \"" + battery.TimeOnBattery + "\",\n";
+					output += "\"Design Capacity\": \"" + battery.DesignCapacity + "\",\n";
+					output += "\"Full Capacity\": \"" + battery.FullChargeCapacity + "\"\n";
+					output += "}\n";
+					
+					batt++;
+				}
+			}
+
+			output += "\n},\n";
+
+			output += "\"Disks\":\n{\n";
+			int diskNo = 1;
+			foreach (var disk in hardwareInfo.DriveList)
+			{
+				string lineEnd = "";
+				if (diskNo < hardwareInfo.DriveList.Count)
+				{
+					lineEnd += ",\n";
+				}
+				else
+				{
+					lineEnd += "\n";
+				}
+				output += "\"Drive " + disk.Index + "\":\n{\n";
+				output += "\"Name\": \"" + disk.Name.Replace(@"\", @"\\") + "\",\n";
+				output += "\"Size\": \"" + (disk.Size / 1073741824) + "GB\",\n";
+				output += "\"Manufacturer\": \"" + disk.Manufacturer + "\",\n";
+				output += "\"Model\": \"" + disk.Model + "\",\n";
+				output += "\"Firmware\": \"" + disk.FirmwareRevision + "\",\n";
+				output += "\"Serial No\": \"" + disk.SerialNumber + "\",\n";
+				output += "\"Partitions\": \"" + disk.Partitions + "\"\n";
+				output += "}" + lineEnd;
+
+				diskNo++;
+			}
+
+			output += "\n},\n";
+
+			output += "\"Network\":\n{\n";
+			int nicNo = 0;
+			foreach (var nic in hardwareInfo.NetworkAdapterList)
+			{
+				string lineEnd = "";
+				if ((nicNo + 1) < hardwareInfo.NetworkAdapterList.Count)
+				{
+					lineEnd += ",\n";
+				}
+				else
+				{
+					lineEnd += "\n";
+				}
+				output += "\"Nic " + nicNo + "\":\n{\n";
+				output += "\"Name\": \"" + nic.Name + "\",\n";
+				output += "\"Product\": \"" + nic.ProductName + "\",\n";
+				output += "\"Type\": \"" + nic.AdapterType + "\",\n";
+				output += "\"Manufacturer\": \"" + nic.Manufacturer + "\",\n";
+				output += "\"Mac\": \"" + nic.MACAddress + "\",\n";
+				output += "\"Bytes Send\": \"" + nic.BytesSentPersec + "\",\n";
+				output += "\"Bytes Recieved\": \"" + nic.BytesReceivedPersec + "\"\n";
+				output += "}" + lineEnd;
+
+				nicNo++;
+			}
+
+			output += "}\n";
 
 			output += "}";
 			return output;
