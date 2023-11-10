@@ -973,7 +973,29 @@ namespace Tinyinfo
 								writer.Write(JSON.CreateJSON());
 							}
 							break;
+						case 2:
+							//Console.Write(XML.CreateXML(JSON.CreateJSON()));
+							//	Defines allowed file types
+							saveFileDialog.Filter = "XML Files (*.xml)|*.json|All Files (*.*)|*.*";
+							//	Sets default file name
+							saveFileDialog.FileName = "export.xml";
 
+							//	Set SaveFileDialog title
+							saveFileDialog.Title = "Tinyinfo - XML Export";
+
+							if (saveFileDialog.ShowDialog() != DialogResult.OK)
+							{
+								return;
+							}
+
+							//	Sets file path to users directory of choice
+							filePath = saveFileDialog.FileName;
+
+							using (StreamWriter writer = new StreamWriter(filePath))
+							{
+								writer.Write(XML.CreateXML(JSON.CreateJSON()));
+							}
+							break;
 						default:
 							break;
 					}
@@ -1030,6 +1052,14 @@ namespace Tinyinfo
 			StopUpdate();
 			//	Exit Tinyinfo
 			Application.Exit();
+		}
+
+		private void btnExportAsXML_Click(object sender, EventArgs e)
+		{
+			infoLabel.Visible = true;
+			infoLabel.Text = "Exporting as XML...";
+			ExportToTextFile(2);
+			infoLabel.Text = "Press Start to continuously update System Info.";
 		}
 	}
 }

@@ -68,6 +68,7 @@ namespace Tinyinfo
 			this.diskOutputBox = new System.Windows.Forms.TextBox();
 			this.netTab = new System.Windows.Forms.TabPage();
 			this.netOutputBox = new System.Windows.Forms.TextBox();
+			this.btnExportAsXML = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
@@ -175,6 +176,7 @@ namespace Tinyinfo
 			this.fileDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.exportItem,
             this.btnExportAsJSON,
+            this.btnExportAsXML,
             this.settingsItem,
             this.menuItem2,
             this.exitItem});
@@ -190,26 +192,25 @@ namespace Tinyinfo
 			// btnExportAsJSON
 			// 
 			this.btnExportAsJSON.Index = 1;
-			this.btnExportAsJSON.RadioCheck = true;
 			this.btnExportAsJSON.Shortcut = System.Windows.Forms.Shortcut.CtrlE;
 			this.btnExportAsJSON.Text = "Export as JSON";
 			this.btnExportAsJSON.Click += new System.EventHandler(this.btnExportAsJSON_Click);
 			// 
 			// settingsItem
 			// 
-			this.settingsItem.Index = 2;
+			this.settingsItem.Index = 3;
 			this.settingsItem.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
 			this.settingsItem.Text = "Settings";
 			this.settingsItem.Click += new System.EventHandler(this.settingsItem_Click);
 			// 
 			// menuItem2
 			// 
-			this.menuItem2.Index = 3;
+			this.menuItem2.Index = 4;
 			this.menuItem2.Text = "-";
 			// 
 			// exitItem
 			// 
-			this.exitItem.Index = 4;
+			this.exitItem.Index = 5;
 			this.exitItem.Shortcut = System.Windows.Forms.Shortcut.AltF4;
 			this.exitItem.Text = "Exit";
 			this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
@@ -373,10 +374,10 @@ namespace Tinyinfo
 			// apiTab
 			// 
 			this.apiTab.Controls.Add(this.nvapiOutputBox);
-			this.apiTab.Location = new System.Drawing.Point(4, 26);
+			this.apiTab.Location = new System.Drawing.Point(4, 22);
 			this.apiTab.Name = "apiTab";
 			this.apiTab.Padding = new System.Windows.Forms.Padding(3);
-			this.apiTab.Size = new System.Drawing.Size(633, 195);
+			this.apiTab.Size = new System.Drawing.Size(633, 199);
 			this.apiTab.TabIndex = 1;
 			this.apiTab.Text = "NvAPI";
 			this.apiTab.UseVisualStyleBackColor = true;
@@ -395,7 +396,7 @@ namespace Tinyinfo
 			this.nvapiOutputBox.Name = "nvapiOutputBox";
 			this.nvapiOutputBox.ReadOnly = true;
 			this.nvapiOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.nvapiOutputBox.Size = new System.Drawing.Size(633, 195);
+			this.nvapiOutputBox.Size = new System.Drawing.Size(633, 199);
 			this.nvapiOutputBox.TabIndex = 9;
 			this.nvapiOutputBox.WordWrap = false;
 			// 
@@ -539,6 +540,13 @@ namespace Tinyinfo
 			this.netOutputBox.TabIndex = 7;
 			this.netOutputBox.WordWrap = false;
 			// 
+			// btnExportAsXML
+			// 
+			this.btnExportAsXML.Index = 2;
+			this.btnExportAsXML.Shortcut = System.Windows.Forms.Shortcut.CtrlM;
+			this.btnExportAsXML.Text = "Export as XML";
+			this.btnExportAsXML.Click += new System.EventHandler(this.btnExportAsXML_Click);
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -624,6 +632,7 @@ namespace Tinyinfo
 		private System.Windows.Forms.TabPage driverTab;
 		private System.Windows.Forms.TabPage apiTab;
 		public System.Windows.Forms.TextBox nvapiOutputBox;
+		private System.Windows.Forms.MenuItem btnExportAsXML;
 	}
 }
 
