@@ -40,7 +40,6 @@
 			this.settingTabs = new System.Windows.Forms.TabControl();
 			this.themeTab = new System.Windows.Forms.TabPage();
 			this.generalTab = new System.Windows.Forms.TabPage();
-			this.splashTransCheckBox = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.refreshRateUpDown)).BeginInit();
 			this.settingTabs.SuspendLayout();
 			this.themeTab.SuspendLayout();
@@ -196,7 +195,6 @@
 			// 
 			this.generalTab.BackColor = System.Drawing.Color.White;
 			this.generalTab.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.generalTab.Controls.Add(this.splashTransCheckBox);
 			this.generalTab.Controls.Add(this.refreshRateUpDown);
 			this.generalTab.Controls.Add(this.refreshRateLabel);
 			this.generalTab.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -207,17 +205,6 @@
 			this.generalTab.TabIndex = 1;
 			this.generalTab.Text = "General";
 			this.generalTab.ToolTipText = "Change Generic Settings";
-			// 
-			// splashTransCheckBox
-			// 
-			this.splashTransCheckBox.AutoSize = true;
-			this.splashTransCheckBox.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.splashTransCheckBox.Location = new System.Drawing.Point(6, 45);
-			this.splashTransCheckBox.Name = "splashTransCheckBox";
-			this.splashTransCheckBox.Size = new System.Drawing.Size(124, 17);
-			this.splashTransCheckBox.TabIndex = 9;
-			this.splashTransCheckBox.Text = "Transparent Splash";
-			this.splashTransCheckBox.UseVisualStyleBackColor = true;
 			// 
 			// SettingsWindow
 			// 
@@ -259,6 +246,5 @@
 		private System.Windows.Forms.TabControl settingTabs;
 		private System.Windows.Forms.TabPage themeTab;
 		private System.Windows.Forms.TabPage generalTab;
-		private System.Windows.Forms.CheckBox splashTransCheckBox;
 	}
 }

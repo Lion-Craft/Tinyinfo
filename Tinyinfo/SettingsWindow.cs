@@ -88,17 +88,6 @@ namespace Tinyinfo
 			darkThemeRadioButton.Font = font;
 			refreshRateLabel.Font = font;
 			refreshRateUpDown.Font = font;
-			splashTransCheckBox.Font = font;
-
-			//	Load splash transparency state
-			if (data.GetKey("tinyinfo.transparentsplash").ToLower() == "true")
-			{
-				splashTransCheckBox.Checked = true;
-			}
-			else
-			{
-				splashTransCheckBox.Checked = false;
-			}
 		}
 
 		public void refreshTheme()
@@ -167,10 +156,6 @@ namespace Tinyinfo
 			data["tinyinfo"]["refresh"] = refreshRateUpDown.Value.ToString();
 			parser.WriteFile("./tinyinfo.ini", data);
 
-			//	Write splash transparency setting
-			data["tinyinfo"]["transparentsplash"] = splashTransCheckBox.Checked.ToString();
-			parser.WriteFile("./tinyinfo.ini", data);
-
 			//	reload theme
 			refreshTheme();
 		}
@@ -220,7 +205,6 @@ namespace Tinyinfo
 			cancelButton.Font = font;
 			lightThemeRadioButton.Font = font;
 			darkThemeRadioButton.Font = font;
-			splashTransCheckBox.Font = font;
 			refreshRateLabel.Font = font;
 			refreshRateUpDown.Font = font;
 			refreshRateUpDown.Location = new Point(refreshRateUpDown.Location.X + Convert.ToInt32(font.Size) * 10, refreshRateUpDown.Location.Y);
