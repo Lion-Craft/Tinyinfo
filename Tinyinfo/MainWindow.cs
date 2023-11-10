@@ -1023,7 +1023,7 @@ namespace Tinyinfo
 			//	Stop Updating
 			StopUpdate();
 			//	Exit Tinyinfo
-			System.Windows.Forms.Application.Exit();
+			Application.Exit();
 		}
 	}
 }
