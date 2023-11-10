@@ -280,6 +280,34 @@ namespace Tinyinfo
 				diskNo++;
 			}
 
+			output += "\n},\n";
+
+			output += "\"Network\":\n{\n";
+			int nicNo = 0;
+			foreach (var nic in hardwareInfo.NetworkAdapterList)
+			{
+				string lineEnd = "";
+				if ((nicNo + 1) < hardwareInfo.NetworkAdapterList.Count)
+				{
+					lineEnd += ",\n";
+				}
+				else
+				{
+					lineEnd += "\n";
+				}
+				output += "\"Nic " + nicNo + "\":\n{\n";
+				output += "\"Name\": \"" + nic.Name + "\",\n";
+				output += "\"Product\": \"" + nic.ProductName + "\",\n";
+				output += "\"Type\": \"" + nic.AdapterType + "\",\n";
+				output += "\"Manufacturer\": \"" + nic.Manufacturer + "\",\n";
+				output += "\"Mac\": \"" + nic.MACAddress + "\",\n";
+				output += "\"Bytes Send\": \"" + nic.BytesSentPersec + "\",\n";
+				output += "\"Bytes Recieved\": \"" + nic.BytesReceivedPersec + "\"\n";
+				output += "}" + lineEnd;
+
+				nicNo++;
+			}
+
 			output += "}\n";
 
 			output += "}";
