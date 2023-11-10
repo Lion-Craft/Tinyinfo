@@ -205,9 +205,9 @@ namespace Tinyinfo
 			
 			output += "\n},\n";
 
+			output += "\"Motherboard\":\n{\n";
 			foreach (var board in hardwareInfo.MotherboardList)
 			{
-				output += "\"Motherboard\":\n{\n";
 				output += "\"Manufacturer\": \"" + board.Manufacturer + "\",\n";
 				output += "\"Model\": \"" + board.Product + "\",\n";
 				output += "\"Serial Number\": \"" + board.SerialNumber + "\"";
@@ -215,15 +215,42 @@ namespace Tinyinfo
 
 			output += "\n},\n";
 
+			output += "\"BIOS\":\n{\n";
 			foreach (var bios in hardwareInfo.BiosList)
 			{
-				output += "\"BIOS\":\n{\n";
 				output += "\"Manufacturer\": \"" + bios.Manufacturer + "\",\n";
 				output += "\"Name\": \"" + bios.Name + "\",\n";
 				output += "\"Version\": \"" + bios.Version + "\",\n";
 				output += "\"Release Date\": \"" + bios.ReleaseDate + "\"";
 			}
 
+			output += "\n},\n";
+
+			output += "\"Batteries\":\n{\n";
+			if (hardwareInfo.BatteryList.Count == 0)
+			{
+				output += "\"Battery 0\": \"Not Present\"";
+			}
+			else
+			{
+				int batt = 0;
+				foreach (var battery in hardwareInfo.BatteryList)
+				{
+					output += "\"Battery " + batt + "\":\n{\n";
+					output += "\"Status\": \"" + battery.BatteryStatus + "\",\n";
+					output += "\"Status Description\": \"" + battery.BatteryStatusDescription + "\",\n";
+					output += "\"Percentage\": \"" + battery.EstimatedChargeRemaining + "\",\n";
+					output += "\"Time Remaining\": \"" + battery.EstimatedRunTime + "\",\n";
+					output += "\"Expected Life\": \"" + battery.ExpectedLife + "\",\n";
+					output += "\"Time To Full\": \"" + battery.TimeToFullCharge + "\",\n";
+					output += "\"Time On Battery\": \"" + battery.TimeOnBattery + "\",\n";
+					output += "\"Design Capacity\": \"" + battery.DesignCapacity + "\",\n";
+					output += "\"Full Capacity\": \"" + battery.FullChargeCapacity + "\"\n";
+					output += "}\n";
+					
+					batt++;
+				}
+			}
 			output += "\n}\n";
 
 			output += "}";
