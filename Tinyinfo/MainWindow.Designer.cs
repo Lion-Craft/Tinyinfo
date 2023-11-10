@@ -38,8 +38,6 @@ namespace Tinyinfo
 			this.onTopCheckbox = new System.Windows.Forms.CheckBox();
 			this.menuBar = new System.Windows.Forms.MainMenu(this.components);
 			this.fileDropdown = new System.Windows.Forms.MenuItem();
-			this.exportItem = new System.Windows.Forms.MenuItem();
-			this.btnExportAsJSON = new System.Windows.Forms.MenuItem();
 			this.settingsItem = new System.Windows.Forms.MenuItem();
 			this.menuItem2 = new System.Windows.Forms.MenuItem();
 			this.exitItem = new System.Windows.Forms.MenuItem();
@@ -68,7 +66,6 @@ namespace Tinyinfo
 			this.diskOutputBox = new System.Windows.Forms.TextBox();
 			this.netTab = new System.Windows.Forms.TabPage();
 			this.netOutputBox = new System.Windows.Forms.TextBox();
-			this.btnExportAsXML = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
@@ -174,43 +171,26 @@ namespace Tinyinfo
 			// 
 			this.fileDropdown.Index = 0;
 			this.fileDropdown.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.exportItem,
-            this.btnExportAsJSON,
-            this.btnExportAsXML,
             this.settingsItem,
             this.menuItem2,
             this.exitItem});
 			this.fileDropdown.Text = "File";
 			// 
-			// exportItem
-			// 
-			this.exportItem.Index = 0;
-			this.exportItem.Shortcut = System.Windows.Forms.Shortcut.CtrlT;
-			this.exportItem.Text = "Export as plain text";
-			this.exportItem.Click += new System.EventHandler(this.exportItem_Click);
-			// 
-			// btnExportAsJSON
-			// 
-			this.btnExportAsJSON.Index = 1;
-			this.btnExportAsJSON.Shortcut = System.Windows.Forms.Shortcut.CtrlE;
-			this.btnExportAsJSON.Text = "Export as JSON";
-			this.btnExportAsJSON.Click += new System.EventHandler(this.btnExportAsJSON_Click);
-			// 
 			// settingsItem
 			// 
-			this.settingsItem.Index = 3;
+			this.settingsItem.Index = 0;
 			this.settingsItem.Shortcut = System.Windows.Forms.Shortcut.CtrlS;
 			this.settingsItem.Text = "Settings";
 			this.settingsItem.Click += new System.EventHandler(this.settingsItem_Click);
 			// 
 			// menuItem2
 			// 
-			this.menuItem2.Index = 4;
+			this.menuItem2.Index = 1;
 			this.menuItem2.Text = "-";
 			// 
 			// exitItem
 			// 
-			this.exitItem.Index = 5;
+			this.exitItem.Index = 2;
 			this.exitItem.Shortcut = System.Windows.Forms.Shortcut.AltF4;
 			this.exitItem.Text = "Exit";
 			this.exitItem.Click += new System.EventHandler(this.exitItem_Click);
@@ -540,13 +520,6 @@ namespace Tinyinfo
 			this.netOutputBox.TabIndex = 7;
 			this.netOutputBox.WordWrap = false;
 			// 
-			// btnExportAsXML
-			// 
-			this.btnExportAsXML.Index = 2;
-			this.btnExportAsXML.Shortcut = System.Windows.Forms.Shortcut.CtrlM;
-			this.btnExportAsXML.Text = "Export as XML";
-			this.btnExportAsXML.Click += new System.EventHandler(this.btnExportAsXML_Click);
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -608,10 +581,8 @@ namespace Tinyinfo
 		private System.Windows.Forms.Panel onTopBoxPanel;
 		private System.Windows.Forms.MenuItem refreshItem;
         private System.Windows.Forms.MenuItem fileDropdown;
-        private System.Windows.Forms.MenuItem exportItem;
 		private System.Windows.Forms.MenuItem menuItem2;
 		private System.Windows.Forms.MenuItem exitItem;
-        private System.Windows.Forms.MenuItem btnExportAsJSON;
 		private System.Windows.Forms.TabControl outputTabs;
 		private System.Windows.Forms.TabPage cpuTab;
 		private System.Windows.Forms.TabPage ramTab;
@@ -632,7 +603,6 @@ namespace Tinyinfo
 		private System.Windows.Forms.TabPage driverTab;
 		private System.Windows.Forms.TabPage apiTab;
 		public System.Windows.Forms.TextBox nvapiOutputBox;
-		private System.Windows.Forms.MenuItem btnExportAsXML;
 	}
 }
 

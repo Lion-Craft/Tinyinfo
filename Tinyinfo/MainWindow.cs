@@ -882,131 +882,6 @@ namespace Tinyinfo
 			LoadTheme();
 		}
 
-		/// <summary>
-		/// Export system info to text file as plain text
-		/// </summary>
-		private void exportItem_Click(object sender, EventArgs e)
-		{
-			infoLabel.Visible = true;
-			infoLabel.Text = "Exporting as Text...";
-			ExportToTextFile(0);
-			infoLabel.Text = "Press Start to continuously update System Info.";
-		}
-
-		/// <summary>
-		/// Export system info to text file as JSON
-		/// </summary>
-		private void btnExportAsJSON_Click(object sender, EventArgs e)
-		{
-			infoLabel.Visible = true;
-			infoLabel.Text = "Exporting as JSON...";
-			ExportToTextFile(1);
-			infoLabel.Text = "Press Start to continuously update System Info.";
-		}
-
-		/// <summary>
-		/// Exports the content of hardwareinfo into a text file based on an integer.
-		/// If the integer is 0, it exports it as a plain text.
-		/// If the integer is 1, it exports it as a JSON.
-		/// </summary>
-		/// <param name="mode"></param>
-		private void ExportToTextFile(int mode)
-		{
-			if (cpuOutputBox == null)
-			{
-				// Handle the case where outputBox is not set.
-				return;
-			}
-
-			try
-			{
-				using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-				{
-					string filePath = "";
-					switch (mode)
-					{
-						case 0:
-							//	Defines allowed file types
-							saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
-							//	Sets default file name
-							saveFileDialog.FileName = "export.txt";
-
-							//	Set SaveFileDialog title
-							saveFileDialog.Title = "Tinyinfo - Text Export";
-
-							if (saveFileDialog.ShowDialog() != DialogResult.OK)
-							{
-								return;
-							}
-
-							//	Sets file path to users directory of choice
-							filePath = saveFileDialog.FileName;
-
-							using (StreamWriter writer = new StreamWriter(filePath))
-							{
-								string nl = Environment.NewLine;
-								string outputText = cpuOutputBox.Text + ramOutputBox.Text + gpuOutputBox.Text + nvapiOutputBox.Text + boardOutputBox.Text + biosOutputBox.Text + battOutputBox.Text + diskOutputBox.Text + netOutputBox.Text;
-
-								writer.Write(outputText);
-							}
-							break;
-
-						case 1:
-							//	Defines allowed file types
-							saveFileDialog.Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*";
-							//	Sets default file name
-							saveFileDialog.FileName = "export.json";
-
-							//	Set SaveFileDialog title
-							saveFileDialog.Title = "Tinyinfo - JSON Export";
-
-							if (saveFileDialog.ShowDialog() != DialogResult.OK)
-							{
-								return;
-							}
-
-							//	Sets file path to users directory of choice
-							filePath = saveFileDialog.FileName;
-
-							using (StreamWriter writer = new StreamWriter(filePath))
-							{
-								writer.Write(JSON.CreateJSON());
-							}
-							break;
-						case 2:
-							//Console.Write(XML.CreateXML(JSON.CreateJSON()));
-							//	Defines allowed file types
-							saveFileDialog.Filter = "XML Files (*.xml)|*.json|All Files (*.*)|*.*";
-							//	Sets default file name
-							saveFileDialog.FileName = "export.xml";
-
-							//	Set SaveFileDialog title
-							saveFileDialog.Title = "Tinyinfo - XML Export";
-
-							if (saveFileDialog.ShowDialog() != DialogResult.OK)
-							{
-								return;
-							}
-
-							//	Sets file path to users directory of choice
-							filePath = saveFileDialog.FileName;
-
-							using (StreamWriter writer = new StreamWriter(filePath))
-							{
-								writer.Write(XML.CreateXML(JSON.CreateJSON()));
-							}
-							break;
-						default:
-							break;
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-			}
-		}
-
 		//	Create ShellAbout
 		[DllImport("shell32.dll")]
 		private static extern int ShellAbout(IntPtr hwnd, string szApp, string szOtherStuff, IntPtr hIcon);
@@ -1024,7 +899,7 @@ namespace Tinyinfo
 		private void aboutItem_Click(object sender, EventArgs e)
 		{
 			//	Create ShellAbout dialog
-			ShellAbout(IntPtr.Zero, "About Tinyinfo" + "#Tinyinfo V" + majorVersion + " Service Pack " + servicePack, "Detailed version info:\nTinyinfo v." + version, Icon.Handle);
+			ShellAbout(IntPtr.Zero, "About Tinyinfo" + "#Tinyinfo V" + majorVersion + "µ Service Pack " + servicePack, "Detailed version info:\nTinyinfo Micro v." + version, Icon.Handle);
 		}
 
 		/// <summary>
@@ -1052,14 +927,6 @@ namespace Tinyinfo
 			StopUpdate();
 			//	Exit Tinyinfo
 			Application.Exit();
-		}
-
-		private void btnExportAsXML_Click(object sender, EventArgs e)
-		{
-			infoLabel.Visible = true;
-			infoLabel.Text = "Exporting as XML...";
-			ExportToTextFile(2);
-			infoLabel.Text = "Press Start to continuously update System Info.";
 		}
 	}
 }
