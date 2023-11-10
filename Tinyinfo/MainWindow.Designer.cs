@@ -534,7 +534,7 @@ namespace Tinyinfo
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Menu = this.menuBar;
 			this.Name = "MainWindow";
-			this.Text = "Tinyinfo";
+			this.Text = "Tinyinfo µ";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainWindow_FormClosing);
 			this.Load += new System.EventHandler(this.Startup);
 			this.onTopBoxPanel.ResumeLayout(false);
