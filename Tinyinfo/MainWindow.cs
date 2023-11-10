@@ -893,8 +893,6 @@ namespace Tinyinfo
 		/// </summary>
 		private void btnExportAsJSON_Click(object sender, EventArgs e)
 		{
-			//	Show Warning Message
-			MessageBox.Show("JSON Export is not fully working at this time.", "Tinyinfo - Export Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			ExportToTextFile(1);
 		}
 
