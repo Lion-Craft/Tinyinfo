@@ -251,7 +251,36 @@ namespace Tinyinfo
 					batt++;
 				}
 			}
-			output += "\n}\n";
+
+			output += "\n},\n";
+
+			output += "\"Disks\":\n{\n";
+			int diskNo = 1;
+			foreach (var disk in hardwareInfo.DriveList)
+			{
+				string lineEnd = "";
+				if (diskNo < hardwareInfo.DriveList.Count)
+				{
+					lineEnd += ",\n";
+				}
+				else
+				{
+					lineEnd += "\n";
+				}
+				output += "\"Drive " + disk.Index + "\":\n{\n";
+				output += "\"Name\": \"" + disk.Name.Replace(@"\", @"\\") + "\",\n";
+				output += "\"Size\": \"" + (disk.Size / 1073741824) + "GB\",\n";
+				output += "\"Manufacturer\": \"" + disk.Manufacturer + "\",\n";
+				output += "\"Model\": \"" + disk.Model + "\",\n";
+				output += "\"Firmware\": \"" + disk.FirmwareRevision + "\",\n";
+				output += "\"Serial No\": \"" + disk.SerialNumber + "\",\n";
+				output += "\"Partitions\": \"" + disk.Partitions + "\"\n";
+				output += "}" + lineEnd;
+
+				diskNo++;
+			}
+
+			output += "}\n";
 
 			output += "}";
 			return output;
