@@ -729,6 +729,8 @@ namespace Tinyinfo
 		private void stopButton_Click(object sender, EventArgs e)
 		{
 			StopUpdate();
+			infoLabel.Visible = true;
+			infoLabel.Text = "Press Start to continuously update System Info.";
 		}
 
 		private void onTopCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -885,7 +887,10 @@ namespace Tinyinfo
 		/// </summary>
 		private void exportItem_Click(object sender, EventArgs e)
 		{
+			infoLabel.Visible = true;
+			infoLabel.Text = "Exporting as Text...";
 			ExportToTextFile(0);
+			infoLabel.Text = "Press Start to continuously update System Info.";
 		}
 
 		/// <summary>
@@ -893,7 +898,10 @@ namespace Tinyinfo
 		/// </summary>
 		private void btnExportAsJSON_Click(object sender, EventArgs e)
 		{
+			infoLabel.Visible = true;
+			infoLabel.Text = "Exporting as JSON...";
 			ExportToTextFile(1);
+			infoLabel.Text = "Press Start to continuously update System Info.";
 		}
 
 		/// <summary>
