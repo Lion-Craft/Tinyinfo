@@ -40,7 +40,7 @@
 			// 
 			// fontSizeUpDown
 			// 
-			this.fontSizeUpDown.Cursor = System.Windows.Forms.Cursors.No;
+			this.fontSizeUpDown.Cursor = System.Windows.Forms.Cursors.Default;
 			this.fontSizeUpDown.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.fontSizeUpDown.Location = new System.Drawing.Point(68, 12);
 			this.fontSizeUpDown.Maximum = new decimal(new int[] {
