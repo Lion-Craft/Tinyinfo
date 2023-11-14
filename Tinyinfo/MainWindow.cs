@@ -506,6 +506,8 @@ namespace Tinyinfo
 				stopButton.Enabled = false;
 				startButton.Enabled = true;
 			}
+			infoLabel.Visible = true;
+			infoLabel.Text = "Press Start to continuously update System Info.";
 		}
 
 		/// <summary>
@@ -605,7 +607,10 @@ namespace Tinyinfo
 		/// </summary>
 		private void exportItem_Click(object sender, EventArgs e)
 		{
+			infoLabel.Visible = true;
+			infoLabel.Text = "Exporting as Text...";
 			ExportToTextFile(0);
+			infoLabel.Text = "Press Start to continuously update System Info.";
 		}
 
 		/// <summary>
@@ -613,7 +618,10 @@ namespace Tinyinfo
 		/// </summary>
 		private void btnExportAsJSON_Click(object sender, EventArgs e)
 		{
+			infoLabel.Visible = true;
+			infoLabel.Text = "Exporting as JSON...";
 			ExportToTextFile(1);
+			infoLabel.Text = "Press Start to continuously update System Info.";
 		}
 
 		/// <summary>
