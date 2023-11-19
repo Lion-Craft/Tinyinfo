@@ -6,8 +6,10 @@ Following Versions are currently officially supported. Please note that this lis
 
 | Version | Support Status          | End of Support |
 | ------- | ------------------ | -------------- |
-| 3.0   | :white_check_mark:   | No |
-| 3.0 prereleases   | :x:  | Yes |
+| 3   | :white_check_mark:   | No |
+| 3µ   | :white_check_mark:  | No |
+| 3 prereleases   | :x:  | Yes |
+| 3µ prereleases   | :x:  | Yes |
 | 2.0   | :white_check_mark: (With Service Packs) | 01.01.2024 |
 | 2.0 prereleases   | :x: | Yes |
 | 1.x   | :x:                | Yes |
