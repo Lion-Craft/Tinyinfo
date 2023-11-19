@@ -6,15 +6,17 @@ Following Versions are currently officially supported. Please note that this lis
 
 | Version | Support Status          | End of Support |
 | ------- | ------------------ | -------------- |
-| 3 prereleases   | :white_check_mark:  | On v3 release |
-| 3µ prereleases   | :white_check_mark:  | On v3µ release |
+| 3   | :white_check_mark:   | No |
+| 3µ   | :white_check_mark:  | No |
+| 3 prereleases   | :x:  | Yes |
+| 3µ prereleases   | :x:  | Yes |
 | 2.0   | :white_check_mark: (With Service Packs) | 01.01.2024 |
 | 2.0 prereleases   | :x: | Yes |
 | 1.x   | :x:                | Yes |
 
-For detailed information please visit https://lioncraft.ione15.com/tinyinfo/versions
+For detailed information please visit https://lioncraft.ione15.com/Tinyinfo/versions
 
-## Reporting a Vulnerability
+## Reporting a Vulnerability or Bug
 
 Please Create a GitHub Issue if you find any Vulnerability or Bug.
 Try to describe the problem as detailed as possible to allow easier reproduction of the issues aswell as creating the corresponding fixes.
