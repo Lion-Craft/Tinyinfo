@@ -8,6 +8,7 @@ Lightweight System Info tool for Windows written in C# using .NET Framework 4.7.
 Tinyinfo currently gives you information about the following components:
 - CPU
 - GPU
+	- When using NVIDIA Graphics more info will be shown.
 - RAM
 - Drives
 - Motherboard
@@ -22,9 +23,9 @@ Windows by default marks all downloaded executables with "not enough reputation"
 You can either click on "More info" and then "Run anyway" in the SmartScreen warning or right click the ZIP before extracting, select "Properties", check the "Unblock" checkbox and then press "Ok".
 ## What does Tinyinfo need to run?
 Tinyinfo is relatively easy to run. It requires the following:
-- Microsoft Windows (64 Bit recommended)
+- Microsoft Windows (64 Bit required)
 - .NET Framework 4.7.2
-- 50MB free RAM
+- 100MB free RAM
 ## Help, I've found a bug or want a feature. What do I do?
 Feel free to report bugs or request features via a GitHub Issue.
 ## How do I contribute to Tinyinfo?
