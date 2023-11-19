@@ -141,6 +141,9 @@ namespace Tinyinfo
 					//	Network Adapter Info
 					LoadNetworkAdaptersData();
 
+					//	GPU and NVAPI info
+					LoadVideoControllerData();
+
 					//	TODO: Make better (This is just bad if were honest)
 					Thread.Sleep(maxRefresh);
 				} while (loop);
@@ -288,7 +291,7 @@ namespace Tinyinfo
 			if (manufacturer[0].ToLower() == "nvidia" || manufacturer[1].ToLower() == "nvidia")
 			{
 				//	Clear nvapi Textbox
-				nvapiOutputBox.Text = "";
+				WriteTextSafe("", "nvapiOutputBox");
 
 				//	Set GPU ID to 0
 				int nvid = 0;
@@ -382,15 +385,17 @@ namespace Tinyinfo
 					string currentVideoClock = $"\tVideo Decode Clockspeed (If available): {nvgpu.CurrentClockFrequencies.VideoDecodingClock.Frequency / 1000}MHz{nl}";
 
 					//	Output GPU info
-					nvapiOutputBox.Text += gpuid + gpu + chip + cores + rops + shaders + graphicsBase + graphicsBoost + memoryBase + memoryBoost+ memoryBus + memorySize + memoryType + memoryManufacturer + memoryEcc + memoryEccOn + bios + bus + pcie + agp + fan + temp + currentGraphicsClock + currentMemoryClock + currentVideoClock;
+					AppendTextSafe(gpuid + gpu + chip + cores + rops + shaders + graphicsBase + graphicsBoost + memoryBase + memoryBoost+ memoryBus + memorySize + memoryType + memoryManufacturer + memoryEcc + memoryEccOn + bios + bus + pcie + agp + fan + temp + currentGraphicsClock + currentMemoryClock + currentVideoClock, "nvapiOutputBox");
 					
 					//	Increment ID
 					nvid++;
+					ShowInfo("");
 				}
 			}
 			else
 			{
-				nvapiOutputBox.Text = "Non NVIDIA Graphics detected. Unable to Display NvAPI information.";
+				WriteTextSafe("Non NVIDIA Graphics detected. Unable to Display NvAPI information.", "nvapiOutputBox");
+				ShowInfo("");
 			}
 		}
 
@@ -626,6 +631,9 @@ namespace Tinyinfo
 					break;
 				case "gpuOutputBox":
 					textBox = gpuOutputBox;
+					break;
+				case "nvapiOutputBox":
+					textBox = nvapiOutputBox;
 					break;
 				case "boardOutputBox":
 					textBox = boardOutputBox;
