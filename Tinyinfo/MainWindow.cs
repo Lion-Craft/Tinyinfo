@@ -232,14 +232,6 @@ namespace Tinyinfo
 
 			string[] manufacturer = {"3dfx", "ati", "3rd device", "4th device", "5th device", "6th device", "7th device"};
 			string nl = Environment.NewLine;
-			//	Example usage
-			/*
-			foreach (var gpu in NvAPIWrapper.GPU.PhysicalGPU.GetPhysicalGPUs())
-			{
-				//	Displays Message Box with gpu chip name
-				MessageBox.Show(gpu.ArchitectInformation.ShortName);
-			}
-			*/
 
 			WriteTextSafe("Video: " + nl, "gpuOutputBox");
 
