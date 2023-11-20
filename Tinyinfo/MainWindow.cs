@@ -230,7 +230,7 @@ namespace Tinyinfo
 		{
 			int id = 0;
 
-			string[] manufacturer = {"3dfx", "ati", "3rd device", "4th device", "5th device", "6th device", "7th device"};
+			string[] manufacturer = {"3dfx", "ati", "3rd device", "4th device", "5th device", "6th device", "7th device", "8th device"};
 			string nl = Environment.NewLine;
 
 			WriteTextSafe("Video: " + nl, "gpuOutputBox");
