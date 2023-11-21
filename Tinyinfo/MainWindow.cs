@@ -230,16 +230,8 @@ namespace Tinyinfo
 		{
 			int id = 0;
 
-			string[] manufacturer = {"3dfx", "ati"};
+			string[] manufacturer = { "3dfx", "ati", "3rd device", "4th device", "5th device", "6th device", "7th device" };
 			string nl = Environment.NewLine;
-			//	Example usage
-			/*
-			foreach (var gpu in NvAPIWrapper.GPU.PhysicalGPU.GetPhysicalGPUs())
-			{
-				//	Displays Message Box with gpu chip name
-				MessageBox.Show(gpu.ArchitectInformation.ShortName);
-			}
-			*/
 
 			WriteTextSafe("Video: " + nl, "gpuOutputBox");
 
@@ -288,7 +280,7 @@ namespace Tinyinfo
 			}
 
 			//	Check what manufacturer the gpu is, if nvidia show nvapi info
-			if (manufacturer[0].ToLower() == "nvidia" || manufacturer[1].ToLower() == "nvidia")
+			if (manufacturer[0].ToLower() == "nvidia" || manufacturer[1].ToLower() == "nvidia" || manufacturer[2].ToLower() == "nvidia" || manufacturer[3].ToLower() == "nvidia" || manufacturer[4].ToLower() == "nvidia" || manufacturer[5].ToLower() == "nvidia" || manufacturer[6].ToLower() == "nvidia" || manufacturer[7].ToLower() == "nvidia")
 			{
 				//	Clear nvapi Textbox
 				WriteTextSafe("", "nvapiOutputBox");
