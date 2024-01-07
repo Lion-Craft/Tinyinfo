@@ -40,6 +40,7 @@ namespace Tinyinfo
 			this.fileDropdown = new System.Windows.Forms.MenuItem();
 			this.exportItem = new System.Windows.Forms.MenuItem();
 			this.btnExportAsJSON = new System.Windows.Forms.MenuItem();
+			this.btnExportAsXML = new System.Windows.Forms.MenuItem();
 			this.settingsItem = new System.Windows.Forms.MenuItem();
 			this.menuItem2 = new System.Windows.Forms.MenuItem();
 			this.exitItem = new System.Windows.Forms.MenuItem();
@@ -68,7 +69,6 @@ namespace Tinyinfo
 			this.diskOutputBox = new System.Windows.Forms.TextBox();
 			this.netTab = new System.Windows.Forms.TabPage();
 			this.netOutputBox = new System.Windows.Forms.TextBox();
-			this.btnExportAsXML = new System.Windows.Forms.MenuItem();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
@@ -195,6 +195,13 @@ namespace Tinyinfo
 			this.btnExportAsJSON.Shortcut = System.Windows.Forms.Shortcut.CtrlE;
 			this.btnExportAsJSON.Text = "Export as JSON";
 			this.btnExportAsJSON.Click += new System.EventHandler(this.btnExportAsJSON_Click);
+			// 
+			// btnExportAsXML
+			// 
+			this.btnExportAsXML.Index = 2;
+			this.btnExportAsXML.Shortcut = System.Windows.Forms.Shortcut.CtrlM;
+			this.btnExportAsXML.Text = "Export as XML";
+			this.btnExportAsXML.Click += new System.EventHandler(this.btnExportAsXML_Click);
 			// 
 			// settingsItem
 			// 
@@ -539,13 +546,6 @@ namespace Tinyinfo
 			this.netOutputBox.Size = new System.Drawing.Size(644, 225);
 			this.netOutputBox.TabIndex = 7;
 			this.netOutputBox.WordWrap = false;
-			// 
-			// btnExportAsXML
-			// 
-			this.btnExportAsXML.Index = 2;
-			this.btnExportAsXML.Shortcut = System.Windows.Forms.Shortcut.CtrlM;
-			this.btnExportAsXML.Text = "Export as XML";
-			this.btnExportAsXML.Click += new System.EventHandler(this.btnExportAsXML_Click);
 			// 
 			// MainWindow
 			// 
