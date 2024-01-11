@@ -275,6 +275,9 @@ namespace Tinyinfo
 				//	Network Adapter Info
 				LoadNetworkAdaptersData();
 
+				//	OS Info
+				LoadOsData();
+
 				ShowInfo("");
 			}
 		}
@@ -698,6 +701,26 @@ namespace Tinyinfo
 		}
 
 		/// <summary>
+		/// Loads OS data and appends it
+		/// </summary>
+		private void LoadOsData()
+		{
+			string nl = Environment.NewLine;
+
+			WriteTextSafe("Operating System:" + nl, "osOutputBox");
+
+			string osName = $"\tName: {hardwareInfo.OperatingSystem.Name}{nl}";
+
+			string osVersion = $"\tVersion: {hardwareInfo.OperatingSystem.VersionString}{nl}";
+
+			string result = osName + osVersion;
+
+			AppendTextSafe(result, "osOutputBox");
+
+			ShowInfo("");
+		}
+
+		/// <summary>
 		/// Safely Overwrite on textbox content
 		/// </summary>
 		/// <param name="text"></param>
@@ -739,6 +762,9 @@ namespace Tinyinfo
 					break;
 				case "netOutputBox":
 					textBox = netOutputBox;
+					break;
+				case "osOutputBox":
+					textBox = osOutputBox;
 					break;
 			}
 			if (textBox.InvokeRequired)
