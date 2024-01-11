@@ -308,6 +308,13 @@ namespace Tinyinfo
 				nicNo++;
 			}
 
+			output += "},\n";
+
+			output += "\"Os\":\n{\n";
+				
+			output += "\"Name\": \"" + hardwareInfo.OperatingSystem.Name + "\",\n";
+			output += "\"Version\": \"" + hardwareInfo.OperatingSystem.VersionString + "\"\n";
+
 			output += "}\n";
 
 			output += "}";
