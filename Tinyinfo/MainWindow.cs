@@ -1069,7 +1069,7 @@ namespace Tinyinfo
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
 								string nl = Environment.NewLine;
-								string outputText = cpuOutputBox.Text + ramOutputBox.Text + gpuOutputBox.Text + nvapiOutputBox.Text + boardOutputBox.Text + biosOutputBox.Text + battOutputBox.Text + diskOutputBox.Text + netOutputBox.Text;
+								string outputText = cpuOutputBox.Text + ramOutputBox.Text + gpuOutputBox.Text + nvapiOutputBox.Text + boardOutputBox.Text + biosOutputBox.Text + battOutputBox.Text + diskOutputBox.Text + netOutputBox.Text + osOutputBox.Text;
 
 								writer.Write(outputText);
 							}
