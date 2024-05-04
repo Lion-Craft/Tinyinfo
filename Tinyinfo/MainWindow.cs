@@ -231,7 +231,7 @@ namespace Tinyinfo
 		{
 			int id = 0;
 
-			string[] manufacturer = new string[hardwareInfo.VideoControllerList.Count]; // = {"3dfx", "ati", "3rd device", "4th device", "5th device", "6th device", "7th device", "8th device"};
+			string[] manufacturer = new string[hardwareInfo.VideoControllerList.Count];
 			string nl = Environment.NewLine;
 
 			WriteTextSafe("Video: " + nl, "gpuOutputBox");
