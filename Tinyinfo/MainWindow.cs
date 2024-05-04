@@ -238,7 +238,7 @@ namespace Tinyinfo
 
 			foreach (var gpu in hardwareInfo.VideoControllerList)
 			{
-				float vmemSizeGB = gpu.AdapterRAM / 1073741824;
+				double vmemSizeGB = gpu.AdapterRAM / 1048576;
 
 				string gpuIdInfo = $"\tGPU {id}:{nl}";
 
@@ -259,7 +259,7 @@ namespace Tinyinfo
 					videoModeInfo = $"\t\tVideo Mode: {gpu.VideoModeDescription} x {gpu.CurrentRefreshRate}Hz x {gpu.CurrentBitsPerPixel} Bit{nl}";
 				}
 
-				string vramAmountInfo = $"\t\tVRAM Amount: {vmemSizeGB:F2}GB{nl}";
+				string vramAmountInfo = $"\t\tVRAM Amount: {vmemSizeGB}MB{nl}";
 
 				string maxRefreshRateInfo = $"\t\tMaximum Refresh Rate: {gpu.MaxRefreshRate}Hz{nl}";
 
