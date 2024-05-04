@@ -74,10 +74,17 @@ namespace Tinyinfo
 			}
 			else
 			{
-				//	Start Thread for CPU info
-				cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
-				cpuThread.IsBackground = true;
-				cpuThread.Start();
+				try
+				{
+					//	Start Thread for CPU info
+					cpuThread = new Thread(() => hardwareInfo.RefreshCPUList());
+					cpuThread.IsBackground = true;
+					cpuThread.Start();
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("An error occured:\n" + ex.Message);
+				}
 			}
 
 			//	Check if Thread is alive
@@ -88,10 +95,16 @@ namespace Tinyinfo
 			}
 			else
 			{
-				//	Start Thread for Battery info
-				batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
-				batteryThread.IsBackground = true;
-				batteryThread.Start();
+				try {
+					//	Start Thread for Battery info
+					batteryThread = new Thread(() => hardwareInfo.RefreshBatteryList());
+					batteryThread.IsBackground = true;
+					batteryThread.Start();
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("An error occured:\n" + ex.Message);
+				}
 			}
 
 			//	Check if Thread is alive
@@ -102,10 +115,16 @@ namespace Tinyinfo
 			}
 			else
 			{
-				//	Start Thread for Network info
-				netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
-				netThread.IsBackground = false;
-				netThread.Start();
+				try {
+					//	Start Thread for Network info
+					netThread = new Thread(() => hardwareInfo.RefreshNetworkAdapterList());
+					netThread.IsBackground = false;
+					netThread.Start();
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("An error occured:\n" + ex.Message);
+				}
 			}
 		}
 
@@ -114,8 +133,87 @@ namespace Tinyinfo
 		/// </summary>
 		private void RefreshAllHardwareInfo()
 		{
-			//	Update info
-			hardwareInfo.RefreshAll();
+			//	Update CPU info
+			try
+			{
+				hardwareInfo.RefreshCPUList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occured:\n" + ex.Message);
+			}
+			//	Update Memory info
+			try
+			{
+				hardwareInfo.RefreshMemoryList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occured:\n" + ex.Message);
+			}
+			//	Update Video info
+			try
+			{
+				hardwareInfo.RefreshVideoControllerList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occured:\n" + ex.Message);
+			}
+			//	Update Drive info
+			try
+			{
+				hardwareInfo.RefreshDriveList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occured:\n" + ex.Message);
+			}
+			//	Update NIC info
+			try
+			{
+				hardwareInfo.RefreshNetworkAdapterList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occured:\n" + ex.Message);
+			}
+			//	Update Mainboard info
+			try
+			{
+				hardwareInfo.RefreshMotherboardList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occured:\n" + ex.Message);
+			}
+			//	Update BIOS info
+			try
+			{
+				hardwareInfo.RefreshBIOSList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occured:\n" + ex.Message);
+			}
+			//	Update Battery info
+			try
+			{
+				hardwareInfo.RefreshBatteryList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occured:\n" + ex.Message);
+			}
+			//	Update OS info
+			try
+			{
+				hardwareInfo.RefreshOperatingSystem();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occured:\n" + ex.Message);
+			}
 		}
 
 		//	Set maximum theoretical Refresh rate in ms
@@ -177,6 +275,9 @@ namespace Tinyinfo
 
 				//	Network Adapter Info
 				LoadNetworkAdaptersData();
+
+				//	OS Info
+				LoadOsData();
 
 				ShowInfo("");
 			}
@@ -601,6 +702,26 @@ namespace Tinyinfo
 		}
 
 		/// <summary>
+		/// Loads OS data and appends it
+		/// </summary>
+		private void LoadOsData()
+		{
+			string nl = Environment.NewLine;
+
+			WriteTextSafe("Operating System:" + nl, "osOutputBox");
+
+			string osName = $"\tName: {hardwareInfo.OperatingSystem.Name}{nl}";
+
+			string osVersion = $"\tVersion: {hardwareInfo.OperatingSystem.VersionString}{nl}";
+
+			string result = osName + osVersion;
+
+			AppendTextSafe(result, "osOutputBox");
+
+			ShowInfo("");
+		}
+
+		/// <summary>
 		/// Safely Overwrite on textbox content
 		/// </summary>
 		/// <param name="text"></param>
@@ -642,6 +763,9 @@ namespace Tinyinfo
 					break;
 				case "netOutputBox":
 					textBox = netOutputBox;
+					break;
+				case "osOutputBox":
+					textBox = osOutputBox;
 					break;
 			}
 			if (textBox.InvokeRequired)
@@ -946,7 +1070,7 @@ namespace Tinyinfo
 							using (StreamWriter writer = new StreamWriter(filePath))
 							{
 								string nl = Environment.NewLine;
-								string outputText = cpuOutputBox.Text + ramOutputBox.Text + gpuOutputBox.Text + nvapiOutputBox.Text + boardOutputBox.Text + biosOutputBox.Text + battOutputBox.Text + diskOutputBox.Text + netOutputBox.Text;
+								string outputText = cpuOutputBox.Text + ramOutputBox.Text + gpuOutputBox.Text + nvapiOutputBox.Text + boardOutputBox.Text + biosOutputBox.Text + battOutputBox.Text + diskOutputBox.Text + netOutputBox.Text + osOutputBox.Text;
 
 								writer.Write(outputText);
 							}

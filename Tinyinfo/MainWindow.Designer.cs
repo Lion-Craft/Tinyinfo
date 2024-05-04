@@ -40,6 +40,7 @@ namespace Tinyinfo
 			this.fileDropdown = new System.Windows.Forms.MenuItem();
 			this.exportItem = new System.Windows.Forms.MenuItem();
 			this.btnExportAsJSON = new System.Windows.Forms.MenuItem();
+			this.btnExportAsXML = new System.Windows.Forms.MenuItem();
 			this.settingsItem = new System.Windows.Forms.MenuItem();
 			this.menuItem2 = new System.Windows.Forms.MenuItem();
 			this.exitItem = new System.Windows.Forms.MenuItem();
@@ -68,7 +69,8 @@ namespace Tinyinfo
 			this.diskOutputBox = new System.Windows.Forms.TextBox();
 			this.netTab = new System.Windows.Forms.TabPage();
 			this.netOutputBox = new System.Windows.Forms.TextBox();
-			this.btnExportAsXML = new System.Windows.Forms.MenuItem();
+			this.osTab = new System.Windows.Forms.TabPage();
+			this.osOutputBox = new System.Windows.Forms.TextBox();
 			this.onTopBoxPanel.SuspendLayout();
 			this.outputTabs.SuspendLayout();
 			this.cpuTab.SuspendLayout();
@@ -82,6 +84,7 @@ namespace Tinyinfo
 			this.battTab.SuspendLayout();
 			this.diskTab.SuspendLayout();
 			this.netTab.SuspendLayout();
+			this.osTab.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// startButton
@@ -196,6 +199,13 @@ namespace Tinyinfo
 			this.btnExportAsJSON.Text = "Export as JSON";
 			this.btnExportAsJSON.Click += new System.EventHandler(this.btnExportAsJSON_Click);
 			// 
+			// btnExportAsXML
+			// 
+			this.btnExportAsXML.Index = 2;
+			this.btnExportAsXML.Shortcut = System.Windows.Forms.Shortcut.CtrlM;
+			this.btnExportAsXML.Text = "Export as XML";
+			this.btnExportAsXML.Click += new System.EventHandler(this.btnExportAsXML_Click);
+			// 
 			// settingsItem
 			// 
 			this.settingsItem.Index = 3;
@@ -267,6 +277,7 @@ namespace Tinyinfo
 			this.outputTabs.Controls.Add(this.battTab);
 			this.outputTabs.Controls.Add(this.diskTab);
 			this.outputTabs.Controls.Add(this.netTab);
+			this.outputTabs.Controls.Add(this.osTab);
 			this.outputTabs.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.outputTabs.Location = new System.Drawing.Point(16, 33);
 			this.outputTabs.Name = "outputTabs";
@@ -540,12 +551,33 @@ namespace Tinyinfo
 			this.netOutputBox.TabIndex = 7;
 			this.netOutputBox.WordWrap = false;
 			// 
-			// btnExportAsXML
+			// osTab
 			// 
-			this.btnExportAsXML.Index = 2;
-			this.btnExportAsXML.Shortcut = System.Windows.Forms.Shortcut.CtrlM;
-			this.btnExportAsXML.Text = "Export as XML";
-			this.btnExportAsXML.Click += new System.EventHandler(this.btnExportAsXML_Click);
+			this.osTab.Controls.Add(this.osOutputBox);
+			this.osTab.Location = new System.Drawing.Point(4, 26);
+			this.osTab.Name = "osTab";
+			this.osTab.Size = new System.Drawing.Size(644, 225);
+			this.osTab.TabIndex = 8;
+			this.osTab.Text = "OS";
+			this.osTab.UseVisualStyleBackColor = true;
+			// 
+			// osOutputBox
+			// 
+			this.osOutputBox.AcceptsReturn = true;
+			this.osOutputBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.osOutputBox.BackColor = System.Drawing.SystemColors.Window;
+			this.osOutputBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.osOutputBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.osOutputBox.Location = new System.Drawing.Point(0, 0);
+			this.osOutputBox.Multiline = true;
+			this.osOutputBox.Name = "osOutputBox";
+			this.osOutputBox.ReadOnly = true;
+			this.osOutputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+			this.osOutputBox.Size = new System.Drawing.Size(644, 225);
+			this.osOutputBox.TabIndex = 8;
+			this.osOutputBox.WordWrap = false;
 			// 
 			// MainWindow
 			// 
@@ -587,6 +619,8 @@ namespace Tinyinfo
 			this.diskTab.PerformLayout();
 			this.netTab.ResumeLayout(false);
 			this.netTab.PerformLayout();
+			this.osTab.ResumeLayout(false);
+			this.osTab.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -633,6 +667,8 @@ namespace Tinyinfo
 		private System.Windows.Forms.TabPage apiTab;
 		public System.Windows.Forms.TextBox nvapiOutputBox;
 		private System.Windows.Forms.MenuItem btnExportAsXML;
+		private System.Windows.Forms.TabPage osTab;
+		public System.Windows.Forms.TextBox osOutputBox;
 	}
 }
 

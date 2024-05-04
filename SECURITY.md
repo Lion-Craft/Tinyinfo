@@ -10,7 +10,7 @@ Following Versions are currently officially supported. Please note that this lis
 | 3µ   | :white_check_mark:  | No |
 | 3 prereleases   | :x:  | Yes |
 | 3µ prereleases   | :x:  | Yes |
-| 2.0   | :white_check_mark: (With Service Packs) | 01.01.2024 |
+| 2.0   | :x: (Including Service Packs) | Yes (Since 01.01.2024) |
 | 2.0 prereleases   | :x: | Yes |
 | 1.x   | :x:                | Yes |
 
