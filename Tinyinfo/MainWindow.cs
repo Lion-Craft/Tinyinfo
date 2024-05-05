@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Tinyinfo
 {
@@ -331,14 +332,14 @@ namespace Tinyinfo
 		{
 			int id = 0;
 
-			string[] manufacturer = { "3dfx", "ati", "3rd device", "4th device", "5th device", "6th device", "7th device" };
+			string[] manufacturer = new string[hardwareInfo.VideoControllerList.Count];
 			string nl = Environment.NewLine;
 
 			WriteTextSafe("Video: " + nl, "gpuOutputBox");
 
 			foreach (var gpu in hardwareInfo.VideoControllerList)
 			{
-				float vmemSizeGB = gpu.AdapterRAM / 1073741824;
+				double vmemSizeMB = gpu.AdapterRAM / 1048576;
 
 				string gpuIdInfo = $"\tGPU {id}:{nl}";
 
@@ -359,7 +360,7 @@ namespace Tinyinfo
 					videoModeInfo = $"\t\tVideo Mode: {gpu.VideoModeDescription} x {gpu.CurrentRefreshRate}Hz x {gpu.CurrentBitsPerPixel} Bit{nl}";
 				}
 
-				string vramAmountInfo = $"\t\tVRAM Amount: {vmemSizeGB:F2}GB{nl}";
+				string vramAmountInfo = $"\t\tVRAM Amount: {vmemSizeMB}MB{nl}";
 
 				string maxRefreshRateInfo = $"\t\tMaximum Refresh Rate: {gpu.MaxRefreshRate}Hz{nl}";
 
@@ -381,7 +382,7 @@ namespace Tinyinfo
 			}
 
 			//	Check what manufacturer the gpu is, if nvidia show nvapi info
-			if (manufacturer[0].ToLower() == "nvidia" || manufacturer[1].ToLower() == "nvidia" || manufacturer[2].ToLower() == "nvidia" || manufacturer[3].ToLower() == "nvidia" || manufacturer[4].ToLower() == "nvidia" || manufacturer[5].ToLower() == "nvidia" || manufacturer[6].ToLower() == "nvidia" || manufacturer[7].ToLower() == "nvidia")
+			if (manufacturer.Contains("nvidia") || manufacturer.Contains("NVIDIA") || manufacturer.Contains("Nvidia"))
 			{
 				//	Clear nvapi Textbox
 				WriteTextSafe("", "nvapiOutputBox");
@@ -674,13 +675,13 @@ namespace Tinyinfo
 
 			foreach (var memory in hardwareInfo.MemoryList)
 			{
-				float memSizeGB = memory.Capacity / 1073741824;
+				float memSizeMB = memory.Capacity / 1048576;
 
 				string bankInfo = $"\t{memory.BankLabel}:{nl}";
 
 				string manufacturerInfo = $"\t\tManufacturer: {memory.Manufacturer}{nl}";
 
-				string sizeInfo = $"\t\t\tSize: {memSizeGB:F2}GB{nl}";
+				string sizeInfo = $"\t\t\tSize: {memSizeMB}MB{nl}";
 
 				string speedInfo = $"\t\t\tSpeed: {memory.Speed}mT/s{nl}";
 
