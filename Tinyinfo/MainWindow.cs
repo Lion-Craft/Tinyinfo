@@ -922,6 +922,8 @@ namespace Tinyinfo
 				netOutputBox.ForeColor = Color.White;
 				nvapiOutputBox.BackColor = Color.DimGray;
 				nvapiOutputBox.ForeColor = Color.White;
+				osOutputBox.BackColor = Color.DimGray;
+				osOutputBox.ForeColor = Color.White;
 			}
 			else
 			{
@@ -952,6 +954,8 @@ namespace Tinyinfo
 				netOutputBox.ForeColor = Color.Black;
 				nvapiOutputBox.BackColor = Color.White;
 				nvapiOutputBox.ForeColor = Color.Black;
+				osOutputBox.BackColor = Color.White;
+				osOutputBox.ForeColor = Color.Black;
 			}
 
 			//	Apply font changes
