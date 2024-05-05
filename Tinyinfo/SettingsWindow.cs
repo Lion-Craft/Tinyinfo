@@ -35,7 +35,6 @@ namespace Tinyinfo
 				fontButton.ForeColor = Color.Black;
 				applyButton.ForeColor = Color.Black;
 				cancelButton.ForeColor = Color.Black;
-
 			}
 			else
 			{
